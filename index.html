@@ -45,17 +45,7 @@ input,select,textarea{font-family:inherit}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--rule);border-radius:3px}
 
 /* ═══════════════════════════ READING BAR ══════════════════════ */
-.rbar{position:fixed;top:0;left:0;right:0;z-index:9999;height:3px;background:var(--rule2);pointer-events:none}
-.rbar-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--amber),var(--amber-mid));transition:width .8s linear;border-radius:0 2px 2px 0}
-.rbar-pill{
-  position:fixed;top:8px;right:12px;z-index:9999;
-  font-family:var(--ff-m);font-size:10px;font-weight:500;
-  color:var(--ink3);background:#fff;border:1px solid var(--rule);
-  padding:3px 9px;border-radius:20px;box-shadow:var(--sh);
-  opacity:0;transition:opacity .3s;pointer-events:none;
-  display:flex;align-items:center;gap:5px;
-}
-.rbar-pill.show{opacity:1}
+/* reading bar removed */
 
 /* ═══════════════════════════ HEADER ═══════════════════════════ */
 .hdr{
@@ -428,9 +418,7 @@ input,select,textarea{font-family:inherit}
 </head>
 <body>
 
-<!-- READING BAR -->
-<div class="rbar"><div class="rbar-fill" id="rFill"></div></div>
-<div class="rbar-pill" id="rPill"><span>⏱</span><span id="rLabel">0:00</span></div>
+<!-- reading bar removed -->
 
 <!-- HEADER -->
 <header class="hdr">
@@ -477,7 +465,6 @@ input,select,textarea{font-family:inherit}
         <div class="dh-chips">
           <span class="chip">28 artigos</span>
           <span class="chip">10 categorias</span>
-          <span class="chip time" id="timeChip">⏱ ~15 min de leitura</span>
           <span class="chip live">🔄 Actualizado às 07:02</span>
         </div>
       </div>
@@ -514,8 +501,7 @@ input,select,textarea{font-family:inherit}
         <div class="setting-row">
           <div><div class="setting-label">Tempo de leitura</div><div class="setting-desc">A barra de progresso no topo</div></div>
           <div class="setting-ctrl" style="display:flex;align-items:center;gap:8px">
-            <input type="range" id="timeSlider" min="5" max="60" step="5" value="15" oninput="updateTime(this.value)">
-            <span class="setting-val" id="timeVal">15 min</span>
+        <!-- reading time setting removed -->
           </div>
         </div>
         <div class="setting-row">
@@ -825,51 +811,6 @@ let STATE=loadState();
 function aP(){ return STATE.profiles.find(p=>p.id===STATE.active)||STATE.profiles[0]; }
 function catOrder(){ const p=aP(); return (p.cats||CAT_DEFS.map(c=>({id:c.id,on:true}))).slice(0,16); }
 
-/* ═════════════════════════ READING TIMER ════════════════ */
-let readStart=null,readInt=null,readPaused=0,readElapsed=0;
-function startTimer(){
-  if(readStart)return;
-  readStart=Date.now();
-  const fill=document.getElementById('rFill');
-  const label=document.getElementById('rLabel');
-  const pill=document.getElementById('rPill');
-  const mins=aP().readingMins||15;
-  const total=mins*60;
-  pill.classList.add('show');
-  function tick(){
-    const el=Math.min(readElapsed+(Date.now()-readStart)/1000,total);
-    const pct=(el/total)*100;
-    fill.style.width=pct+'%';
-    const m=Math.floor(el/60),s=Math.floor(el%60);
-    const rm=Math.floor((total-el)/60),rs=Math.floor((total-el)%60);
-    label.textContent=`${m}:${String(s).padStart(2,'0')} / ${rm}:${String(rs).padStart(2,'0')} restantes`;
-    if(el>=total){clearInterval(readInt);label.textContent=`✓ ${mins} min concluídos!`;fill.style.background='#166534';}
-  }
-  readInt=setInterval(tick,500);
-}
-// Pause timer when tab is hidden (Bug fix: Page Visibility API)
-document.addEventListener('visibilitychange',()=>{
-  if(!readStart)return;
-  if(document.hidden){
-    readElapsed+=(Date.now()-readStart)/1000;
-    clearInterval(readInt);
-  } else {
-    readStart=Date.now();
-    const mins=aP().readingMins||15;
-    const total=mins*60;
-    if(readElapsed<total) readInt=setInterval(()=>{
-      const el=Math.min(readElapsed+(Date.now()-readStart)/1000,total);
-      const pct=(el/total)*100;
-      document.getElementById('rFill').style.width=pct+'%';
-      const m=Math.floor(el/60),s=Math.floor(el%60);
-      const rm=Math.floor((total-el)/60),rs=Math.floor((total-el)%60);
-      document.getElementById('rLabel').textContent=`${m}:${String(s).padStart(2,'0')} / ${rm}:${String(rs).padStart(2,'0')} restantes`;
-      if(el>=total){clearInterval(readInt);document.getElementById('rLabel').textContent=`✓ ${mins} min concluídos!`;}
-    },500);
-  }
-});
-['scroll','click','touchstart'].forEach(ev=>document.addEventListener(ev,()=>startTimer(),{once:true,passive:true}));
-
 /* ═════════════════════════ TICKER ══════════════════════ */
 function buildTicker(){
   const p=aP();
@@ -1102,8 +1043,6 @@ function renderProfile(){
     `<div style="text-align:center;margin-bottom:22px"><button class="pav-add" onclick="openModal()">+</button></div>`;
 
   // Settings
-  const sl=document.getElementById('timeSlider');
-  if(sl){ sl.value=p.readingMins||15; document.getElementById('timeVal').textContent=(p.readingMins||15)+' min'; }
   const fq=document.getElementById('freqSel');
   if(fq) fq.value=p.freq||12;
   // Categories
@@ -1135,9 +1074,8 @@ function renderProfile(){
 
 function setActive(id){ STATE.active=id; saveState(); renderProfile(); buildTicker(); buildSidebar(); buildSections(); updateAv(); document.getElementById('gName').textContent=aP().name; }
 function updateAv(){ const p=aP(); const av=document.getElementById('hAv'); av.textContent=p.name[0].toUpperCase(); av.style.background=p.color; }
-function saveProf(){ const p=aP(); p.readingMins=+(document.getElementById('timeSlider').value)||15; p.freq=+(document.getElementById('freqSel').value)||12; saveState(); document.querySelectorAll('.ps-save').forEach(b=>{b.textContent='✓ Guardado';setTimeout(()=>b.textContent='Guardar',1500);}); }
+function saveProf(){ const p=aP(); p.freq=+(document.getElementById('freqSel').value)||12; saveState(); document.querySelectorAll('.ps-save').forEach(b=>{b.textContent='✓ Guardado';setTimeout(()=>b.textContent='Guardar',1500);}); }
 function togCat(id){ const p=aP(); const co=p.cats.find(c=>c.id===id); if(co){co.on=!co.on;saveState();renderProfile();} }
-function updateTime(v){ document.getElementById('timeVal').textContent=v+' min'; const p=aP(); p.readingMins=+v; saveState(); }
 /* drag drop — mouse + touch support */
 let dIdx=null,touchDragEl=null,touchClone=null;
 function dS(e){dIdx=+e.currentTarget.dataset.idx;e.currentTarget.classList.add('dragging');}
@@ -1501,7 +1439,6 @@ function buildSectionsFromLive(){
   document.querySelector('.dh-chips').innerHTML=`
     <span class="chip">${total} artigos</span>
     <span class="chip">${enabled.length} categorias</span>
-    <span class="chip time">⏱ ~${aP().readingMins||15} min de leitura</span>
     <span class="chip live">🔄 Actualizado ${(LIVE_DATA.updated_at||'').slice(11,16)||'hoje'}</span>`;
 }
 
@@ -1582,7 +1519,6 @@ STATE.profiles.forEach(p=>{ if(!p.cats)p.cats=CAT_DEFS.map(c=>({id:c.id,on:true}
 updateAv();
 updateRefreshLabel();
 document.getElementById('gName').textContent=aP().name;
-document.getElementById('timeChip').textContent=`⏱ ~${aP().readingMins||15} min de leitura`;
 
 // Try loading live data; fall back to demo if not available
 loadLiveData().then(hasLive => {
