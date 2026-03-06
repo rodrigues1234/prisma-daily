@@ -1,5 +1,4 @@
-name: Prisma — Actualizar Briefing Diário
-
+name: Prisma - Actualizar Briefing Diario
 on:
   schedule:
     # 07:00 UTC = 07:00 Lisboa (inverno) / 08:00 Lisboa (verão)
