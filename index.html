@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Prisma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════ TOKENS ══════════════════════════ */
+:root{
+  --cream:#FAF8F4;--paper:#F3F0EA;--paper2:#EAE6DE;--paper3:#E0DBD2;
+  --ink:#1A1714;--ink2:#3D3730;--ink3:#6B6159;--ink4:#9C9189;
+  --rule:#DDD8CF;--rule2:#EDE9E2;
+  --amber:#C8860A;--amber-bg:#FDF3DC;--amber-mid:#E5A820;--amber-lt:#FEF3C7;
+  --up:#166534;--up-bg:#DCFCE7;--dn:#991B1B;--dn-bg:#FEE2E2;
+  --blue:#1D4ED8;--blue-bg:#DBEAFE;
+  --purple:#6D28D9;--purple-bg:#EDE9FE;
+  --teal:#0E7490;--teal-bg:#CFFAFE;
+  --pink:#BE185D;--pink-bg:#FCE7F3;
+
+  /* category colours */
+  --c-break:#DC2626;--c-geo:#7C3AED;--c-eco:#B45309;
+  --c-ecopt:#047857;--c-pol:#1D4ED8;--c-clima:#0E7490;
+  --c-mkt:#92400E;--c-work:#4338CA;--c-biz:#BE185D;
+  --c-fin:#166534;--c-inv:#D97706;
+  --c-ai:#1D4ED8;--c-gadg:#6D28D9;--c-sci:#0E7490;
+  --c-x:#000000;--c-soul:#BE185D;
+
+  --r:10px;--r-sm:6px;--r-lg:14px;
+  --sh:0 1px 3px rgba(26,23,20,.07),0 4px 16px rgba(26,23,20,.04);
+  --sh-md:0 4px 24px rgba(26,23,20,.11);
+
+  --ff-s:'Fraunces',Georgia,serif;
+  --ff-b:'Outfit',system-ui,sans-serif;
+  --ff-m:'JetBrains Mono',monospace;
+  --hh:52px;--th:36px;--nh:60px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
+body{background:var(--cream);color:var(--ink);font-family:var(--ff-b);font-size:15px;line-height:1.6;min-height:100dvh;overflow-x:hidden}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+a{color:inherit;text-decoration:none}
+input,select,textarea{font-family:inherit}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--rule);border-radius:3px}
+
+/* ═══════════════════════════ READING BAR ══════════════════════ */
+.rbar{position:fixed;top:0;left:0;right:0;z-index:9999;height:3px;background:var(--rule2);pointer-events:none}
+.rbar-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--amber),var(--amber-mid));transition:width .8s linear;border-radius:0 2px 2px 0}
+.rbar-pill{
+  position:fixed;top:8px;right:12px;z-index:9999;
+  font-family:var(--ff-m);font-size:10px;font-weight:500;
+  color:var(--ink3);background:#fff;border:1px solid var(--rule);
+  padding:3px 9px;border-radius:20px;box-shadow:var(--sh);
+  opacity:0;transition:opacity .3s;pointer-events:none;
+  display:flex;align-items:center;gap:5px;
+}
+.rbar-pill.show{opacity:1}
+
+/* ═══════════════════════════ HEADER ═══════════════════════════ */
+.hdr{
+  position:sticky;top:0;z-index:200;
+  background:var(--ink);height:var(--hh);
+  display:flex;align-items:center;padding:0 16px;gap:12px;
+}
+.logo{display:flex;align-items:center;gap:3px;flex-shrink:0;cursor:default}
+.logo-prism{font-size:20px;line-height:1}
+.logo-text{font-family:var(--ff-s);font-size:22px;font-weight:900;color:#fff;letter-spacing:-.5px}
+.logo-text em{color:var(--amber-mid);font-style:italic}
+.logo-tag{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-left:4px;align-self:flex-end;margin-bottom:3px;display:none}
+.hdr-refresh{margin-left:auto;display:flex;align-items:center;gap:8px}
+.refresh-info{font-family:var(--ff-m);font-size:10px;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:5px}
+.refresh-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px #4ade80;animation:pulse 2.5s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.hdr-nav{display:flex;align-items:center;gap:2px;background:rgba(255,255,255,.06);padding:3px;border-radius:8px}
+.hn{font-size:12px;font-weight:600;color:rgba(255,255,255,.45);padding:5px 12px;border-radius:6px;transition:all .15s}
+.hn:hover{color:#fff;background:rgba(255,255,255,.1)}
+.hn.active{background:var(--amber);color:var(--ink)}
+.hdr-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;cursor:pointer;border:2px solid rgba(255,255,255,.2);transition:border-color .15s;flex-shrink:0}
+.hdr-av:hover{border-color:var(--amber-mid)}
+
+/* ═══════════════════════════ TICKER ═══════════════════════════ */
+.ticker{background:var(--ink2);height:var(--th);overflow:hidden;display:flex;align-items:center;position:sticky;top:var(--hh);z-index:190;border-bottom:2px solid var(--amber)}
+.t-lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber-mid);padding:0 12px;flex-shrink:0;border-right:1px solid rgba(255,255,255,.1);height:100%;display:flex;align-items:center}
+.t-track{overflow:hidden;flex:1;mask-image:linear-gradient(to right,transparent,black 30px,black calc(100% - 30px),transparent)}
+.t-scroll{display:flex;align-items:center;width:max-content;animation:tick 50s linear infinite}
+.t-scroll:hover{animation-play-state:paused}
+@keyframes tick{to{transform:translateX(-50%)}}
+.t-item{display:flex;align-items:center;gap:6px;padding:0 16px;border-right:1px solid rgba(255,255,255,.07);white-space:nowrap}
+.t-sym{font-family:var(--ff-m);font-size:10.5px;font-weight:500;color:rgba(255,255,255,.8);letter-spacing:.5px}
+.t-price{font-family:var(--ff-m);font-size:11.5px;color:#fff}
+.t-chg{font-family:var(--ff-m);font-size:10px;padding:1px 4px;border-radius:3px}
+.t-chg.up{color:#4ade80}.t-chg.dn{color:#f87171}
+
+/* ═══════════════════════════ SHELL ════════════════════════════ */
+.shell{display:grid;grid-template-columns:210px 1fr;min-height:calc(100dvh - var(--hh) - var(--th));max-width:1300px;margin:0 auto}
+
+/* ═══════════════════════════ SIDEBAR ══════════════════════════ */
+.sb{border-right:1px solid var(--rule);padding:14px 0;position:sticky;top:calc(var(--hh)+var(--th));height:calc(100dvh - var(--hh) - var(--th));overflow-y:auto}
+.sb-grp{margin-bottom:4px}
+.sb-grp-hd{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:6px 14px;cursor:pointer;user-select:none;
+  transition:background .12s;
+}
+.sb-grp-hd:hover{background:var(--paper)}
+.sb-grp-lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ink4)}
+.sb-grp-arrow{font-size:9px;color:var(--ink4);transition:transform .2s;line-height:1}
+.sb-grp.collapsed .sb-grp-arrow{transform:rotate(-90deg)}
+.sb-grp-body{overflow:hidden;transition:max-height .25s ease,opacity .2s ease;max-height:400px;opacity:1}
+.sb-grp.collapsed .sb-grp-body{max-height:0;opacity:0;pointer-events:none}
+.sb-item{display:flex;align-items:center;gap:8px;padding:6px 14px;cursor:pointer;transition:background .12s;border-left:2px solid transparent}
+.sb-item:hover{background:var(--paper)}
+.sb-item.active{background:var(--paper);border-left-color:var(--amber)}
+.sb-ic{font-size:13px;flex-shrink:0;width:18px;text-align:center}
+.sb-nm{font-size:12px;font-weight:500;color:var(--ink2)}
+.sb-item.active .sb-nm{font-weight:700;color:var(--ink)}
+.tl-item{display:flex;align-items:flex-start;gap:9px;padding:6px 14px;cursor:pointer;transition:background .12s;border-left:2px solid transparent}
+.tl-item:hover{background:var(--paper)}
+.tl-item.active{background:var(--paper);border-left-color:var(--amber)}
+.tl-dot{width:7px;height:7px;border-radius:50%;border:1.5px solid var(--rule);background:var(--cream);flex-shrink:0;margin-top:5px;transition:all .15s}
+.tl-item.active .tl-dot{border-color:var(--amber);background:var(--amber)}
+.tl-d{font-size:12px;font-weight:600;color:var(--ink2);line-height:1.2}
+.tl-item.active .tl-d{color:var(--amber)}
+.tl-wd{font-size:10px;color:var(--ink4);margin-top:1px}
+.today-chip{display:inline-block;margin-top:3px;font-size:8px;font-weight:700;letter-spacing:1px;background:var(--amber);color:var(--ink);padding:1px 5px;border-radius:3px;text-transform:uppercase}
+
+/* ═══════════════════════════ MAIN ═════════════════════════════ */
+.main{padding:26px 26px 52px;min-width:0}
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--rule);margin-bottom:26px}
+.tab{font-size:12.5px;font-weight:600;color:var(--ink4);padding:9px 16px;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s}
+.tab:hover{color:var(--ink)}
+.tab.active{color:var(--ink);border-bottom-color:var(--amber)}
+.panel{display:none}.panel.active{display:block}
+
+/* ═══════════════════════════ DAY HEAD ═════════════════════════ */
+.dh{margin-bottom:22px}
+.dh-eye{font-family:var(--ff-m);font-size:10px;color:var(--ink4);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.dh-title{font-family:var(--ff-s);font-size:clamp(26px,3.5vw,38px);font-weight:900;color:var(--ink);line-height:1.05;letter-spacing:-1px}
+.dh-chips{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:11px;font-weight:500;background:var(--paper2);color:var(--ink3);padding:3px 9px;border-radius:20px}
+.chip.time{background:var(--amber-lt);color:var(--amber)}
+.chip.live{background:var(--up-bg);color:var(--up)}
+
+/* ═══════════════════════════ SUMMARY ══════════════════════════ */
+.summary{background:var(--ink);border-radius:var(--r);padding:18px 20px;margin-bottom:26px;animation:fu .35s ease}
+.sum-eye{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber-mid);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.sum-title{font-family:var(--ff-s);font-size:18px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:8px;letter-spacing:-.3px}
+.sum-items{display:flex;flex-direction:column;gap:7px;margin-top:12px}
+.sum-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:rgba(255,255,255,.05);border-radius:var(--r-sm)}
+.si-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.si-text{font-size:13px;color:rgba(255,255,255,.78);line-height:1.55}
+.si-src{font-size:10px;color:rgba(255,255,255,.3);margin-top:2px;display:flex;align-items:center;gap:5px}
+.si-link{color:rgba(255,255,255,.4);font-size:10px;transition:color .15s}
+.si-link:hover{color:var(--amber-mid)}
+
+/* ═══════════════════════════ ARTICLE CARD ═════════════════════ */
+.cards{display:flex;flex-direction:column;gap:10px}
+.card{background:#fff;border:1px solid var(--rule2);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);transition:box-shadow .18s,transform .14s;display:flex}
+.card:hover{box-shadow:var(--sh-md);transform:translateY(-1px)}
+.c-stripe{width:4px;flex-shrink:0}
+.c-stripe.alto{background:#DC2626}.c-stripe.médio{background:var(--amber)}.c-stripe.baixo{background:var(--up)}
+.c-body{padding:14px 16px;flex:1;min-width:0}
+.c-top{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-bottom:7px}
+.c-src{font-size:9.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--ink4)}
+.c-bull{color:var(--rule);font-size:11px}
+.c-ts{font-family:var(--ff-m);font-size:9.5px;color:var(--ink4)}
+.c-badge{font-size:8.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:1px 6px;border-radius:4px;margin-left:auto;cursor:default}
+.c-badge.alto{background:#FEE2E2;color:#991B1B}
+.c-badge.médio{background:#FEF3C7;color:#92400E}
+.c-badge.baixo{background:#DCFCE7;color:#166534}
+.c-title{font-family:var(--ff-s);font-size:16.5px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:7px;letter-spacing:-.2px}
+.c-title a{transition:color .15s;display:flex;align-items:flex-start;gap:6px}
+.c-title a:hover{color:var(--blue)}
+.c-link-icon{font-size:11px;opacity:.35;flex-shrink:0;margin-top:3px;transition:opacity .15s}
+.c-title a:hover .c-link-icon{opacity:.7}
+.c-summary{font-size:13px;color:var(--ink3);line-height:1.65;margin-bottom:10px;font-weight:300}
+/* expandable detail rows */
+.c-details{display:none;flex-direction:column;gap:6px;margin-bottom:10px}
+.c-details.open{display:flex}
+.c-detail-row{display:flex;align-items:flex-start;gap:8px;padding:8px 11px;border-radius:var(--r-sm)}
+.c-detail-row.why{background:#EFF6FF;border:1px solid #BFDBFE}
+.c-detail-row.impact{background:#FEF3C7;border:1px solid #FDE68A}
+.c-detail-row.related{background:#F0FDF4;border:1px solid #BBF7D0}
+.c-dr-icon{font-size:12px;flex-shrink:0;margin-top:1px}
+.c-dr-label{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink4);margin-bottom:2px}
+.c-dr-text{font-size:12.5px;line-height:1.55}
+.c-detail-row.why .c-dr-text{color:#1E40AF}
+.c-detail-row.impact .c-dr-text{color:#92400E}
+.c-detail-row.related .c-dr-text{color:#166534}
+.c-expand{display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:var(--ink4);padding:0;margin-top:4px;transition:color .15s;cursor:pointer}
+.c-expand:hover{color:var(--blue)}
+.c-expand-icon{font-size:10px;transition:transform .2s}
+.c-expand.open .c-expand-icon{transform:rotate(180deg)}
+
+/* section head */
+.sec{margin-bottom:34px;animation:fu .3s ease both}
+.sec-hd{display:flex;align-items:center;gap:9px;margin-bottom:12px;padding-bottom:9px;border-bottom:1px solid var(--rule)}
+.sec-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sec-nm{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+.sec-rule{flex:1}.sec-cnt{font-family:var(--ff-m);font-size:10px;color:var(--ink4)}
+
+/* connections */
+.conns{background:linear-gradient(135deg,#EEF2FF,#F0F9FF);border:1px solid #C7D2FE;border-left:4px solid var(--blue);border-radius:var(--r);padding:14px 16px;margin-bottom:26px;animation:fu .35s ease .06s both}
+.conns-hd{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.conn{padding:8px 0;border-top:1px solid #C7D2FE;font-size:13px;color:#3730A3;line-height:1.6}
+.conn:first-of-type{border-top:none;padding-top:0}
+.conn-pills{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.cpill{font-size:10px;font-weight:600;background:#C7D2FE;color:#3730A3;padding:2px 7px;border-radius:20px}
+
+/* x trends removed */
+
+/* ═══════════════════════════ PORTFOLIO ════════════════════════ */
+.po-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.po-card{background:#fff;border:1px solid var(--rule2);border-radius:var(--r);padding:14px;box-shadow:var(--sh)}
+.po-lbl{font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--ink4);margin-bottom:5px}
+.po-val{font-family:var(--ff-s);font-size:22px;font-weight:900;color:var(--ink);letter-spacing:-.5px;line-height:1}
+.po-chg{font-size:11px;font-weight:600;margin-top:4px}
+.po-chg.up{color:var(--up)}.po-chg.dn{color:var(--dn)}
+.pl-item{background:#fff;border:1px solid var(--rule2);border-radius:var(--r);padding:11px 15px;box-shadow:var(--sh);display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.pl-sym{font-family:var(--ff-m);font-size:13px;font-weight:700;color:var(--ink);width:64px;flex-shrink:0}
+.pl-nm{font-size:13px;color:var(--ink3);flex:1}
+.pl-pr{font-family:var(--ff-m);font-size:12.5px;color:var(--ink)}
+.pl-chg{font-family:var(--ff-m);font-size:11px;font-weight:600;padding:2px 7px;border-radius:5px;flex-shrink:0}
+.pl-chg.up{background:var(--up-bg);color:var(--up)}.pl-chg.dn{background:var(--dn-bg);color:var(--dn)}
+.risco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.rc{background:#fff;border:1px solid var(--rule2);border-radius:var(--r);padding:13px;box-shadow:var(--sh)}
+.rc-lbl{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.rc-lbl.baixo{color:var(--up)}.rc-lbl.médio{color:var(--amber)}.rc-lbl.alto{color:var(--dn)}
+.rc-item{font-size:12.5px;color:var(--ink2);padding:4px 0;border-bottom:1px solid var(--rule2);line-height:1.4}
+.rc-item:last-child{border-bottom:none}
+.rc-rat{font-size:11px;color:var(--ink4);margin-top:2px}
+
+/* ═══════════════════════════ SOUL FOOD ════════════════════════ */
+.soul{background:linear-gradient(135deg,#FDF2F8,#FFF1F2);border:1px solid #FBCFE8;border-left:4px solid var(--pink);border-radius:var(--r);padding:16px 18px}
+.soul-eye{font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--pink);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.soul-type{font-size:10px;font-weight:600;background:#FBCFE8;color:var(--pink);padding:2px 8px;border-radius:20px}
+.soul-title{font-family:var(--ff-s);font-size:17px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:6px;letter-spacing:-.2px}
+.soul-body{font-size:13px;color:var(--ink3);line-height:1.65;margin-bottom:12px;font-weight:300}
+.soul-meta{display:flex;align-items:center;gap:8px}
+.soul-time{font-family:var(--ff-m);font-size:10px;color:var(--ink4)}
+.soul-link{font-size:12px;font-weight:600;color:var(--pink);margin-left:auto;display:flex;align-items:center;gap:4px}
+.soul-link:hover{text-decoration:underline}
+
+/* ═══════════════════════════ WEEKLY ═══════════════════════════ */
+.ws{background:var(--ink);border-radius:var(--r);padding:20px 22px;margin-bottom:14px}
+.ws-eye{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber-mid);margin-bottom:7px}
+.ws-title{font-family:var(--ff-s);font-size:20px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:7px;letter-spacing:-.3px}
+.ws-body{font-size:13.5px;color:rgba(255,255,255,.6);line-height:1.7;font-weight:300}
+.wg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.wg-card{background:#fff;border:1px solid var(--rule2);border-radius:var(--r);padding:13px 15px;box-shadow:var(--sh)}
+.wg-cat{font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+.wg-t{font-family:var(--ff-s);font-size:14px;font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:5px;letter-spacing:-.1px}
+.wg-b{font-size:12px;color:var(--ink3);line-height:1.6;font-weight:300}
+.wn{background:var(--amber-bg);border:1px solid var(--amber-mid);border-radius:var(--r);padding:16px 18px}
+.wn-eye{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:12px}
+.wn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.wn-v{font-family:var(--ff-s);font-size:20px;font-weight:900;color:var(--ink);line-height:1}
+.wn-d{font-size:11px;color:var(--ink3);margin-top:2px}
+
+/* ═══════════════════════════ PROFILE PANEL ════════════════════ */
+.pf-title{font-family:var(--ff-s);font-size:26px;font-weight:900;letter-spacing:-.5px;margin-bottom:4px}
+.pf-sub{font-size:13px;color:var(--ink4);margin-bottom:20px}
+.pf-avatars{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--rule)}
+.pav{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;cursor:pointer;border:3px solid transparent;transition:all .15s;position:relative;color:#fff}
+.pav.active{border-color:var(--ink);box-shadow:0 0 0 2px var(--amber)}
+.pav-nm{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:600;color:var(--ink3);white-space:nowrap}
+.pav-add{width:52px;height:52px;border-radius:50%;border:2px dashed var(--rule);color:var(--ink4);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.pav-add:hover{border-color:var(--amber);color:var(--amber)}
+.ps{background:#fff;border:1px solid var(--rule2);border-radius:var(--r);padding:18px 20px;box-shadow:var(--sh);margin-bottom:14px}
+.ps-hd{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
+.ps-save{font-size:11px;font-weight:600;background:var(--amber);color:var(--ink);padding:4px 12px;border-radius:20px;cursor:pointer;transition:opacity .15s}
+.ps-save:hover{opacity:.85}
+
+/* settings */
+.setting-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--rule2)}
+.setting-row:last-child{border-bottom:none}
+.setting-label{font-size:13.5px;font-weight:500;flex:1}
+.setting-desc{font-size:11px;color:var(--ink4);margin-top:2px}
+.setting-ctrl input[type=range]{width:120px;accent-color:var(--amber)}
+.setting-val{font-family:var(--ff-m);font-size:11px;color:var(--amber);min-width:40px;text-align:right}
+
+/* cat config */
+.cc-list{display:flex;flex-direction:column;gap:5px}
+.cc-item{display:flex;align-items:center;gap:9px;background:var(--cream);border:1px solid var(--rule2);border-radius:var(--r-sm);padding:9px 11px;cursor:grab;user-select:none;transition:box-shadow .15s}
+.cc-item:active{cursor:grabbing;box-shadow:var(--sh-md)}
+.cc-item.dragging{opacity:.5}
+.cc-item.drag-over{border-color:var(--amber);background:var(--amber-lt)}
+.cc-handle{color:var(--ink4);font-size:13px;cursor:grab}
+.cc-tog{width:34px;height:18px;border-radius:9px;background:var(--rule);position:relative;cursor:pointer;transition:background .15s;flex-shrink:0}
+.cc-tog.on{background:var(--amber)}
+.cc-tog::after{content:'';position:absolute;width:12px;height:12px;border-radius:50%;background:#fff;top:3px;left:3px;transition:transform .15s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.cc-tog.on::after{transform:translateX(16px)}
+.cc-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.cc-nm{font-size:13px;font-weight:500;color:var(--ink2);flex:1}
+.cc-grp{font-size:9.5px;font-weight:700;padding:1px 6px;border-radius:4px}
+
+/* sources */
+.src-search{width:100%;border:1px solid var(--rule);border-radius:var(--r-sm);padding:8px 12px;font-size:13px;color:var(--ink);background:var(--cream);outline:none;margin-bottom:12px;transition:border-color .15s}
+.src-search:focus{border-color:var(--amber)}
+.src-item{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid var(--rule2)}
+.src-item:last-child{border-bottom:none}
+.src-tog{width:34px;height:18px;border-radius:9px;background:var(--rule);position:relative;cursor:pointer;transition:background .15s;flex-shrink:0}
+.src-tog.on{background:var(--amber)}
+.src-tog::after{content:'';position:absolute;width:12px;height:12px;border-radius:50%;background:#fff;top:3px;left:3px;transition:transform .15s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.src-tog.on::after{transform:translateX(16px)}
+.src-nm{font-size:13px;font-weight:500;flex:1}
+.src-cat{font-size:9px;font-weight:700;letter-spacing:.5px;padding:2px 7px;border-radius:4px;text-transform:uppercase}
+.stars{display:flex;gap:2px}
+.star{font-size:13px;cursor:pointer;color:var(--rule);transition:color .1s;line-height:1}
+.star.lit{color:var(--amber)}
+.src-rm{font-size:14px;color:var(--ink4);cursor:pointer;transition:color .12s;flex-shrink:0}
+.src-rm:hover{color:var(--dn)}
+
+/* add source form */
+.src-add-form{display:flex;flex-direction:column;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--rule2)}
+.src-add-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.src-add-row-3{display:grid;grid-template-columns:1fr 1fr auto;gap:8px}
+.src-status{font-size:11.5px;padding:7px 11px;border-radius:var(--r-sm);display:none}
+.src-status.ok{display:block;background:#DCFCE7;color:#166534;border:1px solid #BBF7D0}
+.src-status.err{display:block;background:#FEE2E2;color:#991B1B;border:1px solid #FECACA}
+.src-status.loading{display:block;background:#DBEAFE;color:#1D4ED8;border:1px solid #BFDBFE}
+.src-in{border:1px solid var(--rule);border-radius:var(--r-sm);padding:8px 11px;font-size:13px;color:var(--ink);background:var(--cream);outline:none;transition:border-color .15s}
+.src-in:focus{border-color:var(--amber)}
+.src-cat-sel{border:1px solid var(--rule);border-radius:var(--r-sm);padding:8px 11px;font-size:12px;color:var(--ink);background:var(--cream);outline:none;appearance:none;cursor:pointer}
+.src-add-btn{background:var(--ink);color:#fff;border-radius:var(--r-sm);padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;transition:opacity .15s;white-space:nowrap}
+.src-add-btn:hover{opacity:.8}
+.src-count{font-family:var(--ff-m);font-size:10px;color:var(--ink4);text-align:right;margin-top:6px}
+
+/* stocks */
+.st-tags{display:flex;flex-wrap:wrap;gap:7px}
+.st-tag{display:flex;align-items:center;gap:5px;background:var(--paper);border:1px solid var(--rule2);border-radius:20px;padding:4px 10px 4px 12px;font-family:var(--ff-m);font-size:11px;font-weight:500;color:var(--ink2)}
+.st-rm{font-size:14px;color:var(--ink4);cursor:pointer;line-height:1;transition:color .12s}
+.st-rm:hover{color:var(--dn)}
+.st-form{display:flex;gap:8px;margin-top:10px}
+.st-in{flex:1;border:1px solid var(--rule);border-radius:var(--r-sm);padding:8px 12px;font-family:var(--ff-m);font-size:12px;color:var(--ink);background:var(--cream);outline:none;transition:border-color .15s;text-transform:uppercase}
+.st-in:focus{border-color:var(--amber)}
+.st-btn{background:var(--ink);color:#fff;border-radius:var(--r-sm);padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;transition:opacity .15s}
+.st-btn:hover{opacity:.8}
+
+/* ═══════════════════════════ MOBILE NAV ═══════════════════════ */
+.mnav{display:none;position:fixed;bottom:0;left:0;right:0;height:var(--nh);background:#fff;border-top:1px solid var(--rule);padding:0 4px;padding-bottom:env(safe-area-inset-bottom);z-index:300;box-shadow:0 -4px 20px rgba(26,23,20,.08);justify-content:space-around;align-items:center}
+.mn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 12px;border-radius:10px;color:var(--ink4);transition:color .15s;cursor:pointer;min-width:52px}
+.mn.active{color:var(--amber)}
+.mn-ic{font-size:19px;line-height:1}
+.mn-lbl{font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+
+/* ═══════════════════════════ MODAL ════════════════════════════ */
+.overlay{display:none;position:fixed;inset:0;background:rgba(26,23,20,.4);z-index:500;align-items:center;justify-content:center;padding:16px}
+.overlay.open{display:flex}
+.modal{background:#fff;border-radius:14px;padding:22px;width:100%;max-width:380px;box-shadow:var(--sh-md);animation:fu .22s ease}
+.modal-title{font-family:var(--ff-s);font-size:20px;font-weight:900;margin-bottom:14px;letter-spacing:-.3px}
+.f-label{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:5px}
+.f-input{width:100%;border:1px solid var(--rule);border-radius:var(--r-sm);padding:9px 12px;font-size:14px;color:var(--ink);background:var(--cream);outline:none;transition:border-color .15s;margin-bottom:12px}
+.f-input:focus{border-color:var(--amber)}
+.cpicks{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
+.cpick{width:30px;height:30px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s}
+.cpick.sel{border-color:var(--ink);transform:scale(1.15)}
+.modal-acts{display:flex;gap:8px}
+.btn-p{flex:1;background:var(--ink);color:#fff;border-radius:var(--r-sm);padding:10px;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .15s}
+.btn-p:hover{opacity:.85}
+.btn-g{flex:1;background:var(--paper2);color:var(--ink3);border-radius:var(--r-sm);padding:10px;font-size:13px;font-weight:600;cursor:pointer}
+
+/* ═══════════════════════════ UTILS ════════════════════════════ */
+@keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fade{animation:fu .3s ease both}
+
+/* ═══════════════════════════ RESPONSIVE ═══════════════════════ */
+/* dvh fallback for iOS <15.4 */
+@supports not (height: 100dvh){
+  .sb{height:calc(100vh - var(--hh) - var(--th))}
+  .shell{min-height:calc(100vh - var(--hh) - var(--th))}
+}
+/* iOS safe area — bottom padding on main content too */
+@supports(padding-bottom: env(safe-area-inset-bottom)){
+  .main{padding-bottom:max(52px, calc(var(--nh) + env(safe-area-inset-bottom) + 12px))}
+}
+
+/* Tablet portrait: 600–900px */
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr}
+  .sb{display:none}
+  .main{padding:14px 14px calc(var(--nh) + 20px)}
+  .mnav{display:flex}
+  .hdr-nav{display:none}
+  .logo-tag{display:block}
+  .po-grid{grid-template-columns:1fr 1fr}
+  .wg{grid-template-columns:1fr 1fr}
+  .wn-grid{grid-template-columns:1fr 1fr}
+  .risco-grid{grid-template-columns:1fr 1fr}
+  .src-add-row,.src-add-row-3{grid-template-columns:1fr 1fr}
+  .refresh-info{display:none}
+}
+
+/* Tablet landscape: 600–900px horizontal — show compact sidebar */
+@media(min-width:600px) and (max-width:900px) and (orientation:landscape){
+  .shell{grid-template-columns:170px 1fr}
+  .sb{display:block;height:calc(100vh - var(--hh) - var(--th));position:sticky;top:calc(var(--hh) + var(--th))}
+  .mnav{display:none}
+  .main{padding:14px 16px 28px}
+  :root{--hh:46px;--th:32px}
+}
+
+/* Mobile portrait & small screens */
+@media(max-width:599px){
+  .po-grid{grid-template-columns:1fr}
+  .wg{grid-template-columns:1fr}
+  .wn-grid{grid-template-columns:1fr 1fr}
+  .risco-grid{grid-template-columns:1fr}
+  .src-add-row,.src-add-row-3{grid-template-columns:1fr}
+  .src-cat-sel{display:none}
+  .c-title{font-size:15px}
+  .dh-title{font-size:24px}
+  /* min touch target 44px */
+  .mn{min-height:44px}
+  .src-tog,.cc-tog{width:40px;height:22px;border-radius:11px}
+  .src-tog::after,.cc-tog::after{width:14px;height:14px;top:4px;left:4px}
+  .src-tog.on::after,.cc-tog.on::after{transform:translateX(18px)}
+}
+
+/* Mobile landscape — compact header */
+@media(max-height:500px) and (max-width:900px){
+  :root{--hh:40px;--th:28px;--nh:48px}
+  .dh-title{font-size:22px}
+  .summary{padding:12px 14px}
+}
+</style>
+</head>
+<body>
+
+<!-- READING BAR -->
+<div class="rbar"><div class="rbar-fill" id="rFill"></div></div>
+<div class="rbar-pill" id="rPill"><span>⏱</span><span id="rLabel">0:00</span></div>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="logo">
+    <span class="logo-prism">🔷</span>
+    <span class="logo-text"><em>P</em>risma</span>
+    <span class="logo-tag">Diário</span>
+  </div>
+  <div class="hdr-refresh">
+    <div class="refresh-info">
+      <div class="refresh-dot"></div>
+      <span id="refreshLabel">Actualizado 07:02 · próximo em 12h</span>
+    </div>
+  </div>
+  <nav class="hdr-nav">
+    <button class="hn active" onclick="gTab('hoje')">Hoje</button>
+    <button class="hn" onclick="gTab('semana')">Semana</button>
+    <button class="hn" onclick="gTab('perfil')">Perfil</button>
+  </nav>
+  <div class="hdr-av" id="hAv" onclick="openModal()">R</div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="t-lbl">Mercados</div>
+  <div class="t-track"><div class="t-scroll" id="tScroll"></div></div>
+</div>
+
+<!-- SHELL -->
+<div class="shell">
+  <aside class="sb" id="sidebar"></aside>
+  <main class="main">
+    <div class="tabs">
+      <button class="tab active" onclick="gTab('hoje')">📰 Hoje</button>
+      <button class="tab" onclick="gTab('semana')">📊 Semana</button>
+      <button class="tab" onclick="gTab('perfil')">⚙️ Perfil</button>
+    </div>
+
+    <!-- HOJE -->
+    <div class="panel active" id="panel-hoje">
+      <div class="dh fade">
+        <div class="dh-eye">Sexta-feira · 6 de Março de 2026</div>
+        <h1 class="dh-title">Bom dia, <span id="gName">Ricardo</span>.</h1>
+        <div class="dh-chips">
+          <span class="chip">28 artigos</span>
+          <span class="chip">10 categorias</span>
+          <span class="chip time" id="timeChip">⏱ ~15 min de leitura</span>
+          <span class="chip live">🔄 Actualizado às 07:02</span>
+        </div>
+      </div>
+      <div class="summary">
+        <div class="sum-eye">⚡ Resumo de 3 minutos · Últimas 12 horas</div>
+        <div class="sum-title">O essencial desta manhã</div>
+        <div class="sum-items" id="sumItems"></div>
+      </div>
+      <div id="catSections"></div>
+    </div>
+
+    <!-- SEMANA -->
+    <div class="panel" id="panel-semana">
+      <div class="dh fade"><div class="dh-eye">2 — 6 de Março de 2026</div><h2 style="font-family:var(--ff-s);font-size:clamp(24px,3vw,34px);font-weight:900;letter-spacing:-1px">Resumo Semanal</h2></div>
+      <div class="ws fade"><div class="ws-eye">🔥 Destaque da semana</div><div class="ws-title">Fed muda de tom: cortes de taxas voltam à mesa em 2026</div><div class="ws-body">O comunicado da Reserva Federal surpreendeu com postura mais dovish. Dois cortes de 25pb no segundo semestre são agora o cenário central. S&P 500 subiu 2,1%; PSI registou melhor semana desde Janeiro.</div></div>
+      <div class="wg fade" style="animation-delay:.07s">
+        <div class="wg-card"><div class="wg-cat" style="color:var(--c-ai)">IA & Inovação</div><div class="wg-t">GPT-5 redefine o estado da arte</div><div class="wg-b">Capacidades multimodais e raciocínio avançado marcam o lançamento mais antecipado do ano.</div></div>
+        <div class="wg-card"><div class="wg-cat" style="color:var(--c-ecopt)">Economia Nacional</div><div class="wg-t">Portugal pode aceder a €4B do fundo europeu</div><div class="wg-b">A proposta da CE abre janela para transição digital e verde nacional.</div></div>
+        <div class="wg-card"><div class="wg-cat" style="color:var(--c-break)">Geopolítica</div><div class="wg-t">Tensões no Mar Vermelho afectam rotas globais</div><div class="wg-b">Novos incidentes forçaram desvios de cargueiros, pressionando custos de frete.</div></div>
+        <div class="wg-card"><div class="wg-cat" style="color:var(--c-mkt)">Mercados</div><div class="wg-t">BdP identifica sobrevalorização imobiliária de 18%</div><div class="wg-b">Relatório recomenda restrições no crédito habitação.</div></div>
+      </div>
+      <div class="wn fade" style="animation-delay:.14s"><div class="wn-eye">📊 Números da semana</div><div class="wn-grid"><div><div class="wn-v">+2,1%</div><div class="wn-d">S&P 500 semanal</div></div><div><div class="wn-v">+1,2%</div><div class="wn-d">PSI 20 sessão</div></div><div><div class="wn-v">2,1%</div><div class="wn-d">Inflação PT Fev.</div></div><div><div class="wn-v">€200B</div><div class="wn-d">Fundo CE proposto</div></div><div><div class="wn-v">18%</div><div class="wn-d">Sobrevalorização imob.</div></div><div><div class="wn-v">40%</div><div class="wn-d">Melhoria GPT-5</div></div></div></div>
+    </div>
+
+    <!-- PERFIL -->
+    <div class="panel" id="panel-perfil">
+      <div class="pf-title fade">Perfis</div>
+      <div class="pf-sub">Cada perfil tem categorias, fontes, watchlist e definições próprias.</div>
+      <div class="pf-avatars fade" id="pAvatars"></div>
+
+      <!-- Settings -->
+      <div class="ps fade" style="animation-delay:.06s">
+        <div class="ps-hd">⚙️ Definições <span class="ps-save" onclick="saveProf()">Guardar</span></div>
+        <div class="setting-row">
+          <div><div class="setting-label">Tempo de leitura</div><div class="setting-desc">A barra de progresso no topo</div></div>
+          <div class="setting-ctrl" style="display:flex;align-items:center;gap:8px">
+            <input type="range" id="timeSlider" min="5" max="60" step="5" value="15" oninput="updateTime(this.value)">
+            <span class="setting-val" id="timeVal">15 min</span>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Frequência de actualização</div><div class="setting-desc">Intervalo no GitHub Actions</div></div>
+          <div class="setting-ctrl">
+            <select class="src-cat-sel" id="freqSel" style="display:block" onchange="saveProf()">
+              <option value="6">Cada 6h</option>
+              <option value="12" selected>Cada 12h</option>
+              <option value="24">Cada 24h</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categories -->
+      <div class="ps fade" style="animation-delay:.10s">
+        <div class="ps-hd">📋 Categorias e ordem <span class="ps-save" onclick="saveProf()">Guardar</span></div>
+        <div class="cc-list" id="ccList"></div>
+      </div>
+
+      <!-- Sources -->
+      <div class="ps fade" style="animation-delay:.14s">
+        <div class="ps-hd">📰 Fontes <span style="font-size:11px;color:var(--ink4);font-weight:400" id="srcCnt"></span></div>
+        <input class="src-search" id="srcSearch" placeholder="🔍 Pesquisar fontes..." oninput="debounceSrcSearch()">
+        <div id="srcList"></div>
+        <div class="src-add-form">
+          <div>
+            <label class="f-label" style="display:block;margin-bottom:4px">URL do site ou RSS</label>
+            <input class="src-in" id="srcUrl" placeholder="ex: https://observador.pt ou .../rss" style="width:100%" oninput="onUrlInput(this.value)" onblur="tryFetchMeta(this.value)">
+          </div>
+          <div class="src-add-row">
+            <div>
+              <label class="f-label" style="display:block;margin-bottom:4px">Nome da fonte</label>
+              <input class="src-in" id="srcName" placeholder="Preenchido auto ou manual" style="width:100%">
+            </div>
+            <div>
+              <label class="f-label" style="display:block;margin-bottom:4px">Categoria</label>
+              <select class="src-cat-sel" id="srcCatSel" style="display:block;width:100%">
+                <option value="breaking">Breaking News</option>
+                <option value="geo">Geopolítica</option>
+                <option value="eco">Economia Global</option>
+                <option value="ecopt">Portugal/EU</option>
+                <option value="pol">Política</option>
+                <option value="clima">Clima</option>
+                <option value="mkt">Mercados</option>
+                <option value="work">Future of Work</option>
+                <option value="biz">Negócios</option>
+                <option value="ai">IA & Tech</option>
+                <option value="gadgets">Gadgets</option>
+                <option value="sci">Ciência</option>
+                <option value="soul">Soul Food</option>
+              </select>
+            </div>
+          </div>
+          <div id="srcStatus" class="src-status"></div>
+          <button class="src-add-btn" onclick="addSource()" style="align-self:flex-start">+ Adicionar fonte</button>
+        </div>
+        <div class="src-count" id="srcCountLabel"></div>
+      </div>
+
+      <!-- Stocks -->
+      <div class="ps fade" style="animation-delay:.18s">
+        <div class="ps-hd">📈 Watchlist de Stocks</div>
+        <div class="st-tags" id="stList"></div>
+        <div class="st-form">
+          <input class="st-in" id="stIn" placeholder="Ex: AAPL" maxlength="8">
+          <button class="st-btn" onclick="addStock()">+ Adicionar</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- MOBILE NAV -->
+<nav class="mnav">
+  <button class="mn active" id="mn-hoje" onclick="gTab('hoje')"><span class="mn-ic">📰</span><span class="mn-lbl">Hoje</span></button>
+  <button class="mn" id="mn-semana" onclick="gTab('semana')"><span class="mn-ic">📊</span><span class="mn-lbl">Semana</span></button>
+  <button class="mn" id="mn-perfil" onclick="gTab('perfil')"><span class="mn-ic">👤</span><span class="mn-lbl">Perfil</span></button>
+</nav>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-title">Novo Perfil</div>
+    <label class="f-label">Nome</label>
+    <input class="f-input" id="nName" placeholder="Ex: Ricardo">
+    <label class="f-label">Cor</label>
+    <div class="cpicks" id="cPicks"></div>
+    <div class="modal-acts">
+      <button class="btn-g" onclick="closeModal()">Cancelar</button>
+      <button class="btn-p" onclick="createProfile()">Criar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═════════════════════════ DATA ═════════════════════════ */
+const AV_COLORS=['#C8860A','#1D4ED8','#047857','#991B1B','#6D28D9','#BE185D','#0369A1','#065F46'];
+let selColor=AV_COLORS[0];
+
+const CAT_DEFS=[
+  {id:'breaking',g:'mundo',gl:'Mundo & Sociedade',nm:'Breaking News',ic:'🔴',cl:'#DC2626',bg:'#FEE2E2'},
+  {id:'geo',     g:'mundo',gl:'Mundo & Sociedade',nm:'Geopolítica',  ic:'🌐',cl:'#7C3AED',bg:'#EDE9FE'},
+  {id:'eco',     g:'mundo',gl:'Mundo & Sociedade',nm:'Economia Global',ic:'📉',cl:'#B45309',bg:'#FEF3C7'},
+  {id:'ecopt',   g:'mundo',gl:'Mundo & Sociedade',nm:'Economia Nacional',ic:'🇵🇹',cl:'#047857',bg:'#DCFCE7'},
+  {id:'pol',     g:'mundo',gl:'Mundo & Sociedade',nm:'Política Nacional',ic:'🏛️',cl:'#1D4ED8',bg:'#DBEAFE'},
+  {id:'clima',   g:'mundo',gl:'Mundo & Sociedade',nm:'Clima Global',ic:'🌊',cl:'#0E7490',bg:'#CFFAFE'},
+  {id:'mkt',     g:'eco',  gl:'Economia & Carreira',nm:'Mercado Financeiro',ic:'📈',cl:'#92400E',bg:'#FEF3C7'},
+  {id:'work',    g:'eco',  gl:'Economia & Carreira',nm:'Future of Work',ic:'💼',cl:'#4338CA',bg:'#EDE9FE'},
+  {id:'biz',     g:'eco',  gl:'Economia & Carreira',nm:'Dica de Negócios',ic:'💡',cl:'#BE185D',bg:'#FCE7F3'},
+  {id:'fin',     g:'fin',  gl:'Finanças',nm:'O Meu Portfólio',ic:'💰',cl:'#166534',bg:'#DCFCE7'},
+  {id:'inv',     g:'fin',  gl:'Finanças',nm:'Dicas de Investimento',ic:'🎯',cl:'#D97706',bg:'#FEF3C7'},
+  {id:'ai',      g:'tech', gl:'Tecnologia & Ciência',nm:'IA & Inovação',ic:'🤖',cl:'#1D4ED8',bg:'#DBEAFE'},
+  {id:'gadgets', g:'tech', gl:'Tecnologia & Ciência',nm:'Gadgets & Hardware',ic:'📱',cl:'#6D28D9',bg:'#EDE9FE'},
+  {id:'sci',     g:'tech', gl:'Tecnologia & Ciência',nm:'Ciência & Espaço',ic:'🚀',cl:'#0E7490',bg:'#CFFAFE'},
+  {id:'soul',    g:'soul', gl:'Soul Food',nm:'Soul Food',ic:'✨',cl:'#BE185D',bg:'#FCE7F3'},
+];
+
+const DEF_SOURCES=[
+  {id:'tc', nm:'TechCrunch',         cat:'ai',    on:true, stars:3},
+  {id:'tv', nm:'The Verge',           cat:'ai',    on:true, stars:2},
+  {id:'mit',nm:'MIT Tech Review',     cat:'ai',    on:true, stars:2},
+  {id:'vb', nm:'VentureBeat AI',      cat:'ai',    on:false,stars:1},
+  {id:'at', nm:'Ars Technica',        cat:'ai',    on:false,stars:2},
+  {id:'obs',nm:'Observador',          cat:'ecopt', on:true, stars:3},
+  {id:'pub',nm:'Público',             cat:'ecopt', on:true, stars:2},
+  {id:'exp',nm:'Expresso',            cat:'pol',   on:true, stars:3},
+  {id:'eur',nm:'Euronews PT',         cat:'eco',   on:true, stars:2},
+  {id:'rtp',nm:'RTP Notícias',        cat:'ecopt', on:false,stars:1},
+  {id:'jn', nm:'Jornal de Negócios',  cat:'mkt',   on:true, stars:3},
+  {id:'reu',nm:'Reuters',             cat:'eco',   on:true, stars:3},
+  {id:'bbg',nm:'Bloomberg',           cat:'mkt',   on:true, stars:3},
+  {id:'ft', nm:'Financial Times',     cat:'eco',   on:true, stars:3},
+  {id:'yhf',nm:'Yahoo Finance',       cat:'mkt',   on:true, stars:2},
+  {id:'wsj',nm:'Wall Street Journal', cat:'eco',   on:false,stars:2},
+  {id:'eco2',nm:'The Economist',      cat:'eco',   on:false,stars:3},
+  {id:'ap', nm:'AP News',             cat:'breaking',on:true,stars:3},
+  {id:'nyt',nm:'New York Times',      cat:'eco',   on:false,stars:2},
+  {id:'gua',nm:'The Guardian',        cat:'eco',   on:false,stars:2},
+  {id:'sci2',nm:'Nature News',        cat:'sci',   on:false,stars:2},
+  {id:'nas',nm:'NASA Science',        cat:'sci',   on:false,stars:2},
+  {id:'wef',nm:'World Economic Forum',cat:'eco',   on:false,stars:2},
+  {id:'hrv',nm:'Harvard Business Review',cat:'work',on:false,stars:3},
+  {id:'mit2',nm:'MIT Sloan Review',   cat:'work',  on:false,stars:2},
+];
+
+const DEMO_STOCKS=[
+  {sym:'AAPL',nm:'Apple',price:'213.49',chg:'+1.24%',up:true},
+  {sym:'MSFT',nm:'Microsoft',price:'415.32',chg:'-0.41%',up:false},
+  {sym:'NVDA',nm:'NVIDIA',price:'878.54',chg:'+3.10%',up:true},
+  {sym:'TSLA',nm:'Tesla',price:'248.90',chg:'-1.82%',up:false},
+  {sym:'AMZN',nm:'Amazon',price:'196.20',chg:'+0.91%',up:true},
+  {sym:'GOOGL',nm:'Alphabet',price:'162.50',chg:'+0.35%',up:true},
+  {sym:'PSI20',nm:'PSI 20',price:'6,842',chg:'+0.80%',up:true},
+  {sym:'EUR/USD',nm:'Euro/Dólar',price:'1.0832',chg:'+0.12%',up:true},
+  {sym:'BTC',nm:'Bitcoin',price:'91,240',chg:'+2.31%',up:true},
+  {sym:'GOLD',nm:'Ouro',price:'2,184',chg:'+0.55%',up:true},
+  {sym:'SP500',nm:'S&P 500',price:'5,694',chg:'+0.68%',up:true},
+  {sym:'DAX',nm:'DAX 40',price:'17,842',chg:'+0.42%',up:true},
+];
+
+const ARTICLES={
+  breaking:[
+    {title:'Forças russas avançam no nordeste da Ucrânia, Kyiv pede reforço de armamento',url:'https://www.reuters.com',src:'Reuters',ts:'05:30',imp:'alto',
+     summary:'Novos movimentos militares registados na região de Kharkiv. EUA e aliados da NATO reuniram-se de emergência para avaliar a resposta.',
+     why:'Pode desencadear nova ronda de sanções e afectar preços de energia na Europa.',
+     impact:'Aumento nos preços do gás natural na UE. Pressão adicional nas cadeias de abastecimento de cereais.',
+     related:'Liga-se ao alerta do FMI sobre crescimento global (revisão em baixa) e às tensões no Mar Vermelho que já pressionam rotas comerciais.'},
+    {title:'Sismo de magnitude 6,4 atinge costa do Japão, sem alerta de tsunami',url:'https://apnews.com',src:'AP News',ts:'03:12',imp:'médio',
+     summary:'Epicentro a 120km de Tóquio. Breve interrupção de fornecimento eléctrico em Ibaraki. Transportes perturbados por 4 horas.',
+     why:'O Japão é o terceiro maior produtor de semicondutores do mundo.',
+     impact:'Possível perturbação temporária na cadeia de abastecimento de chips. TSMC e Samsung em alerta.',
+     related:'Enquadra-se na dependência global de semicondutores asiáticos, um tema recorrente desde 2020.'},
+  ],
+  geo:[
+    {title:'China e Taiwan: tensão aumenta após exercícios militares de 72 horas no estreito',url:'https://ft.com',src:'Financial Times',ts:'04:00',imp:'alto',
+     summary:'Pequim realizou simulacros de bloqueio naval. Taiwan activou sistemas de alerta. EUA enviaram destróier à região.',
+     why:'O estreito de Taiwan movimenta 40% do comércio marítimo global de chips.',
+     impact:'Seguro marítimo na Ásia sobe 15%. Stocks de semicondutores caíram 3% antes de recuperarem.',
+     related:'Directamente relacionado com a dependência global de chips abordada no sector tech. A Apple (AAPL) e NVDA são as mais expostas.'},
+  ],
+  eco:[
+    {title:'FMI revê em baixa previsão de crescimento global para 2026: 2,8%',url:'https://reuters.com',src:'Reuters',ts:'06:00',imp:'alto',
+     summary:'Fundo cita persistência de taxas de juro elevadas e desaceleração do comércio. Zona Euro recebe previsão de 1,1%.',
+     why:'Aumenta pressão sobre os bancos centrais para iniciar ciclo de cortes mais cedo.',
+     impact:'Pode acelerar a decisão da Fed e do BCE sobre cortes de taxas. Favorece obrigações e sectores defensivos.',
+     related:'Encadeia directamente com a decisão da Fed desta semana e com o cenário do PSI 20 e mercados europeus.'},
+  ],
+  ecopt:[
+    {title:'Banco de Portugal alerta para riscos no mercado imobiliário',url:'https://jornaldenegocios.pt',src:'Jornal de Negócios',ts:'04:00',imp:'alto',
+     summary:'Relatório identifica sobrevalorização de 18% no sector residencial em Lisboa e Porto. Recomenda cautela nos critérios de concessão de crédito.',
+     why:'Afecta directamente quem tem crédito à habitação ou pondera comprar imóvel.',
+     impact:'Bancos podem apertar critérios de aprovação. Taxas Euribor já elevadas somam pressão nas prestações.',
+     related:'Tensão com o fundo europeu de €200B que vai injectar capital na economia portuguesa — risco de alimentar ainda mais a subida de preços.'},
+    {title:'Portugal cria programa de vistos para nómadas digitais com novo regime fiscal',url:'https://observador.pt',src:'Observador',ts:'02:30',imp:'médio',
+     summary:'Governo anuncia pacote de incentivos fiscais para trabalhadores remotos estrangeiros como parte da estratégia de atracção de talento.',
+     why:'Pode pressionar ainda mais o mercado de arrendamento em Lisboa e Porto.',
+     impact:'Aumento da procura de habitação premium. Sectores de co-working e hospitality beneficiam.',
+     related:'Relaciona-se directamente com o alerta do Banco de Portugal sobre sobrevalorização imobiliária desta manhã.'},
+  ],
+  pol:[
+    {title:'Orçamento do Estado: governo avança com redução do IRS para escalões médios',url:'https://expresso.pt',src:'Expresso',ts:'07:00',imp:'alto',
+     summary:'Proposta prevê descida de 1,5 p.p. nas taxas do 3.º e 4.º escalão, com impacto médio de €42 mensais por contribuinte.',
+     why:'Directamente relevante para a maioria dos trabalhadores portugueses a tempo inteiro.',
+     impact:'Aumento do rendimento disponível das famílias. Pressão adicional no défice orçamental.',
+     related:'Enquadra-se na descida da inflação para 2,1% que alivia também o poder de compra. Combinado, o efeito no consumo pode ser significativo.'},
+  ],
+  clima:[
+    {title:'Temperaturas recordes em Março: Lisboa regista 29ºC pelo segundo ano consecutivo',url:'https://publico.pt',src:'Público',ts:'10:00',imp:'médio',
+     summary:'IPMA confirma anomalia térmica de +4ºC face à média histórica. Alertas de incêndio já activados no Alentejo.',
+     why:'Impacto no sector agrícola e nos custos de energia antes do Verão.',
+     impact:'Aumento do risco de incêndio. Custos de ar condicionado antecipados. Possíveis perdas agrícolas.',
+     related:'Enquadra-se nas metas climáticas europeias e no fundo de €200B para transição verde — cria urgência para a aplicação desses fundos.'},
+  ],
+  mkt:[
+    {title:'Fed mantém taxas mas sinaliza dois cortes para o segundo semestre',url:'https://finance.yahoo.com',src:'Yahoo Finance',ts:'02:00',imp:'alto',
+     summary:'Reserva Federal manteve as taxas entre 4,25% e 4,50% mas apontou para dois cortes de 25pb no segundo semestre de 2026.',
+     why:'Impacto directo nas bolsas globais e no custo do crédito europeu e português.',
+     impact:'S&P 500 subiu 2,1%. Obrigações do tesouro valorizaram. Crédito habitação pode baixar no 2.º semestre.',
+     related:'Directamente ligado à revisão em baixa do FMI e à subida do PSI desta sessão. Os cortes esperados podem aliviar as prestações do Banco de Portugal.'},
+    {title:'PSI 20 sobe 1,2% liderado por EDP e Galp após dados positivos da inflação',url:'https://jornaldenegocios.pt',src:'Jornal de Negócios',ts:'01:30',imp:'médio',
+     summary:'EDP valorizou 2,8% e Galp 1,9%. A descida da inflação portuguesa para 2,1% foi o catalisador principal da sessão.',
+     why:'Reflecte melhoria do sentimento económico em Portugal.',
+     impact:'Carteiras com exposição a Portugal beneficiam. Yield das OT portuguesas comprimiu para 2,8%.',
+     related:'Consequência directa da decisão da Fed e da queda da inflação. EDP beneficia também das metas climáticas europeias.'},
+  ],
+  work:[
+    {title:'Microsoft lança Copilot para Excel com análise preditiva automática',url:'https://theverge.com',src:'The Verge',ts:'05:10',imp:'médio',
+     summary:'Nova funcionalidade gera previsões financeiras e identifica anomalias em folhas de cálculo com um clique. Disponível para Microsoft 365 Business.',
+     why:'Reduz horas de trabalho analítico em finanças, operações e gestão.',
+     impact:'Produtividade em funções de análise pode aumentar 30-40%. Pressão sobre analistas júnior.',
+     related:'Enquadra-se no lançamento do GPT-5 — a corrida para integrar IA nas ferramentas de trabalho quotidianas está a acelerar rapidamente.'},
+  ],
+  biz:[
+    {title:'A regra dos 3 emails — como menos comunicação aumenta produtividade da equipa',url:'https://hbr.org',src:'Harvard Business Review',ts:'06:30',imp:'baixo',
+     summary:'Equipas que limitam threads de email a máximo 3 respostas tomam decisões 28% mais rápido e reportam menor fadiga cognitiva.',
+     why:'Aplicável imediatamente sem custo — só requer acordo de equipa.',
+     impact:'Redução do "noise" interno. Menos reuniões de esclarecimento. Decisões mais ágeis.',
+     related:'Encaixa com as ferramentas de IA para produtividade (Copilot, etc.) — quando as ferramentas são mais eficientes, os processos de comunicação precisam de acompanhar.'},
+  ],
+  ai:[
+    {title:'OpenAI lança GPT-5 com capacidades multimodais avançadas e raciocínio melhorado',url:'https://techcrunch.com',src:'TechCrunch',ts:'06:15',imp:'alto',
+     summary:'GPT-5 processa vídeo em tempo real e supera benchmarks anteriores em 40% nas tarefas de raciocínio. Disponível via API a partir de hoje.',
+     why:'Define o novo patamar da IA generativa e acelera a corrida com Google e Anthropic.',
+     impact:'Empresas de software que não integrem IA ficam expostas. Consultoras e serviços de análise vão sentir pressão.',
+     related:'Directamente relacionado com o chip M5 da Apple (IA local) e o Copilot da Microsoft — a corrida para integrar IA em todas as superfícies está a intensificar-se.'},
+    {title:'Apple apresenta chip M5 com motor de IA local: sem dependência da cloud',url:'https://theverge.com',src:'The Verge',ts:'05:40',imp:'médio',
+     summary:'Neural Processing Unit 3x mais rápido que o M4. Modelos de linguagem correm localmente. Estreia nos MacBook Pro de Setembro.',
+     why:'Marca a transição da IA do cloud para o dispositivo — implicações de privacidade e latência.',
+     impact:'Mercado de chips cloud pode sofrer pressão a longo prazo. Beneficia utilizadores com dados sensíveis.',
+     related:'Apple (AAPL no teu portfólio) e NVIDIA são as empresas mais directamente impactadas por esta mudança de arquitectura.'},
+  ],
+  gadgets:[
+    {title:'Samsung anuncia Galaxy S25 Edge: 5,8mm de espessura e bateria 18% maior',url:'https://theverge.com',src:'The Verge',ts:'04:50',imp:'baixo',
+     summary:'O smartphone mais fino da Samsung usa novo processo de fabrico que mantém a autonomia apesar da estrutura ultra-fina.',
+     why:'Benchmark de design para a indústria que pode influenciar o iPhone 17.',
+     impact:'Pressão competitiva para a Apple no segmento premium. OLED da Samsung beneficia.',
+     related:'Contexto: Apple (no teu portfólio) vai responder com iPhone 17 em Setembro — timing relevante.'},
+  ],
+  sci:[
+    {title:'NASA confirma oceano de 40km de profundidade em Enceladus — condições mais favoráveis à vida',url:'https://mit.edu',src:'MIT Tech Review',ts:'03:00',imp:'baixo',
+     summary:'Novas análises dos dados da Cassini indicam oceano 2x mais profundo que estimado, com condições hidrotermais activas.',
+     why:'Reforça Enceladus como alvo prioritário para missões de astrobiologia.',
+     impact:'Pode influenciar decisões de financiamento para missões planetárias na próxima década.',
+     related:'Enquadra-se no contexto da exploração espacial privada (SpaceX, Blue Origin) que está a mudar o custo das missões.'},
+  ],
+  soul:[
+    {title:'Como o aborrecimento se tornou o recurso mais escasso da era digital',url:'https://theatlantic.com',src:'The Atlantic',ts:'Podcast · 28 min',imp:'baixo',
+     summary:'Cal Newport argumenta que os períodos de tédio produtivo são os momentos onde as ideias mais criativas emergem — e estamos a eliminá-los com o scroll infinito.',
+     why:'Para o caminho ou o almoço: uma conversa que muda como olhas para o teu telemóvel.',
+     impact:'Aplicável à gestão da atenção, criatividade e tomada de decisão profissional.',
+     related:'O paradoxo: enquanto a IA (GPT-5, Copilot) automatiza o trabalho analítico, libertamos tempo — mas sabemos aproveitá-lo para pensar?'},
+  ],
+};
+
+const SUMMARY_ITEMS=[
+  {color:'#f87171',text:'OpenAI lançou o GPT-5, superando benchmarks anteriores em 40% com capacidades multimodais.',src:'TechCrunch',ts:'06:15',url:'https://techcrunch.com'},
+  {color:'#fb923c',text:'Fed sinaliza dois cortes de taxas para o 2.º semestre — PSI e S&P subiram em resposta.',src:'Reuters',ts:'02:00',url:'https://reuters.com'},
+  {color:'#4ade80',text:'Portugal pode aceder a €4B do novo fundo europeu de €200B para transição industrial.',src:'Euronews PT',ts:'03:45',url:'https://pt.euronews.com'},
+  {color:'#60a5fa',text:'Banco de Portugal alerta para sobrevalorização de 18% no imobiliário em Lisboa e Porto.',src:'Jornal de Negócios',ts:'04:00',url:'https://jornaldenegocios.pt'},
+];
+
+/* X Trends removed */
+
+/* ═════════════════════════ STATE ════════════════════════ */
+function loadState(){
+  try{ return JSON.parse(localStorage.getItem('prisma_v1')||'null')||defState(); }
+  catch(e){ return defState(); }
+}
+function defState(){
+  return{
+    profiles:[{
+      id:'p1',name:'Ricardo',color:'#C8860A',
+      cats:CAT_DEFS.map(c=>({id:c.id,on:true})),
+      sources:[...DEF_SOURCES.map(s=>({...s}))],
+      stocks:['AAPL','MSFT','NVDA','PSI20'],
+      readingMins:15,
+      freq:12,
+    }],
+    active:'p1',
+    history:['2026-03-06','2026-03-05','2026-03-04','2026-03-03','2026-03-02'],
+  };
+}
+function saveState(){ try{localStorage.setItem('prisma_v1',JSON.stringify(STATE));}catch(e){} }
+let STATE=loadState();
+function aP(){ return STATE.profiles.find(p=>p.id===STATE.active)||STATE.profiles[0]; }
+function catOrder(){ const p=aP(); return (p.cats||CAT_DEFS.map(c=>({id:c.id,on:true}))).slice(0,16); }
+
+/* ═════════════════════════ READING TIMER ════════════════ */
+let readStart=null,readInt=null,readPaused=0,readElapsed=0;
+function startTimer(){
+  if(readStart)return;
+  readStart=Date.now();
+  const fill=document.getElementById('rFill');
+  const label=document.getElementById('rLabel');
+  const pill=document.getElementById('rPill');
+  const mins=aP().readingMins||15;
+  const total=mins*60;
+  pill.classList.add('show');
+  function tick(){
+    const el=Math.min(readElapsed+(Date.now()-readStart)/1000,total);
+    const pct=(el/total)*100;
+    fill.style.width=pct+'%';
+    const m=Math.floor(el/60),s=Math.floor(el%60);
+    const rm=Math.floor((total-el)/60),rs=Math.floor((total-el)%60);
+    label.textContent=`${m}:${String(s).padStart(2,'0')} / ${rm}:${String(rs).padStart(2,'0')} restantes`;
+    if(el>=total){clearInterval(readInt);label.textContent=`✓ ${mins} min concluídos!`;fill.style.background='#166534';}
+  }
+  readInt=setInterval(tick,500);
+}
+// Pause timer when tab is hidden (Bug fix: Page Visibility API)
+document.addEventListener('visibilitychange',()=>{
+  if(!readStart)return;
+  if(document.hidden){
+    readElapsed+=(Date.now()-readStart)/1000;
+    clearInterval(readInt);
+  } else {
+    readStart=Date.now();
+    const mins=aP().readingMins||15;
+    const total=mins*60;
+    if(readElapsed<total) readInt=setInterval(()=>{
+      const el=Math.min(readElapsed+(Date.now()-readStart)/1000,total);
+      const pct=(el/total)*100;
+      document.getElementById('rFill').style.width=pct+'%';
+      const m=Math.floor(el/60),s=Math.floor(el%60);
+      const rm=Math.floor((total-el)/60),rs=Math.floor((total-el)%60);
+      document.getElementById('rLabel').textContent=`${m}:${String(s).padStart(2,'0')} / ${rm}:${String(rs).padStart(2,'0')} restantes`;
+      if(el>=total){clearInterval(readInt);document.getElementById('rLabel').textContent=`✓ ${mins} min concluídos!`;}
+    },500);
+  }
+});
+['scroll','click','touchstart'].forEach(ev=>document.addEventListener(ev,()=>startTimer(),{once:true,passive:true}));
+
+/* ═════════════════════════ TICKER ══════════════════════ */
+function buildTicker(){
+  const p=aP();
+  const watch=(p.stocks||[]).map(s=>s.toUpperCase());
+  let stocks=DEMO_STOCKS.filter(s=>watch.includes(s.sym));
+  if(!stocks.length)stocks=DEMO_STOCKS;
+  const html=[...stocks,...stocks].map(s=>`<div class="t-item"><span class="t-sym">${s.sym}</span><span class="t-price">${s.price}</span><span class="t-chg ${s.up?'up':'dn'}">${s.chg}</span></div>`).join('');
+  document.getElementById('tScroll').innerHTML=html;
+}
+
+/* ═════════════════════════ SIDEBAR ═════════════════════ */
+// Track collapsed sidebar groups in sessionStorage
+function sbCollapsed(grp){ try{const c=JSON.parse(sessionStorage.getItem('sb_col')||'{}'); return !!c[grp];}catch(e){return false;} }
+function sbToggle(grp){ try{const c=JSON.parse(sessionStorage.getItem('sb_col')||'{}'); c[grp]=!c[grp]; sessionStorage.setItem('sb_col',JSON.stringify(c)); buildSidebar();}catch(e){} }
+
+function buildSidebar(){
+  const orders=catOrder();
+  const enabled=orders.filter(c=>c.on).map(c=>CAT_DEFS.find(d=>d.id===c.id)).filter(Boolean);
+  const groups={};
+  enabled.forEach(c=>{ if(!groups[c.g])groups[c.g]=[]; groups[c.g].push(c); });
+  let html='';
+  Object.entries(groups).forEach(([grpKey,cats])=>{
+    const collapsed=sbCollapsed(grpKey);
+    html+=`<div class="sb-grp ${collapsed?'collapsed':''}">
+      <div class="sb-grp-hd" onclick="sbToggle('${grpKey}')">
+        <span class="sb-grp-lbl">${cats[0].gl}</span>
+        <span class="sb-grp-arrow">▾</span>
+      </div>
+      <div class="sb-grp-body">`;
+    cats.forEach(c=>{ html+=`<div class="sb-item" onclick="scrollSec('${c.id}')"><span class="sb-ic">${c.ic}</span><span class="sb-nm">${c.nm}</span></div>`; });
+    html+=`</div></div>`;
+  });
+  const days=['Hoje','Quinta','Quarta','Terça','Segunda'];
+  const dates=STATE.history.slice(0,5);
+  const histCollapsed=sbCollapsed('hist');
+  html+=`<div class="sb-grp ${histCollapsed?'collapsed':''}">
+    <div class="sb-grp-hd" onclick="sbToggle('hist')">
+      <span class="sb-grp-lbl">Histórico</span>
+      <span class="sb-grp-arrow">▾</span>
+    </div>
+    <div class="sb-grp-body">`;
+  dates.forEach((d,i)=>{ html+=`<div class="tl-item ${i===0?'active':''}"><div class="tl-dot"></div><div><div class="tl-d">${formatDate(d)}</div><div class="tl-wd">${days[i]||''}</div>${i===0?'<span class="today-chip">Hoje</span>':''}</div></div>`; });
+  html+=`</div></div>`;
+  document.getElementById('sidebar').innerHTML=html;
+}
+function scrollSec(id){
+  const el=document.getElementById('s-'+id);
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function formatDate(d){ const[y,m,dd]=d.split('-'); const ms=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']; return `${+dd} ${ms[+m-1]}`; }
+
+/* ═════════════════════════ SUMMARY ═════════════════════ */
+function buildSummary(){
+  document.getElementById('sumItems').innerHTML=SUMMARY_ITEMS.map(s=>`
+    <div class="sum-item">
+      <div class="si-dot" style="background:${s.color}"></div>
+      <div>
+        <div class="si-text">${s.text}</div>
+        <div class="si-src">${s.src} · ${s.ts} <a href="${s.url}" target="_blank" class="si-link">↗ Fonte</a></div>
+      </div>
+    </div>`).join('');
+}
+
+/* ═════════════════════════ SECTIONS ════════════════════ */
+function buildSections(){
+  const p=aP();
+  const orders=catOrder();
+  const enabled=orders.filter(c=>c.on).map(c=>CAT_DEFS.find(d=>d.id===c.id)).filter(Boolean);
+  let html=`<div class="conns fade" style="animation-delay:.09s">
+    <div class="conns-hd">⟁ &nbsp;Ligações entre notícias</div>
+    <div class="conn">A sinalização da Fed sobre cortes de taxas foi o catalisador para a subida do PSI e das bolsas europeias.<div class="conn-pills"><span class="cpill">Yahoo Finance</span><span class="cpill">Jornal de Negócios</span></div></div>
+    <div class="conn">O alerta do BdP sobre imobiliário e os fundos europeus apontam em sentidos opostos: moderação no crédito vs. injecção de capital.<div class="conn-pills"><span class="cpill">BdP</span><span class="cpill">Euronews PT</span></div></div>
+    <div class="conn">O lançamento do GPT-5 e o chip M5 da Apple fazem parte da mesma corrida: quem controla a IA no dispositivo do utilizador.<div class="conn-pills"><span class="cpill">TechCrunch</span><span class="cpill">The Verge</span></div></div>
+  </div>`;
+
+  enabled.forEach((cat,i)=>{
+    if(cat.id==='fin'){ html+=buildPortfolio(cat,i); return; }
+    if(cat.id==='inv'){ html+=buildInvestTips(cat,i); return; }
+    if(cat.id==='soul'){ const a=ARTICLES.soul?.[0]; if(a)html+=buildSoul(cat,a,i); return; }
+    const arts=ARTICLES[cat.id]||[];
+    if(!arts.length)return;
+    const cards=arts.map((a,ai)=>`
+      <div class="card">
+        <div class="c-stripe ${a.imp}"></div>
+        <div class="c-body">
+          <div class="c-top">
+            <span class="c-src">${a.src}</span><span class="c-bull">·</span><span class="c-ts">${a.ts}</span>
+            <span class="c-badge ${a.imp}">${a.imp==='alto'?'Alto':a.imp==='médio'?'Médio':'Baixo'}</span>
+          </div>
+          <div class="c-title">
+            <a href="${a.url}" target="_blank" rel="noopener">
+              ${a.title}
+              <span class="c-link-icon">↗</span>
+            </a>
+          </div>
+          <div class="c-summary">${a.summary}</div>
+          <button class="c-expand" id="exp-${cat.id}-${ai}" onclick="toggleCard('${cat.id}-${ai}')">
+            <span>Ver porquê · impacto · ligações</span>
+            <span class="c-expand-icon">▾</span>
+          </button>
+          <div class="c-details" id="det-${cat.id}-${ai}">
+            <div class="c-detail-row why">
+              <span class="c-dr-icon">💡</span>
+              <div><div class="c-dr-label">Porque é relevante</div><div class="c-dr-text">${a.why}</div></div>
+            </div>
+            <div class="c-detail-row impact">
+              <span class="c-dr-icon">⚡</span>
+              <div><div class="c-dr-label">Impacto potencial</div><div class="c-dr-text">${a.impact}</div></div>
+            </div>
+            <div class="c-detail-row related">
+              <span class="c-dr-icon">🔗</span>
+              <div><div class="c-dr-label">Relação com outros factores</div><div class="c-dr-text">${a.related}</div></div>
+            </div>
+          </div>
+        </div>
+      </div>`).join('');
+
+    html+=`<div class="sec fade" style="animation-delay:${.12+i*.04}s" id="s-${cat.id}">
+      <div class="sec-hd">
+        <div class="sec-dot" style="background:${cat.cl}"></div>
+        <span class="sec-nm" style="color:${cat.cl}">${cat.ic} ${cat.nm}</span>
+        <div class="sec-rule"></div>
+        <span class="sec-cnt">${arts.length}</span>
+      </div>
+      <div class="cards">${cards}</div>
+    </div>`;
+  });
+
+  document.getElementById('catSections').innerHTML=html;
+}
+
+function toggleCard(id){
+  const det=document.getElementById('det-'+id);
+  const btn=document.getElementById('exp-'+id);
+  if(!det||!btn)return;
+  const open=det.classList.contains('open');
+  det.classList.toggle('open',!open);
+  btn.classList.toggle('open',!open);
+  btn.querySelector('span:first-child').textContent=open?'Ver porquê · impacto · ligações':'Fechar detalhes';
+}
+
+function buildPortfolio(cat,i){
+  const p=aP();
+  const stocks=(p.stocks||[]);
+  const watchData=stocks.map(sym=>DEMO_STOCKS.find(s=>s.sym===sym)||{sym,nm:sym,price:'—',chg:'—',up:true});
+  const poCards=`
+    <div class="po-card"><div class="po-lbl">Valor Estimado</div><div class="po-val">€48.240</div><div class="po-chg up">↑ +€1.240 hoje (+2,6%)</div></div>
+    <div class="po-card"><div class="po-lbl">Variação Dia</div><div class="po-val" style="color:var(--up)">+2,6%</div><div class="po-chg up">↑ Melhor dia da semana</div></div>
+    <div class="po-card"><div class="po-lbl">Variação Semana</div><div class="po-val" style="color:var(--up)">+4,1%</div><div class="po-chg up">↑ Bate S&P 500 (+2,1%)</div></div>`;
+  const plItems=watchData.map(s=>`
+    <div class="pl-item">
+      <span class="pl-sym">${s.sym}</span>
+      <span class="pl-nm">${s.nm}</span>
+      <span class="pl-pr">${s.price}</span>
+      <span class="pl-chg ${s.up?'up':'dn'}">${s.chg}</span>
+    </div>`).join('');
+  return `<div class="sec fade" style="animation-delay:${.12+i*.04}s" id="s-fin">
+    <div class="sec-hd"><div class="sec-dot" style="background:${cat.cl}"></div><span class="sec-nm" style="color:${cat.cl}">${cat.ic} ${cat.nm}</span><div class="sec-rule"></div></div>
+    <div class="po-grid">${poCards}</div>
+    <div>${plItems}</div>
+    <div class="c-detail-row related" style="margin-top:12px;border-radius:var(--r)">
+      <span class="c-dr-icon">⚡</span>
+      <div><div class="c-dr-label">O que fazer</div><div class="c-dr-text">NVDA continua a beneficiar da corrida à IA. MSFT pode sofrer pressão de curto prazo. PSI20 reage positivamente à Fed — considera reforçar EDP via ETF.</div></div>
+    </div>
+  </div>`;
+}
+
+function buildInvestTips(cat,i){
+  return `<div class="sec fade" style="animation-delay:${.12+i*.04}s" id="s-inv">
+    <div class="sec-hd"><div class="sec-dot" style="background:${cat.cl}"></div><span class="sec-nm" style="color:${cat.cl}">${cat.ic} ${cat.nm}</span><div class="sec-rule"></div></div>
+    <div class="risco-grid">
+      <div class="rc"><div class="rc-lbl baixo">🟢 Baixo Risco</div>
+        <div class="rc-item">ETF S&P 500 (VOO)<div class="rc-rat">Diversificação máxima · Horizonte 10a+</div></div>
+        <div class="rc-item">OT Portugal 2031<div class="rc-rat">Yield 3,2% · Capital garantido</div></div>
+        <div class="rc-item">GOLD / Ouro<div class="rc-rat">Cobertura de inflação · +5% YTD</div></div>
+      </div>
+      <div class="rc"><div class="rc-lbl médio">🟡 Médio Risco</div>
+        <div class="rc-item">Microsoft (MSFT)<div class="rc-rat">Cloud + IA · P/E 35x · Sólido</div></div>
+        <div class="rc-item">ETF Europa (VEUR)<div class="rc-rat">Beneficia de cortes BCE esperados</div></div>
+        <div class="rc-item">Apple (AAPL)<div class="rc-rat">Serviços crescem · Chip M5 catalítico</div></div>
+      </div>
+      <div class="rc"><div class="rc-lbl alto">🔴 Alto Risco</div>
+        <div class="rc-item">NVIDIA (NVDA)<div class="rc-rat">IA dominante · Valuation esticado</div></div>
+        <div class="rc-item">Bitcoin (BTC)<div class="rc-rat">Máx. 5% carteira · Alta volatilidade</div></div>
+        <div class="rc-item">Tesla (TSLA)<div class="rc-rat">Elon risk · Ciclo de produto incerto</div></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function buildSoul(cat,a,i){
+  return `<div class="sec fade" style="animation-delay:${.12+i*.04}s" id="s-soul">
+    <div class="sec-hd"><div class="sec-dot" style="background:${cat.cl}"></div><span class="sec-nm" style="color:${cat.cl}">${cat.ic} ${cat.nm}</span><div class="sec-rule"></div></div>
+    <div class="soul">
+      <div class="soul-eye">✨ Recomendação do dia <span class="soul-type">Podcast</span></div>
+      <div class="soul-title">${a.title}</div>
+      <div class="soul-body">${a.summary}</div>
+      <div class="soul-meta">
+        <span class="soul-time">⏱ ${a.ts}</span>
+        <a href="${a.url}" target="_blank" class="soul-link">Ouvir agora →</a>
+      </div>
+      <div class="c-detail-row related" style="margin-top:12px;border-radius:var(--r-sm)">
+        <span class="c-dr-icon">🔗</span>
+        <div><div class="c-dr-label">Relação com o dia</div><div class="c-dr-text">${a.related}</div></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ═════════════════════════ TABS ═════════════════════════ */
+function gTab(t){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab,.hn,.mn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+t).classList.add('active');
+  document.querySelectorAll(`[onclick*="'${t}'"]`).forEach(b=>b.classList.add('active'));
+  if(t==='perfil')renderProfile();
+}
+
+/* ═════════════════════════ PROFILE ═════════════════════ */
+function renderProfile(){
+  const p=aP();
+  // Avatars
+  document.getElementById('pAvatars').innerHTML=
+    STATE.profiles.map(pr=>`
+      <div style="text-align:center;margin-bottom:22px">
+        <div class="pav ${pr.id===STATE.active?'active':''}" style="background:${pr.color}" onclick="setActive('${pr.id}')">
+          ${pr.name[0].toUpperCase()}<span class="pav-nm">${pr.name}</span>
+        </div>
+      </div>`).join('')+
+    `<div style="text-align:center;margin-bottom:22px"><button class="pav-add" onclick="openModal()">+</button></div>`;
+
+  // Settings
+  const sl=document.getElementById('timeSlider');
+  if(sl){ sl.value=p.readingMins||15; document.getElementById('timeVal').textContent=(p.readingMins||15)+' min'; }
+  const fq=document.getElementById('freqSel');
+  if(fq) fq.value=p.freq||12;
+  // Categories
+  const cats=p.cats||CAT_DEFS.map(c=>({id:c.id,on:true}));
+  const gbg={mundo:'#DBEAFE',eco:'#FEF3C7',fin:'#DCFCE7',tech:'#EDE9FE',soul:'#FCE7F3',social:'#F3F4F6'};
+  const gcl={mundo:'#1D4ED8',eco:'#B45309',fin:'#166534',tech:'#6D28D9',soul:'#BE185D',social:'#6B7280'};
+  const isMob=window.innerWidth<900;
+  document.getElementById('ccList').innerHTML=cats.map((co,i)=>{
+    const cat=CAT_DEFS.find(c=>c.id===co.id); if(!cat)return '';
+    return `<div class="cc-item" draggable="${!isMob}" data-idx="${i}" data-id="${co.id}"
+      ${!isMob?'ondragstart="dS(event)" ondragover="dO(event)" ondrop="dD(event)" ondragend="dE(event)"':''}>
+      ${isMob
+        ? `<div style="display:flex;flex-direction:column;gap:2px;margin-right:2px">
+             <button onclick="catUp(${i})" style="font-size:10px;color:var(--ink4);padding:1px 4px;border-radius:3px;background:var(--rule2)" ${i===0?'disabled':''}>▲</button>
+             <button onclick="catDown(${i})" style="font-size:10px;color:var(--ink4);padding:1px 4px;border-radius:3px;background:var(--rule2)" ${i===cats.length-1?'disabled':''}>▼</button>
+           </div>`
+        : `<span class="cc-handle">⠿</span>`
+      }
+      <div class="cc-tog ${co.on?'on':''}" onclick="togCat('${co.id}')"></div>
+      <div class="cc-dot" style="background:${cat.cl}"></div>
+      <span class="cc-nm">${cat.ic} ${cat.nm}</span>
+      <span class="cc-grp" style="background:${gbg[cat.g]||'#F3F4F6'};color:${gcl[cat.g]||'#6B7280'}">${cat.gl}</span>
+    </div>`;
+  }).join('');
+
+  renderSources();
+  renderStocks();
+}
+
+function setActive(id){ STATE.active=id; saveState(); renderProfile(); buildTicker(); buildSidebar(); buildSections(); updateAv(); document.getElementById('gName').textContent=aP().name; }
+function updateAv(){ const p=aP(); const av=document.getElementById('hAv'); av.textContent=p.name[0].toUpperCase(); av.style.background=p.color; }
+function saveProf(){ const p=aP(); p.readingMins=+(document.getElementById('timeSlider').value)||15; p.freq=+(document.getElementById('freqSel').value)||12; saveState(); document.querySelectorAll('.ps-save').forEach(b=>{b.textContent='✓ Guardado';setTimeout(()=>b.textContent='Guardar',1500);}); }
+function togCat(id){ const p=aP(); const co=p.cats.find(c=>c.id===id); if(co){co.on=!co.on;saveState();renderProfile();} }
+function updateTime(v){ document.getElementById('timeVal').textContent=v+' min'; const p=aP(); p.readingMins=+v; saveState(); }
+/* drag drop — mouse + touch support */
+let dIdx=null,touchDragEl=null,touchClone=null;
+function dS(e){dIdx=+e.currentTarget.dataset.idx;e.currentTarget.classList.add('dragging');}
+function dE(e){e.currentTarget.classList.remove('dragging');document.querySelectorAll('.cc-item').forEach(el=>el.classList.remove('drag-over'));}
+function dO(e){e.preventDefault();document.querySelectorAll('.cc-item').forEach(el=>el.classList.remove('drag-over'));e.currentTarget.classList.add('drag-over');}
+function dD(e){
+  e.preventDefault();const ti=+e.currentTarget.dataset.idx;
+  document.querySelectorAll('.cc-item').forEach(el=>el.classList.remove('drag-over'));
+  if(dIdx===null||dIdx===ti)return;
+  moveCat(dIdx,ti);dIdx=null;
+}
+function moveCat(from,to){
+  const p=aP();const c=[...p.cats];const[m]=c.splice(from,1);c.splice(to,0,m);p.cats=c;saveState();renderProfile();
+}
+// Mobile: up/down buttons instead of drag (drag API unreliable on iOS)
+function catUp(idx){ if(idx>0)moveCat(idx,idx-1); }
+function catDown(idx){ const p=aP(); if(idx<p.cats.length-1)moveCat(idx,idx+1); }
+
+/* ═════════════════════════ SOURCES ═════════════════════ */
+// Debounce search — avoids re-rendering on every keystroke with 60 sources
+let _srcSearchT=null;
+function debounceSrcSearch(){ clearTimeout(_srcSearchT); _srcSearchT=setTimeout(renderSources,180); }
+function renderSources(){
+  const p=aP(); const srcs=p.sources||[]; const q=(document.getElementById('srcSearch')||{}).value||'';
+  const filtered=srcs.filter(s=>!q||s.nm.toLowerCase().includes(q.toLowerCase())||((s.url||'').toLowerCase().includes(q.toLowerCase())));
+  document.getElementById('srcList').innerHTML=filtered.map(s=>{
+    const cat=CAT_DEFS.find(c=>c.id===s.cat)||{nm:s.cat||'Outro',cl:'#6B7280',bg:'#F3F4F6'};
+    const hasUrl=s.url||s.rss;
+    return `<div class="src-item">
+      <div class="src-tog ${s.on?'on':''}" onclick="togSrc('${s.id}')"></div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+          <span class="src-nm">${s.nm}</span>
+          ${hasUrl?`<a href="${s.url||s.rss}" target="_blank" style="font-family:var(--ff-m);font-size:9px;color:var(--ink4);text-decoration:none;transition:color .15s;flex-shrink:0" title="${s.rss||s.url||''}" onmouseover="this.style.color='var(--blue)'" onmouseout="this.style.color='var(--ink4)'">↗ ${extractDomain(s.url||s.rss)||'link'}</a>`:''}
+        </div>
+        ${s.rss&&s.rss!==s.url?`<div style="font-family:var(--ff-m);font-size:9px;color:var(--up);margin-top:1px">RSS ✓</div>`:''}
+      </div>
+      <span class="src-cat" style="background:${cat.bg||'#F3F4F6'};color:${cat.cl||'#6B7280'}">${cat.nm||s.cat}</span>
+      <div class="stars">${[1,2,3].map(n=>`<span class="star ${s.stars>=n?'lit':''}" onclick="setStar('${s.id}',${n})">★</span>`).join('')}</div>
+      <span class="src-rm" onclick="rmSrc('${s.id}')">✕</span>
+    </div>`;
+  }).join('');
+  const cnt=srcs.length;
+  document.getElementById('srcCnt').textContent=`${cnt}/60 fontes`;
+  document.getElementById('srcCountLabel').textContent=cnt>=60?'⚠️ Limite de 60 fontes atingido':`${60-cnt} disponíveis para adicionar`;
+}
+function togSrc(id){ const p=aP(); const s=p.sources.find(x=>x.id===id); if(s){s.on=!s.on;saveState();renderSources();} }
+function setStar(id,n){ const p=aP(); const s=p.sources.find(x=>x.id===id); if(s){s.stars=n;saveState();renderSources();} }
+function rmSrc(id){ const p=aP(); p.sources=p.sources.filter(s=>s.id!==id); saveState();renderSources(); }
+/* ═════════════════════════ SOURCE URL HELPERS ══════════ */
+// Known RSS feeds for popular sites — auto-suggest
+const KNOWN_RSS={
+  'observador.pt':'https://observador.pt/feed/',
+  'publico.pt':'https://www.publico.pt/rss',
+  'expresso.pt':'https://feeds.feedburner.com/expresso-online',
+  'jornaldenegocios.pt':'https://www.jornaldenegocios.pt/rss',
+  'rtp.pt':'https://www.rtp.pt/noticias/rss',
+  'techcrunch.com':'https://techcrunch.com/feed/',
+  'theverge.com':'https://www.theverge.com/rss/index.xml',
+  'reuters.com':'https://feeds.reuters.com/reuters/topNews',
+  'ft.com':'https://www.ft.com/rss/home',
+  'bloomberg.com':'https://feeds.bloomberg.com/markets/news.rss',
+  'hbr.org':'https://hbr.org/rss',
+  'thenextweb.com':'https://thenextweb.com/feed/',
+  'wired.com':'https://www.wired.com/feed/rss',
+  'apnews.com':'https://apnews.com/rss',
+};
+
+// Common RSS path patterns to try
+const RSS_PATHS=['/feed','/feed/','/rss','/rss/','/rss.xml','/feed.xml','/atom.xml','/news/rss','/feeds/posts/default'];
+
+function extractDomain(url){
+  try{
+    const u=new URL(url.startsWith('http')?url:'https://'+url);
+    return u.hostname.replace(/^www\./,'');
+  }catch(e){return null;}
+}
+
+function domainToName(domain){
+  if(!domain)return '';
+  // capitalize first part before dot
+  return domain.split('.')[0].charAt(0).toUpperCase()+domain.split('.')[0].slice(1);
+}
+
+function guessRss(url){
+  const domain=extractDomain(url);
+  if(!domain)return null;
+  // check known list
+  for(const[k,v] of Object.entries(KNOWN_RSS)){
+    if(domain===k||domain.endsWith('.'+k))return v;
+  }
+  // if url already looks like RSS return as-is
+  if(url.match(/\.(xml|rss|atom)$|\/rss|\/feed|\/atom/i))return url;
+  return null;
+}
+
+function onUrlInput(val){
+  const domain=extractDomain(val);
+  if(!domain)return;
+  const nameEl=document.getElementById('srcName');
+  if(!nameEl.value||nameEl.dataset.auto==='1'){
+    nameEl.value=domainToName(domain);
+    nameEl.dataset.auto='1';
+  }
+}
+
+async function tryFetchMeta(url){
+  const st=document.getElementById('srcStatus');
+  if(!url||!url.includes('.')){st.className='src-status';return;}
+  const domain=extractDomain(url);
+  if(!domain)return;
+  // populate name
+  const nameEl=document.getElementById('srcName');
+  if(!nameEl.value||nameEl.dataset.auto==='1'){
+    nameEl.value=domainToName(domain);
+    nameEl.dataset.auto='1';
+  }
+  const rss=guessRss(url);
+  if(rss){
+    st.className='src-status ok';
+    st.textContent=`✓ RSS detectado: ${rss} — será usado pelo Prisma para buscar artigos.`;
+    document.getElementById('srcUrl').dataset.rss=rss;
+  } else {
+    // Try CORS proxy to fetch page and find RSS link
+    st.className='src-status loading';
+    st.textContent='🔍 A tentar detectar RSS...';
+    // Try common paths
+    const base=url.startsWith('http')?url:`https://${url}`;
+    const baseClean=base.replace(/\/$/,'');
+    let found=null;
+    for(const path of RSS_PATHS){
+      try{
+        const ctrl=new AbortController();const tid=setTimeout(()=>ctrl.abort(),4000);
+        const probe=await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(baseClean+path)}`,{signal:ctrl.signal});
+        clearTimeout(tid);
+        if(probe.ok){
+          const data=await probe.json();
+          if(data.contents&&(data.contents.includes('<rss')||data.contents.includes('<feed')||data.contents.includes('<channel'))){
+            found=baseClean+path;
+            break;
+          }
+        }
+      }catch(e){}
+    }
+    if(found){
+      st.className='src-status ok';
+      st.textContent=`✓ RSS encontrado: ${found}`;
+      document.getElementById('srcUrl').dataset.rss=found;
+    } else {
+      st.className='src-status err';
+      st.textContent=`⚠️ RSS não detectado automaticamente. Podes ainda adicionar a fonte — o URL fica guardado para configuração manual do Python.`;
+    }
+  }
+}
+
+async function addSource(){
+  const p=aP(); if((p.sources||[]).length>=60){alert('Limite de 60 fontes atingido.');return;}
+  const urlEl=document.getElementById('srcUrl');
+  const url=urlEl.value.trim();
+  const nameEl=document.getElementById('srcName');
+  // If URL present but RSS not yet probed (user didn't blur), run detection now
+  if(url&&!urlEl.dataset.rss){
+    await tryFetchMeta(url);
+  }
+  const nm=nameEl.value.trim()||(url?domainToName(extractDomain(url)):'')||url;
+  if(!nm){alert('Introduz pelo menos um URL ou nome.');return;}
+  const cat=document.getElementById('srcCatSel').value;
+  const rss=urlEl.dataset.rss||url;
+  const id='u'+Date.now();
+  if(!p.sources)p.sources=[];
+  p.sources.push({id,nm,url,rss,cat,on:true,stars:2});
+  saveState();renderSources();
+  urlEl.value='';urlEl.dataset.rss='';
+  nameEl.value='';nameEl.dataset.auto='';
+  document.getElementById('srcStatus').className='src-status';
+}
+
+/* ═════════════════════════ STOCKS ══════════════════════ */
+function renderStocks(){ const p=aP(); document.getElementById('stList').innerHTML=(p.stocks||[]).map(s=>`<div class="st-tag">${s}<span class="st-rm" onclick="rmStock('${s}')">×</span></div>`).join(''); }
+function addStock(){ const i=document.getElementById('stIn'); const s=i.value.trim().toUpperCase(); if(!s)return; const p=aP(); if(!p.stocks)p.stocks=[]; if(!p.stocks.includes(s)){p.stocks.push(s);saveState();buildTicker();renderStocks();} i.value=''; }
+function rmStock(s){ const p=aP(); p.stocks=(p.stocks||[]).filter(x=>x!==s); saveState();buildTicker();renderStocks(); }
+document.getElementById('stIn').addEventListener('keydown',e=>{if(e.key==='Enter')addStock();});
+
+/* ═════════════════════════ MODAL ════════════════════════ */
+function openModal(){
+  selColor=AV_COLORS[0];
+  document.getElementById('nName').value='';
+  document.getElementById('cPicks').innerHTML=AV_COLORS.map(c=>`<div class="cpick ${c===selColor?'sel':''}" style="background:${c}" onclick="pickC('${c}')"></div>`).join('');
+  document.getElementById('overlay').classList.add('open');
+  setTimeout(()=>document.getElementById('nName').focus(),100);
+}
+function pickC(c){ selColor=c; document.querySelectorAll('.cpick').forEach(el=>el.classList.toggle('sel',el.style.background===c||el.style.backgroundColor===c)); }
+function closeModal(){ document.getElementById('overlay').classList.remove('open'); }
+function createProfile(){
+  const nm=document.getElementById('nName').value.trim(); if(!nm)return;
+  const id='p'+Date.now();
+  STATE.profiles.push({id,name:nm,color:selColor,cats:CAT_DEFS.map(c=>({id:c.id,on:true})),sources:DEF_SOURCES.map(s=>({...s})),stocks:['AAPL','MSFT'],readingMins:15,freq:12});
+  STATE.active=id; saveState(); closeModal();
+  gTab('perfil'); buildTicker(); buildSidebar(); updateAv();
+  document.getElementById('gName').textContent=nm;
+}
+document.getElementById('overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+
+/* ═════════════════════════ 12H REFRESH LABEL ═══════════ */
+function updateRefreshLabel(){
+  const now=new Date();
+  const h=now.getHours();
+  // next update at 07:00 or 19:00
+  const nextH=h<7?7:h<19?19:7;
+  const nextD=h>=19?new Date(now.getFullYear(),now.getMonth(),now.getDate()+1,nextH,0):new Date(now.getFullYear(),now.getMonth(),now.getDate(),nextH,0);
+  const diff=Math.round((nextD-now)/60000);
+  const dh=Math.floor(diff/60),dm=diff%60;
+  document.getElementById('refreshLabel').textContent=`Actualizado 07:02 · próxima em ${dh}h${dm>0?dm+'m':''}`;
+}
+
+/* ═════════════════════════ LIVE DATA LOADER ════════════ */
+let LIVE_DATA = null;
+
+async function loadLiveData(){
+  // Tenta pela ordem: latest.json → hoje → ontem
+  const today = new Date().toISOString().slice(0,10);
+  const yesterday = new Date(Date.now()-86400000).toISOString().slice(0,10);
+  const attempts = ['data/latest.json', `data/${today}.json`, `data/${yesterday}.json`];
+  try {
+    for(const url of attempts){
+      const res = await fetch(url);
+      if(res.ok){
+        LIVE_DATA = await res.json();
+        console.log(`Prisma: dados carregados de ${url}`);
+        // Actualiza histórico do index
+        try{
+          const idx = await fetch('data/index.json');
+          if(idx.ok){
+            const idxData = await idx.json();
+            // Suporta formato array ou {dates:[...]}
+            const dates = Array.isArray(idxData) ? idxData : (idxData.dates || []);
+            if(dates.length) STATE.history = dates.slice(0,5);
+          }
+        }catch(e){}
+        return true;
+      }
+    }
+  } catch(e){ console.log('Prisma: sem dados live, modo demo.', e); }
+  return false;
+}
+
+function buildTickerFromLive(){
+  if(!LIVE_DATA?.stocks) return buildTicker();
+  const p=aP();
+  const watch=(p.stocks||[]).map(s=>s.toUpperCase());
+  let stocks=LIVE_DATA.stocks.filter(s=>watch.includes(s.symbol.replace(/[^A-Z]/g,'')));
+  if(!stocks.length) stocks=LIVE_DATA.stocks;
+  const html=[...stocks,...stocks].map(s=>`
+    <div class="t-item">
+      <span class="t-sym">${s.symbol.split('.')[0].split('=')[0]}</span>
+      <span class="t-price">${typeof s.price==='number'?s.price.toLocaleString('pt-PT',{maximumFractionDigits:2}):s.price}</span>
+      <span class="t-chg ${s.up?'up':'dn'}">${s.change_pct>=0?'+':''}${s.change_pct?.toFixed(2)}%</span>
+    </div>`).join('');
+  document.getElementById('tScroll').innerHTML=html;
+}
+
+function buildSummaryFromLive(){
+  if(!LIVE_DATA?.summary) return buildSummary();
+  const s=LIVE_DATA.summary;
+  document.getElementById('sumItems').innerHTML=(s.items||[]).map(item=>`
+    <div class="sum-item">
+      <div class="si-dot" style="background:${item.color||'#60a5fa'}"></div>
+      <div>
+        <div class="si-text">${item.text}</div>
+        <div class="si-src">${item.source}${item.time?' · '+item.time:''}
+          ${item.url?`<a href="${item.url}" target="_blank" class="si-link">↗ Fonte</a>`:''}
+        </div>
+      </div>
+    </div>`).join('');
+  if(s.headline){
+    document.querySelector('.sum-title').textContent=s.headline;
+  }
+}
+
+function buildSectionsFromLive(){
+  if(!LIVE_DATA?.categories) return buildSections();
+  const p=aP();
+  const orders=catOrder();
+  const enabled=orders.filter(c=>c.on).map(c=>CAT_DEFS.find(d=>d.id===c.id)).filter(Boolean);
+  let html='';
+
+  // Connections
+  const conns=LIVE_DATA.connections||[];
+  if(conns.length){
+    html+=`<div class="conns fade" style="animation-delay:.09s">
+      <div class="conns-hd">⟁ &nbsp;Ligações entre notícias</div>
+      ${conns.map(c=>`<div class="conn">${c.note}<div class="conn-pills">${(c.articles||[]).map(a=>`<span class="cpill">${a}</span>`).join('')}</div></div>`).join('')}
+    </div>`;
+  }
+
+  enabled.forEach((cat,i)=>{
+    if(cat.id==='fin'){
+      html+=buildPortfolioFromLive(cat,i); return;
+    }
+    if(cat.id==='inv'){
+      html+=buildInvestTipsFromLive(cat,i); return;
+    }
+    if(cat.id==='soul'){
+      const souls=LIVE_DATA.categories?.soul||[];
+      if(souls[0]) html+=buildSoul(cat,{
+        title:souls[0].title, url:souls[0].url,
+        summary:souls[0].summary, ts:'~15 min',
+        related:souls[0].related||''
+      },i);
+      return;
+    }
+    const arts=LIVE_DATA.categories?.[cat.id]||[];
+    if(!arts.length) return;
+
+    const cards=arts.map((a,ai)=>`
+      <div class="card">
+        <div class="c-stripe ${a.impact_level||'médio'}"></div>
+        <div class="c-body">
+          <div class="c-top">
+            <span class="c-src">${a.source||''}</span>
+            <span class="c-bull">·</span>
+            <span class="c-ts">${(a.date||'').slice(11,16)||''}</span>
+            <span class="c-badge ${a.impact_level||'médio'}">${a.impact_level==='alto'?'Alto':a.impact_level==='baixo'?'Baixo':'Médio'}</span>
+          </div>
+          <div class="c-title">
+            <a href="${a.url||'#'}" target="_blank" rel="noopener">
+              ${a.title}<span class="c-link-icon">↗</span>
+            </a>
+          </div>
+          <div class="c-summary">${a.summary||''}</div>
+          <button class="c-expand" id="exp-${cat.id}-${ai}" onclick="toggleCard('${cat.id}-${ai}')">
+            <span>Ver porquê · impacto · ligações</span>
+            <span class="c-expand-icon">▾</span>
+          </button>
+          <div class="c-details" id="det-${cat.id}-${ai}">
+            <div class="c-detail-row why"><span class="c-dr-icon">💡</span>
+              <div><div class="c-dr-label">Porque é relevante</div><div class="c-dr-text">${a.why||'—'}</div></div></div>
+            <div class="c-detail-row impact"><span class="c-dr-icon">⚡</span>
+              <div><div class="c-dr-label">Impacto potencial</div><div class="c-dr-text">${a.impact||'—'}</div></div></div>
+            <div class="c-detail-row related"><span class="c-dr-icon">🔗</span>
+              <div><div class="c-dr-label">Relação com outros factores</div><div class="c-dr-text">${a.related||'—'}</div></div></div>
+          </div>
+        </div>
+      </div>`).join('');
+
+    html+=`<div class="sec fade" style="animation-delay:${.12+i*.04}s" id="s-${cat.id}">
+      <div class="sec-hd">
+        <div class="sec-dot" style="background:${cat.cl}"></div>
+        <span class="sec-nm" style="color:${cat.cl}">${cat.ic} ${cat.nm}</span>
+        <div class="sec-rule"></div>
+        <span class="sec-cnt">${arts.length}</span>
+      </div>
+      <div class="cards">${cards}</div>
+    </div>`;
+  });
+
+  document.getElementById('catSections').innerHTML=html;
+
+  // Update chips
+  const total=Object.values(LIVE_DATA.categories||{}).reduce((s,a)=>s+(a?.length||0),0);
+  document.querySelector('.dh-chips').innerHTML=`
+    <span class="chip">${total} artigos</span>
+    <span class="chip">${enabled.length} categorias</span>
+    <span class="chip time">⏱ ~${aP().readingMins||15} min de leitura</span>
+    <span class="chip live">🔄 Actualizado ${(LIVE_DATA.updated_at||'').slice(11,16)||'hoje'}</span>`;
+}
+
+function buildPortfolioFromLive(cat,i){
+  if(!LIVE_DATA?.stocks) return buildPortfolio(cat,i);
+  const p=aP();
+  const watch=(p.stocks||[]).map(s=>s.toUpperCase());
+  let stocks=LIVE_DATA.stocks.filter(s=>watch.includes(s.symbol.replace(/[^A-Z]/g,'')));
+  if(!stocks.length) stocks=LIVE_DATA.stocks.slice(0,5);
+  const pa=LIVE_DATA.portfolio_analysis||{};
+
+  const overallChg=pa.total_change_pct||0;
+  const poCards=`
+    <div class="po-card"><div class="po-lbl">Hoje</div>
+      <div class="po-val" style="color:${overallChg>=0?'var(--up)':'var(--dn)'}">${overallChg>=0?'+':''}${overallChg.toFixed(2)}%</div>
+      <div class="po-chg ${overallChg>=0?'up':'dn'}">${pa.sentiment||'neutro'}</div></div>
+    <div class="po-card"><div class="po-lbl">O que aconteceu</div>
+      <div style="font-size:12px;color:var(--ink3);line-height:1.5;margin-top:4px">${pa.what_happened||'—'}</div></div>
+    <div class="po-card"><div class="po-lbl">O que fazer</div>
+      <div style="font-size:12px;color:var(--ink3);line-height:1.5;margin-top:4px">${pa.what_to_do||'—'}</div></div>`;
+
+  const plItems=stocks.map(s=>`
+    <div class="pl-item">
+      <span class="pl-sym">${s.symbol.split('.')[0].split('=')[0]}</span>
+      <span class="pl-nm">${s.label||s.symbol}</span>
+      <span class="pl-pr">${typeof s.price==='number'?s.price.toLocaleString('pt-PT',{maximumFractionDigits:2}):s.price}</span>
+      <span class="pl-chg ${s.up?'up':'dn'}">${s.change_pct>=0?'+':''}${s.change_pct?.toFixed(2)}%</span>
+    </div>`).join('');
+
+  const riskRow=pa.risks?`
+    <div class="c-detail-row impact" style="margin-top:12px;border-radius:var(--r)">
+      <span class="c-dr-icon">⚠️</span>
+      <div><div class="c-dr-label">Risco a vigiar</div><div class="c-dr-text">${pa.risks}</div></div>
+    </div>`:''
+
+  return `<div class="sec fade" style="animation-delay:${.12+i*.04}s" id="s-fin">
+    <div class="sec-hd"><div class="sec-dot" style="background:${cat.cl}"></div>
+      <span class="sec-nm" style="color:${cat.cl}">${cat.ic} ${cat.nm}</span>
+      <div class="sec-rule"></div></div>
+    <div class="po-grid">${poCards}</div>
+    <div>${plItems}</div>${riskRow}
+  </div>`;
+}
+
+function buildInvestTipsFromLive(cat,i){
+  const pa=LIVE_DATA?.portfolio_analysis;
+  if(!pa?.tips) return buildInvestTips(cat,i);
+  const tips={baixo:'',médio:'',alto:''};
+  (pa.tips||[]).forEach(t=>{ tips[t.risk]=t.suggestion; });
+  return `<div class="sec fade" style="animation-delay:${.12+i*.04}s" id="s-inv">
+    <div class="sec-hd"><div class="sec-dot" style="background:${cat.cl}"></div>
+      <span class="sec-nm" style="color:${cat.cl}">${cat.ic} ${cat.nm}</span><div class="sec-rule"></div></div>
+    <div class="risco-grid">
+      <div class="rc"><div class="rc-lbl baixo">🟢 Baixo Risco</div><div class="rc-item">${tips.baixo||'ETF S&P 500 diversificado'}</div></div>
+      <div class="rc"><div class="rc-lbl médio">🟡 Médio Risco</div><div class="rc-item">${tips.médio||'Acções de qualidade com dividend'}</div></div>
+      <div class="rc"><div class="rc-lbl alto">🔴 Alto Risco</div><div class="rc-item">${tips.alto||'Evitar posições especulativas'}</div></div>
+    </div>
+  </div>`;
+}
+
+function updateRefreshLabel(){
+  if(LIVE_DATA?.updated_at){
+    const upd=LIVE_DATA.updated_at.slice(11,16);
+    const now=new Date();
+    const h=now.getHours();
+    const nextH=h<7?7:h<19?19:7;
+    const nextD=h>=19?new Date(now.getFullYear(),now.getMonth(),now.getDate()+1,nextH,0):new Date(now.getFullYear(),now.getMonth(),now.getDate(),nextH,0);
+    const diff=Math.round((nextD-now)/60000);
+    const dh=Math.floor(diff/60),dm=diff%60;
+    document.getElementById('refreshLabel').textContent=`Actualizado ${upd} · próxima em ${dh}h${dm>0?dm+'m':''}`;
+    return;
+  }
+  document.getElementById('refreshLabel').textContent='Modo demo · configura o GitHub Actions';
+}
+
+/* ═════════════════════════ INIT ════════════════════════ */
+STATE.profiles.forEach(p=>{ if(!p.cats)p.cats=CAT_DEFS.map(c=>({id:c.id,on:true})); if(!p.name&&p.nm)p.name=p.nm; });
+updateAv();
+updateRefreshLabel();
+document.getElementById('gName').textContent=aP().name;
+document.getElementById('timeChip').textContent=`⏱ ~${aP().readingMins||15} min de leitura`;
+
+// Try loading live data; fall back to demo if not available
+loadLiveData().then(hasLive => {
+  buildSidebar();
+  if(hasLive){
+    buildTickerFromLive();
+    buildSummaryFromLive();
+    buildSectionsFromLive();
+    updateRefreshLabel();
+  } else {
+    buildTicker();
+    buildSummary();
+    buildSections();
+  }
+});
+
+setInterval(updateRefreshLabel, 60000);
+</script>
+</body>
+</html>
