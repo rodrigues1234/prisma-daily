@@ -11,11 +11,12 @@ from pathlib import Path
 
 import feedparser
 import yfinance as yf
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 
 # ─── CONFIG ──────────────────────────────────────────────────────────
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-MODEL   = genai.GenerativeModel("gemini-1.5-flash")
+CLIENT = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+MODEL = "gemini-2.0-flash"
 TODAY   = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 NOW_ISO = datetime.now(timezone.utc).isoformat()
 DATA    = Path("data")
@@ -172,8 +173,8 @@ Responde APENAS com JSON valido (sem markdown, sem backticks):
 Nao inventes URLs. Em portugues de Portugal. Se nao ha nada relevante devolve [].
 """
     try:
-        r = MODEL.generate_content(prompt,
-            generation_config={"temperature":0.2,"max_output_tokens":1200})
+        r = CLIENT.models.generate_content(model=MODEL, contents=prompt,
+            config=types.GenerateContentConfig(temperature=0.2, max_output_tokens=1200))
         text = re.sub(r"^```(?:json)?|```$","",r.text.strip(),flags=re.MULTILINE).strip()
         data = json.loads(text)
         for item in data:
@@ -217,8 +218,8 @@ Responde APENAS com JSON valido (sem markdown):
 
 Em portugues de Portugal. Sem markdown."""
     try:
-        r = MODEL.generate_content(prompt,
-            generation_config={"temperature":0.1,"max_output_tokens":700})
+        r = CLIENT.models.generate_content(model=MODEL, contents=prompt,
+            config=types.GenerateContentConfig(temperature=0.1, max_output_tokens=700))
         text = re.sub(r"^```(?:json)?|```$","",r.text.strip(),flags=re.MULTILINE).strip()
         return json.loads(text)
     except Exception as e:
@@ -262,8 +263,8 @@ Responde APENAS com JSON valido (sem markdown):
 
 Em portugues de Portugal. Conservador e realista."""
     try:
-        r = MODEL.generate_content(prompt,
-            generation_config={"temperature":0.15,"max_output_tokens":600})
+        r = CLIENT.models.generate_content(model=MODEL, contents=prompt,
+            config=types.GenerateContentConfig(temperature=0.15, max_output_tokens=600))
         text = re.sub(r"^```(?:json)?|```$","",r.text.strip(),flags=re.MULTILINE).strip()
         return json.loads(text)
     except Exception as e:
