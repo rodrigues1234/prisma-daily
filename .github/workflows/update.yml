@@ -1,1 +1,45 @@
+name: Prisma — Actualizar Briefing Diário
+
+on:
+  schedule:
+    # 07:00 UTC = 07:00 Lisboa (inverno) / 08:00 Lisboa (verão)
+    - cron: "0 7 * * *"
+  # Permite correr manualmente no GitHub (botão "Run workflow")
+  workflow_dispatch:
+
+jobs:
+  update-briefing:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # necessário para fazer commit dos JSON
+
+    steps:
+      - name: Checkout repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependências
+        run: |
+          pip install feedparser yfinance google-generativeai
+
+      - name: Criar pasta data (se não existir)
+        run: mkdir -p data
+
+      - name: Correr fetch_news.py
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python fetch_news.py
+
+      - name: Commit e push dos dados gerados
+        run: |
+          git config user.name  "Prisma Bot"
+          git config user.email "prisma-bot@users.noreply.github.com"
+          git add data/
+          # Só faz commit se houver alterações
+          git diff --staged --quiet || git commit -m "briefing: $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push
 
