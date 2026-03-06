@@ -1,0 +1,116 @@
+{
+  "updated_at": "2026-03-06T22:43:27.143807+00:00",
+  "categories": {
+    "breaking": [],
+    "geo": [],
+    "eco": [],
+    "nateco": [],
+    "politics": [],
+    "climate": [],
+    "market": [],
+    "work": [],
+    "biz": [],
+    "ai": [],
+    "gadgets": [],
+    "science": [],
+    "soul": []
+  },
+  "summary": {
+    "headline": "Briefing 2026-03-06",
+    "items": []
+  },
+  "stocks": [
+    {
+      "symbol": "AAPL",
+      "label": "Apple",
+      "price": 257.46,
+      "change_pct": -1.09,
+      "up": false
+    },
+    {
+      "symbol": "MSFT",
+      "label": "Microsoft",
+      "price": 408.96,
+      "change_pct": -0.42,
+      "up": false
+    },
+    {
+      "symbol": "NVDA",
+      "label": "NVIDIA",
+      "price": 177.82,
+      "change_pct": -3.01,
+      "up": false
+    },
+    {
+      "symbol": "TSLA",
+      "label": "Tesla",
+      "price": 396.73,
+      "change_pct": -2.17,
+      "up": false
+    },
+    {
+      "symbol": "AMZN",
+      "label": "Amazon",
+      "price": 213.21,
+      "change_pct": -2.62,
+      "up": false
+    },
+    {
+      "symbol": "META",
+      "label": "Meta",
+      "price": 644.86,
+      "change_pct": -2.38,
+      "up": false
+    },
+    {
+      "symbol": "GOOGL",
+      "label": "Google",
+      "price": 298.52,
+      "change_pct": -0.78,
+      "up": false
+    },
+    {
+      "symbol": "EURUSD=X",
+      "label": "EUR/USD",
+      "price": 1.16,
+      "change_pct": -0.12,
+      "up": false
+    },
+    {
+      "symbol": "BTC-USD",
+      "label": "Bitcoin",
+      "price": 68314.05,
+      "change_pct": -3.57,
+      "up": false
+    },
+    {
+      "symbol": "GC=F",
+      "label": "Gold",
+      "price": 5181.3,
+      "change_pct": 2.29,
+      "up": true
+    }
+  ],
+  "portfolio_analysis": {
+    "total_change_pct": 0,
+    "sentiment": "neutro",
+    "what_happened": "Dados insuficientes para analise.",
+    "what_to_do": "Manter posicoes actuais.",
+    "risks": "Volatilidade de mercado.",
+    "tips": [
+      {
+        "risk": "baixo",
+        "suggestion": "ETF de indice diversificado"
+      },
+      {
+        "risk": "medio",
+        "suggestion": "Accoes de qualidade com dividendo"
+      },
+      {
+        "risk": "alto",
+        "suggestion": "Sem recomendacao especulativa hoje"
+      }
+    ]
+  },
+  "connections": []
+}
