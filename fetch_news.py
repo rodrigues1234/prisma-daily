@@ -23,11 +23,14 @@ from google import genai
 from google.genai import types
 
 # ─── CONFIG ───────────────────────────────────────────────────────────
-CLIENT  = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
-MODEL   = "gemini-2.0-flash"
-TODAY   = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-NOW_ISO = datetime.now(timezone.utc).isoformat()
-DATA    = Path("data")
+CLIENT   = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+MODEL    = "gemini-2.0-flash"
+_NOW     = datetime.now(timezone.utc)
+TODAY    = _NOW.strftime("%Y-%m-%d")
+RUN_SLOT = _NOW.strftime("%Hh")          # ex: "06h", "12h", "21h"
+RUN_ID   = f"{TODAY}-{RUN_SLOT}"         # ex: "2026-03-07-06h"
+NOW_ISO  = _NOW.isoformat()
+DATA     = Path("data")
 DATA.mkdir(exist_ok=True)
 
 # HTTP session com headers reais — evita bloqueios de sites como Reuters/Guardian
@@ -447,31 +450,38 @@ def main():
         "stocks":              stocks_list,
         "portfolio_analysis":  pa,
         "connections":         [],
+        "run_id":              RUN_ID,
     }
 
-    dated  = DATA / f"{TODAY}.json"
-    latest = DATA / "latest.json"
-    dated.write_text(json.dumps(output, ensure_ascii=False, indent=2))
+    # Ficheiro por run  ex: data/2026-03-07-06h.json
+    run_file = DATA / f"{RUN_ID}.json"
+    latest   = DATA / "latest.json"
+    run_file.write_text(json.dumps(output, ensure_ascii=False, indent=2))
     latest.write_text(json.dumps(output, ensure_ascii=False, indent=2))
 
-    # 6. Index
+    # Index — guarda últimas 180 entradas (30 dias × 6 runs)
     idx_path = DATA / "index.json"
-    existing = {"dates": []}
+    existing = {"runs": []}
     if idx_path.exists():
         try:
             existing = json.loads(idx_path.read_text())
         except Exception:
-            existing = {"dates": []}
-    if TODAY not in existing.get("dates", []):
-        existing["dates"].insert(0, TODAY)
-    existing["dates"] = existing["dates"][:30]
-    idx_path.write_text(json.dumps(existing, ensure_ascii=False))
+            existing = {"runs": []}
+
+    runs = existing.get("runs", [])
+    entry = {"id": RUN_ID, "date": TODAY, "slot": RUN_SLOT, "ts": NOW_ISO}
+    # Remove entrada com mesmo id se já existir (re-run manual)
+    runs = [r for r in runs if r.get("id") != RUN_ID]
+    runs.insert(0, entry)
+    existing["runs"] = runs[:180]
+    idx_path.write_text(json.dumps(existing, ensure_ascii=False, indent=2))
 
     total_arts = sum(len(v) for v in categories.values())
     elapsed    = time.time() - t0
     print(f"\n{'='*52}")
     print(f"  Concluído em {elapsed:.1f}s")
     print(f"  {total_arts} artigos | {len([c for c in categories if categories[c]])} categorias")
+    print(f"  Ficheiro: {run_file}")
     print(f"  Chamadas Gemini usadas: 4 / 1500 disponíveis hoje")
     print(f"{'='*52}\n")
 
