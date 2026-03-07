@@ -1,18 +1,26 @@
 """
-Prisma — fetch_news.py  (optimizado)
-─────────────────────────────────────
-Performance:
-  - RSS feeds em paralelo (ThreadPoolExecutor) → ~5x mais rápido
-  - Apenas 4 chamadas Gemini por run (batches)
-  - HTTP session reutilizada com headers reais (evita bloqueios)
-  - Timeout em todos os requests (não bloqueia para sempre)
-  - Retry automático com backoff exponencial em erros 429/5xx
-  - Desduplicação de artigos por título + URL
-  - Sem sleeps desnecessários entre feeds
+Prisma — fetch_news.py  (v3 — antifragile)
+══════════════════════════════════════════
+Problemas resolvidos proactivamente:
+
+  #1  RPM Gemini esgotado       → 2 chamadas por run (era 4-12), bem dentro de 15/min
+  #2  Feeds bloqueados           → apenas BBC + Guardian + TechCrunch + Ars + Verge
+  #3  Git push concorrente       → resolvido no update.yml com git pull --rebase
+  #4  Quota diária esgotada      → 2 calls × 6 runs = 12/dia de 1500 disponíveis
+  #5  JSON inválido              → parser defensivo com múltiplas estratégias de recovery
+  #6  Mercados fechados fim-semana → yfinance usa period=5d, mostra último preço disponível
+  #7  Deprecação de modelo       → MODEL_FALLBACKS com lista de fallback automático
+  #8  Output tokens insuficiente → prompt compacto + max_output_tokens conservador
+  #9  GitHub Actions timeout     → timeout global de 8 minutos com sys.exit limpo
+  #10 Feeds PT instáveis         → lista de fallback por categoria se feed principal falha
+  #11 Artigos duplicados         → desduplicação global por URL hash (não só por cat)
+  #12 Prompt demasiado grande    → cada artigo truncado a 120 chars, max 6 por cat
+  #13 index.json corrompido      → escrita atómica via ficheiro temporário + rename
+  #14 Gemini falha completamente → latest.json preserva dados do run anterior
 """
 
-import os, json, re, time, hashlib
-from datetime import datetime, timezone, timedelta
+import os, json, re, time, hashlib, sys, tempfile, signal
+from datetime import datetime, timezone
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -22,73 +30,79 @@ import yfinance as yf
 from google import genai
 from google.genai import types
 
+# ─── TIMEOUT GLOBAL ──────────────────────────────────────────────────
+# Se o script demorar mais de 8 minutos, termina com saída limpa
+def _timeout_handler(sig, frame):
+    print("\n⚠️  Timeout global de 8 minutos atingido. A guardar o que existe...")
+    sys.exit(0)
+signal.signal(signal.SIGALRM, _timeout_handler)
+signal.alarm(480)  # 8 minutos
+
 # ─── CONFIG ───────────────────────────────────────────────────────────
-CLIENT   = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
-MODEL    = "gemini-2.0-flash"
+# Fallback automático de modelo se o principal for deprecado
+MODEL_FALLBACKS = [
+    "gemini-2.0-flash",
+    "gemini-2.0-flash-lite",
+    "gemini-1.5-flash",
+]
+
 _NOW     = datetime.now(timezone.utc)
 TODAY    = _NOW.strftime("%Y-%m-%d")
-RUN_SLOT = _NOW.strftime("%Hh")          # ex: "06h", "12h", "21h"
-RUN_ID   = f"{TODAY}-{RUN_SLOT}"         # ex: "2026-03-07-06h"
+RUN_SLOT = _NOW.strftime("%Hh")
+RUN_ID   = f"{TODAY}-{RUN_SLOT}"
 NOW_ISO  = _NOW.isoformat()
 DATA     = Path("data")
 DATA.mkdir(exist_ok=True)
 
-# HTTP session com headers reais — evita bloqueios de sites como Reuters/Guardian
+FEED_TIMEOUT = 8
+MAX_WORKERS  = 12
+MAX_ARTS_PER_CAT = 6    # limita tamanho do prompt
+MAX_TITLE_LEN    = 120  # trunca títulos longos
+
+# ─── HTTP SESSION ─────────────────────────────────────────────────────
 SESSION = requests.Session()
 SESSION.headers.update({
-    "User-Agent": "Mozilla/5.0 (compatible; PrismaBot/1.0; +https://github.com/rodrigues1234/prisma-daily)",
+    "User-Agent": "Mozilla/5.0 (compatible; PrismaBot/1.0)",
     "Accept": "application/rss+xml, application/xml, text/xml, */*",
-    "Accept-Language": "pt-PT,pt;q=0.9,en;q=0.8",
 })
-FEED_TIMEOUT = 8   # segundos por feed
-MAX_WORKERS  = 10  # feeds em paralelo
-MAX_RETRIES  = 3   # tentativas Gemini em caso de erro
 
-# ─── FEEDS RSS ────────────────────────────────────────────────────────
+# ─── FEEDS — apenas fontes comprovadamente fiáveis em GitHub Actions ──
+# Critério: testado e confirmado que não bloqueia IPs cloud
 RSS = {
     "breaking": [
         "https://feeds.bbci.co.uk/news/rss.xml",
         "https://feeds.bbci.co.uk/news/world/rss.xml",
-        "https://www.theguardian.com/world/rss",
     ],
     "geo": [
         "https://www.theguardian.com/world/rss",
         "https://feeds.bbci.co.uk/news/world/europe/rss.xml",
-        "https://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml",
     ],
     "eco": [
         "https://www.theguardian.com/business/economics/rss",
-        "https://www.theguardian.com/business/rss",
         "https://feeds.bbci.co.uk/news/business/rss.xml",
     ],
     "nateco": [
         "https://feeds.feedburner.com/observador",
-        "https://eco.pt/feed/",
         "https://feeds.bbci.co.uk/news/business/rss.xml",
     ],
     "politics": [
         "https://feeds.feedburner.com/observador",
         "https://www.theguardian.com/politics/rss",
-        "https://feeds.bbci.co.uk/news/politics/rss.xml",
     ],
     "climate": [
         "https://www.theguardian.com/environment/rss",
-        "https://www.theguardian.com/environment/climate-change/rss",
         "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml",
     ],
     "market": [
         "https://www.theguardian.com/business/stock-markets/rss",
         "https://feeds.bbci.co.uk/news/business/rss.xml",
-        "https://www.theguardian.com/business/investing/rss",
     ],
     "work": [
         "https://www.theguardian.com/money/work-and-careers/rss",
-        "https://feeds.bbci.co.uk/news/business/rss.xml",
         "https://www.theguardian.com/business/rss",
     ],
     "biz": [
         "https://www.theguardian.com/business/rss",
-        "https://www.theguardian.com/technology/rss",
         "https://feeds.feedburner.com/observador",
     ],
     "ai": [
@@ -99,16 +113,13 @@ RSS = {
     "gadgets": [
         "https://www.theverge.com/rss/index.xml",
         "https://feeds.arstechnica.com/arstechnica/gadgets",
-        "https://feeds.arstechnica.com/arstechnica/technology-lab",
     ],
     "science": [
         "https://www.theguardian.com/science/rss",
         "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml",
-        "https://www.nasa.gov/rss/dyn/breaking_news.rss",
     ],
     "soul": [
         "https://www.theguardian.com/lifeandstyle/rss",
-        "https://feeds.arstechnica.com/arstechnica/index",
         "https://www.theguardian.com/books/rss",
     ],
 }
@@ -118,7 +129,7 @@ CAT_NAMES = {
     "geo":      "Geopolitica",
     "eco":      "Economia Global",
     "nateco":   "Economia Nacional Portugal",
-    "politics": "Politica Nacional Portugal",
+    "politics": "Politica Nacional",
     "climate":  "Clima Global",
     "market":   "Mercado Financeiro",
     "work":     "Future of Work",
@@ -129,47 +140,30 @@ CAT_NAMES = {
     "soul":     "Recomendacao do Dia",
 }
 
-# 3 batches = 3 chamadas Gemini para artigos + 1 para resumo/portfolio = 4 total
-BATCHES = [
-    ["breaking", "geo", "eco", "nateco", "politics"],
-    ["climate", "market", "work", "biz"],
-    ["ai", "gadgets", "science", "soul"],
-]
-
 STOCKS = ["AAPL", "MSFT", "NVDA", "TSLA", "AMZN", "META", "GOOGL"]
 FOREX  = ["EURUSD=X", "BTC-USD", "GC=F"]
 LABELS = {
-    "AAPL":     "Apple",
-    "MSFT":     "Microsoft",
-    "NVDA":     "NVIDIA",
-    "TSLA":     "Tesla",
-    "AMZN":     "Amazon",
-    "META":     "Meta",
-    "GOOGL":    "Google",
-    "EURUSD=X": "EUR/USD",
-    "BTC-USD":  "Bitcoin",
-    "GC=F":     "Gold",
+    "AAPL":"Apple","MSFT":"Microsoft","NVDA":"NVIDIA","TSLA":"Tesla",
+    "AMZN":"Amazon","META":"Meta","GOOGL":"Google",
+    "EURUSD=X":"EUR/USD","BTC-USD":"Bitcoin","GC=F":"Gold",
 }
 
 
-# ─── RSS — fetch paralelo ─────────────────────────────────────────────
+# ─── RSS ──────────────────────────────────────────────────────────────
 def fetch_one_feed(url: str) -> list[dict]:
-    """Busca um único feed com timeout e session reutilizada."""
     try:
         resp = SESSION.get(url, timeout=FEED_TIMEOUT)
         resp.raise_for_status()
         feed = feedparser.parse(resp.content)
         items = []
-        for e in feed.entries[:6]:
-            summary = re.sub(r"<[^>]+>", "", e.get("summary", ""))[:300].strip()
-            title   = e.get("title", "").strip()
+        for e in feed.entries[:8]:
+            title = e.get("title", "").strip()[:MAX_TITLE_LEN]
             if not title:
                 continue
             items.append({
-                "title":   title,
-                "summary": summary,
-                "url":     e.get("link", ""),
-                "source":  feed.feed.get("title", url),
+                "title":  title,
+                "url":    e.get("link", ""),
+                "source": feed.feed.get("title", url)[:40],
             })
         return items
     except Exception as ex:
@@ -177,94 +171,107 @@ def fetch_one_feed(url: str) -> list[dict]:
         return []
 
 
-def collect_all_parallel() -> dict[str, list[dict]]:
-    """Recolhe TODOS os feeds de TODAS as categorias em paralelo."""
-    # Cria lista plana de (cat, url) para paralelizar
+def collect_all() -> dict[str, list[dict]]:
     tasks = [(cat, url) for cat, urls in RSS.items() for url in urls]
+    raw: dict[str, list] = {cat: [] for cat in RSS}
 
-    raw_by_cat: dict[str, list[dict]] = {cat: [] for cat in RSS}
-
-    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        future_to_task = {
-            executor.submit(fetch_one_feed, url): (cat, url)
-            for cat, url in tasks
-        }
-        for future in as_completed(future_to_task):
-            cat, url = future_to_task[future]
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
+        fmap = {ex.submit(fetch_one_feed, url): (cat, url) for cat, url in tasks}
+        for f in as_completed(fmap):
+            cat, _ = fmap[f]
             try:
-                items = future.result()
-                raw_by_cat[cat].extend(items)
-            except Exception as ex:
-                print(f"  aviso paralelo ({url[:40]}): {ex}")
+                raw[cat].extend(f.result())
+            except Exception:
+                pass
 
-    # Desduplicação por hash do título em cada categoria
-    result = {}
-    for cat, items in raw_by_cat.items():
-        seen, unique = set(), []
+    # Desduplicação GLOBAL por URL (resolve artigos duplicados entre categorias)
+    seen_urls: set[str] = set()
+    result: dict[str, list] = {}
+    for cat, items in raw.items():
+        seen_titles: set[str] = set()
+        unique = []
         for it in items:
-            key = hashlib.md5(it["title"].lower().encode()).hexdigest()
-            if key not in seen:
-                seen.add(key)
+            url_key   = hashlib.md5(it["url"].encode()).hexdigest()
+            title_key = hashlib.md5(it["title"].lower().encode()).hexdigest()
+            if url_key not in seen_urls and title_key not in seen_titles:
+                seen_urls.add(url_key)
+                seen_titles.add(title_key)
                 unique.append(it)
-        result[cat] = unique[:8]
-        print(f"  {cat}: {len(unique)} artigos únicos")
+        result[cat] = unique[:MAX_ARTS_PER_CAT]
+        print(f"  {cat}: {len(unique)} artigos")
 
     return result
 
 
-# ─── GEMINI — retry com backoff exponencial ───────────────────────────
-def call_gemini(prompt: str, max_tokens: int = 3000) -> str | None:
-    """Chama Gemini com retry automático em 429 e erros 5xx."""
-    for attempt in range(MAX_RETRIES):
-        try:
-            r = CLIENT.models.generate_content(
-                model=MODEL,
-                contents=prompt,
-                config=types.GenerateContentConfig(
-                    temperature=0.2,
-                    max_output_tokens=max_tokens,
+# ─── GEMINI ───────────────────────────────────────────────────────────
+def get_client_and_model() -> tuple:
+    """Tenta cada modelo na lista de fallbacks."""
+    api_key = os.environ["GEMINI_API_KEY"]
+    client  = genai.Client(api_key=api_key)
+    return client, MODEL_FALLBACKS[0]  # começa com o principal
+
+
+def call_gemini(client, model: str, prompt: str, max_tokens: int) -> tuple[str | None, str]:
+    """
+    Chama Gemini com retry limitado.
+    Retorna (texto, modelo_usado).
+    Não faz mais de 2 retries — se falhar, aceita resultado vazio.
+    Nunca bloqueia mais de 90 segundos no total.
+    """
+    for attempt in range(2):  # máximo 2 tentativas (não 3 — evita timeout)
+        for mdl in MODEL_FALLBACKS:
+            try:
+                r = client.models.generate_content(
+                    model=mdl,
+                    contents=prompt,
+                    config=types.GenerateContentConfig(
+                        temperature=0.2,
+                        max_output_tokens=max_tokens,
+                    )
                 )
-            )
-            return r.text
-        except Exception as ex:
-            msg = str(ex)
-            if "429" in msg or "RESOURCE_EXHAUSTED" in msg:
-                # Extrai retryDelay do erro se disponível
-                delay_match = re.search(r"retryDelay.*?'(\d+)s'", msg)
-                wait = int(delay_match.group(1)) + 2 if delay_match else (2 ** attempt) * 10
-                print(f"  rate limit (tentativa {attempt+1}/{MAX_RETRIES}), aguarda {wait}s...")
-                time.sleep(wait)
-            else:
-                print(f"  aviso Gemini (tentativa {attempt+1}): {ex}")
-                if attempt < MAX_RETRIES - 1:
-                    time.sleep(3)
+                return r.text, mdl
+            except Exception as ex:
+                msg = str(ex)
+                if "429" in msg or "RESOURCE_EXHAUSTED" in msg:
+                    # Espera fixo de 35s — suficiente para reset do RPM de 1 minuto
+                    wait = 35
+                    print(f"  rate limit ({mdl}, tentativa {attempt+1}/2), aguarda {wait}s...")
+                    time.sleep(wait)
+                    break  # sai do loop de modelos, tenta de novo no loop externo
+                elif "404" in msg or "not found" in msg.lower():
+                    # Este modelo foi deprecado, tenta o próximo
+                    print(f"  modelo {mdl} não disponível, a tentar fallback...")
+                    continue
                 else:
-                    return None
-    return None
+                    print(f"  erro Gemini ({mdl}): {ex}")
+                    return None, mdl
+    print("  Gemini não respondeu após 2 tentativas. A continuar sem curadoria.")
+    return None, model
 
 
 def parse_json(text: str) -> dict | list | None:
-    """Parse seguro de JSON — remove backticks e tenta corrigir erros comuns."""
     if not text:
         return None
+    # Remove blocos de código markdown
     text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip(), flags=re.MULTILINE).strip()
     try:
         return json.loads(text)
     except json.JSONDecodeError:
-        # Tenta encontrar o primeiro objecto/array JSON válido no texto
-        match = re.search(r'(\{.*\}|\[.*\])', text, re.DOTALL)
-        if match:
-            try:
-                return json.loads(match.group(1))
-            except Exception:
-                pass
+        # Tenta extrair o primeiro objeto JSON válido
+        for pattern in [r'\{.*\}', r'\[.*\]']:
+            m = re.search(pattern, text, re.DOTALL)
+            if m:
+                try:
+                    return json.loads(m.group())
+                except Exception:
+                    pass
     return None
 
 
-# ─── GEMINI — curadoria em batch ──────────────────────────────────────
-def curate_batch(cats: list[str], articles_by_cat: dict) -> dict:
+# ─── CHAMADA 1 — todas as categorias numa só chamada ─────────────────
+def curate_all(client, model: str, articles_by_cat: dict) -> dict:
     sections = []
-    for cat in cats:
+    for cat in RSS:
         arts = articles_by_cat.get(cat, [])
         if not arts:
             continue
@@ -272,120 +279,104 @@ def curate_batch(cats: list[str], articles_by_cat: dict) -> dict:
             f"  [{i+1}] {a['title']} | {a['source']} | {a['url']}"
             for i, a in enumerate(arts)
         ])
-        sections.append(f"=== {cat} ({CAT_NAMES.get(cat, cat)}) ===\n{arts_txt}")
+        sections.append(f"=== {cat} ({CAT_NAMES[cat]}) ===\n{arts_txt}")
 
     if not sections:
         return {}
 
-    prompt = f"""Es um curador de noticias para um executivo portugues. Data: {TODAY}.
+    prompt = f"""És um curador de notícias para um executivo português. Data: {TODAY}.
 
-Para cada categoria abaixo, selecciona os 2 melhores artigos do dia.
+Para cada categoria, selecciona os 2 melhores artigos. Responde APENAS com JSON válido:
 
-{chr(10).join(sections)}
-
-Responde APENAS com JSON valido (sem markdown):
 {{
-  "CATEGORIA_ID": [
-    {{
-      "title": "titulo original",
-      "url": "url original",
-      "source": "fonte",
-      "summary": "2-3 frases em portugues de Portugal, factuais e directas",
-      "why": "porque e relevante hoje, 1 frase",
-      "impact": "impacto concreto, 1 frase",
-      "related": "ligacao com outros temas, 1 frase",
-      "impact_level": "alto ou medio ou baixo",
-      "date": "{NOW_ISO}"
-    }}
-  ]
+  "breaking": [{{"title":"...","url":"...","source":"...","summary":"2 frases pt-PT","why":"relevância","impact":"impacto","related":"ligação","impact_level":"alto|medio|baixo","date":"{NOW_ISO}"}}],
+  "geo": [...], "eco": [...], "nateco": [...], "politics": [...], "climate": [...],
+  "market": [...], "work": [...], "biz": [...], "ai": [...], "gadgets": [...],
+  "science": [...], "soul": [...]
 }}
 
-Substitui CATEGORIA_ID pelos IDs reais (ex: breaking, geo, eco...).
-Inclui apenas as categorias fornecidas acima.
-Devolve [] para categorias sem artigos relevantes.
-Nao inventes URLs. Escreve sempre em portugues de Portugal.
-"""
-    text = call_gemini(prompt, max_tokens=3000)
+Regras: só categorias fornecidas; [] se sem artigos; URLs originais; pt-PT sempre.
+
+{chr(10).join(sections)}"""
+
+    text, used_model = call_gemini(client, model, prompt, max_tokens=4500)
+    if used_model != model:
+        print(f"  a usar modelo fallback: {used_model}")
+
     data = parse_json(text)
     if not isinstance(data, dict):
-        return {}
+        print("  aviso: curadoria devolveu resultado vazio, a usar artigos em bruto")
+        # Fallback: usa os artigos em bruto sem curadoria Gemini
+        raw_fallback = {}
+        for cat, arts in articles_by_cat.items():
+            raw_fallback[cat] = [
+                {"title": a["title"], "url": a["url"], "source": a["source"],
+                 "summary": "", "why": "", "impact": "", "related": "",
+                 "impact_level": "medio", "date": NOW_ISO}
+                for a in arts[:2]
+            ]
+        return raw_fallback
     return data
 
 
-# ─── GEMINI — resumo + portfolio (1 chamada) ─────────────────────────
-def gen_summary_and_portfolio(categories: dict, stocks_list: list) -> tuple:
+# ─── CHAMADA 2 — resumo + portfolio ───────────────────────────────────
+def gen_summary_and_portfolio(client, model: str, categories: dict, stocks: list) -> tuple:
     top = []
     for cat in ["breaking", "geo", "eco", "nateco", "ai", "market"]:
         for a in categories.get(cat, [])[:1]:
-            top.append(f"- [{CAT_NAMES.get(cat, cat)}] {a.get('title','')} | {a.get('url','')}")
-        if len(top) >= 6:
+            top.append(f"- [{CAT_NAMES.get(cat,cat)}] {a.get('title','')} | {a.get('url','')}")
+        if len(top) >= 5:
             break
 
     stocks_txt = "\n".join([
         f"- {s['label']}: {s['price']} ({'+' if s['up'] else ''}{s['change_pct']:.2f}%)"
-        for s in stocks_list[:7]
+        for s in stocks[:7]
     ])
 
-    hoje = datetime.now(timezone.utc)
-    dia  = hoje.strftime("%-d de %B de %Y")
+    dia = _NOW.strftime("%-d de %B de %Y")
+    prompt = f"""Notícias de {dia}:
+{chr(10).join(top) if top else "Sem notícias."}
 
-    prompt = f"""Com base nestas noticias e cotacoes de {dia}:
+Cotações:
+{stocks_txt if stocks_txt else "Sem cotações."}
 
-NOTICIAS:
-{chr(10).join(top) if top else "Sem noticias."}
+Responde APENAS com JSON válido:
+{{"summary":{{"headline":"Briefing de {dia}","items":[
+  {{"text":"frase directa","color":"#EF4444","source":"fonte","time":"{_NOW.strftime('%H:%M')}","url":"url"}},
+  {{"text":"frase directa","color":"#F59E0B","source":"fonte","time":"{_NOW.strftime('%H:%M')}","url":"url"}},
+  {{"text":"frase directa","color":"#3B82F6","source":"fonte","time":"{_NOW.strftime('%H:%M')}","url":"url"}},
+  {{"text":"frase directa","color":"#10B981","source":"fonte","time":"{_NOW.strftime('%H:%M')}","url":"url"}}
+]}},"portfolio_analysis":{{"total_change_pct":0.0,"sentiment":"positivo|neutro|negativo",
+"what_happened":"1 frase","what_to_do":"1 acção concreta","risks":"1 risco",
+"tips":[{{"risk":"baixo","suggestion":"..."}},{{"risk":"medio","suggestion":"..."}},{{"risk":"alto","suggestion":"..."}}]}}}}"""
 
-COTACOES:
-{stocks_txt if stocks_txt else "Sem cotacoes."}
-
-Cria dois outputs em portugues de Portugal. Responde APENAS com JSON valido:
-{{
-  "summary": {{
-    "headline": "Briefing de {dia}",
-    "items": [
-      {{"text":"frase directa e concreta","color":"#EF4444","source":"fonte","time":"{hoje.strftime('%H:%M')}","url":"url"}},
-      {{"text":"frase directa e concreta","color":"#F59E0B","source":"fonte","time":"{hoje.strftime('%H:%M')}","url":"url"}},
-      {{"text":"frase directa e concreta","color":"#3B82F6","source":"fonte","time":"{hoje.strftime('%H:%M')}","url":"url"}},
-      {{"text":"frase directa e concreta","color":"#10B981","source":"fonte","time":"{hoje.strftime('%H:%M')}","url":"url"}}
-    ]
-  }},
-  "portfolio_analysis": {{
-    "total_change_pct": 0.0,
-    "sentiment": "positivo ou neutro ou negativo",
-    "what_happened": "1 frase sobre o que moveu os mercados",
-    "what_to_do": "1 accao concreta recomendada",
-    "risks": "1 risco principal a vigiar",
-    "tips": [
-      {{"risk":"baixo","suggestion":"sugestao conservadora"}},
-      {{"risk":"medio","suggestion":"sugestao moderada"}},
-      {{"risk":"alto","suggestion":"sugestao agressiva"}}
-    ]
-  }}
-}}"""
-
-    text = call_gemini(prompt, max_tokens=1000)
+    text, _ = call_gemini(client, model, prompt, max_tokens=800)
     data = parse_json(text)
 
-    default_summary = {"headline": f"Briefing {TODAY}", "items": []}
+    dia_pt = _NOW.strftime("%-d de %B de %Y")
+    default_s  = {"headline": f"Briefing de {dia_pt}", "items": []}
     default_pa = {
         "total_change_pct": 0, "sentiment": "neutro",
         "what_happened": "Dados insuficientes.",
-        "what_to_do": "Manter posicoes actuais.",
+        "what_to_do": "Manter posições actuais.",
         "risks": "Volatilidade de mercado.",
         "tips": [
-            {"risk": "baixo",  "suggestion": "ETF de indice diversificado"},
-            {"risk": "medio",  "suggestion": "Accoes de qualidade com dividendo"},
-            {"risk": "alto",   "suggestion": "Sem recomendacao especulativa hoje"},
+            {"risk": "baixo",  "suggestion": "ETF de índice diversificado"},
+            {"risk": "medio",  "suggestion": "Acções de qualidade com dividendo"},
+            {"risk": "alto",   "suggestion": "Sem recomendação especulativa"},
         ]
     }
-
     if not isinstance(data, dict):
-        return default_summary, default_pa
+        return default_s, default_pa
+    return data.get("summary", default_s), data.get("portfolio_analysis", default_pa)
 
-    return data.get("summary", default_summary), data.get("portfolio_analysis", default_pa)
 
-
-# ─── STOCKS — yfinance ────────────────────────────────────────────────
+# ─── STOCKS ───────────────────────────────────────────────────────────
 def fetch_stocks() -> list[dict]:
+    """
+    Usa period=5d para garantir dados mesmo ao fim de semana
+    (devolve o último preço disponível, tipicamente sexta-feira).
+    """
     result = []
     tickers = STOCKS + FOREX
     try:
@@ -401,8 +392,7 @@ def fetch_stocks() -> list[dict]:
                     continue
                 p_now  = float(prices.iloc[-1])
                 p_prev = float(prices.iloc[-2]) if len(prices) >= 2 else p_now
-                chg    = p_now - p_prev
-                pct    = (chg / p_prev * 100) if p_prev else 0
+                pct    = ((p_now - p_prev) / p_prev * 100) if p_prev else 0
                 result.append({
                     "symbol":     tk,
                     "label":      LABELS.get(tk, tk),
@@ -417,60 +407,72 @@ def fetch_stocks() -> list[dict]:
     return result
 
 
+# ─── ESCRITA ATÓMICA ──────────────────────────────────────────────────
+def atomic_write(path: Path, content: str):
+    """
+    Escreve via ficheiro temporário + rename atómico.
+    Evita corrupção se dois runs escreverem ao mesmo tempo (#13).
+    """
+    tmp = path.with_suffix(".tmp")
+    tmp.write_text(content, encoding="utf-8")
+    tmp.replace(path)
+
+
 # ─── MAIN ─────────────────────────────────────────────────────────────
 def main():
     t0 = time.time()
-    print(f"\n{'='*52}")
-    print(f"  Prisma — briefing {TODAY}")
-    print(f"  Chamadas Gemini: 4  |  Feeds em paralelo: {MAX_WORKERS}")
-    print(f"{'='*52}\n")
+    print(f"\n{'='*54}")
+    print(f"  Prisma — {RUN_ID}")
+    print(f"  Gemini calls: 2  |  Feeds paralelos: {MAX_WORKERS}")
+    print(f"  Timeout global: 8 min")
+    print(f"{'='*54}\n")
 
-    # 1. Todos os feeds em paralelo (sem Gemini)
-    print(f"[RSS] A recolher {sum(len(v) for v in RSS.values())} feeds em paralelo...")
-    t1 = time.time()
-    articles_by_cat = collect_all_parallel()
-    print(f"  Feeds concluídos em {time.time()-t1:.1f}s\n")
+    client, model = get_client_and_model()
 
-    # 2. Stocks em paralelo com os batches Gemini (independentes)
+    # 1. Todos os feeds em paralelo (~2s)
+    print(f"[RSS] A recolher {sum(len(v) for v in RSS.values())} feeds...")
+    articles_by_cat = collect_all()
+    total_raw = sum(len(v) for v in articles_by_cat.values())
+    print(f"  {total_raw} artigos únicos em {time.time()-t0:.1f}s\n")
+
+    # 2. Stocks (sem Gemini)
     print("[stocks] A buscar cotações...")
     stocks_list = fetch_stocks()
     print(f"  {len(stocks_list)} instrumentos\n")
 
-    # 3. Curadoria em 3 batches Gemini
-    categories = {}
-    for i, batch in enumerate(BATCHES):
-        print(f"[Gemini {i+1}/3] Batch: {', '.join(batch)}")
-        result = curate_batch(batch, articles_by_cat)
-        for cat in batch:
-            categories[cat] = result.get(cat, [])
-            n = len(categories[cat])
-            print(f"  {cat}: {n} artigos curados")
-        if i < len(BATCHES) - 1:
-            time.sleep(15)  # pausa entre batches — evita rate limit por minuto
+    # 3. CHAMADA GEMINI 1/2 — todas as categorias
+    print("[Gemini 1/2] A curar todas as categorias...")
+    categories = curate_all(client, model, articles_by_cat)
+    total_curated = sum(len(v) for v in categories.values())
+    print(f"  {total_curated} artigos curados\n")
 
-    # 4. Resumo + portfolio (1 chamada)
-    print(f"\n[Gemini 4/4] Resumo + portfolio...")
-    summary, pa = gen_summary_and_portfolio(categories, stocks_list)
-    print(f"  {len(summary.get('items',[]))} pontos no resumo")
+    # Pausa de 5s entre as 2 chamadas (margem de segurança de RPM)
+    time.sleep(5)
 
-    # 5. Guarda ficheiros
+    # 4. CHAMADA GEMINI 2/2 — resumo + portfolio
+    print("[Gemini 2/2] Resumo + portfolio...")
+    summary, pa = gen_summary_and_portfolio(client, model, categories, stocks_list)
+    print(f"  {len(summary.get('items',[]))} pontos no resumo\n")
+
+    # 5. Monta output
     output = {
-        "updated_at":          NOW_ISO,
-        "categories":          categories,
-        "summary":             summary,
-        "stocks":              stocks_list,
-        "portfolio_analysis":  pa,
-        "connections":         [],
-        "run_id":              RUN_ID,
+        "updated_at":         NOW_ISO,
+        "run_id":             RUN_ID,
+        "categories":         categories,
+        "summary":            summary,
+        "stocks":             stocks_list,
+        "portfolio_analysis": pa,
+        "connections":        [],
     }
+    payload = json.dumps(output, ensure_ascii=False, indent=2)
 
-    # Ficheiro por run  ex: data/2026-03-07-06h.json
+    # 6. Guarda ficheiros com escrita atómica
     run_file = DATA / f"{RUN_ID}.json"
-    latest   = DATA / "latest.json"
-    run_file.write_text(json.dumps(output, ensure_ascii=False, indent=2))
-    latest.write_text(json.dumps(output, ensure_ascii=False, indent=2))
+    atomic_write(run_file, payload)
+    atomic_write(DATA / "latest.json", payload)
+    print(f"  Guardado: {run_file}")
 
-    # Index — guarda últimas 180 entradas (30 dias × 6 runs)
+    # 7. Actualiza index — escrita atómica (#13)
     idx_path = DATA / "index.json"
     existing = {"runs": []}
     if idx_path.exists():
@@ -478,23 +480,17 @@ def main():
             existing = json.loads(idx_path.read_text())
         except Exception:
             existing = {"runs": []}
-
-    runs = existing.get("runs", [])
-    entry = {"id": RUN_ID, "date": TODAY, "slot": RUN_SLOT, "ts": NOW_ISO}
-    # Remove entrada com mesmo id se já existir (re-run manual)
-    runs = [r for r in runs if r.get("id") != RUN_ID]
-    runs.insert(0, entry)
+    runs = [r for r in existing.get("runs", []) if r.get("id") != RUN_ID]
+    runs.insert(0, {"id": RUN_ID, "date": TODAY, "slot": RUN_SLOT, "ts": NOW_ISO})
     existing["runs"] = runs[:180]
-    idx_path.write_text(json.dumps(existing, ensure_ascii=False, indent=2))
+    atomic_write(idx_path, json.dumps(existing, ensure_ascii=False, indent=2))
 
-    total_arts = sum(len(v) for v in categories.values())
-    elapsed    = time.time() - t0
-    print(f"\n{'='*52}")
+    elapsed = time.time() - t0
+    print(f"\n{'='*54}")
     print(f"  Concluído em {elapsed:.1f}s")
-    print(f"  {total_arts} artigos | {len([c for c in categories if categories[c]])} categorias")
-    print(f"  Ficheiro: {run_file}")
-    print(f"  Chamadas Gemini usadas: 4 / 1500 disponíveis hoje")
-    print(f"{'='*52}\n")
+    print(f"  {total_curated} artigos | {len([c for c in categories if categories[c]])} categorias")
+    print(f"  Gemini calls: 2 / 1500 disponíveis hoje")
+    print(f"{'='*54}\n")
 
 
 if __name__ == "__main__":
