@@ -1286,40 +1286,39 @@ function createProfile(){
 }
 document.getElementById('overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
 
-/* ═════════════════════════ 12H REFRESH LABEL ═══════════ */
-function updateRefreshLabel(){
-  const now=new Date();
-  const h=now.getHours();
-  // next update at 07:00 or 19:00
-  const nextH=h<7?7:h<19?19:7;
-  const nextD=h>=19?new Date(now.getFullYear(),now.getMonth(),now.getDate()+1,nextH,0):new Date(now.getFullYear(),now.getMonth(),now.getDate(),nextH,0);
-  const diff=Math.round((nextD-now)/60000);
-  const dh=Math.floor(diff/60),dm=diff%60;
-  document.getElementById('refreshLabel').textContent=`Actualizado 07:02 · próxima em ${dh}h${dm>0?dm+'m':''}`;
-}
 
 /* ═════════════════════════ LIVE DATA LOADER ════════════ */
 let LIVE_DATA = null;
 
 async function loadLiveData(){
-  // Tenta pela ordem: latest.json → hoje → ontem
-  const today = new Date().toISOString().slice(0,10);
+  // Tenta pela ordem: latest.json → fallback demo
+  const today     = new Date().toISOString().slice(0,10);
   const yesterday = new Date(Date.now()-86400000).toISOString().slice(0,10);
-  const attempts = ['data/latest.json', `data/${today}.json`, `data/${yesterday}.json`];
+  const attempts  = ['data/latest.json', `data/${today}-06h.json`, `data/${yesterday}-21h.json`];
   try {
     for(const url of attempts){
       const res = await fetch(url);
       if(res.ok){
         LIVE_DATA = await res.json();
         console.log(`Prisma: dados carregados de ${url}`);
-        // Actualiza histórico do index
+        // Carrega index — suporta formato novo {runs:[]} e antigo {dates:[]}
         try{
           const idx = await fetch('data/index.json');
           if(idx.ok){
             const idxData = await idx.json();
-            // Suporta formato array ou {dates:[...]}
-            const dates = Array.isArray(idxData) ? idxData : (idxData.dates || []);
-            if(dates.length) STATE.history = dates.slice(0,5);
+            if(Array.isArray(idxData)){
+              STATE.history = idxData.slice(0,5);
+            } else if(idxData.runs){
+              // Agrupa por data, pega a mais recente de cada dia
+              const byDate = {};
+              for(const r of idxData.runs){
+                if(!byDate[r.date]) byDate[r.date] = r;
+              }
+              STATE.history = Object.keys(byDate).sort().reverse().slice(0,30)
+                .map(d => byDate[d]);
+            } else if(idxData.dates){
+              STATE.history = idxData.dates.slice(0,5);
+            }
           }
         }catch(e){}
         return true;
@@ -1567,17 +1566,26 @@ async function manualRefresh(){
 
 function updateRefreshLabel(){
   if(LIVE_DATA?.updated_at){
-    const upd=LIVE_DATA.updated_at.slice(11,16);
-    const now=new Date();
-    const h=now.getHours();
-    const nextH=h<6?6:h<18?18:6;
-    const nextD=h>=18?new Date(now.getFullYear(),now.getMonth(),now.getDate()+1,nextH,0):new Date(now.getFullYear(),now.getMonth(),now.getDate(),nextH,0);
-    const diff=Math.round((nextD-now)/60000);
-    const dh=Math.floor(diff/60),dm=diff%60;
-    document.getElementById('refreshLabel').textContent=`Actualizado ${upd} · próxima em ${dh}h${dm>0?dm+'m':''}`;
+    const upd = LIVE_DATA.updated_at.slice(11,16);
+    const now  = new Date();
+    // Próximo run: 06 09 12 15 18 21 UTC (em hora local usa getUTC*)
+    const slots = [6,9,12,15,18,21];
+    const nowUTC = now.getUTCHours()*60 + now.getUTCMinutes();
+    const next   = slots.find(h => h*60 > nowUTC);
+    let nextDate;
+    if(next !== undefined){
+      nextDate = new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate(),next,0,0));
+    } else {
+      // Já passou das 21h UTC — próximo é 06h de amanhã
+      nextDate = new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+1,6,0,0));
+    }
+    const diff = Math.round((nextDate - now)/60000);
+    const dh   = Math.floor(diff/60), dm = diff%60;
+    document.getElementById('refreshLabel').textContent =
+      `Actualizado ${upd} · próxima em ${dh}h${dm>0?dm+'m':''}`;
     return;
   }
-  document.getElementById('refreshLabel').textContent='Modo demo · configura o GitHub Actions';
+  document.getElementById('refreshLabel').textContent = 'Modo demo · configura o GitHub Actions';
 }
 
 /* ═════════════════════════ INIT ════════════════════════ */
