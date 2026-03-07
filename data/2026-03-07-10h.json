@@ -1,22 +1,299 @@
 {
-  "updated_at": "2026-03-07T10:18:10.214400+00:00",
+  "updated_at": "2026-03-07T10:41:54.206765+00:00",
+  "run_id": "2026-03-07-10h",
   "categories": {
-    "breaking": [],
-    "geo": [],
-    "eco": [],
-    "nateco": [],
-    "politics": [],
-    "climate": [],
-    "market": [],
-    "work": [],
+    "breaking": [
+      {
+        "title": "Trump demands 'unconditional surrender' from Iran as Putin speaks with Iran's president",
+        "url": "https://www.bbc.com/news/articles/c5yq82k1wk8o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      },
+      {
+        "title": "Flight paths squeezed as Iran conflict closes more airspace",
+        "url": "https://www.bbc.com/news/articles/crrx1jgr4jjo?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      }
+    ],
+    "geo": [
+      {
+        "title": "Weight-loss jab could be made for $3 a month, study finds",
+        "url": "https://www.theguardian.com/global-development/2026/mar/06/generic-drugs-weight-loss-semaglutide-ozempic-wegovy-diabetes-obesity-study",
+        "source": "World news | The Guardian",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      },
+      {
+        "title": "Three men deported by US file legal case against Eswatini over detention",
+        "url": "https://www.theguardian.com/world/2026/mar/05/three-men-deported-us-eswatini-legal-case-detention",
+        "source": "World news | The Guardian",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      }
+    ],
+    "eco": [
+      {
+        "title": "Oil price at two-year high after Qatar warns all Gulf production could stop within days",
+        "url": "https://www.bbc.com/news/articles/cy031ylgepro?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      },
+      {
+        "title": "US economy unexpectedly sheds 92,000 jobs in February",
+        "url": "https://www.bbc.com/news/articles/cjd98091g28o?at_medium=RSS&at_campaign=rss",
+        "source": "BBC News",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      }
+    ],
+    "nateco": [
+      {
+        "title": "Grande Entrevista - Sinfonia",
+        "url": "http://observador21.blogspot.com/2010/03/grande-entrevista-sinfonia.html",
+        "source": "Observador XXI",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      },
+      {
+        "title": "Curtas: Arbitragem I",
+        "url": "http://observador21.blogspot.com/2010/02/curtas-arbitragem-i.html",
+        "source": "Observador XXI",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      }
+    ],
+    "politics": [
+      {
+        "title": "UK must stockpile food in readiness for climate shocks or war, expert warns",
+        "url": "https://www.theguardian.com/global-development/2026/mar/07/uk-stockpile-food-climate-shocks-war",
+        "source": "Politics | The Guardian",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      },
+      {
+        "title": "Police search home of former Labour MP’s husband amid China spying investigation",
+        "url": "https://www.theguardian.com/politics/2026/mar/06/gloria-de-piero-james-robinson-police-search-labour-mp-china-spying",
+        "source": "Politics | The Guardian",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      }
+    ],
+    "climate": [
+      {
+        "title": "Trump has launched an unprecedented assault on the environment. Where’s the pushback?",
+        "url": "https://www.theguardian.com/commentisfree/2026/mar/04/trump-climate-change-democrats",
+        "source": "Environment | The Guardian",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      },
+      {
+        "title": "Syngenta says it will stop making pesticide linked to Parkinson’s disease",
+        "url": "https://www.theguardian.com/environment/2026/mar/03/syngesta-pesticide-parkinsons",
+        "source": "Environment | The Guardian",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      }
+    ],
+    "market": [
+      {
+        "title": "Brent crude hits $90 as Kuwait ‘starts cutting oil production’; shock as US economy loses 92,000 jobs in February – as i",
+        "url": "https://www.theguardian.com/business/live/2026/mar/06/oil-biggest-weekly-gain-four-years-strait-of-hormuz-traffic-halt-stock-markets-dollar-imf-news-updates",
+        "source": "Stock markets | The Guardian",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      },
+      {
+        "title": "How will war in the Middle East affect your finances?",
+        "url": "https://www.theguardian.com/business/2026/mar/04/iran-war-middle-east-affect-finances-energy-bills-inflation-interest-rates",
+        "source": "Stock markets | The Guardian",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      }
+    ],
+    "work": [
+      {
+        "title": "US lost 92,000 jobs in February just before Trump joined Iran conflict",
+        "url": "https://www.theguardian.com/business/2026/mar/06/february-jobs-report",
+        "source": "Business | The Guardian",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      },
+      {
+        "title": "US preparing system to process refunds on billions in illegal Trump tariffs",
+        "url": "https://www.theguardian.com/us-news/2026/mar/06/us-judge-lawyers-175bn-trump-tariffs-refunds",
+        "source": "Business | The Guardian",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      }
+    ],
     "biz": [],
-    "ai": [],
-    "gadgets": [],
-    "science": [],
-    "soul": []
+    "ai": [
+      {
+        "title": "Robinhood’s startup fund stumbles in NYSE debut",
+        "url": "https://techcrunch.com/2026/03/06/robinhoods-startup-fund-stumbles-in-nyse-debut/",
+        "source": "TechCrunch",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      },
+      {
+        "title": "X is testing a new ad format that connects posts with products",
+        "url": "https://techcrunch.com/2026/03/06/x-is-testing-a-new-ad-format-that-connects-posts-with-products/",
+        "source": "TechCrunch",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      }
+    ],
+    "gadgets": [
+      {
+        "title": "Apple's 512GB Mac Studio vanishes, a quiet acknowledgment of the RAM shortage",
+        "url": "https://arstechnica.com/gadgets/2026/03/apples-512gb-mac-studio-vanishes-a-quiet-acknowledgement-of-the-ram-shortage/",
+        "source": "Tech - Ars Technica",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      },
+      {
+        "title": "Workers report watching Ray-Ban Meta-shot footage of people using the bathroom",
+        "url": "https://arstechnica.com/gadgets/2026/03/workers-report-watching-ray-ban-meta-shot-footage-of-people-using-the-bathroom/",
+        "source": "Tech - Ars Technica",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      }
+    ],
+    "science": [
+      {
+        "title": "Humanity heating planet faster than ever before, study finds",
+        "url": "https://www.theguardian.com/environment/2026/mar/06/humanity-heating-planet-faster-than-ever-before-study-finds",
+        "source": "Science | The Guardian",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      },
+      {
+        "title": "Weight-loss drugs alone will not solve UK’s obesity crisis, says Chris Whitty",
+        "url": "https://www.theguardian.com/science/2026/mar/06/weight-loss-drugs-alone-not-solve-uk-obesity-crisis-chris-whitty",
+        "source": "Science | The Guardian",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      }
+    ],
+    "soul": [
+      {
+        "title": "Malorie Blackman on Noughts & Crosses at 25: ‘It’s even more relevant today’",
+        "url": "https://www.theguardian.com/books/2026/mar/07/malorie-blackman-on-noughts-crosses-at-25-its-even-more-relevant-today",
+        "source": "Books | The Guardian",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      },
+      {
+        "title": "António Lobo Antunes, Portuguese novelist who chronicled dictatorship and war, dies aged 83",
+        "url": "https://www.theguardian.com/books/2026/mar/06/antonio-lobo-antunes-portuguese-novelist-dies-aged-83",
+        "source": "Books | The Guardian",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "related": "",
+        "impact_level": "medio",
+        "date": "2026-03-07T10:41:54.206765+00:00"
+      }
+    ]
   },
   "summary": {
-    "headline": "Briefing 2026-03-07",
+    "headline": "Briefing de 7 de March de 2026",
     "items": []
   },
   "stocks": [
@@ -79,8 +356,8 @@
     {
       "symbol": "BTC-USD",
       "label": "Bitcoin",
-      "price": 68091.43,
-      "change_pct": -0.07,
+      "price": 67979.52,
+      "change_pct": -0.23,
       "up": false
     },
     {
@@ -95,23 +372,22 @@
     "total_change_pct": 0,
     "sentiment": "neutro",
     "what_happened": "Dados insuficientes.",
-    "what_to_do": "Manter posicoes actuais.",
+    "what_to_do": "Manter posições actuais.",
     "risks": "Volatilidade de mercado.",
     "tips": [
       {
         "risk": "baixo",
-        "suggestion": "ETF de indice diversificado"
+        "suggestion": "ETF de índice diversificado"
       },
       {
         "risk": "medio",
-        "suggestion": "Accoes de qualidade com dividendo"
+        "suggestion": "Acções de qualidade com dividendo"
       },
       {
         "risk": "alto",
-        "suggestion": "Sem recomendacao especulativa hoje"
+        "suggestion": "Sem recomendação especulativa"
       }
     ]
   },
-  "connections": [],
-  "run_id": "2026-03-07-10h"
+  "connections": []
 }
