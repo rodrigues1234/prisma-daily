@@ -48,57 +48,68 @@ MAX_RETRIES  = 3   # tentativas Gemini em caso de erro
 RSS = {
     "breaking": [
         "https://feeds.bbci.co.uk/news/rss.xml",
-        "https://feeds.reuters.com/reuters/topNews",
-        "https://rss.ap.org/apf-topnews",
+        "https://feeds.bbci.co.uk/news/world/rss.xml",
+        "https://www.theguardian.com/world/rss",
     ],
     "geo": [
-        "https://feeds.reuters.com/Reuters/worldNews",
         "https://www.theguardian.com/world/rss",
+        "https://feeds.bbci.co.uk/news/world/europe/rss.xml",
+        "https://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml",
     ],
     "eco": [
         "https://www.theguardian.com/business/economics/rss",
-        "https://feeds.reuters.com/reuters/businessNews",
+        "https://www.theguardian.com/business/rss",
+        "https://feeds.bbci.co.uk/news/business/rss.xml",
     ],
     "nateco": [
         "https://feeds.feedburner.com/observador",
-        "https://www.jornaldenegocios.pt/rss",
+        "https://eco.pt/feed/",
+        "https://feeds.bbci.co.uk/news/business/rss.xml",
     ],
     "politics": [
-        "https://www.publico.pt/rss/politica",
         "https://feeds.feedburner.com/observador",
+        "https://www.theguardian.com/politics/rss",
+        "https://feeds.bbci.co.uk/news/politics/rss.xml",
     ],
     "climate": [
         "https://www.theguardian.com/environment/rss",
+        "https://www.theguardian.com/environment/climate-change/rss",
         "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml",
     ],
     "market": [
-        "https://feeds.reuters.com/reuters/companyNews",
-        "https://hbr.org/rss/topic/finance",
+        "https://www.theguardian.com/business/stock-markets/rss",
+        "https://feeds.bbci.co.uk/news/business/rss.xml",
+        "https://www.theguardian.com/business/investing/rss",
     ],
     "work": [
-        "https://hbr.org/rss/topic/leadership",
-        "https://feeds.feedburner.com/mitsloanmanagementreview",
+        "https://www.theguardian.com/money/work-and-careers/rss",
+        "https://feeds.bbci.co.uk/news/business/rss.xml",
+        "https://www.theguardian.com/business/rss",
     ],
     "biz": [
-        "https://hbr.org/rss/hbreditors",
-        "https://www.weforum.org/rss/agenda",
+        "https://www.theguardian.com/business/rss",
+        "https://www.theguardian.com/technology/rss",
+        "https://feeds.feedburner.com/observador",
     ],
     "ai": [
         "https://techcrunch.com/feed/",
-        "https://feeds.feedburner.com/mit-technology-review",
         "https://www.theverge.com/rss/index.xml",
+        "https://feeds.arstechnica.com/arstechnica/index",
     ],
     "gadgets": [
         "https://www.theverge.com/rss/index.xml",
+        "https://feeds.arstechnica.com/arstechnica/gadgets",
         "https://feeds.arstechnica.com/arstechnica/technology-lab",
     ],
     "science": [
+        "https://www.theguardian.com/science/rss",
+        "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml",
         "https://www.nasa.gov/rss/dyn/breaking_news.rss",
-        "https://feeds.nature.com/nature/rss/current",
     ],
     "soul": [
-        "https://hbr.org/rss/hbreditors",
-        "https://feeds.feedburner.com/TedTalks_video",
+        "https://www.theguardian.com/lifeandstyle/rss",
+        "https://feeds.arstechnica.com/arstechnica/index",
+        "https://www.theguardian.com/books/rss",
     ],
 }
 
@@ -435,7 +446,7 @@ def main():
             n = len(categories[cat])
             print(f"  {cat}: {n} artigos curados")
         if i < len(BATCHES) - 1:
-            time.sleep(2)
+            time.sleep(15)  # pausa entre batches — evita rate limit por minuto
 
     # 4. Resumo + portfolio (1 chamada)
     print(f"\n[Gemini 4/4] Resumo + portfolio...")
