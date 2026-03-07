@@ -2,8 +2,8 @@ name: Prisma — Actualizar Briefing Diário
 
 on:
   schedule:
-    # 07:00 UTC = 07:00 Lisboa (inverno) / 08:00 Lisboa (verão)
-    - cron: "0 7 * * *"
+    # 06:00 09:00 12:00 15:00 18:00 21:00 UTC (= mesmas horas Lisboa no inverno)
+    - cron: "0 6,9,12,15,18,21 * * *"
   # Permite correr manualmente no GitHub (botão "Run workflow")
   workflow_dispatch:
 
