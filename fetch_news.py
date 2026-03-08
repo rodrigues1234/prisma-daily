@@ -54,6 +54,10 @@ NOW_ISO  = _NOW.isoformat()
 DATA     = Path("data")
 DATA.mkdir(exist_ok=True)
 
+MESES_PT = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho",
+            "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"]
+DIA_PT = f"{_NOW.day} de {MESES_PT[_NOW.month-1]} de {_NOW.year}"
+
 FEED_TIMEOUT = 8
 MAX_WORKERS  = 12
 MAX_ARTS_PER_CAT = 6    # limita tamanho do prompt
@@ -83,10 +87,14 @@ RSS = {
     ],
     "nateco": [
         "https://feeds.feedburner.com/observador",
+        "https://eco.sapo.pt/feed/",
+        "https://www.jornaldenegocios.pt/rss",
         "https://feeds.bbci.co.uk/news/business/rss.xml",
     ],
     "politics": [
         "https://feeds.feedburner.com/observador",
+        "https://www.rtp.pt/noticias/rss/rtp-noticias",
+        "https://www.dn.pt/rss/feed.aspx",
         "https://www.theguardian.com/politics/rss",
     ],
     "climate": [
@@ -286,10 +294,18 @@ def curate_all(client, model: str, articles_by_cat: dict) -> dict:
 
     prompt = f"""És um curador de notícias para um executivo português. Data: {TODAY}.
 
-Para cada categoria, selecciona os 2 melhores artigos. Responde APENAS com JSON válido:
+Para cada categoria, selecciona os 2 melhores artigos. IMPORTANTE:
+- Todos os campos em português de Portugal (pt-PT)
+- "title": traduz para pt-PT se o original for inglês; mantém se já for português
+- "translated": true se traduziste o título, false se já estava em pt-PT
+- "summary": 2 frases directas em pt-PT
+- "why", "impact", "related": obrigatórios, mínimo 1 frase cada
+- "impact_level": "alto", "médio" ou "baixo"
+
+Responde APENAS com JSON válido:
 
 {{
-  "breaking": [{{"title":"...","url":"...","source":"...","summary":"2 frases pt-PT","why":"relevância","impact":"impacto","related":"ligação","impact_level":"alto|medio|baixo","date":"{NOW_ISO}"}}],
+  "breaking": [{{"title":"...","url":"...","source":"...","translated":false,"summary":"2 frases pt-PT","why":"relevância","impact":"impacto","related":"ligação","impact_level":"alto|médio|baixo","date":"{NOW_ISO}"}}],
   "geo": [...], "eco": [...], "nateco": [...], "politics": [...], "climate": [...],
   "market": [...], "work": [...], "biz": [...], "ai": [...], "gadgets": [...],
   "science": [...], "soul": [...]
@@ -311,7 +327,7 @@ Regras: só categorias fornecidas; [] se sem artigos; URLs originais; pt-PT semp
         for cat, arts in articles_by_cat.items():
             raw_fallback[cat] = [
                 {"title": a["title"], "url": a["url"], "source": a["source"],
-                 "summary": "", "why": "", "impact": "", "related": "",
+                 "translated": False, "summary": "", "why": "", "impact": "", "related": "",
                  "impact_level": "médio", "date": NOW_ISO}
                 for a in arts[:2]
             ]
@@ -333,7 +349,7 @@ def gen_summary_and_portfolio(client, model: str, categories: dict, stocks: list
         for s in stocks[:7]
     ])
 
-    dia = _NOW.strftime("%-d de %B de %Y")
+    dia = DIA_PT
     prompt = f"""Notícias de {dia}:
 {chr(10).join(top) if top else "Sem notícias."}
 
@@ -353,8 +369,7 @@ Responde APENAS com JSON válido:
     text, _ = call_gemini(client, model, prompt, max_tokens=800)
     data = parse_json(text)
 
-    dia_pt = _NOW.strftime("%-d de %B de %Y")
-    default_s  = {"headline": f"Briefing de {dia_pt}", "items": []}
+    default_s  = {"headline": f"Briefing de {DIA_PT}", "items": []}
     default_pa = {
         "total_change_pct": 0, "sentiment": "neutro",
         "what_happened": "Dados insuficientes.",
