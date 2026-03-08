@@ -70,83 +70,50 @@ SESSION.headers.update({
     "Accept": "application/rss+xml, application/xml, text/xml, */*",
 })
 
-# ─── FEEDS — apenas fontes comprovadamente fiáveis em GitHub Actions ──
-# Critério: testado e confirmado que não bloqueia IPs cloud
-RSS = {
-    "breaking": [
-        "https://feeds.bbci.co.uk/news/rss.xml",
-        "https://feeds.bbci.co.uk/news/world/rss.xml",
-    ],
-    "geo": [
-        "https://www.theguardian.com/world/rss",
-        "https://feeds.bbci.co.uk/news/world/europe/rss.xml",
-    ],
-    "eco": [
-        "https://www.theguardian.com/business/economics/rss",
-        "https://feeds.bbci.co.uk/news/business/rss.xml",
-    ],
-    "nateco": [
-        "https://feeds.feedburner.com/observador",
-        "https://eco.sapo.pt/feed/",
-        "https://www.jornaldenegocios.pt/rss",
-        "https://feeds.bbci.co.uk/news/business/rss.xml",
-    ],
-    "politics": [
-        "https://feeds.feedburner.com/observador",
-        "https://www.rtp.pt/noticias/rss/rtp-noticias",
-        "https://www.dn.pt/rss/feed.aspx",
-        "https://www.theguardian.com/politics/rss",
-    ],
-    "climate": [
-        "https://www.theguardian.com/environment/rss",
-        "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml",
-    ],
-    "market": [
-        "https://www.theguardian.com/business/stock-markets/rss",
-        "https://feeds.bbci.co.uk/news/business/rss.xml",
-    ],
-    "work": [
-        "https://www.theguardian.com/money/work-and-careers/rss",
-        "https://www.theguardian.com/business/rss",
-    ],
-    "biz": [
-        "https://www.theguardian.com/business/rss",
-        "https://feeds.feedburner.com/observador",
-    ],
-    "ai": [
-        "https://techcrunch.com/feed/",
-        "https://www.theverge.com/rss/index.xml",
-        "https://feeds.arstechnica.com/arstechnica/index",
-    ],
-    "gadgets": [
-        "https://www.theverge.com/rss/index.xml",
-        "https://feeds.arstechnica.com/arstechnica/gadgets",
-    ],
-    "science": [
-        "https://www.theguardian.com/science/rss",
-        "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml",
-    ],
-    "soul": [
-        "https://www.theguardian.com/lifeandstyle/rss",
-        "https://www.theguardian.com/books/rss",
-    ],
-}
+# ─── FEEDS — lista plana, sem categorias fixas ────────────────────────
+# O Gemini categoriza livremente nos 8 temas abaixo
+RSS = [
+    # Mundo / Breaking
+    "https://feeds.bbci.co.uk/news/rss.xml",
+    "https://feeds.bbci.co.uk/news/world/rss.xml",
+    "https://www.theguardian.com/world/rss",
+    "https://feeds.bbci.co.uk/news/world/europe/rss.xml",
+    # Portugal
+    "https://feeds.feedburner.com/observador",
+    "https://eco.sapo.pt/feed/",
+    "https://www.jornaldenegocios.pt/rss",
+    "https://www.rtp.pt/noticias/rss/rtp-noticias",
+    "https://www.dn.pt/rss/feed.aspx",
+    # Economia & Mercados
+    "https://www.theguardian.com/business/economics/rss",
+    "https://feeds.bbci.co.uk/news/business/rss.xml",
+    "https://www.theguardian.com/business/stock-markets/rss",
+    # Tecnologia & IA
+    "https://techcrunch.com/feed/",
+    "https://www.theverge.com/rss/index.xml",
+    "https://feeds.arstechnica.com/arstechnica/index",
+    # Carreira & Negócios
+    "https://www.theguardian.com/money/work-and-careers/rss",
+    "https://www.theguardian.com/business/rss",
+    # Clima / Ambiente (Mundo)
+    "https://www.theguardian.com/environment/rss",
+    # Recomendação do Dia
+    "https://www.theguardian.com/lifeandstyle/rss",
+    "https://www.theguardian.com/books/rss",
+    "https://www.theguardian.com/science/rss",
+]
 
 CAT_NAMES = {
-    "breaking": "Breaking News",
-    "geo":      "Geopolitica",
-    "eco":      "Economia Global",
-    "nateco":   "Economia Nacional Portugal",
-    "politics": "Politica Nacional",
-    "climate":  "Clima Global",
-    "market":   "Mercado Financeiro",
-    "work":     "Future of Work",
-    "biz":      "Dica de Negocios",
-    "ai":       "IA e Inovacao",
-    "gadgets":  "Gadgets e Hardware",
-    "science":  "Ciencia e Espaco",
-    "soul":     "Recomendacao do Dia",
+    "breaking":     "Breaking News",
+    "portugal":     "Portugal",
+    "mundo":        "Mundo",
+    "economia":     "Economia & Mercados",
+    "portfolio":    "O Meu Portfólio",
+    "tecnologia":   "Tecnologia & IA",
+    "carreira":     "Carreira & Negócios",
+    "recomendacao": "Recomendação do Dia",
 }
+CATS_ALL = list(CAT_NAMES.keys())
 
 STOCKS = ["AAPL", "MSFT", "NVDA", "TSLA", "AMZN", "META", "GOOGL"]
 FOREX  = ["EURUSD=X", "BTC-USD", "GC=F"]
@@ -179,36 +146,31 @@ def fetch_one_feed(url: str) -> list[dict]:
         return []
 
 
-def collect_all() -> dict[str, list[dict]]:
-    tasks = [(cat, url) for cat, urls in RSS.items() for url in urls]
-    raw: dict[str, list] = {cat: [] for cat in RSS}
-
+def collect_all() -> list[dict]:
+    """Recolhe todos os feeds em paralelo e devolve lista plana deduplicada."""
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
-        fmap = {ex.submit(fetch_one_feed, url): (cat, url) for cat, url in tasks}
+        fmap = {ex.submit(fetch_one_feed, url): url for url in RSS}
+        raw = []
         for f in as_completed(fmap):
-            cat, _ = fmap[f]
             try:
-                raw[cat].extend(f.result())
+                raw.extend(f.result())
             except Exception:
                 pass
 
-    # Desduplicação GLOBAL por URL (resolve artigos duplicados entre categorias)
-    seen_urls: set[str] = set()
-    result: dict[str, list] = {}
-    for cat, items in raw.items():
-        seen_titles: set[str] = set()
-        unique = []
-        for it in items:
-            url_key   = hashlib.md5(it["url"].encode()).hexdigest()
-            title_key = hashlib.md5(it["title"].lower().encode()).hexdigest()
-            if url_key not in seen_urls and title_key not in seen_titles:
-                seen_urls.add(url_key)
-                seen_titles.add(title_key)
-                unique.append(it)
-        result[cat] = unique[:MAX_ARTS_PER_CAT]
-        print(f"  {cat}: {len(unique)} artigos")
+    # Desduplicação global por URL e título
+    seen_urls:   set[str] = set()
+    seen_titles: set[str] = set()
+    unique = []
+    for it in raw:
+        url_key   = hashlib.md5(it["url"].encode()).hexdigest()
+        title_key = hashlib.md5(it["title"].lower().encode()).hexdigest()
+        if url_key not in seen_urls and title_key not in seen_titles:
+            seen_urls.add(url_key)
+            seen_titles.add(title_key)
+            unique.append(it)
 
-    return result
+    print(f"  {len(unique)} artigos únicos de {len(RSS)} feeds")
+    return unique[:80]  # limita tamanho do prompt
 
 
 # ─── GEMINI ───────────────────────────────────────────────────────────
@@ -276,68 +238,81 @@ def parse_json(text: str) -> dict | list | None:
     return None
 
 
-# ─── CHAMADA 1 — todas as categorias numa só chamada ─────────────────
-def curate_all(client, model: str, articles_by_cat: dict) -> dict:
-    sections = []
-    for cat in RSS:
-        arts = articles_by_cat.get(cat, [])
-        if not arts:
-            continue
-        arts_txt = "\n".join([
-            f"  [{i+1}] {a['title']} | {a['source']} | {a['url']}"
-            for i, a in enumerate(arts)
-        ])
-        sections.append(f"=== {cat} ({CAT_NAMES[cat]}) ===\n{arts_txt}")
-
-    if not sections:
+# ─── CHAMADA 1 — categorização + curadoria numa só chamada ───────────
+def curate_all(client, model: str, articles: list) -> dict:
+    """Gemini categoriza livremente e selecciona os 2 melhores por categoria."""
+    if not articles:
         return {}
+
+    arts_txt = "\n".join([
+        f"  [{i+1}] {a['title']} | {a['source']} | {a['url']}"
+        for i, a in enumerate(articles)
+    ])
+
+    cats_desc = "\n".join([f"  - {k}: {v}" for k, v in CAT_NAMES.items()])
 
     prompt = f"""És um curador de notícias para um executivo português. Data: {TODAY}.
 
-PASSO 1 — Selecciona os 2 artigos mais relevantes por categoria.
-PASSO 2 — Para cada artigo, preenche TODOS os campos obrigatoriamente:
-  - "title": TRADUZ SEMPRE para português de Portugal. Se já estiver em português, mantém.
-  - "translated": true se o título original era inglês/outro idioma, false se já era português
-  - "summary": 2 frases directas em português de Portugal
-  - "why": 1 frase — porque é relevante para um executivo português
-  - "impact": 1 frase — impacto concreto nos próximos dias/semanas
-  - "related": 1 frase — ligação a outro tema ou notícia
-  - "impact_level": "alto", "médio" ou "baixo"
-  - "url": URL original sem alterações
-  - "source": nome da fonte original
+Tens {len(articles)} artigos abaixo. As 8 categorias disponíveis são:
+{cats_desc}
 
-Responde APENAS com JSON válido, sem texto antes ou depois:
+INSTRUÇÕES:
+1. Lê todos os artigos e atribui cada um à categoria mais adequada.
+2. Selecciona os 2 artigos mais relevantes por categoria (pode ficar vazio se não houver artigos adequados).
+3. Para cada artigo seleccionado, preenche TODOS os campos:
+   - "title": TRADUZ SEMPRE para português de Portugal. Se já for português, mantém.
+   - "translated": true se traduziste, false se já era português
+   - "summary": 2 frases directas em português de Portugal
+   - "why": 1 frase — porque é relevante para um executivo português
+   - "impact": 1 frase — impacto concreto nos próximos dias/semanas
+   - "related": 1 frase — ligação a outro tema ou notícia
+   - "impact_level": "alto", "médio" ou "baixo"
+   - "url": URL original sem alterações
+   - "source": nome da fonte original
+   - "date": "{NOW_ISO}"
 
+NOTA sobre categorias:
+- "breaking": apenas acontecimentos das últimas horas, urgentes
+- "portugal": política, economia ou sociedade portuguesa
+- "mundo": geopolítica, conflitos, relações internacionais, ambiente
+- "economia": macroeconomia global, bolsa, mercados, finanças
+- "portfolio": análise de mercado relevante para investidores individuais
+- "tecnologia": IA, software, hardware, inovação digital
+- "carreira": liderança, future of work, estratégia empresarial
+- "recomendacao": apenas 1 artigo — ensaio, livro, ideia ou reflexão de valor duradouro
+
+Responde APENAS com JSON válido:
 {{
-  "breaking": [{{
-    "title":"TÍTULO EM PORTUGUÊS","url":"url original","source":"fonte",
-    "translated":true,"summary":"resumo pt","why":"porquê","impact":"impacto",
-    "related":"ligação","impact_level":"médio","date":"{NOW_ISO}"
-  }}],
-  "geo": [...], "eco": [...], "nateco": [...], "politics": [...], "climate": [...],
-  "market": [...], "work": [...], "biz": [...], "ai": [...], "gadgets": [...],
-  "science": [...], "soul": [...]
+  "breaking":     [{{ "title":"PT","url":"...","source":"...","translated":true,"summary":"...","why":"...","impact":"...","related":"...","impact_level":"médio","date":"{NOW_ISO}" }}],
+  "portugal":     [...],
+  "mundo":        [...],
+  "economia":     [...],
+  "portfolio":    [...],
+  "tecnologia":   [...],
+  "carreira":     [...],
+  "recomendacao": [...]
 }}
 
 Artigos disponíveis:
-{chr(10).join(sections)}"""
+{arts_txt}"""
 
-    text, used_model = call_gemini(client, model, prompt, max_tokens=4500)
+    text, used_model = call_gemini(client, model, prompt, max_tokens=5000)
     if used_model != model:
         print(f"  a usar modelo fallback: {used_model}")
 
     data = parse_json(text)
     if not isinstance(data, dict):
         print("  aviso: curadoria devolveu resultado vazio, a usar artigos em bruto")
-        # Fallback: usa os artigos em bruto sem curadoria Gemini
-        raw_fallback = {}
-        for cat, arts in articles_by_cat.items():
-            raw_fallback[cat] = [
-                {"title": a["title"], "url": a["url"], "source": a["source"],
-                 "translated": False, "summary": "", "why": "", "impact": "", "related": "",
-                 "impact_level": "médio", "date": NOW_ISO}
-                for a in arts[:2]
-            ]
+        # Fallback: distribui os primeiros artigos pelas categorias sem curadoria
+        raw_fallback = {cat: [] for cat in CATS_ALL}
+        for i, a in enumerate(articles[:16]):
+            cat = CATS_ALL[i % len(CATS_ALL)]
+            if len(raw_fallback[cat]) < 2:
+                raw_fallback[cat].append({
+                    "title": a["title"], "url": a["url"], "source": a["source"],
+                    "translated": False, "summary": "", "why": "", "impact": "",
+                    "related": "", "impact_level": "médio", "date": NOW_ISO
+                })
         return raw_fallback
     return data
 
@@ -345,7 +320,7 @@ Artigos disponíveis:
 # ─── CHAMADA 2 — resumo + portfolio ───────────────────────────────────
 def gen_summary_and_portfolio(client, model: str, categories: dict, stocks: list) -> tuple:
     top = []
-    for cat in ["breaking", "geo", "eco", "nateco", "ai", "market"]:
+    for cat in ["breaking", "portugal", "mundo", "economia", "tecnologia"]:
         for a in categories.get(cat, [])[:1]:
             top.append(f"- [{CAT_NAMES.get(cat,cat)}] {a.get('title','')} | {a.get('url','')}")
         if len(top) >= 5:
@@ -452,21 +427,20 @@ def main():
     client, model = get_client_and_model()
 
     # 1. Todos os feeds em paralelo (~2s)
-    print(f"[RSS] A recolher {sum(len(v) for v in RSS.values())} feeds...")
-    articles_by_cat = collect_all()
-    total_raw = sum(len(v) for v in articles_by_cat.values())
-    print(f"  {total_raw} artigos únicos em {time.time()-t0:.1f}s\n")
+    print(f"[RSS] A recolher {len(RSS)} feeds...")
+    articles = collect_all()
+    print(f"  {len(articles)} artigos prontos em {time.time()-t0:.1f}s\n")
 
     # 2. Stocks (sem Gemini)
     print("[stocks] A buscar cotações...")
     stocks_list = fetch_stocks()
     print(f"  {len(stocks_list)} instrumentos\n")
 
-    # 3. CHAMADA GEMINI 1/2 — todas as categorias
-    print("[Gemini 1/2] A curar todas as categorias...")
-    categories = curate_all(client, model, articles_by_cat)
+    # 3. CHAMADA GEMINI 1/2 — categorização + curadoria
+    print("[Gemini 1/2] A categorizar e curar artigos...")
+    categories = curate_all(client, model, articles)
     total_curated = sum(len(v) for v in categories.values())
-    print(f"  {total_curated} artigos curados\n")
+    print(f"  {total_curated} artigos curados em {sum(1 for v in categories.values() if v)} categorias\n")
 
     # Pausa de 5s entre as 2 chamadas (margem de segurança de RPM)
     time.sleep(5)
