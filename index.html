@@ -1678,22 +1678,38 @@ document.addEventListener('click',()=>{ document.querySelectorAll('.c-move-drop.
 /* ═══════════════════ CATEGORIZE ARTICLES (v4) ══════════ */
 function categorizeArticles(articles){
   /**
-   * v4: JSON tem lista plana de artigos.
-   * Aplica regras: 1) override de artigo, 2) categoria da fonte, 3) "sem_categoria".
+   * v4 — prioridade de categorização:
+   * 1. Override manual de artigo (botão ⋯)
+   * 2. Flag Gemini: breaking: true  → breaking
+   * 3. Flag Gemini: recomendacao: true → recomendacao
+   * 4. Regra de fonte definida pelo utilizador
+   * 5. Sem categoria
    */
-  const sourceCats  = loadSourceCats();
+  const sourceCats   = loadSourceCats();
   const artOverrides = loadOverrides();
   const result = {};
   CAT_DEFS.forEach(c=>result[c.id]=[]);
   result['sem_categoria'] = [];
 
+  // Para recomendação: só 1 por run (o primeiro que tiver o flag)
+  let recomendacaoUsed = false;
+
   (articles||[]).forEach(a=>{
-    const urlHash = hashUrl(a.url||'');
-    // Override manual de artigo tem prioridade
+    const urlHash    = hashUrl(a.url||'');
     const overrideCat = artOverrides[urlHash];
-    // Categoria da fonte
-    const sourceCat = sourceCats[a.source];
-    const cat = overrideCat || sourceCat || 'sem_categoria';
+    let cat;
+
+    if(overrideCat){
+      cat = overrideCat;
+    } else if(a.breaking){
+      cat = 'breaking';
+    } else if(a.recomendacao && !recomendacaoUsed){
+      cat = 'recomendacao';
+      recomendacaoUsed = true;
+    } else {
+      cat = sourceCats[a.source] || 'sem_categoria';
+    }
+
     if(!result[cat]) result[cat]=[];
     result[cat].push(a);
   });
