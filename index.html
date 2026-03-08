@@ -79,7 +79,7 @@ input,select,textarea{font-family:inherit}
 /* ═══════════════════════════ TICKER ═══════════════════════════ */
 .ticker{background:var(--ink2);height:var(--th);overflow:hidden;display:flex;align-items:center;position:sticky;top:var(--hh);z-index:190;border-bottom:2px solid var(--amber)}
 .t-lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber-mid);padding:0 12px;flex-shrink:0;border-right:1px solid rgba(255,255,255,.1);height:100%;display:flex;align-items:center}
-.t-track{overflow:hidden;flex:1;mask-image:linear-gradient(to right,transparent,black 30px,black calc(100% - 30px),transparent)}
+.t-track{overflow:hidden;flex:1;-webkit-mask-image:linear-gradient(to right,transparent,black 30px,black calc(100% - 30px),transparent);mask-image:linear-gradient(to right,transparent,black 30px,black calc(100% - 30px),transparent)}
 .t-scroll{display:flex;align-items:center;width:max-content;animation:tick 50s linear infinite}
 .t-scroll:hover{animation-play-state:paused}
 @keyframes tick{to{transform:translateX(-50%)}}
@@ -170,7 +170,7 @@ input,select,textarea{font-family:inherit}
 .c-move{position:relative;margin-left:auto;flex-shrink:0}
 .c-move-btn{background:none;border:none;font-size:13px;color:var(--ink4);cursor:pointer;padding:0 2px;opacity:.4;transition:opacity .15s;line-height:1}
 .c-move-btn:hover{opacity:1}
-.c-move-drop{display:none;position:absolute;right:0;top:20px;background:#fff;border:1px solid var(--rule);border-radius:var(--r-sm);box-shadow:0 4px 16px rgba(0,0,0,.1);z-index:50;min-width:180px;overflow:hidden}
+.c-move-drop{display:none;position:fixed;background:#fff;border:1px solid var(--rule);border-radius:var(--r-sm);box-shadow:0 4px 24px rgba(0,0,0,.15);z-index:500;min-width:180px;max-height:60vh;overflow-y:auto}
 .c-move-drop.open{display:block}
 .c-move-opt{display:flex;align-items:center;gap:7px;padding:7px 12px;font-size:12px;color:var(--ink2);cursor:pointer;transition:background .1s}
 .c-move-opt:hover{background:var(--paper)}
@@ -305,7 +305,7 @@ input,select,textarea{font-family:inherit}
 /* sources */
 .src-search{width:100%;border:1px solid var(--rule);border-radius:var(--r-sm);padding:8px 12px;font-size:13px;color:var(--ink);background:var(--cream);outline:none;margin-bottom:12px;transition:border-color .15s}
 .src-search:focus{border-color:var(--amber)}
-.src-item{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid var(--rule2)}
+.src-item{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--rule2);flex-wrap:wrap}
 .src-item:last-child{border-bottom:none}
 .src-tog{width:34px;height:18px;border-radius:9px;background:var(--rule);position:relative;cursor:pointer;transition:background .15s;flex-shrink:0}
 .src-tog.on{background:var(--amber)}
@@ -415,7 +415,6 @@ input,select,textarea{font-family:inherit}
   .wn-grid{grid-template-columns:1fr 1fr}
   .risco-grid{grid-template-columns:1fr}
   .src-add-row,.src-add-row-3{grid-template-columns:1fr}
-  .src-cat-sel{display:none}
   .c-title{font-size:15px}
   .dh-title{font-size:24px}
   /* min touch target 44px */
@@ -423,6 +422,17 @@ input,select,textarea{font-family:inherit}
   .src-tog,.cc-tog{width:40px;height:22px;border-radius:11px}
   .src-tog::after,.cc-tog::after{width:14px;height:14px;top:4px;left:4px}
   .src-tog.on::after,.cc-tog.on::after{transform:translateX(18px)}
+  /* src-item: dropdown full width on second line */
+  .src-item{align-items:flex-start}
+  .src-item .src-cat-sel{width:100%;margin-top:4px;order:99;flex-basis:100%;font-size:13px;padding:7px 10px}
+  .src-item .stars{margin-left:auto}
+  /* cc-item: count buttons easier to tap */
+  .cc-item{padding:10px 8px;gap:6px}
+  /* card move dropdown: full width bottom sheet feel */
+  .c-move-drop{min-width:220px}
+  /* pl-item: tighter on small screens */
+  .pl-sym{width:48px}
+  .pl-nm{font-size:12px}
 }
 
 /* Mobile landscape — compact header */
@@ -515,15 +525,7 @@ input,select,textarea{font-family:inherit}
       <!-- Settings -->
       <div class="ps fade" style="animation-delay:.06s">
         <div class="ps-hd">⚙️ Definições</div>
-        <div class="setting-row">
-          <div><div class="setting-label">Artigos por categoria</div><div class="setting-desc">Quantos artigos mostrar em cada secção</div></div>
-          <div class="setting-ctrl" style="display:flex;align-items:center;gap:8px">
-            <input type="range" id="artsPerCatSlider" min="1" max="8" value="2"
-              style="width:80px;accent-color:var(--amber)"
-              oninput="document.getElementById('artsPerCatVal').textContent=this.value;saveProf()">
-            <span id="artsPerCatVal" style="font-size:13px;font-weight:700;color:var(--amber);min-width:12px">2</span>
-          </div>
-        </div>
+
         <div class="setting-row" id="deleteProfileRow" style="display:none">
           <div><div class="setting-label">Eliminar perfil</div><div class="setting-desc">Remove este perfil e todos os dados</div></div>
           <div class="setting-ctrl">
@@ -1015,10 +1017,7 @@ function renderProfile(){
   // Mostra/esconde botão de eliminar (só aparece se houver mais de 1 perfil)
   const delRow = document.getElementById('deleteProfileRow');
   if(delRow) delRow.style.display = STATE.profiles.length > 1 ? 'flex' : 'none';
-  // Slider artigos por categoria
-  const sl=document.getElementById('artsPerCatSlider');
-  const vl=document.getElementById('artsPerCatVal');
-  if(sl){ sl.value=p.artsPerCat||2; if(vl) vl.textContent=sl.value; }
+
 
   // Categories
   const cats=p.cats||CAT_DEFS.map(c=>({id:c.id,on:true}));
@@ -1027,6 +1026,7 @@ function renderProfile(){
   const isMob=window.innerWidth<900;
   document.getElementById('ccList').innerHTML=cats.map((co,i)=>{
     const cat=CAT_DEFS.find(c=>c.id===co.id); if(!cat)return '';
+    const catCount = co.count||2;
     return `<div class="cc-item" draggable="${!isMob}" data-idx="${i}" data-id="${co.id}"
       ${!isMob?'ondragstart="dS(event)" ondragover="dO(event)" ondrop="dD(event)" ondragend="dE(event)"':''}>
       ${isMob
@@ -1039,7 +1039,15 @@ function renderProfile(){
       <div class="cc-tog ${co.on?'on':''}" onclick="togCat('${co.id}')"></div>
       <div class="cc-dot" style="background:${cat.cl}"></div>
       <span class="cc-nm">${cat.ic} ${cat.nm}</span>
-      <span class="cc-grp" style="background:${gbg[cat.g]||'#F3F4F6'};color:${gcl[cat.g]||'#6B7280'}">${cat.gl}</span>
+      <div style="display:flex;align-items:center;gap:4px;margin-left:auto;flex-shrink:0">
+        <button onclick="setCatCount('${co.id}',${catCount-1},event)"
+          style="width:44px;height:44px;border-radius:6px;background:var(--rule2);color:var(--ink3);font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;-webkit-tap-highlight-color:transparent"
+          ${catCount<=1?'disabled':''}>−</button>
+        <span style="font-family:var(--ff-m);font-size:12px;font-weight:700;color:var(--amber);min-width:14px;text-align:center">${catCount}</span>
+        <button onclick="setCatCount('${co.id}',${catCount+1},event)"
+          style="width:44px;height:44px;border-radius:6px;background:var(--rule2);color:var(--ink3);font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;-webkit-tap-highlight-color:transparent"
+          ${catCount>=8?'disabled':''}>+</button>
+      </div>
     </div>`;
   }).join('');
 
@@ -1052,8 +1060,7 @@ function setActive(id){ STATE.active=id; saveState(); renderProfile(); buildSide
 function updateAv(){ const p=aP(); const av=document.getElementById('hAv'); av.textContent=p.name[0].toUpperCase(); av.style.background=p.color; }
 function saveProf(){
   const p=aP();
-  const sl=document.getElementById('artsPerCatSlider');
-  if(sl) p.artsPerCat=+sl.value||2;
+
   saveState();
   document.querySelectorAll('.ps-save').forEach(b=>{b.textContent='✓ Guardado';setTimeout(()=>b.textContent='Guardar',1500);});
 }
@@ -1071,6 +1078,13 @@ function deleteProfile(){
   document.getElementById('gName').textContent=aP().name;
 }
 function togCat(id){ const p=aP(); const co=p.cats.find(c=>c.id===id); if(co){co.on=!co.on;saveState();renderProfile();buildSidebar();_rebuild();} }
+function setCatCount(id,n,event){
+  event.stopPropagation();
+  n=Math.max(1,Math.min(8,n));
+  const p=aP();
+  const co=p.cats.find(c=>c.id===id);
+  if(co){ co.count=n; saveState(); renderProfile(); _rebuild(); }
+}
 /* drag drop — mouse + touch support */
 let dIdx=null,touchDragEl=null,touchClone=null;
 function dS(e){dIdx=+e.currentTarget.dataset.idx;e.currentTarget.classList.add('dragging');}
@@ -1374,7 +1388,6 @@ function buildSectionsFromLive(){
   if(!isV4 && !LIVE_DATA?.categories) return buildSections();
 
   const p=aP();
-  const maxArts = p.artsPerCat||2;
   const orders=catOrder();
   const enabled=orders.filter(c=>c.on).map(c=>CAT_DEFS.find(d=>d.id===c.id)).filter(Boolean);
 
@@ -1402,6 +1415,8 @@ function buildSectionsFromLive(){
       if(recs[0]) html+=buildSoul(cat,{title:recs[0].title,url:recs[0].url,summary:recs[0].summary,ts:'~15 min',related:recs[0].related||''},i);
       return;
     }
+    const catCfg=orders.find(o=>o.id===cat.id)||{};
+    const maxArts=catCfg.count||2;
     const arts=(categories?.[cat.id]||[]).slice(0,maxArts);
     if(!arts.length) return;
 
@@ -1635,7 +1650,23 @@ function hashUrl(url){
 function toggleMoveMenu(cardId,event){
   event.stopPropagation();
   document.querySelectorAll('.c-move-drop.open').forEach(d=>{ if(d.id!==`move-${cardId}`) d.classList.remove('open'); });
-  document.getElementById(`move-${cardId}`)?.classList.toggle('open');
+  const drop = document.getElementById(`move-${cardId}`);
+  if(!drop) return;
+  const wasOpen = drop.classList.contains('open');
+  drop.classList.toggle('open', !wasOpen);
+  if(!wasOpen){
+    // Position relative to viewport so it never clips off-screen
+    const btn = event.currentTarget;
+    const rect = btn.getBoundingClientRect();
+    const dropW = 200;
+    let left = rect.right - dropW;
+    if(left < 8) left = 8;
+    if(left + dropW > window.innerWidth - 8) left = window.innerWidth - dropW - 8;
+    const top = rect.bottom + 4;
+    drop.style.left = left + 'px';
+    drop.style.top = top + 'px';
+    drop.style.right = 'auto';
+  }
 }
 function moveArticle(urlHash,newCatId,cardId){
   saveOverride(urlHash,newCatId);
