@@ -867,7 +867,14 @@ function scrollSec(id){
   const el=document.getElementById('s-'+id);
   if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
 }
-function formatDate(d){ const[y,m,dd]=d.split('-'); const ms=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']; return `${+dd} ${ms[+m-1]}`; }
+function formatDate(d){
+  const str = (typeof d === 'object' && d !== null) ? (d.date || d.id || '') : String(d);
+  const parts = str.slice(0,10).split('-');
+  if(parts.length < 3) return str;
+  const [y,m,dd] = parts;
+  const ms=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+  return `${+dd} ${ms[+m-1]}`;
+}
 
 /* ═════════════════════════ SUMMARY ═════════════════════ */
 function buildSummary(){
