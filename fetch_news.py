@@ -312,7 +312,7 @@ Regras: só categorias fornecidas; [] se sem artigos; URLs originais; pt-PT semp
             raw_fallback[cat] = [
                 {"title": a["title"], "url": a["url"], "source": a["source"],
                  "summary": "", "why": "", "impact": "", "related": "",
-                 "impact_level": "medio", "date": NOW_ISO}
+                 "impact_level": "médio", "date": NOW_ISO}
                 for a in arts[:2]
             ]
         return raw_fallback
@@ -348,7 +348,7 @@ Responde APENAS com JSON válido:
   {{"text":"frase directa","color":"#10B981","source":"fonte","time":"{_NOW.strftime('%H:%M')}","url":"url"}}
 ]}},"portfolio_analysis":{{"total_change_pct":0.0,"sentiment":"positivo|neutro|negativo",
 "what_happened":"1 frase","what_to_do":"1 acção concreta","risks":"1 risco",
-"tips":[{{"risk":"baixo","suggestion":"..."}},{{"risk":"medio","suggestion":"..."}},{{"risk":"alto","suggestion":"..."}}]}}}}"""
+"tips":[{{"risk":"baixo","suggestion":"..."}},{{"risk":"médio","suggestion":"..."}},{{"risk":"alto","suggestion":"..."}}]}}}}"""
 
     text, _ = call_gemini(client, model, prompt, max_tokens=800)
     data = parse_json(text)
@@ -362,7 +362,7 @@ Responde APENAS com JSON válido:
         "risks": "Volatilidade de mercado.",
         "tips": [
             {"risk": "baixo",  "suggestion": "ETF de índice diversificado"},
-            {"risk": "medio",  "suggestion": "Acções de qualidade com dividendo"},
+            {"risk": "médio",  "suggestion": "Acções de qualidade com dividendo"},
             {"risk": "alto",   "suggestion": "Sem recomendação especulativa"},
         ]
     }
