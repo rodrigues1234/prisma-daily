@@ -437,7 +437,7 @@ input,select,textarea{font-family:inherit}
   <div class="hdr-refresh">
     <div class="refresh-info">
       <div class="refresh-dot"></div>
-      <span id="refreshLabel">Actualizado 06:00 · próximo em 12h</span>
+      <span id="refreshLabel">A carregar...</span>
     </div>
   </div>
   <nav class="hdr-nav">
@@ -467,12 +467,12 @@ input,select,textarea{font-family:inherit}
     <!-- HOJE -->
     <div class="panel active" id="panel-hoje">
       <div class="dh fade">
-        <div class="dh-eye">Sexta-feira · 6 de Março de 2026</div>
+        <div class="dh-eye" id="dhEye">A carregar...</div>
         <h1 class="dh-title">Bom dia, <span id="gName">Ricardo</span>.</h1>
         <div class="dh-chips">
-          <span class="chip">28 artigos</span>
-          <span class="chip">10 categorias</span>
-          <span class="chip live">🔄 Actualizado às 07:02</span>
+          <span class="chip" id="chipArtigos">28 artigos</span>
+          <span class="chip" id="chipCats">10 categorias</span>
+          <span class="chip live" id="chipLive">🔄 A carregar...</span>
         </div>
       </div>
       <div class="summary">
@@ -810,7 +810,7 @@ function defState(){
       freq:12,
     }],
     active:'p1',
-    history:['2026-03-06','2026-03-05','2026-03-04','2026-03-03','2026-03-02'],
+    history: Array.from({length:5},(_,i)=>{ const d=new Date(); d.setDate(d.getDate()-i); return d.toISOString().slice(0,10); }),
   };
 }
 function saveState(){ try{localStorage.setItem('prisma_v1',JSON.stringify(STATE));}catch(e){} }
@@ -1405,13 +1405,13 @@ function buildSectionsFromLive(){
 
     const cards=arts.map((a,ai)=>`
       <div class="card">
-        <div class="c-stripe ${a.impact_level||'médio'}"></div>
+        <div class="c-stripe ${(a.impact_level||'médio').replace('medio','médio')}"></div>
         <div class="c-body">
           <div class="c-top">
             <span class="c-src">${a.source||''}</span>
             <span class="c-bull">·</span>
             <span class="c-ts">${(a.date||'').slice(11,16)||''}</span>
-            <span class="c-badge ${a.impact_level||'médio'}">${a.impact_level==='alto'?'Alto':a.impact_level==='baixo'?'Baixo':'Médio'}</span>
+            <span class="c-badge ${(a.impact_level||'médio').replace('medio','médio')}">${a.impact_level==='alto'?'Alto':a.impact_level==='baixo'?'Baixo':'Médio'}</span>
           </div>
           <div class="c-title">
             <a href="${a.url||'#'}" target="_blank" rel="noopener">
@@ -1447,12 +1447,15 @@ function buildSectionsFromLive(){
 
   document.getElementById('catSections').innerHTML=html;
 
-  // Update chips
+  // Update chips — usar IDs individuais em vez de innerHTML (preserva IDs)
   const total=Object.values(LIVE_DATA.categories||{}).reduce((s,a)=>s+(a?.length||0),0);
-  document.querySelector('.dh-chips').innerHTML=`
-    <span class="chip">${total} artigos</span>
-    <span class="chip">${enabled.length} categorias</span>
-    <span class="chip live">🔄 Actualizado ${(LIVE_DATA.updated_at||'').slice(11,16)||'hoje'}</span>`;
+  const upTime = (LIVE_DATA.updated_at||'').slice(11,16)||'hoje';
+  const chipA = document.getElementById('chipArtigos');
+  const chipC = document.getElementById('chipCats');
+  const chipL = document.getElementById('chipLive');
+  if(chipA) chipA.textContent = `${total} artigos`;
+  if(chipC) chipC.textContent = `${enabled.length} categorias`;
+  if(chipL) chipL.textContent = `🔄 Actualizado ${upTime}`;
 }
 
 function buildPortfolioFromLive(cat,i){
@@ -1601,7 +1604,15 @@ updateAv();
 updateRefreshLabel();
 document.getElementById('gName').textContent=aP().name;
 
-// Try loading live data; fall back to demo if not available
+// Data dinâmica no header
+(function(){
+  const now = new Date();
+  const dias  = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+  const meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  const eye = document.getElementById('dhEye');
+  if(eye) eye.textContent = `${dias[now.getDay()]} · ${now.getDate()} de ${meses[now.getMonth()]} de ${now.getFullYear()}`;
+})();
+
 loadLiveData().then(hasLive => {
   buildSidebar();
   if(hasLive){
