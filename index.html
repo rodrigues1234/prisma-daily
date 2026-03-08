@@ -1652,7 +1652,18 @@ document.addEventListener('click', ()=>{
 });
 
 /* ═════════════════════════ INIT ════════════════════════ */
-STATE.profiles.forEach(p=>{ if(!p.cats)p.cats=CAT_DEFS.map(c=>({id:c.id,on:true})); if(!p.name&&p.nm)p.name=p.nm; });
+// Migração de perfis: garante que os IDs das categorias são os actuais
+const VALID_CAT_IDS = new Set(CAT_DEFS.map(c=>c.id));
+STATE.profiles.forEach(p=>{
+  const hasCats = Array.isArray(p.cats) && p.cats.length > 0;
+  const hasValidCats = hasCats && p.cats.some(c=>VALID_CAT_IDS.has(c.id));
+  // Se não tem cats válidas (perfil antigo), reinicia com as 8 categorias actuais
+  if(!hasValidCats){
+    p.cats = CAT_DEFS.map(c=>({id:c.id,on:true}));
+  }
+  if(!p.name&&p.nm) p.name=p.nm;
+});
+saveState();
 updateAv();
 updateRefreshLabel();
 document.getElementById('gName').textContent=aP().name;
