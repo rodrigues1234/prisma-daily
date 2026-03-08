@@ -170,7 +170,7 @@ def collect_all() -> list[dict]:
             unique.append(it)
 
     print(f"  {len(unique)} artigos únicos de {len(RSS)} feeds")
-    return unique[:80]  # limita tamanho do prompt
+    return unique[:48]  # ~48 artigos = prompt ~3500 tokens, dentro do limite seguro
 
 
 # ─── GEMINI ───────────────────────────────────────────────────────────
@@ -296,7 +296,8 @@ Responde APENAS com JSON válido:
 Artigos disponíveis:
 {arts_txt}"""
 
-    text, used_model = call_gemini(client, model, prompt, max_tokens=5000)
+    print(f"  prompt: {len(prompt)} chars, ~{len(prompt)//4} tokens")
+    text, used_model = call_gemini(client, model, prompt, max_tokens=6000)
     if used_model != model:
         print(f"  a usar modelo fallback: {used_model}")
 
