@@ -166,6 +166,7 @@ input,select,textarea{font-family:inherit}
 .c-badge.alto{background:#FEE2E2;color:#991B1B}
 .c-badge.médio{background:#FEF3C7;color:#92400E}
 .c-badge.baixo{background:#DCFCE7;color:#166534}
+.c-translated{font-size:10px;opacity:.45;cursor:default;margin-left:2px;title:'Traduzido'}
 .c-title{font-family:var(--ff-s);font-size:16.5px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:7px;letter-spacing:-.2px}
 .c-title a{transition:color .15s;display:flex;align-items:flex-start;gap:6px}
 .c-title a:hover{color:var(--blue)}
@@ -429,7 +430,7 @@ input,select,textarea{font-family:inherit}
 
 <!-- HEADER -->
 <header class="hdr">
-  <div class="logo">
+  <div class="logo" onclick="gTab('hoje')" style="cursor:pointer" title="Voltar ao início">
     <span class="logo-prism">🔷</span>
     <span class="logo-text"><em>P</em>risma</span>
     <span class="logo-tag">Diário</span>
@@ -1146,7 +1147,15 @@ const KNOWN_RSS={
   'publico.pt':'https://www.publico.pt/rss',
   'expresso.pt':'https://feeds.feedburner.com/expresso-online',
   'jornaldenegocios.pt':'https://www.jornaldenegocios.pt/rss',
-  'rtp.pt':'https://www.rtp.pt/noticias/rss',
+  'rtp.pt':'https://www.rtp.pt/noticias/rss/rtp-noticias',
+  'dn.pt':'https://www.dn.pt/rss/feed.aspx',
+  'jn.pt':'https://feeds.jn.pt/JN-Ultimas',
+  'eco.sapo.pt':'https://eco.sapo.pt/feed/',
+  'cmjornal.pt':'https://www.cmjornal.pt/rss',
+  'sicnoticias.pt':'https://sicnoticias.pt/rss.xml',
+  'ionline.pt':'https://ionline.sapo.pt/rss',
+  'abola.pt':'https://www.abola.pt/rss/index.ashx',
+  'record.pt':'https://www.record.pt/rss/index.xml',
   'techcrunch.com':'https://techcrunch.com/feed/',
   'theverge.com':'https://www.theverge.com/rss/index.xml',
   'reuters.com':'https://feeds.reuters.com/reuters/topNews',
@@ -1158,8 +1167,8 @@ const KNOWN_RSS={
   'apnews.com':'https://apnews.com/rss',
 };
 
-// Common RSS path patterns to try
-const RSS_PATHS=['/feed','/feed/','/rss','/rss/','/rss.xml','/feed.xml','/atom.xml','/news/rss','/feeds/posts/default'];
+// Common RSS path patterns (limitado a 4 para não bloquear UX)
+const RSS_PATHS=['/feed','/rss','/feed.xml','/rss.xml'];
 
 function extractDomain(url){
   try{
@@ -1201,7 +1210,6 @@ async function tryFetchMeta(url){
   if(!url||!url.includes('.')){st.className='src-status';return;}
   const domain=extractDomain(url);
   if(!domain)return;
-  // populate name
   const nameEl=document.getElementById('srcName');
   if(!nameEl.value||nameEl.dataset.auto==='1'){
     nameEl.value=domainToName(domain);
@@ -1210,38 +1218,37 @@ async function tryFetchMeta(url){
   const rss=guessRss(url);
   if(rss){
     st.className='src-status ok';
-    st.textContent=`✓ RSS detectado: ${rss} — será usado pelo Prisma para buscar artigos.`;
+    st.textContent=`✓ RSS detectado: ${rss}`;
     document.getElementById('srcUrl').dataset.rss=rss;
-  } else {
-    // Try CORS proxy to fetch page and find RSS link
-    st.className='src-status loading';
-    st.textContent='🔍 A tentar detectar RSS...';
-    // Try common paths
-    const base=url.startsWith('http')?url:`https://${url}`;
-    const baseClean=base.replace(/\/$/,'');
-    let found=null;
-    for(const path of RSS_PATHS){
-      try{
-        const ctrl=new AbortController();const tid=setTimeout(()=>ctrl.abort(),4000);
-        const probe=await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(baseClean+path)}`,{signal:ctrl.signal});
-        clearTimeout(tid);
-        if(probe.ok){
-          const data=await probe.json();
-          if(data.contents&&(data.contents.includes('<rss')||data.contents.includes('<feed')||data.contents.includes('<channel'))){
-            found=baseClean+path;
-            break;
-          }
+    return;
+  }
+  // Try CORS proxy with short timeout (2s max per attempt, max 3 attempts)
+  st.className='src-status loading';
+  st.textContent='🔍 A detectar RSS...';
+  const base=url.startsWith('http')?url:`https://${url}`;
+  const baseClean=base.replace(/\/$/,'');
+  let found=null;
+  for(const path of RSS_PATHS){
+    try{
+      const ctrl=new AbortController();
+      const tid=setTimeout(()=>ctrl.abort(),2000);
+      const probe=await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(baseClean+path)}`,{signal:ctrl.signal});
+      clearTimeout(tid);
+      if(probe.ok){
+        const data=await probe.json();
+        if(data.contents&&(data.contents.includes('<rss')||data.contents.includes('<feed')||data.contents.includes('<channel'))){
+          found=baseClean+path; break;
         }
-      }catch(e){}
-    }
-    if(found){
-      st.className='src-status ok';
-      st.textContent=`✓ RSS encontrado: ${found}`;
-      document.getElementById('srcUrl').dataset.rss=found;
-    } else {
-      st.className='src-status err';
-      st.textContent=`⚠️ RSS não detectado automaticamente. Podes ainda adicionar a fonte — o URL fica guardado para configuração manual do Python.`;
-    }
+      }
+    }catch(e){}
+  }
+  if(found){
+    st.className='src-status ok';
+    st.textContent=`✓ RSS encontrado: ${found}`;
+    document.getElementById('srcUrl').dataset.rss=found;
+  } else {
+    st.className='src-status err';
+    st.textContent=`RSS não detectado automaticamente — mas podes adicionar na mesma. O URL fica guardado.`;
   }
 }
 
@@ -1403,15 +1410,19 @@ function buildSectionsFromLive(){
     const arts=LIVE_DATA.categories?.[cat.id]||[];
     if(!arts.length) return;
 
-    const cards=arts.map((a,ai)=>`
+    const cards=arts.map((a,ai)=>{
+      const hasDetails = a.why || a.impact || a.related;
+      const impLvl = (a.impact_level||'médio').replace('medio','médio');
+      return `
       <div class="card">
-        <div class="c-stripe ${(a.impact_level||'médio').replace('medio','médio')}"></div>
+        <div class="c-stripe ${impLvl}"></div>
         <div class="c-body">
           <div class="c-top">
             <span class="c-src">${a.source||''}</span>
             <span class="c-bull">·</span>
             <span class="c-ts">${(a.date||'').slice(11,16)||''}</span>
-            <span class="c-badge ${(a.impact_level||'médio').replace('medio','médio')}">${a.impact_level==='alto'?'Alto':a.impact_level==='baixo'?'Baixo':'Médio'}</span>
+            ${a.translated?'<span class="c-translated" title="Traduzido para português">🌐</span>':''}
+            <span class="c-badge ${impLvl}">${impLvl==='alto'?'Alto':impLvl==='baixo'?'Baixo':'Médio'}</span>
           </div>
           <div class="c-title">
             <a href="${a.url||'#'}" target="_blank" rel="noopener">
@@ -1419,20 +1430,22 @@ function buildSectionsFromLive(){
             </a>
           </div>
           <div class="c-summary">${a.summary||''}</div>
+          ${hasDetails?`
           <button class="c-expand" id="exp-${cat.id}-${ai}" onclick="toggleCard('${cat.id}-${ai}')">
             <span>Ver porquê · impacto · ligações</span>
             <span class="c-expand-icon">▾</span>
           </button>
           <div class="c-details" id="det-${cat.id}-${ai}">
-            <div class="c-detail-row why"><span class="c-dr-icon">💡</span>
-              <div><div class="c-dr-label">Porque é relevante</div><div class="c-dr-text">${a.why||'—'}</div></div></div>
-            <div class="c-detail-row impact"><span class="c-dr-icon">⚡</span>
-              <div><div class="c-dr-label">Impacto potencial</div><div class="c-dr-text">${a.impact||'—'}</div></div></div>
-            <div class="c-detail-row related"><span class="c-dr-icon">🔗</span>
-              <div><div class="c-dr-label">Relação com outros factores</div><div class="c-dr-text">${a.related||'—'}</div></div></div>
-          </div>
+            ${a.why?`<div class="c-detail-row why"><span class="c-dr-icon">💡</span>
+              <div><div class="c-dr-label">Porque é relevante</div><div class="c-dr-text">${a.why}</div></div></div>`:''}
+            ${a.impact?`<div class="c-detail-row impact"><span class="c-dr-icon">⚡</span>
+              <div><div class="c-dr-label">Impacto potencial</div><div class="c-dr-text">${a.impact}</div></div></div>`:''}
+            ${a.related?`<div class="c-detail-row related"><span class="c-dr-icon">🔗</span>
+              <div><div class="c-dr-label">Relação com outros factores</div><div class="c-dr-text">${a.related}</div></div></div>`:''}
+          </div>`:''}
         </div>
-      </div>`).join('');
+      </div>`;
+    }).join('');
 
     html+=`<div class="sec fade" style="animation-delay:${.12+i*.04}s" id="s-${cat.id}">
       <div class="sec-hd">
