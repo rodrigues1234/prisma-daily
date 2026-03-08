@@ -167,6 +167,14 @@ input,select,textarea{font-family:inherit}
 .c-badge.médio{background:#FEF3C7;color:#92400E}
 .c-badge.baixo{background:#DCFCE7;color:#166534}
 .c-translated{font-size:10px;opacity:.45;cursor:default;margin-left:2px;title:'Traduzido'}
+.c-move{position:relative;margin-left:auto;flex-shrink:0}
+.c-move-btn{background:none;border:none;font-size:13px;color:var(--ink4);cursor:pointer;padding:0 2px;opacity:.4;transition:opacity .15s;line-height:1}
+.c-move-btn:hover{opacity:1}
+.c-move-drop{display:none;position:absolute;right:0;top:20px;background:#fff;border:1px solid var(--rule);border-radius:var(--r-sm);box-shadow:0 4px 16px rgba(0,0,0,.1);z-index:50;min-width:180px;overflow:hidden}
+.c-move-drop.open{display:block}
+.c-move-opt{display:flex;align-items:center;gap:7px;padding:7px 12px;font-size:12px;color:var(--ink2);cursor:pointer;transition:background .1s}
+.c-move-opt:hover{background:var(--paper)}
+.c-move-opt.current{font-weight:700;color:var(--amber)}
 .c-title{font-family:var(--ff-s);font-size:16.5px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:7px;letter-spacing:-.2px}
 .c-title a{transition:color .15s;display:flex;align-items:flex-start;gap:6px}
 .c-title a:hover{color:var(--blue)}
@@ -613,50 +621,30 @@ const AV_COLORS=['#C8860A','#1D4ED8','#047857','#991B1B','#6D28D9','#BE185D','#0
 let selColor=AV_COLORS[0];
 
 const CAT_DEFS=[
-  {id:'breaking',g:'mundo',gl:'Mundo & Sociedade',nm:'Breaking News',ic:'🔴',cl:'#DC2626',bg:'#FEE2E2'},
-  {id:'geo',     g:'mundo',gl:'Mundo & Sociedade',nm:'Geopolítica',  ic:'🌐',cl:'#7C3AED',bg:'#EDE9FE'},
-  {id:'eco',     g:'mundo',gl:'Mundo & Sociedade',nm:'Economia Global',ic:'📉',cl:'#B45309',bg:'#FEF3C7'},
-  {id:'ecopt',   g:'mundo',gl:'Mundo & Sociedade',nm:'Economia Nacional',ic:'🇵🇹',cl:'#047857',bg:'#DCFCE7'},
-  {id:'pol',     g:'mundo',gl:'Mundo & Sociedade',nm:'Política Nacional',ic:'🏛️',cl:'#1D4ED8',bg:'#DBEAFE'},
-  {id:'clima',   g:'mundo',gl:'Mundo & Sociedade',nm:'Clima Global',ic:'🌊',cl:'#0E7490',bg:'#CFFAFE'},
-  {id:'mkt',     g:'eco',  gl:'Economia & Carreira',nm:'Mercado Financeiro',ic:'📈',cl:'#92400E',bg:'#FEF3C7'},
-  {id:'work',    g:'eco',  gl:'Economia & Carreira',nm:'Future of Work',ic:'💼',cl:'#4338CA',bg:'#EDE9FE'},
-  {id:'biz',     g:'eco',  gl:'Economia & Carreira',nm:'Dica de Negócios',ic:'💡',cl:'#BE185D',bg:'#FCE7F3'},
-  {id:'fin',     g:'fin',  gl:'Finanças',nm:'O Meu Portfólio',ic:'💰',cl:'#166534',bg:'#DCFCE7'},
-  {id:'inv',     g:'fin',  gl:'Finanças',nm:'Dicas de Investimento',ic:'🎯',cl:'#D97706',bg:'#FEF3C7'},
-  {id:'ai',      g:'tech', gl:'Tecnologia & Ciência',nm:'IA & Inovação',ic:'🤖',cl:'#1D4ED8',bg:'#DBEAFE'},
-  {id:'gadgets', g:'tech', gl:'Tecnologia & Ciência',nm:'Gadgets & Hardware',ic:'📱',cl:'#6D28D9',bg:'#EDE9FE'},
-  {id:'sci',     g:'tech', gl:'Tecnologia & Ciência',nm:'Ciência & Espaço',ic:'🚀',cl:'#0E7490',bg:'#CFFAFE'},
-  {id:'soul',    g:'soul', gl:'Soul Food',nm:'Soul Food',ic:'✨',cl:'#BE185D',bg:'#FCE7F3'},
+  {id:'breaking',    g:'urgente',  gl:'Urgente',            nm:'Breaking News',       ic:'🔴',cl:'#DC2626',bg:'#FEE2E2'},
+  {id:'portugal',    g:'portugal', gl:'Portugal',            nm:'Portugal',            ic:'🇵🇹',cl:'#047857',bg:'#DCFCE7'},
+  {id:'mundo',       g:'mundo',    gl:'Mundo',               nm:'Mundo',               ic:'🌍',cl:'#7C3AED',bg:'#EDE9FE'},
+  {id:'economia',    g:'economia', gl:'Economia',            nm:'Economia & Mercados', ic:'📈',cl:'#B45309',bg:'#FEF3C7'},
+  {id:'portfolio',   g:'financas', gl:'Finanças',            nm:'O Meu Portfólio',    ic:'💰',cl:'#166534',bg:'#DCFCE7'},
+  {id:'tecnologia',  g:'tech',     gl:'Tecnologia',          nm:'Tecnologia & IA',    ic:'🤖',cl:'#1D4ED8',bg:'#DBEAFE'},
+  {id:'carreira',    g:'carreira', gl:'Carreira',            nm:'Carreira & Negócios', ic:'🧠',cl:'#BE185D',bg:'#FCE7F3'},
+  {id:'recomendacao',g:'soul',     gl:'Soul Food',           nm:'Recomendação do Dia', ic:'✨',cl:'#6D28D9',bg:'#EDE9FE'},
 ];
 
 const DEF_SOURCES=[
-  {id:'tc', nm:'TechCrunch',         cat:'ai',    on:true, stars:3},
-  {id:'tv', nm:'The Verge',           cat:'ai',    on:true, stars:2},
-  {id:'mit',nm:'MIT Tech Review',     cat:'ai',    on:true, stars:2},
-  {id:'vb', nm:'VentureBeat AI',      cat:'ai',    on:false,stars:1},
-  {id:'at', nm:'Ars Technica',        cat:'ai',    on:false,stars:2},
-  {id:'obs',nm:'Observador',          cat:'ecopt', on:true, stars:3},
-  {id:'pub',nm:'Público',             cat:'ecopt', on:true, stars:2},
-  {id:'exp',nm:'Expresso',            cat:'pol',   on:true, stars:3},
-  {id:'eur',nm:'Euronews PT',         cat:'eco',   on:true, stars:2},
-  {id:'rtp',nm:'RTP Notícias',        cat:'ecopt', on:false,stars:1},
-  {id:'jn', nm:'Jornal de Negócios',  cat:'mkt',   on:true, stars:3},
-  {id:'reu',nm:'Reuters',             cat:'eco',   on:true, stars:3},
-  {id:'bbg',nm:'Bloomberg',           cat:'mkt',   on:true, stars:3},
-  {id:'ft', nm:'Financial Times',     cat:'eco',   on:true, stars:3},
-  {id:'yhf',nm:'Yahoo Finance',       cat:'mkt',   on:true, stars:2},
-  {id:'wsj',nm:'Wall Street Journal', cat:'eco',   on:false,stars:2},
-  {id:'eco2',nm:'The Economist',      cat:'eco',   on:false,stars:3},
-  {id:'ap', nm:'AP News',             cat:'breaking',on:true,stars:3},
-  {id:'nyt',nm:'New York Times',      cat:'eco',   on:false,stars:2},
-  {id:'gua',nm:'The Guardian',        cat:'eco',   on:false,stars:2},
-  {id:'sci2',nm:'Nature News',        cat:'sci',   on:false,stars:2},
-  {id:'nas',nm:'NASA Science',        cat:'sci',   on:false,stars:2},
-  {id:'wef',nm:'World Economic Forum',cat:'eco',   on:false,stars:2},
-  {id:'hrv',nm:'Harvard Business Review',cat:'work',on:false,stars:3},
-  {id:'mit2',nm:'MIT Sloan Review',   cat:'work',  on:false,stars:2},
+  {id:'tc',  nm:'TechCrunch',             cat:'tecnologia', on:true, stars:3},
+  {id:'tv',  nm:'The Verge',              cat:'tecnologia', on:true, stars:2},
+  {id:'at',  nm:'Ars Technica',           cat:'tecnologia', on:true, stars:2},
+  {id:'obs', nm:'Observador',             cat:'portugal',   on:true, stars:3},
+  {id:'eco2',nm:'Eco',                    cat:'portugal',   on:true, stars:3},
+  {id:'jn',  nm:'Jornal de Negócios',    cat:'economia',   on:true, stars:3},
+  {id:'rtp', nm:'RTP Notícias',          cat:'portugal',   on:true, stars:2},
+  {id:'dn',  nm:'Diário de Notícias',    cat:'portugal',   on:true, stars:2},
+  {id:'gua', nm:'The Guardian',          cat:'mundo',      on:true, stars:3},
+  {id:'bbc', nm:'BBC News',              cat:'breaking',   on:true, stars:3},
+  {id:'hrv', nm:'Harvard Business Review',cat:'carreira',  on:false,stars:3},
 ];
+
 
 const DEMO_STOCKS=[
   {sym:'AAPL',nm:'Apple',price:'213.49',chg:'+1.24%',up:true},
@@ -831,38 +819,14 @@ function buildTicker(){
 }
 
 /* ═════════════════════════ SIDEBAR ═════════════════════ */
-// Track collapsed sidebar groups in sessionStorage
-function sbCollapsed(grp){ try{const c=JSON.parse(sessionStorage.getItem('sb_col')||'{}'); return !!c[grp];}catch(e){return false;} }
-function sbToggle(grp){ try{const c=JSON.parse(sessionStorage.getItem('sb_col')||'{}'); c[grp]=!c[grp]; sessionStorage.setItem('sb_col',JSON.stringify(c)); buildSidebar();}catch(e){} }
-
 function buildSidebar(){
   const orders=catOrder();
   const enabled=orders.filter(c=>c.on).map(c=>CAT_DEFS.find(d=>d.id===c.id)).filter(Boolean);
-  const groups={};
-  enabled.forEach(c=>{ if(!groups[c.g])groups[c.g]=[]; groups[c.g].push(c); });
-  let html='';
-  Object.entries(groups).forEach(([grpKey,cats])=>{
-    const collapsed=sbCollapsed(grpKey);
-    html+=`<div class="sb-grp ${collapsed?'collapsed':''}">
-      <div class="sb-grp-hd" onclick="sbToggle('${grpKey}')">
-        <span class="sb-grp-lbl">${cats[0].gl}</span>
-        <span class="sb-grp-arrow">▾</span>
-      </div>
-      <div class="sb-grp-body">`;
-    cats.forEach(c=>{ html+=`<div class="sb-item" onclick="scrollSec('${c.id}')"><span class="sb-ic">${c.ic}</span><span class="sb-nm">${c.nm}</span></div>`; });
-    html+=`</div></div>`;
-  });
-  const days=['Hoje','Quinta','Quarta','Terça','Segunda'];
-  const dates=STATE.history.slice(0,5);
-  const histCollapsed=sbCollapsed('hist');
-  html+=`<div class="sb-grp ${histCollapsed?'collapsed':''}">
-    <div class="sb-grp-hd" onclick="sbToggle('hist')">
-      <span class="sb-grp-lbl">Histórico</span>
-      <span class="sb-grp-arrow">▾</span>
-    </div>
-    <div class="sb-grp-body">`;
-  dates.forEach((d,i)=>{ html+=`<div class="tl-item ${i===0?'active':''}"><div class="tl-dot"></div><div><div class="tl-d">${formatDate(d)}</div><div class="tl-wd">${days[i]||''}</div>${i===0?'<span class="today-chip">Hoje</span>':''}</div></div>`; });
-  html+=`</div></div>`;
+  const html=enabled.map(c=>`
+    <div class="sb-item" onclick="scrollSec('${c.id}')">
+      <span class="sb-ic">${c.ic}</span>
+      <span class="sb-nm">${c.nm}</span>
+    </div>`).join('');
   document.getElementById('sidebar').innerHTML=html;
 }
 function scrollSec(id){
@@ -1383,6 +1347,9 @@ function buildSectionsFromLive(){
   const enabled=orders.filter(c=>c.on).map(c=>CAT_DEFS.find(d=>d.id===c.id)).filter(Boolean);
   let html='';
 
+  // Aplica overrides do utilizador antes de renderizar
+  const categories = applyOverrides(LIVE_DATA.categories);
+
   // Connections
   const conns=LIVE_DATA.connections||[];
   if(conns.length){
@@ -1393,14 +1360,11 @@ function buildSectionsFromLive(){
   }
 
   enabled.forEach((cat,i)=>{
-    if(cat.id==='fin'){
+    if(cat.id==='portfolio'){
       html+=buildPortfolioFromLive(cat,i); return;
     }
-    if(cat.id==='inv'){
-      html+=buildInvestTipsFromLive(cat,i); return;
-    }
-    if(cat.id==='soul'){
-      const souls=LIVE_DATA.categories?.soul||[];
+    if(cat.id==='recomendacao'){
+      const souls=categories?.recomendacao||[];
       if(souls[0]) html+=buildSoul(cat,{
         title:souls[0].title, url:souls[0].url,
         summary:souls[0].summary, ts:'~15 min',
@@ -1408,12 +1372,18 @@ function buildSectionsFromLive(){
       },i);
       return;
     }
-    const arts=LIVE_DATA.categories?.[cat.id]||[];
+    const arts=categories?.[cat.id]||[];
     if(!arts.length) return;
 
     const cards=arts.map((a,ai)=>{
       const hasDetails = a.why || a.impact || a.related;
       const impLvl = (a.impact_level||'médio').replace('medio','médio');
+      const urlHash = hashUrl(a.url||'');
+      const cardId = `${cat.id}-${ai}`;
+      const moveOpts = CAT_DEFS.map(c=>`
+        <div class="c-move-opt ${c.id===cat.id?'current':''}" onclick="moveArticle('${urlHash}','${c.id}','${cardId}')">
+          <span>${c.ic}</span><span>${c.nm}</span>
+        </div>`).join('');
       return `
       <div class="card">
         <div class="c-stripe ${impLvl}"></div>
@@ -1424,6 +1394,10 @@ function buildSectionsFromLive(){
             <span class="c-ts">${(a.date||'').slice(11,16)||''}</span>
             ${a.translated?'<span class="c-translated" title="Traduzido para português">🌐</span>':''}
             <span class="c-badge ${impLvl}">${impLvl==='alto'?'Alto':impLvl==='baixo'?'Baixo':'Médio'}</span>
+            <div class="c-move">
+              <button class="c-move-btn" onclick="toggleMoveMenu('${cardId}',event)" title="Mover para outra categoria">⋯</button>
+              <div class="c-move-drop" id="move-${cardId}">${moveOpts}</div>
+            </div>
           </div>
           <div class="c-title">
             <a href="${a.url||'#'}" target="_blank" rel="noopener">
@@ -1612,6 +1586,70 @@ function updateRefreshLabel(){
   }
   document.getElementById('refreshLabel').textContent = 'Modo demo · configura o GitHub Actions';
 }
+
+/* ═══════════════════ CATEGORY OVERRIDES ════════════════ */
+function _overrideKey(){ return `prisma_overrides_${LIVE_DATA?.run_id||'demo'}`; }
+
+function loadOverrides(){
+  try{ return JSON.parse(localStorage.getItem(_overrideKey())||'{}'); }
+  catch(e){ return {}; }
+}
+
+function saveOverride(urlHash, newCatId){
+  const ov = loadOverrides();
+  ov[urlHash] = newCatId;
+  localStorage.setItem(_overrideKey(), JSON.stringify(ov));
+}
+
+function applyOverrides(categories){
+  // Move artigos entre categorias de acordo com overrides do utilizador
+  const ov = loadOverrides();
+  if(!Object.keys(ov).length) return categories;
+  const result = {};
+  CAT_DEFS.forEach(c => result[c.id] = [...(categories[c.id]||[])]);
+  Object.entries(ov).forEach(([hash, newCat]) => {
+    // Encontra o artigo em qualquer categoria
+    let found = null, fromCat = null;
+    for(const [cat, arts] of Object.entries(result)){
+      const idx = arts.findIndex(a => hashUrl(a.url) === hash);
+      if(idx !== -1){ found = arts.splice(idx,1)[0]; fromCat = cat; break; }
+    }
+    if(found && newCat !== fromCat){
+      if(!result[newCat]) result[newCat] = [];
+      result[newCat].unshift(found);
+    }
+  });
+  return result;
+}
+
+function hashUrl(url){
+  // FNV-1a 32-bit simples (não precisa de ser criptográfico)
+  let h = 2166136261;
+  for(let i=0;i<url.length;i++){ h ^= url.charCodeAt(i); h = (h * 16777619) >>> 0; }
+  return h.toString(16);
+}
+
+function toggleMoveMenu(cardId, event){
+  event.stopPropagation();
+  // Fecha todos os outros dropdowns
+  document.querySelectorAll('.c-move-drop.open').forEach(d => {
+    if(d.id !== `move-${cardId}`) d.classList.remove('open');
+  });
+  document.getElementById(`move-${cardId}`)?.classList.toggle('open');
+}
+
+function moveArticle(urlHash, newCatId, cardId){
+  saveOverride(urlHash, newCatId);
+  // Fecha dropdown
+  document.getElementById(`move-${cardId}`)?.classList.remove('open');
+  // Re-renderiza com override aplicado
+  buildSectionsFromLive();
+}
+
+// Fecha dropdowns ao clicar fora
+document.addEventListener('click', ()=>{
+  document.querySelectorAll('.c-move-drop.open').forEach(d=>d.classList.remove('open'));
+});
 
 /* ═════════════════════════ INIT ════════════════════════ */
 STATE.profiles.forEach(p=>{ if(!p.cats)p.cats=CAT_DEFS.map(c=>({id:c.id,on:true})); if(!p.name&&p.nm)p.name=p.nm; });
