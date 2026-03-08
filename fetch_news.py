@@ -294,25 +294,32 @@ def curate_all(client, model: str, articles_by_cat: dict) -> dict:
 
     prompt = f"""És um curador de notícias para um executivo português. Data: {TODAY}.
 
-Para cada categoria, selecciona os 2 melhores artigos. IMPORTANTE:
-- Todos os campos em português de Portugal (pt-PT)
-- "title": traduz para pt-PT se o original for inglês; mantém se já for português
-- "translated": true se traduziste o título, false se já estava em pt-PT
-- "summary": 2 frases directas em pt-PT
-- "why", "impact", "related": obrigatórios, mínimo 1 frase cada
-- "impact_level": "alto", "médio" ou "baixo"
+PASSO 1 — Selecciona os 2 artigos mais relevantes por categoria.
+PASSO 2 — Para cada artigo, preenche TODOS os campos obrigatoriamente:
+  - "title": TRADUZ SEMPRE para português de Portugal. Se já estiver em português, mantém.
+  - "translated": true se o título original era inglês/outro idioma, false se já era português
+  - "summary": 2 frases directas em português de Portugal
+  - "why": 1 frase — porque é relevante para um executivo português
+  - "impact": 1 frase — impacto concreto nos próximos dias/semanas
+  - "related": 1 frase — ligação a outro tema ou notícia
+  - "impact_level": "alto", "médio" ou "baixo"
+  - "url": URL original sem alterações
+  - "source": nome da fonte original
 
-Responde APENAS com JSON válido:
+Responde APENAS com JSON válido, sem texto antes ou depois:
 
 {{
-  "breaking": [{{"title":"...","url":"...","source":"...","translated":false,"summary":"2 frases pt-PT","why":"relevância","impact":"impacto","related":"ligação","impact_level":"alto|médio|baixo","date":"{NOW_ISO}"}}],
+  "breaking": [{{
+    "title":"TÍTULO EM PORTUGUÊS","url":"url original","source":"fonte",
+    "translated":true,"summary":"resumo pt","why":"porquê","impact":"impacto",
+    "related":"ligação","impact_level":"médio","date":"{NOW_ISO}"
+  }}],
   "geo": [...], "eco": [...], "nateco": [...], "politics": [...], "climate": [...],
   "market": [...], "work": [...], "biz": [...], "ai": [...], "gadgets": [...],
   "science": [...], "soul": [...]
 }}
 
-Regras: só categorias fornecidas; [] se sem artigos; URLs originais; pt-PT sempre.
-
+Artigos disponíveis:
 {chr(10).join(sections)}"""
 
     text, used_model = call_gemini(client, model, prompt, max_tokens=4500)
