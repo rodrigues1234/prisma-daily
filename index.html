@@ -514,21 +514,11 @@ input,select,textarea{font-family:inherit}
 
       <!-- Settings -->
       <div class="ps fade" style="animation-delay:.06s">
-        <div class="ps-hd">⚙️ Definições <span class="ps-save" onclick="saveProf()">Guardar</span></div>
-        <div class="setting-row">
-          <div><div class="setting-label">Tempo de leitura</div><div class="setting-desc">A barra de progresso no topo</div></div>
-          <div class="setting-ctrl" style="display:flex;align-items:center;gap:8px">
-        <!-- reading time setting removed -->
-          </div>
-        </div>
-        <div class="setting-row">
-          <div><div class="setting-label">Frequência de actualização</div><div class="setting-desc">Intervalo no GitHub Actions</div></div>
+        <div class="ps-hd">⚙️ Definições</div>
+        <div class="setting-row" id="deleteProfileRow" style="border-top:none;display:none">
+          <div><div class="setting-label">Eliminar perfil</div><div class="setting-desc">Remove este perfil e todos os dados</div></div>
           <div class="setting-ctrl">
-            <select class="src-cat-sel" id="freqSel" style="display:block" onchange="saveProf()">
-              <option value="6">Cada 6h</option>
-              <option value="12" selected>Cada 12h</option>
-              <option value="24">Cada 24h</option>
-            </select>
+            <button onclick="deleteProfile()" style="background:#FEE2E2;color:#DC2626;border:none;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer">Eliminar</button>
           </div>
         </div>
       </div>
@@ -1022,13 +1012,14 @@ function renderProfile(){
       </div>`).join('')+
     `<div style="text-align:center;margin-bottom:22px"><button class="pav-add" onclick="openModal()">+</button></div>`;
 
-  // Settings
-  const fq=document.getElementById('freqSel');
-  if(fq) fq.value=p.freq||12;
+  // Mostra/esconde botão de eliminar (só aparece se houver mais de 1 perfil)
+  const delRow = document.getElementById('deleteProfileRow');
+  if(delRow) delRow.style.display = STATE.profiles.length > 1 ? 'flex' : 'none';
+
   // Categories
   const cats=p.cats||CAT_DEFS.map(c=>({id:c.id,on:true}));
-  const gbg={mundo:'#DBEAFE',eco:'#FEF3C7',fin:'#DCFCE7',tech:'#EDE9FE',soul:'#FCE7F3',social:'#F3F4F6'};
-  const gcl={mundo:'#1D4ED8',eco:'#B45309',fin:'#166534',tech:'#6D28D9',soul:'#BE185D',social:'#6B7280'};
+  const gbg={urgente:'#FEE2E2',portugal:'#DCFCE7',mundo:'#EDE9FE',economia:'#FEF3C7',financas:'#DCFCE7',tech:'#DBEAFE',carreira:'#FCE7F3',soul:'#EDE9FE'};
+  const gcl={urgente:'#DC2626',portugal:'#047857',mundo:'#7C3AED',economia:'#B45309',financas:'#166534',tech:'#1D4ED8',carreira:'#BE185D',soul:'#6D28D9'};
   const isMob=window.innerWidth<900;
   document.getElementById('ccList').innerHTML=cats.map((co,i)=>{
     const cat=CAT_DEFS.find(c=>c.id===co.id); if(!cat)return '';
@@ -1052,10 +1043,24 @@ function renderProfile(){
   renderStocks();
 }
 
-function setActive(id){ STATE.active=id; saveState(); renderProfile(); buildTicker(); buildSidebar(); buildSections(); updateAv(); document.getElementById('gName').textContent=aP().name; }
+function _rebuild(){ if(LIVE_DATA){buildTickerFromLive();buildSummaryFromLive();buildSectionsFromLive();}else{buildTicker();buildSummary();buildSections();} }
+function setActive(id){ STATE.active=id; saveState(); renderProfile(); buildSidebar(); _rebuild(); updateAv(); document.getElementById('gName').textContent=aP().name; }
 function updateAv(){ const p=aP(); const av=document.getElementById('hAv'); av.textContent=p.name[0].toUpperCase(); av.style.background=p.color; }
-function saveProf(){ const p=aP(); p.freq=+(document.getElementById('freqSel').value)||12; saveState(); document.querySelectorAll('.ps-save').forEach(b=>{b.textContent='✓ Guardado';setTimeout(()=>b.textContent='Guardar',1500);}); }
-function togCat(id){ const p=aP(); const co=p.cats.find(c=>c.id===id); if(co){co.on=!co.on;saveState();renderProfile();} }
+function saveProf(){ saveState(); document.querySelectorAll('.ps-save').forEach(b=>{b.textContent='✓ Guardado';setTimeout(()=>b.textContent='Guardar',1500);}); }
+
+function deleteProfile(){
+  if(STATE.profiles.length<=1){ alert('Não é possível eliminar o único perfil existente.'); return; }
+  if(!confirm(`Eliminar o perfil "${aP().name}"? Esta acção não pode ser desfeita.`)) return;
+  STATE.profiles = STATE.profiles.filter(p=>p.id!==STATE.active);
+  STATE.active = STATE.profiles[0].id;
+  saveState();
+  renderProfile();
+  buildSidebar();
+  _rebuild();
+  updateAv();
+  document.getElementById('gName').textContent=aP().name;
+}
+function togCat(id){ const p=aP(); const co=p.cats.find(c=>c.id===id); if(co){co.on=!co.on;saveState();renderProfile();buildSidebar();_rebuild();} }
 /* drag drop — mouse + touch support */
 let dIdx=null,touchDragEl=null,touchClone=null;
 function dS(e){dIdx=+e.currentTarget.dataset.idx;e.currentTarget.classList.add('dragging');}
@@ -1325,7 +1330,9 @@ function buildTickerFromLive(){
 function buildSummaryFromLive(){
   if(!LIVE_DATA?.summary) return buildSummary();
   const s=LIVE_DATA.summary;
-  document.getElementById('sumItems').innerHTML=(s.items||[]).map(item=>`
+  const items = s.items||[];
+  document.getElementById('sumItems').innerHTML = items.length
+    ? items.map(item=>`
     <div class="sum-item">
       <div class="si-dot" style="background:${item.color||'#60a5fa'}"></div>
       <div>
@@ -1334,7 +1341,8 @@ function buildSummaryFromLive(){
           ${item.url?`<a href="${item.url}" target="_blank" class="si-link">↗ Fonte</a>`:''}
         </div>
       </div>
-    </div>`).join('');
+    </div>`).join('')
+    : `<div style="color:rgba(255,255,255,.45);font-size:13px;padding:8px 0">Resumo a ser gerado na próxima actualização.</div>`;
   if(s.headline){
     document.querySelector('.sum-title').textContent=s.headline;
   }
@@ -1652,15 +1660,15 @@ document.addEventListener('click', ()=>{
 });
 
 /* ═════════════════════════ INIT ════════════════════════ */
-// Migração de perfis: garante que os IDs das categorias são os actuais
+// Migração de perfis: remove IDs antigos, adiciona categorias novas que faltem
 const VALID_CAT_IDS = new Set(CAT_DEFS.map(c=>c.id));
 STATE.profiles.forEach(p=>{
-  const hasCats = Array.isArray(p.cats) && p.cats.length > 0;
-  const hasValidCats = hasCats && p.cats.some(c=>VALID_CAT_IDS.has(c.id));
-  // Se não tem cats válidas (perfil antigo), reinicia com as 8 categorias actuais
-  if(!hasValidCats){
-    p.cats = CAT_DEFS.map(c=>({id:c.id,on:true}));
-  }
+  // Filtra cats que já não existem
+  const validCats = (p.cats||[]).filter(c=>VALID_CAT_IDS.has(c.id));
+  // Adiciona categorias novas que ainda não estejam no perfil
+  const existingIds = new Set(validCats.map(c=>c.id));
+  CAT_DEFS.forEach(c=>{ if(!existingIds.has(c.id)) validCats.push({id:c.id,on:true}); });
+  p.cats = validCats;
   if(!p.name&&p.nm) p.name=p.nm;
 });
 saveState();
