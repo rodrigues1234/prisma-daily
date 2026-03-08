@@ -515,7 +515,16 @@ input,select,textarea{font-family:inherit}
       <!-- Settings -->
       <div class="ps fade" style="animation-delay:.06s">
         <div class="ps-hd">⚙️ Definições</div>
-        <div class="setting-row" id="deleteProfileRow" style="border-top:none;display:none">
+        <div class="setting-row">
+          <div><div class="setting-label">Artigos por categoria</div><div class="setting-desc">Quantos artigos mostrar em cada secção</div></div>
+          <div class="setting-ctrl" style="display:flex;align-items:center;gap:8px">
+            <input type="range" id="artsPerCatSlider" min="1" max="8" value="2"
+              style="width:80px;accent-color:var(--amber)"
+              oninput="document.getElementById('artsPerCatVal').textContent=this.value;saveProf()">
+            <span id="artsPerCatVal" style="font-size:13px;font-weight:700;color:var(--amber);min-width:12px">2</span>
+          </div>
+        </div>
+        <div class="setting-row" id="deleteProfileRow" style="display:none">
           <div><div class="setting-label">Eliminar perfil</div><div class="setting-desc">Remove este perfil e todos os dados</div></div>
           <div class="setting-ctrl">
             <button onclick="deleteProfile()" style="background:#FEE2E2;color:#DC2626;border:none;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer">Eliminar</button>
@@ -547,19 +556,14 @@ input,select,textarea{font-family:inherit}
             <div>
               <label class="f-label" style="display:block;margin-bottom:4px">Categoria</label>
               <select class="src-cat-sel" id="srcCatSel" style="display:block;width:100%">
-                <option value="breaking">Breaking News</option>
-                <option value="geo">Geopolítica</option>
-                <option value="eco">Economia Global</option>
-                <option value="ecopt">Portugal/EU</option>
-                <option value="pol">Política</option>
-                <option value="clima">Clima</option>
-                <option value="mkt">Mercados</option>
-                <option value="work">Future of Work</option>
-                <option value="biz">Negócios</option>
-                <option value="ai">IA & Tech</option>
-                <option value="gadgets">Gadgets</option>
-                <option value="sci">Ciência</option>
-                <option value="soul">Soul Food</option>
+                <option value="breaking">🔴 Breaking News</option>
+                <option value="portugal">🇵🇹 Portugal</option>
+                <option value="mundo">🌍 Mundo</option>
+                <option value="economia">📈 Economia & Mercados</option>
+                <option value="portfolio">💰 O Meu Portfólio</option>
+                <option value="tecnologia">🤖 Tecnologia & IA</option>
+                <option value="carreira">🧠 Carreira & Negócios</option>
+                <option value="recomendacao">✨ Recomendação do Dia</option>
               </select>
             </div>
           </div>
@@ -622,19 +626,15 @@ const CAT_DEFS=[
 ];
 
 const DEF_SOURCES=[
-  {id:'tc',  nm:'TechCrunch',             cat:'tecnologia', on:true, stars:3},
-  {id:'tv',  nm:'The Verge',              cat:'tecnologia', on:true, stars:2},
-  {id:'at',  nm:'Ars Technica',           cat:'tecnologia', on:true, stars:2},
-  {id:'obs', nm:'Observador',             cat:'portugal',   on:true, stars:3},
-  {id:'eco2',nm:'Eco',                    cat:'portugal',   on:true, stars:3},
-  {id:'jn',  nm:'Jornal de Negócios',    cat:'economia',   on:true, stars:3},
-  {id:'rtp', nm:'RTP Notícias',          cat:'portugal',   on:true, stars:2},
-  {id:'dn',  nm:'Diário de Notícias',    cat:'portugal',   on:true, stars:2},
-  {id:'gua', nm:'The Guardian',          cat:'mundo',      on:true, stars:3},
-  {id:'bbc', nm:'BBC News',              cat:'breaking',   on:true, stars:3},
-  {id:'hrv', nm:'Harvard Business Review',cat:'carreira',  on:false,stars:3},
+  {id:'tc',  nm:'TechCrunch',           cat:'tecnologia', on:true,  stars:3},
+  {id:'tv',  nm:'The Verge',            cat:'tecnologia', on:true,  stars:2},
+  {id:'at',  nm:'Ars Technica',         cat:'tecnologia', on:true,  stars:2},
+  {id:'obs', nm:'Observador',           cat:'portugal',   on:true,  stars:3},
+  {id:'eco2',nm:'Eco',                  cat:'portugal',   on:true,  stars:3},
+  {id:'jn',  nm:'Jornal de Negócios',  cat:'economia',   on:true,  stars:3},
+  {id:'gua', nm:'The Guardian',         cat:'mundo',      on:true,  stars:3},
+  {id:'bbc', nm:'BBC News',             cat:'breaking',   on:true,  stars:3},
 ];
-
 
 const DEMO_STOCKS=[
   {sym:'AAPL',nm:'Apple',price:'213.49',chg:'+1.24%',up:true},
@@ -1015,6 +1015,10 @@ function renderProfile(){
   // Mostra/esconde botão de eliminar (só aparece se houver mais de 1 perfil)
   const delRow = document.getElementById('deleteProfileRow');
   if(delRow) delRow.style.display = STATE.profiles.length > 1 ? 'flex' : 'none';
+  // Slider artigos por categoria
+  const sl=document.getElementById('artsPerCatSlider');
+  const vl=document.getElementById('artsPerCatVal');
+  if(sl){ sl.value=p.artsPerCat||2; if(vl) vl.textContent=sl.value; }
 
   // Categories
   const cats=p.cats||CAT_DEFS.map(c=>({id:c.id,on:true}));
@@ -1046,7 +1050,13 @@ function renderProfile(){
 function _rebuild(){ if(LIVE_DATA){buildTickerFromLive();buildSummaryFromLive();buildSectionsFromLive();}else{buildTicker();buildSummary();buildSections();} }
 function setActive(id){ STATE.active=id; saveState(); renderProfile(); buildSidebar(); _rebuild(); updateAv(); document.getElementById('gName').textContent=aP().name; }
 function updateAv(){ const p=aP(); const av=document.getElementById('hAv'); av.textContent=p.name[0].toUpperCase(); av.style.background=p.color; }
-function saveProf(){ saveState(); document.querySelectorAll('.ps-save').forEach(b=>{b.textContent='✓ Guardado';setTimeout(()=>b.textContent='Guardar',1500);}); }
+function saveProf(){
+  const p=aP();
+  const sl=document.getElementById('artsPerCatSlider');
+  if(sl) p.artsPerCat=+sl.value||2;
+  saveState();
+  document.querySelectorAll('.ps-save').forEach(b=>{b.textContent='✓ Guardado';setTimeout(()=>b.textContent='Guardar',1500);});
+}
 
 function deleteProfile(){
   if(STATE.profiles.length<=1){ alert('Não é possível eliminar o único perfil existente.'); return; }
@@ -1084,21 +1094,29 @@ function catDown(idx){ const p=aP(); if(idx<p.cats.length-1)moveCat(idx,idx+1); 
 let _srcSearchT=null;
 function debounceSrcSearch(){ clearTimeout(_srcSearchT); _srcSearchT=setTimeout(renderSources,180); }
 function renderSources(){
-  const p=aP(); const srcs=p.sources||[]; const q=(document.getElementById('srcSearch')||{}).value||'';
+  const p=aP();
+  const srcs=p.sources||[];
+  const q=(document.getElementById('srcSearch')||{}).value||'';
   const filtered=srcs.filter(s=>!q||s.nm.toLowerCase().includes(q.toLowerCase())||((s.url||'').toLowerCase().includes(q.toLowerCase())));
+  const sourceCats = loadSourceCats();
+
   document.getElementById('srcList').innerHTML=filtered.map(s=>{
-    const cat=CAT_DEFS.find(c=>c.id===s.cat)||{nm:s.cat||'Outro',cl:'#6B7280',bg:'#F3F4F6'};
+    const assignedCat = sourceCats[s.nm] || '';
+    const catOpts = `<option value="">— sem categoria —</option>` +
+      CAT_DEFS.map(c=>`<option value="${c.id}" ${assignedCat===c.id?'selected':''}>${c.ic} ${c.nm}</option>`).join('');
     const hasUrl=s.url||s.rss;
     return `<div class="src-item">
       <div class="src-tog ${s.on?'on':''}" onclick="togSrc('${s.id}')"></div>
       <div style="flex:1;min-width:0">
         <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
           <span class="src-nm">${s.nm}</span>
-          ${hasUrl?`<a href="${s.url||s.rss}" target="_blank" style="font-family:var(--ff-m);font-size:9px;color:var(--ink4);text-decoration:none;transition:color .15s;flex-shrink:0" title="${s.rss||s.url||''}" onmouseover="this.style.color='var(--blue)'" onmouseout="this.style.color='var(--ink4)'">↗ ${extractDomain(s.url||s.rss)||'link'}</a>`:''}
+          ${hasUrl?`<a href="${s.url||s.rss}" target="_blank" style="font-family:var(--ff-m);font-size:9px;color:var(--ink4);text-decoration:none" title="${s.rss||s.url||''}">↗ ${extractDomain(s.url||s.rss)||'link'}</a>`:''}
         </div>
-        ${s.rss&&s.rss!==s.url?`<div style="font-family:var(--ff-m);font-size:9px;color:var(--up);margin-top:1px">RSS ✓</div>`:''}
       </div>
-      <span class="src-cat" style="background:${cat.bg||'#F3F4F6'};color:${cat.cl||'#6B7280'}">${cat.nm||s.cat}</span>
+      <select class="src-cat-sel" style="font-size:11px;padding:3px 6px;border-radius:5px;border:1px solid var(--rule);background:#fff;color:var(--ink2);cursor:pointer;max-width:140px"
+        onchange="saveSourceCat('${s.nm}',this.value);_rebuild()">
+        ${catOpts}
+      </select>
       <div class="stars">${[1,2,3].map(n=>`<span class="star ${s.stars>=n?'lit':''}" onclick="setStar('${s.id}',${n})">★</span>`).join('')}</div>
       <span class="src-rm" onclick="rmSrc('${s.id}')">✕</span>
     </div>`;
@@ -1349,46 +1367,50 @@ function buildSummaryFromLive(){
 }
 
 function buildSectionsFromLive(){
-  if(!LIVE_DATA?.categories) return buildSections();
+  // v4: lista plana de artigos, categorização no HTML pelo utilizador
+  // v3 legacy: categories dict
+  const isV4 = LIVE_DATA?.version===4 || Array.isArray(LIVE_DATA?.articles);
+  if(!LIVE_DATA) return buildSections();
+  if(!isV4 && !LIVE_DATA?.categories) return buildSections();
+
   const p=aP();
+  const maxArts = p.artsPerCat||2;
   const orders=catOrder();
   const enabled=orders.filter(c=>c.on).map(c=>CAT_DEFS.find(d=>d.id===c.id)).filter(Boolean);
+
+  const categories = isV4
+    ? categorizeArticles(LIVE_DATA.articles)
+    : LIVE_DATA.categories;
+
   let html='';
 
-  // Aplica overrides do utilizador antes de renderizar
-  const categories = applyOverrides(LIVE_DATA.categories);
-
-  // Connections
-  const conns=LIVE_DATA.connections||[];
-  if(conns.length){
-    html+=`<div class="conns fade" style="animation-delay:.09s">
-      <div class="conns-hd">⟁ &nbsp;Ligações entre notícias</div>
-      ${conns.map(c=>`<div class="conn">${c.note}<div class="conn-pills">${(c.articles||[]).map(a=>`<span class="cpill">${a}</span>`).join('')}</div></div>`).join('')}
-    </div>`;
+  // Connections (v3 only)
+  if(!isV4){
+    const conns=LIVE_DATA.connections||[];
+    if(conns.length){
+      html+=`<div class="conns fade" style="animation-delay:.09s">
+        <div class="conns-hd">⟁ &nbsp;Ligações entre notícias</div>
+        ${conns.map(cn=>`<div class="conn">${cn.note}<div class="conn-pills">${(cn.articles||[]).map(a=>`<span class="cpill">${a}</span>`).join('')}</div></div>`).join('')}
+      </div>`;
+    }
   }
 
   enabled.forEach((cat,i)=>{
-    if(cat.id==='portfolio'){
-      html+=buildPortfolioFromLive(cat,i); return;
-    }
+    if(cat.id==='portfolio'){ html+=buildPortfolioFromLive(cat,i); return; }
     if(cat.id==='recomendacao'){
-      const souls=categories?.recomendacao||[];
-      if(souls[0]) html+=buildSoul(cat,{
-        title:souls[0].title, url:souls[0].url,
-        summary:souls[0].summary, ts:'~15 min',
-        related:souls[0].related||''
-      },i);
+      const recs=(categories?.recomendacao||[]);
+      if(recs[0]) html+=buildSoul(cat,{title:recs[0].title,url:recs[0].url,summary:recs[0].summary,ts:'~15 min',related:recs[0].related||''},i);
       return;
     }
-    const arts=categories?.[cat.id]||[];
+    const arts=(categories?.[cat.id]||[]).slice(0,maxArts);
     if(!arts.length) return;
 
     const cards=arts.map((a,ai)=>{
-      const hasDetails = a.why || a.impact || a.related;
-      const impLvl = (a.impact_level||'médio').replace('medio','médio');
-      const urlHash = hashUrl(a.url||'');
-      const cardId = `${cat.id}-${ai}`;
-      const moveOpts = CAT_DEFS.map(c=>`
+      const hasDetails=a.why||a.impact||a.related;
+      const impLvl=(a.impact_level||a.imp||'médio').replace('medio','médio');
+      const urlHash=hashUrl(a.url||'');
+      const cardId=`${cat.id}-${ai}`;
+      const moveOpts=CAT_DEFS.map(c=>`
         <div class="c-move-opt ${c.id===cat.id?'current':''}" onclick="moveArticle('${urlHash}','${c.id}','${cardId}')">
           <span>${c.ic}</span><span>${c.nm}</span>
         </div>`).join('');
@@ -1397,9 +1419,9 @@ function buildSectionsFromLive(){
         <div class="c-stripe ${impLvl}"></div>
         <div class="c-body">
           <div class="c-top">
-            <span class="c-src">${a.source||''}</span>
+            <span class="c-src">${a.source||a.src||''}</span>
             <span class="c-bull">·</span>
-            <span class="c-ts">${(a.date||'').slice(11,16)||''}</span>
+            <span class="c-ts">${(a.date||'').slice(11,16)||a.ts||''}</span>
             ${a.translated?'<span class="c-translated" title="Traduzido para português">🌐</span>':''}
             <span class="c-badge ${impLvl}">${impLvl==='alto'?'Alto':impLvl==='baixo'?'Baixo':'Médio'}</span>
             <div class="c-move">
@@ -1407,24 +1429,16 @@ function buildSectionsFromLive(){
               <div class="c-move-drop" id="move-${cardId}">${moveOpts}</div>
             </div>
           </div>
-          <div class="c-title">
-            <a href="${a.url||'#'}" target="_blank" rel="noopener">
-              ${a.title}<span class="c-link-icon">↗</span>
-            </a>
-          </div>
+          <div class="c-title"><a href="${a.url||'#'}" target="_blank" rel="noopener">${a.title}<span class="c-link-icon">↗</span></a></div>
           <div class="c-summary">${a.summary||''}</div>
           ${hasDetails?`
           <button class="c-expand" id="exp-${cat.id}-${ai}" onclick="toggleCard('${cat.id}-${ai}')">
-            <span>Ver porquê · impacto · ligações</span>
-            <span class="c-expand-icon">▾</span>
+            <span>Ver porquê · impacto · ligações</span><span class="c-expand-icon">▾</span>
           </button>
           <div class="c-details" id="det-${cat.id}-${ai}">
-            ${a.why?`<div class="c-detail-row why"><span class="c-dr-icon">💡</span>
-              <div><div class="c-dr-label">Porque é relevante</div><div class="c-dr-text">${a.why}</div></div></div>`:''}
-            ${a.impact?`<div class="c-detail-row impact"><span class="c-dr-icon">⚡</span>
-              <div><div class="c-dr-label">Impacto potencial</div><div class="c-dr-text">${a.impact}</div></div></div>`:''}
-            ${a.related?`<div class="c-detail-row related"><span class="c-dr-icon">🔗</span>
-              <div><div class="c-dr-label">Relação com outros factores</div><div class="c-dr-text">${a.related}</div></div></div>`:''}
+            ${a.why?`<div class="c-detail-row why"><span class="c-dr-icon">💡</span><div><div class="c-dr-label">Porque é relevante</div><div class="c-dr-text">${a.why}</div></div></div>`:''}
+            ${a.impact?`<div class="c-detail-row impact"><span class="c-dr-icon">⚡</span><div><div class="c-dr-label">Impacto potencial</div><div class="c-dr-text">${a.impact}</div></div></div>`:''}
+            ${a.related?`<div class="c-detail-row related"><span class="c-dr-icon">🔗</span><div><div class="c-dr-label">Relação com outros factores</div><div class="c-dr-text">${a.related}</div></div></div>`:''}
           </div>`
           :`<button class="c-expand disabled" disabled><span>Detalhes indisponíveis</span></button>`}
         </div>
@@ -1444,15 +1458,16 @@ function buildSectionsFromLive(){
 
   document.getElementById('catSections').innerHTML=html;
 
-  // Update chips — usar IDs individuais em vez de innerHTML (preserva IDs)
-  const total=Object.values(LIVE_DATA.categories||{}).reduce((s,a)=>s+(a?.length||0),0);
-  const upTime = (LIVE_DATA.updated_at||'').slice(11,16)||'hoje';
-  const chipA = document.getElementById('chipArtigos');
-  const chipC = document.getElementById('chipCats');
-  const chipL = document.getElementById('chipLive');
-  if(chipA) chipA.textContent = `${total} artigos`;
-  if(chipC) chipC.textContent = `${enabled.length} categorias`;
-  if(chipL) chipL.textContent = `🔄 Actualizado ${upTime}`;
+  const total = isV4
+    ? (LIVE_DATA.articles||[]).length
+    : Object.values(LIVE_DATA.categories||{}).reduce((s,a)=>s+(a?.length||0),0);
+  const upTime=(LIVE_DATA.updated_at||'').slice(11,16)||'hoje';
+  const chipA=document.getElementById('chipArtigos');
+  const chipC=document.getElementById('chipCats');
+  const chipL=document.getElementById('chipLive');
+  if(chipA) chipA.textContent=`${total} artigos`;
+  if(chipC) chipC.textContent=`${enabled.length} categorias`;
+  if(chipL) chipL.textContent=`🔄 Actualizado ${upTime}`;
 }
 
 function buildPortfolioFromLive(cat,i){
@@ -1595,69 +1610,65 @@ function updateRefreshLabel(){
   document.getElementById('refreshLabel').textContent = 'Modo demo · configura o GitHub Actions';
 }
 
-/* ═══════════════════ CATEGORY OVERRIDES ════════════════ */
-function _overrideKey(){ return `prisma_overrides_${LIVE_DATA?.run_id||'demo'}`; }
-
-function loadOverrides(){
-  try{ return JSON.parse(localStorage.getItem(_overrideKey())||'{}'); }
-  catch(e){ return {}; }
+/* ═══════════════════ SOURCE CATEGORY OVERRIDES ═════════ */
+function _srcCatKey(){ return 'prisma_source_cats'; }
+function loadSourceCats(){ try{ return JSON.parse(localStorage.getItem(_srcCatKey())||'{}'); }catch(e){ return {}; } }
+function saveSourceCat(sourceName, catId){
+  const sc = loadSourceCats();
+  if(catId) sc[sourceName]=catId; else delete sc[sourceName];
+  localStorage.setItem(_srcCatKey(), JSON.stringify(sc));
 }
 
+/* ═══════════════════ CATEGORY OVERRIDES (article) ══════ */
+function _overrideKey(){ return `prisma_overrides_${LIVE_DATA?.run_id||'demo'}`; }
+function loadOverrides(){ try{ return JSON.parse(localStorage.getItem(_overrideKey())||'{}'); }catch(e){ return {}; } }
 function saveOverride(urlHash, newCatId){
   const ov = loadOverrides();
   ov[urlHash] = newCatId;
   localStorage.setItem(_overrideKey(), JSON.stringify(ov));
 }
+function hashUrl(url){
+  let h=2166136261;
+  for(let i=0;i<url.length;i++){ h^=url.charCodeAt(i); h=(h*16777619)>>>0; }
+  return h.toString(16);
+}
+function toggleMoveMenu(cardId,event){
+  event.stopPropagation();
+  document.querySelectorAll('.c-move-drop.open').forEach(d=>{ if(d.id!==`move-${cardId}`) d.classList.remove('open'); });
+  document.getElementById(`move-${cardId}`)?.classList.toggle('open');
+}
+function moveArticle(urlHash,newCatId,cardId){
+  saveOverride(urlHash,newCatId);
+  document.getElementById(`move-${cardId}`)?.classList.remove('open');
+  buildSectionsFromLive();
+}
+document.addEventListener('click',()=>{ document.querySelectorAll('.c-move-drop.open').forEach(d=>d.classList.remove('open')); });
 
-function applyOverrides(categories){
-  // Move artigos entre categorias de acordo com overrides do utilizador
-  const ov = loadOverrides();
-  if(!Object.keys(ov).length) return categories;
+/* ═══════════════════ CATEGORIZE ARTICLES (v4) ══════════ */
+function categorizeArticles(articles){
+  /**
+   * v4: JSON tem lista plana de artigos.
+   * Aplica regras: 1) override de artigo, 2) categoria da fonte, 3) "sem_categoria".
+   */
+  const sourceCats  = loadSourceCats();
+  const artOverrides = loadOverrides();
   const result = {};
-  CAT_DEFS.forEach(c => result[c.id] = [...(categories[c.id]||[])]);
-  Object.entries(ov).forEach(([hash, newCat]) => {
-    // Encontra o artigo em qualquer categoria
-    let found = null, fromCat = null;
-    for(const [cat, arts] of Object.entries(result)){
-      const idx = arts.findIndex(a => hashUrl(a.url) === hash);
-      if(idx !== -1){ found = arts.splice(idx,1)[0]; fromCat = cat; break; }
-    }
-    if(found && newCat !== fromCat){
-      if(!result[newCat]) result[newCat] = [];
-      result[newCat].unshift(found);
-    }
+  CAT_DEFS.forEach(c=>result[c.id]=[]);
+  result['sem_categoria'] = [];
+
+  (articles||[]).forEach(a=>{
+    const urlHash = hashUrl(a.url||'');
+    // Override manual de artigo tem prioridade
+    const overrideCat = artOverrides[urlHash];
+    // Categoria da fonte
+    const sourceCat = sourceCats[a.source];
+    const cat = overrideCat || sourceCat || 'sem_categoria';
+    if(!result[cat]) result[cat]=[];
+    result[cat].push(a);
   });
   return result;
 }
 
-function hashUrl(url){
-  // FNV-1a 32-bit simples (não precisa de ser criptográfico)
-  let h = 2166136261;
-  for(let i=0;i<url.length;i++){ h ^= url.charCodeAt(i); h = (h * 16777619) >>> 0; }
-  return h.toString(16);
-}
-
-function toggleMoveMenu(cardId, event){
-  event.stopPropagation();
-  // Fecha todos os outros dropdowns
-  document.querySelectorAll('.c-move-drop.open').forEach(d => {
-    if(d.id !== `move-${cardId}`) d.classList.remove('open');
-  });
-  document.getElementById(`move-${cardId}`)?.classList.toggle('open');
-}
-
-function moveArticle(urlHash, newCatId, cardId){
-  saveOverride(urlHash, newCatId);
-  // Fecha dropdown
-  document.getElementById(`move-${cardId}`)?.classList.remove('open');
-  // Re-renderiza com override aplicado
-  buildSectionsFromLive();
-}
-
-// Fecha dropdowns ao clicar fora
-document.addEventListener('click', ()=>{
-  document.querySelectorAll('.c-move-drop.open').forEach(d=>d.classList.remove('open'));
-});
 
 /* ═════════════════════════ INIT ════════════════════════ */
 // Migração de perfis: remove IDs antigos, adiciona categorias novas que faltem
