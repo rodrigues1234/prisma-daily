@@ -26,7 +26,7 @@ def _timeout_handler(sig, frame):
     print("\n⚠️  Timeout global atingido.")
     sys.exit(0)
 signal.signal(signal.SIGALRM, _timeout_handler)
-signal.alarm(600)
+signal.alarm(720)  # 12 min: 3 batches × worst-case + resumo
 
 MODEL_FALLBACKS = ["gemini-2.0-flash","gemini-2.0-flash-lite","gemini-1.5-flash"]
 
@@ -159,50 +159,77 @@ def parse_json(text):
     return None
 
 
-def enrich_articles(client, articles):
-    if not articles: return []
-    arts_txt = "\n".join([f"[{i+1}] {a['title']} | {a['source']} | {a['url']}" for i,a in enumerate(articles)])
+BATCH_SIZE = 30  # ~4500 tokens input + ~5000 output por batch — dentro do limite seguro
+
+def _enrich_batch(client, batch: list, id_offset: int) -> dict:
+    """
+    Enriquece um batch de artigos. Devolve dict {id -> enriched_item}.
+    id_offset: o primeiro artigo deste batch tem id = id_offset + 1.
+    """
+    arts_txt = "\n".join([
+        f"[{id_offset+i+1}] {a['title']} | {a['source']} | {a['url']}"
+        for i,a in enumerate(batch)
+    ])
     prompt = f"""És um curador de notícias para um executivo português. Data: {DIA_PT}.
 
-Para cada artigo, preenche todos os campos. NÃO categorizes.
+Para cada artigo preenche TODOS os campos abaixo. Sê conciso.
 
-- "id": número do artigo (inteiro)
-- "title": TRADUZ SEMPRE para português de Portugal. Se já for português, mantém.
+- "id": número do artigo (inteiro, tal como no input)
+- "title": TRADUZ SEMPRE para português de Portugal. Se já for português, mantém igual.
 - "translated": true se traduziste, false se já era português
 - "summary": 2 frases directas em português de Portugal
 - "why": 1 frase — porque é relevante para um executivo português
 - "impact": 1 frase — impacto concreto nos próximos dias/semanas
 - "related": 1 frase — ligação a outro tema ou notícia
 - "impact_level": exactamente "alto", "médio" ou "baixo"
+- "breaking": true APENAS se for notícia urgente de impacto imediato (ex: conflito, crise financeira, catástrofe, decisão política inesperada). false nos restantes.
+- "recomendacao": true APENAS para 1 artigo por batch — o mais interessante para leitura/reflexão pessoal (ensaio, livro, podcast, ciência, lifestyle). false nos restantes.
 
-Responde APENAS com JSON — array com {len(articles)} objectos:
-[{{"id":1,"title":"...","translated":true,"summary":"...","why":"...","impact":"...","related":"...","impact_level":"médio"}}]
+Responde APENAS com JSON válido — array com {len(batch)} objectos:
+[{{"id":{id_offset+1},"title":"...","translated":true,"summary":"...","why":"...","impact":"...","related":"...","impact_level":"médio","breaking":false,"recomendacao":false}}]
 
 Artigos:
 {arts_txt}"""
 
-    print(f"  prompt: {len(prompt)} chars, ~{len(prompt)//4} tokens")
-    text = call_gemini(client, prompt, max_tokens=10000)
+    print(f"  batch [{id_offset+1}–{id_offset+len(batch)}]: {len(prompt)} chars, ~{len(prompt)//4} tokens")
+    text = call_gemini(client, prompt, max_tokens=6000)
     data = parse_json(text)
-
     if not isinstance(data, list):
-        print("  aviso: enriquecimento falhou, artigos sem detalhe")
-        return [{**a,"translated":False,"summary":"","why":"","impact":"","related":"","impact_level":"médio","date":NOW_ISO} for a in articles]
+        print(f"  aviso: batch [{id_offset+1}–{id_offset+len(batch)}] falhou")
+        return {}
+    return {item.get("id"): item for item in data if isinstance(item, dict)}
 
-    enriched_map = {item.get("id"): item for item in data if isinstance(item,dict)}
+
+def enrich_articles(client, articles):
+    if not articles:
+        return []
+
+    all_enriched: dict = {}
+    batches = [articles[i:i+BATCH_SIZE] for i in range(0, len(articles), BATCH_SIZE)]
+    print(f"  {len(articles)} artigos em {len(batches)} batch(es) de {BATCH_SIZE}")
+
+    for b_idx, batch in enumerate(batches):
+        if b_idx > 0:
+            time.sleep(12)  # margem entre batches — evita rate limit
+        offset = b_idx * BATCH_SIZE
+        enriched = _enrich_batch(client, batch, offset)
+        all_enriched.update(enriched)
+
     result = []
-    for i,a in enumerate(articles):
-        e = enriched_map.get(i+1, {})
+    for i, a in enumerate(articles):
+        e = all_enriched.get(i + 1, {})
         result.append({
             "title":        e.get("title") or a["title"],
             "url":          a["url"],
             "source":       a["source"],
             "translated":   e.get("translated", False),
-            "summary":      e.get("summary",""),
-            "why":          e.get("why",""),
-            "impact":       e.get("impact",""),
-            "related":      e.get("related",""),
+            "summary":      e.get("summary", ""),
+            "why":          e.get("why", ""),
+            "impact":       e.get("impact", ""),
+            "related":      e.get("related", ""),
             "impact_level": (e.get("impact_level") or "médio").replace("medio","médio"),
+            "breaking":     bool(e.get("breaking", False)),
+            "recomendacao": bool(e.get("recomendacao", False)),
             "date":         NOW_ISO,
         })
     return result
@@ -286,7 +313,7 @@ def main():
     print(f"\n{'='*54}")
     print(f"  Prisma v4 — {RUN_ID}")
     print(f"  Feeds: {len(RSS)} | Max artigos: {MAX_ARTS_TOTAL} | Gemini calls: 2")
-    print(f"  Timeout: 10 min")
+    print(f"  Timeout: 12 min")
     print(f"{'='*54}\n")
 
     client = get_client()
@@ -343,7 +370,7 @@ def main():
     print(f"\n{'='*54}")
     print(f"  Concluído em {elapsed:.1f}s")
     print(f"  {len(articles_enriched)} artigos | {len(SOURCE_NAMES)} fontes")
-    print(f"  Gemini calls: 2 / 1500 disponíveis hoje")
+    print(f"  Gemini calls: {len(batches)+1} / 1500 disponíveis hoje")
     print(f"{'='*54}\n")
 
 
