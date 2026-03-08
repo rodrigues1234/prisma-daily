@@ -187,6 +187,7 @@ input,select,textarea{font-family:inherit}
 .c-detail-row.impact .c-dr-text{color:#92400E}
 .c-detail-row.related .c-dr-text{color:#166534}
 .c-expand{display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:var(--ink4);padding:0;margin-top:4px;transition:color .15s;cursor:pointer}
+.c-expand.disabled{color:var(--ink4);opacity:.38;cursor:default;pointer-events:none}
 .c-expand:hover{color:var(--blue)}
 .c-expand-icon{font-size:10px;transition:transform .2s}
 .c-expand.open .c-expand-icon{transform:rotate(180deg)}
@@ -1442,7 +1443,8 @@ function buildSectionsFromLive(){
               <div><div class="c-dr-label">Impacto potencial</div><div class="c-dr-text">${a.impact}</div></div></div>`:''}
             ${a.related?`<div class="c-detail-row related"><span class="c-dr-icon">🔗</span>
               <div><div class="c-dr-label">Relação com outros factores</div><div class="c-dr-text">${a.related}</div></div></div>`:''}
-          </div>`:''}
+          </div>`
+          :`<button class="c-expand disabled" disabled><span>Detalhes indisponíveis</span></button>`}
         </div>
       </div>`;
     }).join('');
