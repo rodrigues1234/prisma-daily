@@ -22,14 +22,14 @@ jobs:
           python-version: "3.11"
 
       - name: Instalar dependências
-        run: pip install feedparser yfinance google-genai requests
+        run: pip install feedparser yfinance mistralai requests
 
       - name: Criar pasta data (se não existir)
         run: mkdir -p data
 
       - name: Correr fetch_news.py
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
         run: python fetch_news.py
 
       - name: Commit e push dos dados gerados
