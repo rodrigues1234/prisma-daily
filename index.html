@@ -38,7 +38,7 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
-body{background:var(--cream);color:var(--ink);font-family:var(--ff-b);font-size:15px;line-height:1.6;min-height:100dvh;overflow-x:hidden}
+body{background:var(--cream);color:var(--ink);font-family:var(--ff-ui);font-size:15px;line-height:1.6;min-height:100dvh;overflow-x:hidden}
 button{cursor:pointer;border:none;background:none;font-family:inherit}
 a{color:inherit;text-decoration:none}
 input,select,textarea{font-family:inherit}
@@ -93,7 +93,7 @@ input,select,textarea{font-family:inherit}
 .shell{display:grid;grid-template-columns:210px 1fr;min-height:calc(100dvh - var(--hh) - var(--th));max-width:1300px;margin:0 auto}
 
 /* ═══════════════════════════ SIDEBAR ══════════════════════════ */
-.sb{border-right:1px solid var(--rule);padding:14px 0;position:sticky;top:calc(var(--hh)+var(--th));height:calc(100dvh - var(--hh) - var(--th));overflow-y:auto}
+.sb{border-right:2px solid var(--rule);padding:14px 0;position:sticky;top:calc(var(--hh)+var(--th));height:calc(100dvh - var(--hh) - var(--th));overflow-y:auto;background:var(--cream)}
 .sb-grp{margin-bottom:4px}
 .sb-grp-hd{
   display:flex;align-items:center;justify-content:space-between;
@@ -175,7 +175,7 @@ input,select,textarea{font-family:inherit}
 .c-move-opt{display:flex;align-items:center;gap:7px;padding:7px 12px;font-size:12px;color:var(--ink2);cursor:pointer;transition:background .1s}
 .c-move-opt:hover{background:var(--paper)}
 .c-move-opt.current{font-weight:700;color:var(--amber)}
-.c-title{font-family:var(--ff-s);font-size:16.5px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:7px;letter-spacing:-.2px}
+.c-title{font-family:var(--ff-hl);font-size:17px;font-weight:700;color:var(--ink);line-height:1.32;margin-bottom:8px;letter-spacing:-.1px;word-break:break-word;overflow-wrap:break-word}
 .c-title a{transition:color .15s;display:flex;align-items:flex-start;gap:6px}
 .c-title a:hover{color:var(--blue)}
 .c-link-icon{font-size:11px;opacity:.35;flex-shrink:0;margin-top:3px;transition:opacity .15s}
@@ -263,6 +263,20 @@ input,select,textarea{font-family:inherit}
 .wn-eye{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:12px}
 .wn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .wn-v{font-family:var(--ff-s);font-size:20px;font-weight:900;color:var(--ink);line-height:1}
+/* ── weekly narrative ── */
+.wnr{background:#fff;border:1px solid var(--rule);border-radius:var(--r);padding:28px 32px;margin-top:24px}
+.wnr-hd{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.wnr-icon{font-size:20px}
+.wnr-title{font-family:var(--ff-hl);font-size:22px;font-weight:700;letter-spacing:-.2px;font-style:italic}
+.wnr-meta{font-family:var(--ff-m);font-size:10px;color:var(--ink4);letter-spacing:.06em;text-transform:uppercase;margin-bottom:24px}
+.wnr-sec{margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--rule2)}
+.wnr-sec:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.wnr-sec-title{font-family:var(--ff-ui);font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+.wnr-body{font-family:var(--ff-b);font-size:16px;line-height:1.75;color:var(--ink2)}
+.wnr-body p{margin:0 0 1em}
+.wnr-body p:last-child{margin-bottom:0}
+.wnr-loading{text-align:center;padding:40px 0;color:var(--ink4);font-family:var(--ff-ui);font-size:14px}
+.wnr-placeholder{background:var(--rule2);border-radius:var(--r);padding:32px;text-align:center;color:var(--ink4);font-family:var(--ff-ui);font-size:14px;margin-top:24px}
 .wn-d{font-size:11px;color:var(--ink3);margin-top:2px}
 
 /* ═══════════════════════════ PROFILE PANEL ════════════════════ */
@@ -347,7 +361,7 @@ input,select,textarea{font-family:inherit}
 
 /* ═══════════════════════════ MOBILE NAV ═══════════════════════ */
 .mnav{display:none;position:fixed;bottom:0;left:0;right:0;height:var(--nh);background:#fff;border-top:1px solid var(--rule);padding:0 4px;padding-bottom:env(safe-area-inset-bottom);z-index:300;box-shadow:0 -4px 20px rgba(26,23,20,.08);justify-content:space-around;align-items:center}
-.mn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 12px;border-radius:10px;color:var(--ink4);transition:color .15s;cursor:pointer;min-width:52px}
+.mn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 8px;border-radius:10px;color:var(--ink4);transition:color .15s;cursor:pointer;flex:1;min-width:0}
 .mn.active{color:var(--amber)}
 .mn-ic{font-size:19px;line-height:1}
 .mn-lbl{font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
@@ -396,7 +410,7 @@ input,select,textarea{font-family:inherit}
   .wn-grid{grid-template-columns:1fr 1fr}
   .risco-grid{grid-template-columns:1fr 1fr}
   .src-add-row,.src-add-row-3{grid-template-columns:1fr 1fr}
-  .refresh-info{display:none}
+  .refresh-info{display:flex;font-size:9px;color:rgba(255,255,255,.28)}
 }
 
 /* Tablet landscape: 600–900px horizontal — show compact sidebar */
@@ -433,6 +447,9 @@ input,select,textarea{font-family:inherit}
   /* pl-item: tighter on small screens */
   .pl-sym{width:48px}
   .pl-nm{font-size:12px}
+
+  .wnr{padding:20px 16px}
+  .wnr-body{font-size:15px}
 }
 
 /* Mobile landscape — compact header */
@@ -472,6 +489,7 @@ input,select,textarea{font-family:inherit}
 <div class="ticker">
   <div class="t-lbl">Mercados</div>
   <div class="t-track"><div class="t-scroll" id="tScroll"></div></div>
+
 </div>
 
 <!-- SHELL -->
@@ -482,6 +500,7 @@ input,select,textarea{font-family:inherit}
       <button class="tab active" onclick="gTab('hoje')">📰 Hoje</button>
       <button class="tab" onclick="gTab('semana')">📊 Semana</button>
       <button class="tab" onclick="gTab('perfil')">⚙️ Perfil</button>
+      <button class="tab" id="tab-ler" onclick="gTab('ler')">🔖 Ler Mais Tarde <span id="lerBadge" style="display:none;background:var(--amber);color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;font-weight:700;margin-left:4px"></span></button>
     </div>
 
     <!-- HOJE -->
@@ -493,6 +512,7 @@ input,select,textarea{font-family:inherit}
           <span class="chip" id="chipArtigos">28 artigos</span>
           <span class="chip" id="chipCats">10 categorias</span>
           <span class="chip live" id="chipLive">🔄 A carregar...</span>
+          <span class="chip" id="chipNext" style="color:var(--ink3)">⏱ A calcular...</span>
         </div>
       </div>
       <div class="summary">
@@ -514,6 +534,19 @@ input,select,textarea{font-family:inherit}
         <div class="wg-card"><div class="wg-cat" style="color:var(--c-mkt)">Mercados</div><div class="wg-t">BdP identifica sobrevalorização imobiliária de 18%</div><div class="wg-b">Relatório recomenda restrições no crédito habitação.</div></div>
       </div>
       <div class="wn fade" style="animation-delay:.14s"><div class="wn-eye">📊 Números da semana</div><div class="wn-grid"><div><div class="wn-v">+2,1%</div><div class="wn-d">S&P 500 semanal</div></div><div><div class="wn-v">+1,2%</div><div class="wn-d">PSI 20 sessão</div></div><div><div class="wn-v">2,1%</div><div class="wn-d">Inflação PT Fev.</div></div><div><div class="wn-v">€200B</div><div class="wn-d">Fundo CE proposto</div></div><div><div class="wn-v">18%</div><div class="wn-d">Sobrevalorização imob.</div></div><div><div class="wn-v">40%</div><div class="wn-d">Melhoria GPT-5</div></div></div></div>
+
+      <!-- NARRATIVA SEMANAL 8 MINUTOS -->
+      <div class="wnr fade" style="animation-delay:.21s" id="wnrBlock">
+        <div class="wnr-loading" id="wnrLoading">⏳ A carregar narrativa semanal...</div>
+        <div id="wnrContent" style="display:none">
+          <div class="wnr-hd">
+            <span class="wnr-icon">📖</span>
+            <span class="wnr-title">A Semana em 8 Minutos</span>
+          </div>
+          <div class="wnr-meta" id="wnrMeta">—</div>
+          <div id="wnrSections"></div>
+        </div>
+      </div>
     </div>
 
     <!-- PERFIL -->
@@ -522,9 +555,68 @@ input,select,textarea{font-family:inherit}
       <div class="pf-sub">Cada perfil tem categorias, fontes, watchlist e definições próprias.</div>
       <div class="pf-avatars fade" id="pAvatars"></div>
 
+      <!-- SYNC -->
+      <div class="ps fade" style="animation-delay:.03s">
+        <div class="ps-hd">🔄 Sincronizar entre dispositivos</div>
+        <div class="pf-sub" style="margin-bottom:10px">O perfil é guardado localmente. Para usar noutro dispositivo, exporta e importa o ficheiro JSON.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <button onclick="exportProfile()"
+            style="background:var(--ink);color:#fff;border-radius:6px;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer">
+            ⬇️ Exportar perfil
+          </button>
+          <label style="background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;color:var(--ink2)">
+            ⬆️ Importar perfil
+            <input type="file" accept=".json" onchange="importProfile(event)" style="display:none">
+          </label>
+          <button onclick="shareProfileUrl()"
+            style="background:#EBF5FF;border:1px solid #BFDBFE;color:#1D4ED8;border-radius:6px;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer">
+            🔗 Copiar link de partilha
+          </button>
+        </div>
+        <div id="syncStatus" style="font-size:12px;color:#10B981;margin-top:8px;min-height:16px"></div>
+      </div>
+
       <!-- Settings -->
       <div class="ps fade" style="animation-delay:.06s">
         <div class="ps-hd">⚙️ Definições</div>
+
+        <!-- GitHub auto-sync -->
+        <div style="margin-bottom:16px">
+          <div class="setting-label" style="margin-bottom:4px">🔑 GitHub Personal Access Token</div>
+          <div class="setting-desc" style="margin-bottom:10px">
+            Permite que as fontes que adicionas sejam activadas automaticamente no próximo run do Prisma (máximo 6h).<br>
+            <a href="https://github.com/settings/tokens/new?scopes=repo&description=Prisma+Daily" target="_blank"
+              style="color:var(--blue);font-weight:600;text-decoration:none">Criar token no GitHub ↗</a>
+            — selecciona apenas o scope <strong>repo</strong>.
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <div style="position:relative;flex:1">
+              <input id="ghPat" type="password"
+                style="width:100%;padding:8px 36px 8px 10px;border:1px solid var(--rule);border-radius:6px;font-size:13px;font-family:var(--ff-m);background:var(--paper)"
+                placeholder="ghp_xxxxxxxxxxxx"
+                oninput="onPatInput(this.value)"
+                value="">
+              <button onclick="togglePatVisibility()"
+                style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:14px;opacity:.5"
+                id="patEyeBtn" title="Mostrar/ocultar">👁</button>
+            </div>
+            <button onclick="saveGhPat()"
+              style="background:var(--ink);color:#fff;border-radius:6px;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;flex-shrink:0">
+              Guardar
+            </button>
+          </div>
+          <div id="patStatus" style="font-size:12px;min-height:16px;margin-top:6px"></div>
+          <div id="patRepoRow" style="display:none;margin-top:8px">
+            <div class="setting-label" style="margin-bottom:4px">Repositório (user/repo)</div>
+            <input id="ghRepo" type="text"
+              style="width:100%;padding:8px 10px;border:1px solid var(--rule);border-radius:6px;font-size:13px;font-family:var(--ff-m);background:var(--paper)"
+              placeholder="rodrigues1234/prisma-daily"
+              value="rodrigues1234/prisma-daily">
+          </div>
+        </div>
+
+        <!-- Source sync status -->
+        <div id="srcSyncStatus" style="display:none;padding:10px 12px;border-radius:6px;font-size:12px;margin-bottom:12px"></div>
 
         <div class="setting-row" id="deleteProfileRow" style="display:none">
           <div><div class="setting-label">Eliminar perfil</div><div class="setting-desc">Remove este perfil e todos os dados</div></div>
@@ -543,6 +635,7 @@ input,select,textarea{font-family:inherit}
       <!-- Sources -->
       <div class="ps fade" style="animation-delay:.14s">
         <div class="ps-hd">📰 Fontes <span style="font-size:11px;color:var(--ink4);font-weight:400" id="srcCnt"></span></div>
+        <div id="srcErrors" style="display:none;background:#FEF2F2;border:1px solid #FECACA;border-radius:6px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#991B1B"></div>
         <input class="src-search" id="srcSearch" placeholder="🔍 Pesquisar fontes..." oninput="debounceSrcSearch()">
         <div id="srcList"></div>
         <div class="src-add-form">
@@ -578,11 +671,30 @@ input,select,textarea{font-family:inherit}
       <!-- Stocks -->
       <div class="ps fade" style="animation-delay:.18s">
         <div class="ps-hd">📈 Watchlist de Stocks</div>
+        <div class="pf-sub" style="margin-bottom:10px">Tickers do Yahoo Finance: AAPL, MSFT, NVDA, PSI20.LS, BTC-USD, GC=F, EURUSD=X</div>
         <div class="st-tags" id="stList"></div>
-        <div class="st-form">
-          <input class="st-in" id="stIn" placeholder="Ex: AAPL" maxlength="8">
-          <button class="st-btn" onclick="addStock()">+ Adicionar</button>
+        <div class="st-form" style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;gap:8px;align-items:center">
+            <div style="position:relative;flex:1">
+              <input class="st-in" id="stIn" placeholder="Ex: AAPL, PSI20.LS" maxlength="12"
+                oninput="onTickerInput(this.value)"
+                style="width:100%;padding-right:32px">
+              <span id="stValidIcon" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:14px;display:none"></span>
+            </div>
+            <button class="st-btn" id="stAddBtn" onclick="addStock()" style="flex-shrink:0">+ Adicionar</button>
+          </div>
+          <div id="stStatus" style="font-size:12px;color:var(--ink4);min-height:16px"></div>
         </div>
+      </div>
+    </div>
+
+    <!-- LER MAIS TARDE -->
+    <div class="panel" id="panel-ler" style="display:none">
+      <div class="pf-title fade">🔖 Ler Mais Tarde</div>
+      <div class="pf-sub" id="lerEmpty">Nenhum artigo guardado. Clica em 🔖 num artigo para guardar.</div>
+      <div id="lerList" style="display:flex;flex-direction:column;gap:10px;margin-top:8px"></div>
+      <div id="lerClearRow" style="display:none;margin-top:16px">
+        <button onclick="clearReadLater()" style="background:#FEE2E2;color:#DC2626;border:none;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer">🗑 Limpar tudo</button>
       </div>
     </div>
 
@@ -594,6 +706,7 @@ input,select,textarea{font-family:inherit}
   <button class="mn active" id="mn-hoje" onclick="gTab('hoje')"><span class="mn-ic">📰</span><span class="mn-lbl">Hoje</span></button>
   <button class="mn" id="mn-semana" onclick="gTab('semana')"><span class="mn-ic">📊</span><span class="mn-lbl">Semana</span></button>
   <button class="mn" id="mn-perfil" onclick="gTab('perfil')"><span class="mn-ic">👤</span><span class="mn-lbl">Perfil</span></button>
+  <button class="mn" id="mn-ler" onclick="gTab('ler')"><span class="mn-ic">🔖</span><span class="mn-lbl">Guardados</span></button>
 </nav>
 
 <!-- MODAL -->
@@ -994,11 +1107,18 @@ function buildSoul(cat,a,i){
 
 /* ═════════════════════════ TABS ═════════════════════════ */
 function gTab(t){
+  STATE.tab = t;
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab,.hn,.mn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('panel-'+t).classList.add('active');
+  const panel = document.getElementById('panel-'+t);
+  if(panel) panel.classList.add('active');
   document.querySelectorAll(`[onclick*="'${t}'"]`).forEach(b=>b.classList.add('active'));
-  if(t==='perfil')renderProfile();
+  if(t==='perfil') renderProfile();
+  if(t==='ler') renderReadLater();
+  if(t==='semana'){
+    if(WEEKLY_DATA) buildWeeklyNarrative(WEEKLY_DATA);
+    else loadWeeklyData().then(wd => buildWeeklyNarrative(wd || LIVE_DATA?.weekly_narrative));
+  }
 }
 
 /* ═════════════════════════ PROFILE ═════════════════════ */
@@ -1053,6 +1173,7 @@ function renderProfile(){
 
   renderSources();
   renderStocks();
+  loadPatToUI();
 }
 
 function renderGeminiAlert(){
@@ -1170,7 +1291,7 @@ function renderSources(){
 }
 function togSrc(id){ const p=aP(); const s=p.sources.find(x=>x.id===id); if(s){s.on=!s.on;saveState();renderSources();} }
 function setStar(id,n){ const p=aP(); const s=p.sources.find(x=>x.id===id); if(s){s.stars=n;saveState();renderSources();} }
-function rmSrc(id){ const p=aP(); p.sources=p.sources.filter(s=>s.id!==id); saveState();renderSources(); }
+async function rmSrc(id){ const p=aP(); const removed=p.sources.find(s=>s.id===id); p.sources=p.sources.filter(s=>s.id!==id); saveState();renderSources(); if(removed) await syncUserSources('removed', removed.nm); }
 /* ═════════════════════════ SOURCE URL HELPERS ══════════ */
 // Known RSS feeds for popular sites — auto-suggest
 const KNOWN_RSS={
@@ -1288,7 +1409,6 @@ async function addSource(){
   const urlEl=document.getElementById('srcUrl');
   const url=urlEl.value.trim();
   const nameEl=document.getElementById('srcName');
-  // If URL present but RSS not yet probed (user didn't blur), run detection now
   if(url&&!urlEl.dataset.rss){
     await tryFetchMeta(url);
   }
@@ -1298,18 +1418,120 @@ async function addSource(){
   const rss=urlEl.dataset.rss||url;
   const id='u'+Date.now();
   if(!p.sources)p.sources=[];
-  p.sources.push({id,nm,url,rss,cat,on:true,stars:2});
+  p.sources.push({id,nm,url,rss,cat,on:true,stars:2,_added:new Date().toISOString()});
   saveState();renderSources();
   urlEl.value='';urlEl.dataset.rss='';
   nameEl.value='';nameEl.dataset.auto='';
   document.getElementById('srcStatus').className='src-status';
+  // Auto-commit to GitHub if PAT configured
+  await syncUserSources('added', nm);
 }
 
 /* ═════════════════════════ STOCKS ══════════════════════ */
-function renderStocks(){ const p=aP(); document.getElementById('stList').innerHTML=(p.stocks||[]).map(s=>`<div class="st-tag">${s}<span class="st-rm" onclick="rmStock('${s}')">×</span></div>`).join(''); }
-function addStock(){ const i=document.getElementById('stIn'); const s=i.value.trim().toUpperCase(); if(!s)return; const p=aP(); if(!p.stocks)p.stocks=[]; if(!p.stocks.includes(s)){p.stocks.push(s);saveState();buildTicker();renderStocks();} i.value=''; }
-function rmStock(s){ const p=aP(); p.stocks=(p.stocks||[]).filter(x=>x!==s); saveState();buildTicker();renderStocks(); }
-document.getElementById('stIn').addEventListener('keydown',e=>{if(e.key==='Enter')addStock();});
+function renderStocks(){
+  const p=aP();
+  document.getElementById('stList').innerHTML=(p.stocks||[]).map(s=>`
+    <div class="st-tag">
+      <span class="st-sym">${s}</span>
+      <span class="st-rm" onclick="rmStock('${s}')">×</span>
+    </div>`).join('');
+}
+
+let _tickerTimeout = null;
+let _tickerValid   = false;
+
+function onTickerInput(val){
+  const s = val.trim().toUpperCase();
+  const icon   = document.getElementById('stValidIcon');
+  const status = document.getElementById('stStatus');
+  const btn    = document.getElementById('stAddBtn');
+  icon.style.display = 'none';
+  status.textContent = '';
+  btn.disabled = false;
+  _tickerValid = false;
+  clearTimeout(_tickerTimeout);
+  if(!s){ return; }
+  // Basic format check: 1-6 chars, optionally .XX suffix, or special like =X, -USD
+  const fmtOk = /^[A-Z0-9]{1,6}([.=-][A-Z0-9]{1,4})?$/.test(s);
+  if(!fmtOk){
+    icon.textContent='❌'; icon.style.display='';
+    status.textContent='Formato inválido. Ex: AAPL, PSI20.LS, BTC-USD, EURUSD=X';
+    status.style.color='#EF4444';
+    btn.disabled=true;
+    return;
+  }
+  icon.textContent='⏳'; icon.style.display='';
+  status.textContent='A validar...';
+  status.style.color='var(--ink4)';
+  _tickerTimeout = setTimeout(()=>validateTicker(s), 600);
+}
+
+async function validateTicker(s){
+  const icon   = document.getElementById('stValidIcon');
+  const status = document.getElementById('stStatus');
+  const btn    = document.getElementById('stAddBtn');
+  try{
+    // Yahoo Finance public quote endpoint — no key needed
+    const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(s)}?interval=1d&range=1d`;
+    const r = await fetch(url, {signal: AbortSignal.timeout(5000)});
+    const d = await r.json();
+    const meta = d?.chart?.result?.[0]?.meta;
+    if(meta && meta.regularMarketPrice){
+      icon.textContent='✅'; icon.style.display='';
+      const name = meta.longName || meta.shortName || s;
+      const price = meta.regularMarketPrice.toFixed(2);
+      const cur = meta.currency || '';
+      status.textContent=`${name} — ${price} ${cur}`;
+      status.style.color='#10B981';
+      _tickerValid = true;
+      btn.disabled = false;
+    } else {
+      icon.textContent='❌'; icon.style.display='';
+      status.textContent='Ticker não encontrado no Yahoo Finance.';
+      status.style.color='#EF4444';
+      btn.disabled = true;
+    }
+  } catch(e){
+    // Network error: allow anyway (GitHub Pages CORS can block)
+    icon.textContent='⚠️'; icon.style.display='';
+    status.textContent='Não foi possível validar (CORS/rede). Será verificado no próximo run.';
+    status.style.color='#F59E0B';
+    _tickerValid = true;
+    btn.disabled = false;
+  }
+}
+
+function addStock(){
+  const i = document.getElementById('stIn');
+  const s = i.value.trim().toUpperCase();
+  if(!s) return;
+  const p=aP();
+  if(!p.stocks) p.stocks=[];
+  if(p.stocks.includes(s)){
+    document.getElementById('stStatus').textContent='Ticker já está na watchlist.';
+    document.getElementById('stStatus').style.color='#F59E0B';
+    return;
+  }
+  p.stocks.push(s);
+  saveState();
+  if(LIVE_DATA) buildTickerFromLive(); else buildTicker();
+  renderStocks();
+  i.value='';
+  document.getElementById('stValidIcon').style.display='none';
+  document.getElementById('stStatus').textContent='';
+  document.getElementById('stAddBtn').disabled=false;
+  _tickerValid=false;
+}
+
+function rmStock(s){
+  const p=aP();
+  p.stocks=(p.stocks||[]).filter(x=>x!==s);
+  saveState();
+  if(LIVE_DATA) buildTickerFromLive(); else buildTicker();
+  renderStocks();
+}
+
+document.getElementById('stIn').addEventListener('keydown',e=>{ if(e.key==='Enter') addStock(); });
 
 /* ═════════════════════════ MODAL ════════════════════════ */
 function openModal(){
@@ -1379,7 +1601,7 @@ function buildTickerFromLive(){
   if(!LIVE_DATA?.stocks) return buildTicker();
   const p=aP();
   const watch=(p.stocks||[]).map(s=>s.toUpperCase());
-  let stocks=LIVE_DATA.stocks.filter(s=>watch.includes(s.symbol.replace(/[^A-Z]/g,'')));
+  let stocks=LIVE_DATA.stocks.filter(s=>watch.includes(s.symbol.toUpperCase()));
   if(!stocks.length) stocks=LIVE_DATA.stocks;
   const html=[...stocks,...stocks].map(s=>`
     <div class="t-item">
@@ -1450,7 +1672,14 @@ function buildSectionsFromLive(){
 
   let html='';
 
-  // Connections: removido em v5
+  // Ligações entre notícias (v5+: vem do Python via LIVE_DATA.connections)
+  const conns = LIVE_DATA?.connections || [];
+  if(conns.length){
+    html+=`<div class="conns fade" style="animation-delay:.09s">
+      <div class="conns-hd">⟁ &nbsp;Ligações entre notícias</div>
+      ${conns.map(cn=>`<div class="conn">${cn.note}<div class="conn-pills">${(cn.articles||[]).map(a=>`<span class="cpill">${a}</span>`).join('')}</div></div>`).join('')}
+    </div>`;
+  }
 
   enabled.forEach((cat,i)=>{
     if(cat.id==='portfolio'){ html+=buildPortfolioFromLive(cat,i); return; }
@@ -1483,9 +1712,18 @@ function buildSectionsFromLive(){
             <span class="c-ts">${(a.date||'').slice(11,16)||a.ts||''}</span>
             ${a.translated?'<span class="c-translated" title="Traduzido para português">🌐</span>':''}
             <span class="c-badge ${impLvl}">${impLvl==='alto'?'Alto':impLvl==='baixo'?'Baixo':'Médio'}</span>
-            <div class="c-move">
-              <button class="c-move-btn" onclick="toggleMoveMenu('${cardId}',event)" title="Mover para outra categoria">⋯</button>
-              <div class="c-move-drop" id="move-${cardId}">${moveOpts}</div>
+            <div style="display:flex;align-items:center;gap:4px;margin-left:auto">
+              <button onclick="toggleReadLater('${urlHash}',this,event)"
+                data-url="${(a.url||'').replace(/"/g,'&quot;')}"
+                data-title="${(a.title||'').replace(/"/g,'&quot;')}"
+                data-source="${(a.source||'').replace(/"/g,'&quot;')}"
+                title="Guardar para ler mais tarde"
+                style="background:none;border:none;cursor:pointer;font-size:15px;padding:2px 4px;opacity:${isReadLater('${urlHash}')?1:.4};-webkit-tap-highlight-color:transparent"
+                id="rl-${urlHash}">${isReadLater('${urlHash}')?'🔖':'🔖'}</button>
+              <div class="c-move">
+                <button class="c-move-btn" onclick="toggleMoveMenu('${cardId}',event)" title="Mover para outra categoria">⋯</button>
+                <div class="c-move-drop" id="move-${cardId}">${moveOpts}</div>
+              </div>
             </div>
           </div>
           <div class="c-title"><a href="${a.url||'#'}" target="_blank" rel="noopener">${a.title}<span class="c-link-icon">↗</span></a></div>
@@ -1525,14 +1763,14 @@ function buildSectionsFromLive(){
   const chipL=document.getElementById('chipLive');
   if(chipA) chipA.textContent=`${total} artigos`;
   if(chipC) chipC.textContent=`${enabled.length} categorias`;
-  if(chipL) chipL.textContent=`🔄 Actualizado ${upTime}`;
+  // chipLive actualizado por updateRefreshLabel() — não duplicar aqui
 }
 
 function buildPortfolioFromLive(cat,i){
   if(!LIVE_DATA?.stocks) return buildPortfolio(cat,i);
   const p=aP();
   const watch=(p.stocks||[]).map(s=>s.toUpperCase());
-  let stocks=LIVE_DATA.stocks.filter(s=>watch.includes(s.symbol.replace(/[^A-Z]/g,'')));
+  let stocks=LIVE_DATA.stocks.filter(s=>watch.includes(s.symbol.toUpperCase()));
   if(!stocks.length) stocks=LIVE_DATA.stocks.slice(0,5);
   const pa=LIVE_DATA.portfolio_analysis||{};
 
@@ -1645,27 +1883,60 @@ async function manualRefresh(){
 }
 
 function updateRefreshLabel(){
-  if(LIVE_DATA?.updated_at){
-    const upd = LIVE_DATA.updated_at.slice(11,16);
-    const now  = new Date();
-    // Próximo run: 06 09 12 15 18 21 UTC (em hora local usa getUTC*)
-    const slots = [6,9,12,15,18,21];
-    const nowUTC = now.getUTCHours()*60 + now.getUTCMinutes();
-    const next   = slots.find(h => h*60 > nowUTC);
+  // Runs reais: 07h, 12h, 18h, 22h UTC (update.yml)
+  const SLOTS_UTC = [7, 12, 18, 22];
+
+  function nextRunInfo(){
+    const now    = new Date();
+    const nowUTC = now.getUTCHours() * 60 + now.getUTCMinutes();
+    const nextH  = SLOTS_UTC.find(h => h * 60 > nowUTC);
     let nextDate;
-    if(next !== undefined){
-      nextDate = new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate(),next,0,0));
+    if(nextH !== undefined){
+      nextDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), nextH, 0, 0));
     } else {
-      // Já passou das 21h UTC — próximo é 06h de amanhã
-      nextDate = new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+1,6,0,0));
+      nextDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1, SLOTS_UTC[0], 0, 0));
     }
-    const diff = Math.round((nextDate - now)/60000);
-    const dh   = Math.floor(diff/60), dm = diff%60;
-    document.getElementById('refreshLabel').textContent =
-      `Actualizado ${upd} · próxima em ${dh}h${dm>0?dm+'m':''}`;
+    const diff = Math.round((nextDate - now) / 60000);
+    const dh   = Math.floor(diff / 60);
+    const dm   = diff % 60;
+    // Hora local do próximo run
+    const localH = nextDate.getHours().toString().padStart(2,'0');
+    const localM = nextDate.getMinutes().toString().padStart(2,'0');
+    return { dh, dm, localTime: `${localH}:${localM}`, totalMin: diff };
+  }
+
+  if(LIVE_DATA?.updated_at){
+    const updISO  = LIVE_DATA.updated_at;
+    // Hora local da última actualização
+    const updDate = new Date(updISO);
+    const updH    = updDate.getHours().toString().padStart(2,'0');
+    const updM    = updDate.getMinutes().toString().padStart(2,'0');
+    const updStr  = `${updH}:${updM}`;
+
+    const {dh, dm, localTime, totalMin} = nextRunInfo();
+    const nextStr = totalMin < 60
+      ? `${totalMin} min`
+      : `${dh}h${dm > 0 ? dm + 'm' : ''}`;
+
+    // Header label (desktop + mobile)
+    const lbl = document.getElementById('refreshLabel');
+    if(lbl) lbl.textContent = `Actualizado ${updStr} · próxima ${localTime}`;
+
+    // Chip no corpo da página (visível em todos os tamanhos)
+    const chipL = document.getElementById('chipLive');
+    if(chipL) chipL.textContent = `🔄 Actualizado ${updStr}`;
+
+    // Chip de próxima actualização
+    const chipN = document.getElementById('chipNext');
+    if(chipN) chipN.textContent = `⏱ Próxima às ${localTime} (em ${nextStr})`;
     return;
   }
-  document.getElementById('refreshLabel').textContent = 'Modo demo · configura o GitHub Actions';
+
+  // Demo mode
+  const lbl = document.getElementById('refreshLabel');
+  if(lbl) lbl.textContent = 'Modo demo · configura o GitHub Actions';
+  const chipN = document.getElementById('chipNext');
+  if(chipN) chipN.style.display = 'none';
 }
 
 /* ═══════════════════ SOURCE CATEGORY OVERRIDES ═════════ */
@@ -1792,6 +2063,8 @@ loadLiveData().then(hasLive => {
     buildTickerFromLive();
     buildSummaryFromLive();
     buildSectionsFromLive();
+    buildInvestTipsFromLive();
+    renderUserSourceErrors();
     updateRefreshLabel();
   } else {
     buildTicker();
@@ -1801,6 +2074,398 @@ loadLiveData().then(hasLive => {
 });
 
 setInterval(updateRefreshLabel, 60000);
+checkUrlProfile();
+updateLerBadge();
+
+// ── PROFILE SYNC ─────────────────────────────────────────────
+function exportProfile(){
+  const data = JSON.stringify(STATE, null, 2);
+  const blob = new Blob([data], {type:'application/json'});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `prisma-perfil-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  const st = document.getElementById('syncStatus');
+  if(st){ st.textContent='Perfil exportado com sucesso.'; setTimeout(()=>st.textContent='',3000); }
+}
+
+function importProfile(event){
+  const file = event.target.files?.[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try{
+      const data = JSON.parse(e.target.result);
+      if(!data.profiles || !Array.isArray(data.profiles)) throw new Error('Formato inválido');
+      // Merge: keep existing profiles not in imported, add new ones
+      Object.assign(STATE, data);
+      saveState();
+      renderProfile();
+      buildSidebar();
+      _rebuild();
+      const st = document.getElementById('syncStatus');
+      if(st){ st.textContent='✅ Perfil importado com sucesso!'; setTimeout(()=>st.textContent='',4000); }
+    } catch(err){
+      const st = document.getElementById('syncStatus');
+      if(st){ st.textContent='❌ Erro ao importar: ' + err.message; st.style.color='#EF4444'; setTimeout(()=>{ st.textContent=''; st.style.color='#10B981'; },4000); }
+    }
+  };
+  reader.readAsText(file);
+  event.target.value=''; // reset input
+}
+
+function shareProfileUrl(){
+  try{
+    const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(STATE))));
+    const url = window.location.origin + window.location.pathname + '?p=' + encoded;
+    navigator.clipboard.writeText(url).then(()=>{
+      const st = document.getElementById('syncStatus');
+      if(st){ st.textContent='🔗 Link copiado! Abre no outro dispositivo para sincronizar.'; setTimeout(()=>st.textContent='',5000); }
+    });
+  } catch(e){
+    const st = document.getElementById('syncStatus');
+    if(st){ st.textContent='Erro ao gerar link: perfil demasiado grande.'; st.style.color='#EF4444'; }
+  }
+}
+
+function checkUrlProfile(){
+  const params = new URLSearchParams(window.location.search);
+  const p = params.get('p');
+  if(!p) return;
+  try{
+    const data = JSON.parse(decodeURIComponent(escape(atob(p))));
+    if(!data.profiles) return;
+    Object.assign(STATE, data);
+    saveState();
+    // Clean URL
+    window.history.replaceState({}, '', window.location.pathname);
+    setTimeout(()=>{
+      renderProfile(); buildSidebar(); _rebuild();
+      alert('✅ Perfil sincronizado com sucesso!');
+    }, 500);
+  } catch(e){ console.log('URL profile parse error:', e); }
+}
+
+
+// ── READ LATER ────────────────────────────────────────────────
+const RL_KEY = 'prisma_readlater';
+
+function getReadLater(){ try{ return JSON.parse(localStorage.getItem(RL_KEY)||'[]'); }catch(e){ return []; } }
+function saveReadLater(items){ localStorage.setItem(RL_KEY, JSON.stringify(items)); }
+function isReadLater(hash){ return getReadLater().some(i=>i.hash===hash); }
+
+function toggleReadLater(hash, btnOrEvent, event){
+  const btn = (btnOrEvent instanceof HTMLElement) ? btnOrEvent : document.getElementById('rl-'+hash);
+  if(event) event.stopPropagation();
+  else if(btnOrEvent && btnOrEvent.stopPropagation) btnOrEvent.stopPropagation();
+  const title  = btn?.dataset?.title  || '';
+  const url    = btn?.dataset?.url    || '';
+  const source = btn?.dataset?.source || '';
+  const items  = getReadLater();
+  const idx    = items.findIndex(i=>i.hash===hash);
+  if(idx >= 0){
+    items.splice(idx,1);
+  } else {
+    items.unshift({hash, title, url, source, savedAt: new Date().toISOString()});
+  }
+  saveReadLater(items);
+  const el = document.getElementById('rl-'+hash);
+  if(el) el.style.opacity = idx >= 0 ? '0.4' : '1';
+  updateLerBadge();
+  if(STATE.tab==='ler') renderReadLater();
+}
+
+function updateLerBadge(){
+  const n = getReadLater().length;
+  const badge = document.getElementById('lerBadge');
+  if(!badge) return;
+  if(n > 0){ badge.textContent=n; badge.style.display='inline'; }
+  else { badge.style.display='none'; }
+}
+
+function renderReadLater(){
+  const items = getReadLater();
+  const empty = document.getElementById('lerEmpty');
+  const list  = document.getElementById('lerList');
+  const clearRow = document.getElementById('lerClearRow');
+  if(!list) return;
+  if(!items.length){
+    if(empty) empty.style.display='';
+    list.innerHTML='';
+    if(clearRow) clearRow.style.display='none';
+    return;
+  }
+  if(empty) empty.style.display='none';
+  if(clearRow) clearRow.style.display='';
+  list.innerHTML = items.map(item=>`
+    <div style="background:#fff;border:1px solid var(--rule2);border-radius:var(--r);padding:14px 16px;box-shadow:var(--sh)">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+        <div style="flex:1">
+          <div style="font-size:11px;color:var(--ink4);font-family:var(--ff-m);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px">${item.source} · ${(item.savedAt||'').slice(0,10)}</div>
+          <a href="${item.url}" target="_blank" rel="noopener"
+            style="font-family:var(--ff-s);font-size:15px;font-weight:700;color:var(--ink);line-height:1.3;text-decoration:none;display:block">
+            ${item.title}<span style="font-size:11px;margin-left:4px;opacity:.5">↗</span>
+          </a>
+        </div>
+        <button onclick="toggleReadLater('${item.hash}','','','',event)"
+          style="background:none;border:none;cursor:pointer;font-size:18px;flex-shrink:0;padding:2px;opacity:.6"
+          title="Remover">🗑</button>
+      </div>
+    </div>`).join('');
+}
+
+function clearReadLater(){
+  if(!confirm('Limpar todos os artigos guardados?')) return;
+  saveReadLater([]);
+  updateLerBadge();
+  renderReadLater();
+}
+
+
+// ── WEEKLY NARRATIVE ─────────────────────────────────────────────────────────
+let WEEKLY_DATA = null;
+
+async function loadWeeklyData(){
+  try{
+    const r = await fetch(`data/weekly.json?v=${Date.now()}`);
+    if(!r.ok) return null;
+    WEEKLY_DATA = await r.json();
+    return WEEKLY_DATA;
+  } catch(e){ return null; }
+}
+
+function buildWeeklyNarrative(data){
+  const loading  = document.getElementById('wnrLoading');
+  const content  = document.getElementById('wnrContent');
+  const meta     = document.getElementById('wnrMeta');
+  const sections = document.getElementById('wnrSections');
+  if(!loading || !content || !meta || !sections) return;
+
+  if(!data || !data.sections || !data.sections.length){
+    // Check if LIVE_DATA has it (generated today)
+    const nd = LIVE_DATA?.weekly_narrative;
+    if(nd && nd.sections && nd.sections.length){
+      return buildWeeklyNarrative(nd);
+    }
+    loading.style.display='none';
+    const block = document.getElementById('wnrBlock');
+    if(block){
+      block.innerHTML=`<div class="wnr-placeholder">
+        📅 A narrativa semanal é gerada automaticamente às sextas-feiras.<br>
+        <span style="font-size:12px;margin-top:8px;display:block">Disponível após o run de sexta-feira.</span>
+      </div>`;
+    }
+    return;
+  }
+
+  // Format: "9 de Março de 2026" from week_label
+  meta.textContent = `Semana de ${data.week_label || '—'} · ${data.reading_minutes || 8} minutos de leitura`;
+
+  const SEC_ICONS = {
+    'O Mundo Esta Semana': '🌍',
+    'Portugal em Foco':    '🇵🇹',
+    'Economia e Mercados': '📈',
+    'Relevante Para Ti':   '✨',
+  };
+
+  sections.innerHTML = (data.sections || []).map(sec => {
+    const icon = SEC_ICONS[sec.title] || '📌';
+    // Split body into paragraphs on double newlines or \n
+    const paras = (sec.body || '')
+      .split(/\n{2,}|\n/)
+      .map(p => p.trim())
+      .filter(p => p.length > 20);
+    const bodyHtml = paras.map(p => `<p>${p}</p>`).join('');
+    return `
+      <div class="wnr-sec">
+        <div class="wnr-sec-title">${icon} ${sec.title}</div>
+        <div class="wnr-body">${bodyHtml}</div>
+      </div>`;
+  }).join('');
+
+  loading.style.display = 'none';
+  content.style.display = 'block';
+}
+
+
+// ── GITHUB AUTO-SYNC ─────────────────────────────────────────────
+const PAT_KEY  = 'prisma_gh_pat';
+const REPO_KEY = 'prisma_gh_repo';
+
+function getGhPat()  { return localStorage.getItem(PAT_KEY)  || ''; }
+function getGhRepo() { return localStorage.getItem(REPO_KEY) || 'rodrigues1234/prisma-daily'; }
+
+function onPatInput(val){
+  // Show/hide repo row based on whether PAT has content
+  const row = document.getElementById('patRepoRow');
+  if(row) row.style.display = val.trim() ? '' : 'none';
+}
+
+function togglePatVisibility(){
+  const inp = document.getElementById('ghPat');
+  const btn = document.getElementById('patEyeBtn');
+  if(!inp) return;
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+  if(btn) btn.style.opacity = inp.type === 'text' ? '1' : '.5';
+}
+
+function saveGhPat(){
+  const pat  = (document.getElementById('ghPat')?.value  || '').trim();
+  const repo = (document.getElementById('ghRepo')?.value || '').trim() || 'rodrigues1234/prisma-daily';
+  const st   = document.getElementById('patStatus');
+
+  if(!pat){
+    localStorage.removeItem(PAT_KEY);
+    if(st){ st.textContent='Token removido.'; st.style.color='var(--ink4)'; }
+    return;
+  }
+
+  // Basic format validation: GitHub PATs start with ghp_ or github_pat_
+  if(!pat.startsWith('ghp_') && !pat.startsWith('github_pat_')){
+    if(st){ st.textContent='❌ Formato inválido. O token deve começar com ghp_ ou github_pat_'; st.style.color='#EF4444'; }
+    return;
+  }
+
+  localStorage.setItem(PAT_KEY, pat);
+  localStorage.setItem(REPO_KEY, repo);
+  if(st){ st.textContent='⏳ A verificar token...'; st.style.color='var(--ink4)'; }
+
+  // Verify token against GitHub API
+  fetch(`https://api.github.com/repos/${repo}`, {
+    headers: { Authorization: `token ${pat}`, 'X-GitHub-Api-Version': '2022-11-28' }
+  }).then(r => {
+    if(r.ok){
+      if(st){ st.textContent='✅ Token válido. Fontes serão sincronizadas automaticamente.'; st.style.color='#10B981'; }
+      // Show repo row
+      const row = document.getElementById('patRepoRow');
+      if(row) row.style.display = '';
+    } else if(r.status === 401){
+      if(st){ st.textContent='❌ Token inválido ou expirado.'; st.style.color='#EF4444'; }
+      localStorage.removeItem(PAT_KEY);
+    } else if(r.status === 404){
+      if(st){ st.textContent='❌ Repositório não encontrado. Verifica o campo "user/repo".'; st.style.color='#EF4444'; }
+    } else {
+      if(st){ st.textContent=`⚠️ Erro ${r.status}. Token guardado na mesma.`; st.style.color='#F59E0B'; }
+    }
+  }).catch(() => {
+    if(st){ st.textContent='⚠️ Sem ligação para verificar. Token guardado.'; st.style.color='#F59E0B'; }
+  });
+}
+
+function loadPatToUI(){
+  const pat  = getGhPat();
+  const repo = getGhRepo();
+  const inp  = document.getElementById('ghPat');
+  const rInp = document.getElementById('ghRepo');
+  const row  = document.getElementById('patRepoRow');
+  if(inp && pat) inp.value = pat;
+  if(rInp) rInp.value = repo;
+  if(row) row.style.display = pat ? '' : 'none';
+}
+
+function buildUserSourcesPayload(){
+  // Collect all custom sources (id starts with 'u') across all profiles
+  const custom = [];
+  const seen   = new Set();
+  STATE.profiles.forEach(p => {
+    (p.sources || []).forEach(s => {
+      if(s.id?.startsWith('u') && s.rss && !seen.has(s.rss)){
+        seen.add(s.rss);
+        custom.push({ name: s.nm, rss: s.rss, category: s.cat });
+      }
+    });
+  });
+  return custom;
+}
+
+function showSrcSyncStatus(msg, type){
+  // type: 'loading' | 'ok' | 'error' | 'warning'
+  const el = document.getElementById('srcSyncStatus');
+  if(!el) return;
+  const colors = { loading:'#EFF6FF', ok:'#ECFDF5', error:'#FEF2F2', warning:'#FFFBEB' };
+  const texts  = { loading:'var(--blue)', ok:'#065F46', error:'#991B1B', warning:'#92400E' };
+  el.style.display  = '';
+  el.style.background = colors[type] || colors.loading;
+  el.style.color      = texts[type]  || texts.loading;
+  el.textContent = msg;
+  if(type === 'ok' || type === 'error'){
+    setTimeout(() => { el.style.display = 'none'; }, 6000);
+  }
+}
+
+async function syncUserSources(action, sourceName){
+  const pat  = getGhPat();
+  const repo = getGhRepo();
+  if(!pat){
+    showSrcSyncStatus(
+      `"${sourceName}" guardada localmente. Para activar no Prisma, configura o GitHub Token nas Definições.`,
+      'warning'
+    );
+    return;
+  }
+
+  const custom = buildUserSourcesPayload();
+  const content = JSON.stringify({ sources: custom, updated_at: new Date().toISOString() }, null, 2);
+  const encoded = btoa(unescape(encodeURIComponent(content)));
+  const path    = 'data/user-sources.json';
+  const apiUrl  = `https://api.github.com/repos/${repo}/contents/${path}`;
+  const headers = {
+    Authorization: `token ${pat}`,
+    'Content-Type': 'application/json',
+    'X-GitHub-Api-Version': '2022-11-28'
+  };
+
+  showSrcSyncStatus(`⏳ A sincronizar "${sourceName}" com o Prisma...`, 'loading');
+
+  try {
+    // Get current SHA (needed for update)
+    let sha = null;
+    const getR = await fetch(apiUrl, { headers });
+    if(getR.ok){
+      const existing = await getR.json();
+      sha = existing.sha;
+    }
+
+    // Commit
+    const body = { message: `prisma: ${action} source "${sourceName}"`, content: encoded };
+    if(sha) body.sha = sha;
+
+    const putR = await fetch(apiUrl, {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify(body)
+    });
+
+    if(putR.ok){
+      showSrcSyncStatus(
+        `✅ "${sourceName}" sincronizada. Activa no próximo run do Prisma (máximo 6h).`,
+        'ok'
+      );
+    } else if(putR.status === 401){
+      showSrcSyncStatus('❌ Token inválido ou expirado. Actualiza nas Definições.', 'error');
+    } else {
+      const err = await putR.json().catch(()=>({}));
+      showSrcSyncStatus(`❌ Erro ${putR.status}: ${err.message || 'falha na sincronização'}.`, 'error');
+    }
+  } catch(e){
+    showSrcSyncStatus('⚠️ Sem ligação. A fonte foi guardada localmente mas não foi sincronizada.', 'warning');
+  }
+}
+
+
+// ── USER SOURCE ERRORS ───────────────────────────────────────────
+function renderUserSourceErrors(){
+  const errors = LIVE_DATA?.user_source_errors || [];
+  const el = document.getElementById('srcErrors');
+  if(!el) return;
+  if(!errors.length){ el.style.display='none'; return; }
+  el.style.display = '';
+  el.innerHTML = `<strong>⚠️ ${errors.length} fonte${errors.length>1?'s':''} com erro no último run:</strong><br>`
+    + errors.map(e => `• <strong>${e.name}</strong> — ${e.error}`).join('<br>');
+}
+
 </script>
 </body>
 </html>
