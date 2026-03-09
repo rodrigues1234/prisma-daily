@@ -1055,6 +1055,35 @@ function renderProfile(){
   renderStocks();
 }
 
+function renderGeminiAlert(){
+  // Remove alerta anterior
+  document.querySelectorAll('.gemini-alert').forEach(el=>el.remove());
+  if(!LIVE_DATA?.gemini_alert) return;
+  const status = LIVE_DATA.gemini_status || 'failed';
+  const colors = {failed:'#EF4444', partial:'#F59E0B', ok:'#10B981'};
+  const icons  = {failed:'⚠️', partial:'⚡', ok:'✅'};
+  const color  = colors[status] || colors.failed;
+  const icon   = icons[status]  || icons.failed;
+  const el = document.createElement('div');
+  el.className = 'gemini-alert';
+  el.style.cssText = `
+    background:#fff;border:1.5px solid ${color};border-radius:10px;
+    padding:12px 16px;margin:0 0 18px 0;display:flex;align-items:flex-start;
+    gap:10px;font-size:13px;line-height:1.5;color:var(--ink2);
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+  `;
+  el.innerHTML = `
+    <span style="font-size:16px;flex-shrink:0;margin-top:1px">${icon}</span>
+    <div>
+      <strong style="color:${color};font-size:12px;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:2px">
+        ${status==='failed'?'IA indisponível':status==='partial'?'IA parcialmente disponível':'IA disponível'}
+      </strong>
+      ${LIVE_DATA.gemini_alert}
+    </div>`;
+  const target = document.getElementById('catSections');
+  if(target) target.parentNode.insertBefore(el, target);
+}
+
 function _rebuild(){ if(LIVE_DATA){buildTickerFromLive();buildSummaryFromLive();buildSectionsFromLive();}else{buildTicker();buildSummary();buildSections();} }
 function setActive(id){ STATE.active=id; saveState(); renderProfile(); buildSidebar(); _rebuild(); updateAv(); document.getElementById('gName').textContent=aP().name; }
 function updateAv(){ const p=aP(); const av=document.getElementById('hAv'); av.textContent=p.name[0].toUpperCase(); av.style.background=p.color; }
@@ -1317,6 +1346,8 @@ async function loadLiveData(){
       if(res.ok){
         LIVE_DATA = await res.json();
         console.log(`Prisma: dados carregados de ${url}`);
+        // Mostra alerta Gemini se existir
+        if(LIVE_DATA?.gemini_alert) setTimeout(renderGeminiAlert, 100);
         // Carrega index — suporta formato novo {runs:[]} e antigo {dates:[]}
         try{
           const idx = await fetch('data/index.json');
@@ -1381,32 +1412,45 @@ function buildSummaryFromLive(){
 }
 
 function buildSectionsFromLive(){
-  // v4: lista plana de artigos, categorização no HTML pelo utilizador
-  // v3 legacy: categories dict
-  const isV4 = LIVE_DATA?.version===4 || Array.isArray(LIVE_DATA?.articles);
+  // v5: categories pré-agrupado pelo Python, overrides manuais aplicados no HTML
+  // v4: lista plana, categorização no HTML
+  // v3 legacy: categories dict directo
+  const v = LIVE_DATA?.version || 0;
+  const isV5 = v >= 5;
+  const isV4 = v === 4 || (Array.isArray(LIVE_DATA?.articles) && !isV5);
   if(!LIVE_DATA) return buildSections();
-  if(!isV4 && !LIVE_DATA?.categories) return buildSections();
+  if(!isV5 && !isV4 && !LIVE_DATA?.categories) return buildSections();
+
+  // Mostra/esconde alerta Gemini
+  renderGeminiAlert();
 
   const p=aP();
   const orders=catOrder();
   const enabled=orders.filter(c=>c.on).map(c=>CAT_DEFS.find(d=>d.id===c.id)).filter(Boolean);
 
-  const categories = isV4
-    ? categorizeArticles(LIVE_DATA.articles)
-    : LIVE_DATA.categories;
+  let categories;
+  if(isV5){
+    categories = JSON.parse(JSON.stringify(LIVE_DATA.categories || {}));
+    const artOverrides = loadOverrides();
+    if(Object.keys(artOverrides).length && LIVE_DATA.articles){
+      for(const cat of Object.keys(categories)){
+        categories[cat] = (categories[cat]||[]).filter(a => !artOverrides[hashUrl(a.url||'')]);
+      }
+      for(const a of LIVE_DATA.articles){
+        const h = hashUrl(a.url||'');
+        const oc = artOverrides[h];
+        if(oc){ if(!categories[oc]) categories[oc]=[]; categories[oc].push(a); }
+      }
+    }
+  } else if(isV4){
+    categories = categorizeArticles(LIVE_DATA.articles);
+  } else {
+    categories = LIVE_DATA.categories;
+  }
 
   let html='';
 
-  // Connections (v3 only)
-  if(!isV4){
-    const conns=LIVE_DATA.connections||[];
-    if(conns.length){
-      html+=`<div class="conns fade" style="animation-delay:.09s">
-        <div class="conns-hd">⟁ &nbsp;Ligações entre notícias</div>
-        ${conns.map(cn=>`<div class="conn">${cn.note}<div class="conn-pills">${(cn.articles||[]).map(a=>`<span class="cpill">${a}</span>`).join('')}</div></div>`).join('')}
-      </div>`;
-    }
-  }
+  // Connections: removido em v5
 
   enabled.forEach((cat,i)=>{
     if(cat.id==='portfolio'){ html+=buildPortfolioFromLive(cat,i); return; }
@@ -1473,9 +1517,8 @@ function buildSectionsFromLive(){
 
   document.getElementById('catSections').innerHTML=html;
 
-  const total = isV4
-    ? (LIVE_DATA.articles||[]).length
-    : Object.values(LIVE_DATA.categories||{}).reduce((s,a)=>s+(a?.length||0),0);
+  const total = (LIVE_DATA.articles||[]).length ||
+    Object.values(LIVE_DATA.categories||{}).reduce((s,a)=>s+(a?.length||0),0);
   const upTime=(LIVE_DATA.updated_at||'').slice(11,16)||'hoje';
   const chipA=document.getElementById('chipArtigos');
   const chipC=document.getElementById('chipCats');
