@@ -29,8 +29,8 @@ signal.alarm(300)  # 5 min — Mistral é rápido
 
 # ─── CONFIG ───────────────────────────────────────────────────────────
 MODEL          = "mistral-small-latest"
-MAX_ARTICLES   = 40    # enviados ao Mistral
-MAX_PER_SOURCE = 3     # 18 fontes × 3 = 54 → limita a 40
+MAX_ARTICLES   = 60    # enviados ao Mistral
+MAX_PER_SOURCE = 3     # 27 fontes × 3 = 81 → limita a 60
 
 _NOW     = datetime.now(timezone.utc)
 TODAY    = _NOW.strftime("%Y-%m-%d")
@@ -65,15 +65,24 @@ SOURCE_TO_CAT = {
     "Dinheiro Vivo":        "economia",
     "RTP Notícias":         "portugal",
     "Público":              "portugal",
-    "The Guardian":         "mundo",
+    "SIC Notícias":         "portugal",
+    "Euronews PT":          "mundo",
     "BBC News":             "breaking",
-    "SAPO Tek":             "tecnologia",
+    "The Guardian":         "mundo",
+    "Reuters":              "mundo",
+    "Al Jazeera":           "mundo",
+    "DW News":              "mundo",
+    "Le Monde EN":          "mundo",
     "Bloomberg":            "economia",
     "The Economist":        "economia",
+    "Financial Times":      "economia",
+    "Seeking Alpha":        "portfolio",
+    "Reuters Business":     "economia",
+    "Negócios ao Minuto":   "economia",
     "TechCrunch":           "tecnologia",
     "The Verge":            "tecnologia",
     "Wired":                "tecnologia",
-    "Seeking Alpha":        "portfolio",
+    "SAPO Tek":             "tecnologia",
     "HBR":                  "carreira",
     "MIT Sloan Review":     "carreira",
     "Fast Company":         "carreira",
@@ -82,25 +91,34 @@ SOURCE_TO_CAT = {
 # ─── 18 FONTES ────────────────────────────────────────────────────────
 # URLs testados em runs reais + melhores alternativas conhecidas
 RSS = [
-    # Portugal (6)
+    # Portugal (8)
     ("Observador",          "https://feeds.feedburner.com/observador"),
     ("Eco",                 "https://eco.sapo.pt/feed/"),
     ("Jornal de Negócios",  "https://www.jornaldenegocios.pt/rss"),
     ("Dinheiro Vivo",       "https://www.dinheirovivo.pt/feed/"),
-    ("RTP Notícias",        "https://www.rtp.pt/noticias/rss/rtp-noticias"),
-    ("Público",             "https://www.publico.pt/api/feeds/rss"),
-    # Mundo & Breaking (2)
-    ("The Guardian",        "https://www.theguardian.com/world/rss"),
+    ("RTP Notícias",        "https://www.rtp.pt/noticias/?output=rss"),
+    ("Público",             "https://feeds.feedburner.com/PublicoRSS"),
+    ("SIC Notícias",        "https://sicnoticias.pt/rss"),
+    ("Euronews PT",         "https://pt.euronews.com/rss?level=theme&name=news"),
+    # Mundo & Breaking (6)
     ("BBC News",            "https://feeds.bbci.co.uk/news/rss.xml"),
-    # Economia & Portfolio (4)
+    ("The Guardian",        "https://www.theguardian.com/world/rss"),
+    ("Reuters",             "https://feeds.reuters.com/reuters/topNews"),
+    ("Al Jazeera",          "https://www.aljazeera.com/xml/rss/all.xml"),
+    ("DW News",             "https://rss.dw.com/rdf/rss-en-all"),
+    ("Le Monde EN",         "https://www.lemonde.fr/en/rss/une.xml"),
+    # Economia & Mercados (6)
     ("Bloomberg",           "https://feeds.bloomberg.com/markets/news.rss"),
     ("The Economist",       "https://www.economist.com/finance-and-economics/rss.xml"),
+    ("Financial Times",     "https://www.ft.com/rss/home"),
     ("Seeking Alpha",       "https://seekingalpha.com/feed.xml"),
-    ("SAPO Tek",            "https://tek.sapo.pt/rss"),
-    # Tecnologia (3)
+    ("Reuters Business",    "https://feeds.reuters.com/reuters/businessNews"),
+    ("Negócios ao Minuto",  "https://www.noticiasaominuto.com/rss/economia"),
+    # Tecnologia (4)
     ("TechCrunch",          "https://techcrunch.com/feed/"),
     ("The Verge",           "https://www.theverge.com/rss/index.xml"),
     ("Wired",               "https://www.wired.com/feed/rss"),
+    ("SAPO Tek",            "https://tek.sapo.pt/rss"),
     # Carreira & Recomendação (3)
     ("HBR",                 "https://feeds.feedburner.com/harvardbusiness"),
     ("MIT Sloan Review",    "https://sloanreview.mit.edu/feed/"),
@@ -143,9 +161,40 @@ def fetch_one_feed(name: str, url: str) -> list[dict]:
         return []
 
 
-def collect_and_filter() -> list[dict]:
+def load_user_sources() -> list[tuple[str, str]]:
+    """Lê data/user-sources.json se existir e devolve lista de (name, url)."""
+    path = DATA / "user-sources.json"
+    if not path.exists():
+        return []
+    try:
+        data  = json.loads(path.read_text(encoding="utf-8"))
+        srcs  = data.get("sources", [])
+        valid = []
+        for s in srcs:
+            nm  = s.get("name","").strip()
+            rss = s.get("rss","").strip()
+            cat = s.get("category","mundo")
+            if nm and rss and rss.startswith("http"):
+                valid.append((nm, rss, cat))
+        if valid:
+            print(f"  📌 {len(valid)} fontes do utilizador carregadas de user-sources.json")
+        return valid
+    except Exception as ex:
+        print(f"  aviso user-sources: {ex}")
+        return []
+
+
+def collect_and_filter() -> tuple[list[dict], list[dict]]:
+    """Devolve (articles, user_source_errors)."""
+    # Merge hardcoded + user sources
+    user_srcs = load_user_sources()
+    all_feeds = list(RSS) + [(nm, url) for nm, url, cat in user_srcs]
+
+    # Build SOURCE_TO_CAT override for user sources
+    user_cat_map = {nm: cat for nm, url, cat in user_srcs}
+
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
-        futures = {ex.submit(fetch_one_feed, n, u): n for n, u in RSS}
+        futures = {ex.submit(fetch_one_feed, n, u): n for n, u in all_feeds}
         raw = []
         for f in as_completed(futures):
             try: raw.extend(f.result())
@@ -172,9 +221,20 @@ def collect_and_filter() -> list[dict]:
 
     # Ordena por fonte para output consistente, limita a MAX_ARTICLES
     selected = selected[:MAX_ARTICLES]
-    feeds_ok = len(by_source)
-    print(f"  {len(unique)} artigos únicos de {feeds_ok}/{len(RSS)} feeds → {len(selected)} seleccionados")
-    return selected
+    feeds_ok  = len(by_source)
+    total_feeds = len(all_feeds)
+    print(f"  {len(unique)} artigos únicos de {feeds_ok}/{total_feeds} feeds → {len(selected)} seleccionados")
+
+    # Report user sources that failed (got 0 articles)
+    user_source_errors = []
+    for nm, url, cat in user_srcs:
+        if nm not in by_source:
+            user_source_errors.append({"name": nm, "rss": url, "error": "Sem artigos ou feed inacessível"})
+
+    # Add user cat mappings to SOURCE_TO_CAT for enrichment fallback
+    SOURCE_TO_CAT.update(user_cat_map)
+
+    return selected, user_source_errors
 
 
 # ─── MISTRAL ──────────────────────────────────────────────────────────
@@ -257,7 +317,7 @@ Artigos:
 
     print(f"  prompt: {len(prompt)} chars (~{len(prompt)//4} tokens estimados)")
     t0 = time.time()
-    text = call_mistral(client, prompt, max_tokens=8000, label="[enrich]")
+    text = call_mistral(client, prompt, max_tokens=12000, label="[enrich]")
     print(f"  Mistral respondeu em {time.time()-t0:.1f}s")
     data = parse_json_safe(text)
 
@@ -306,8 +366,12 @@ Artigos:
 
 
 # ─── RESUMO DO DIA ────────────────────────────────────────────────────
-def gen_summary(client: Mistral, articles: list, stocks: list) -> tuple[dict, str]:
-    top = [a for a in articles if a.get("why")][:8] or articles[:8]
+def gen_summary(client: Mistral, articles: list, stocks: list) -> tuple[dict, list, str]:
+    """
+    Devolve (summary_dict, connections_list, status).
+    Tudo numa chamada: 4 pontos de briefing + 3 ligações entre notícias.
+    """
+    top = [a for a in articles if a.get("why")][:10] or articles[:10]
     arts_txt   = "\n".join([f"- {a['title']} ({a['source']})" for a in top])
     stocks_txt = "\n".join([
         f"- {s['label']}: {s['price']} ({'+' if s['up'] else ''}{s['change_pct']:.2f}%)"
@@ -320,29 +384,44 @@ def gen_summary(client: Mistral, articles: list, stocks: list) -> tuple[dict, st
 Mercados:
 {stocks_txt}
 
-Gera um briefing executivo com exactamente 4 pontos de destaque em português de Portugal.
-Cada ponto deve ser uma frase directa, informativa e útil para um executivo.
+Responde com JSON com DUAS secções:
+
+1. "briefing": array de exactamente 4 pontos de destaque em português de Portugal. Cada ponto é uma frase directa e útil para um executivo.
+
+2. "connections": array de exactamente 3 ligações entre notícias. Cada ligação identifica uma relação não óbvia entre 2 ou mais notícias e explica a implicação prática. Usa os nomes das fontes exactamente como aparecem acima.
 
 Responde APENAS com JSON válido:
-{{"headline":"Briefing de {DIA_PT}","items":[
-  {{"text":"frase directa","color":"#EF4444","source":"nome da fonte","time":"{HORA_PT}","url":""}},
-  {{"text":"frase directa","color":"#F59E0B","source":"nome da fonte","time":"{HORA_PT}","url":""}},
-  {{"text":"frase directa","color":"#3B82F6","source":"nome da fonte","time":"{HORA_PT}","url":""}},
-  {{"text":"frase directa","color":"#10B981","source":"nome da fonte","time":"{HORA_PT}","url":""}}
-]}}"""
+{{
+  "headline": "Briefing de {DIA_PT}",
+  "briefing": [
+    {{"text":"frase directa","color":"#EF4444","source":"nome da fonte","time":"{HORA_PT}","url":""}},
+    {{"text":"frase directa","color":"#F59E0B","source":"nome da fonte","time":"{HORA_PT}","url":""}},
+    {{"text":"frase directa","color":"#3B82F6","source":"nome da fonte","time":"{HORA_PT}","url":""}},
+    {{"text":"frase directa","color":"#10B981","source":"nome da fonte","time":"{HORA_PT}","url":""}}
+  ],
+  "connections": [
+    {{"note":"explicação da ligação em 1-2 frases","articles":["Fonte A","Fonte B"]}},
+    {{"note":"explicação da ligação em 1-2 frases","articles":["Fonte C","Fonte D"]}},
+    {{"note":"explicação da ligação em 1-2 frases","articles":["Fonte E","Fonte F"]}}
+  ]
+}}"""
 
     t0 = time.time()
-    text = call_mistral(client, prompt, max_tokens=600, label="[resumo]")
-    print(f"  Mistral resumo em {time.time()-t0:.1f}s")
+    text = call_mistral(client, prompt, max_tokens=1000, label="[resumo+ligações]")
+    print(f"  Mistral resumo+ligações em {time.time()-t0:.1f}s")
     data = parse_json_safe(text)
-    default = {"headline": f"Briefing de {DIA_PT}", "items": []}
+    default_sum = {"headline": f"Briefing de {DIA_PT}", "items": []}
     if not isinstance(data, dict):
         print("  resumo falhou")
-        return default, "failed"
-    return {
-        "headline": data.get("headline", default["headline"]),
-        "items":    data.get("items", [])
-    }, "ok"
+        return default_sum, [], "failed"
+
+    summary = {
+        "headline": data.get("headline", default_sum["headline"]),
+        "items":    data.get("briefing", data.get("items", [])),
+    }
+    connections = data.get("connections", [])
+    print(f"  {len(summary['items'])} pontos briefing, {len(connections)} ligações")
+    return summary, connections, "ok"
 
 
 # ─── PORTFOLIO ────────────────────────────────────────────────────────
@@ -413,20 +492,140 @@ def atomic_write(path: Path, content: str):
     tmp.replace(path)
 
 
+
+# ─── NARRATIVA SEMANAL ───────────────────────────────────────────────────────
+def load_week_articles() -> list[dict]:
+    """Agrega artigos únicos dos últimos 7 ficheiros data/*.json."""
+    files = sorted(DATA.glob("????-??-??-??h.json"), reverse=True)[:28]  # 4 runs/dia × 7 dias
+    seen, articles = set(), []
+    for fp in files:
+        try:
+            data = json.loads(fp.read_text(encoding="utf-8"))
+            for a in data.get("articles", []):
+                key = a.get("url", "") or a.get("title", "")
+                if key and key not in seen:
+                    seen.add(key)
+                    articles.append(a)
+        except Exception:
+            continue
+    print(f"  {len(articles)} artigos únicos de {len(files)} runs da semana")
+    return articles
+
+
+def gen_weekly_narrative(client: Mistral, articles: list) -> dict | None:
+    """
+    Gera narrativa semanal em texto corrido (~8 minutos de leitura).
+    Formato: 4 secções temáticas + relevância pessoal.
+    Só corre às sextas-feiras (ou se weekly.json não existir esta semana).
+    """
+    if not articles:
+        return None
+
+    # Agrupa por categoria para dar contexto ao Mistral
+    cats = {}
+    for a in articles:
+        c = a.get("category", "mundo")
+        cats.setdefault(c, []).append(a)
+
+    # Selecciona os melhores artigos por categoria (max 8 por cat)
+    lines = []
+    priority = ["breaking","economia","portfolio","portugal","mundo","tecnologia","carreira","recomendacao"]
+    for cat in priority:
+        arts = cats.get(cat, [])
+        top  = [a for a in arts if a.get("why") or a.get("summary")][:8]
+        if top:
+            lines.append(f"\n[{cat.upper()}]")
+            for a in top:
+                lines.append(f"  • {a['title']} — {a.get('summary','')[:120]}")
+
+    arts_context = "\n".join(lines)
+
+    # Semana actual
+    from datetime import timedelta
+    monday = _NOW - timedelta(days=_NOW.weekday())
+    friday = monday + timedelta(days=4)
+    week_label = f"{monday.strftime('%d')} a {friday.strftime('%d de %B de %Y')}"
+
+    prompt = f"""És editor de um briefing semanal personalizado para Ricardo, executivo português.
+
+PERFIL DO LEITOR:
+- Trabalha na Microsoft (CCX) em FinOps, Azure governance e AI governance
+- Investidor: carteira com NVDA, ASML, MSFT, AVGO, IWDA (ETF MSCI World), VHYL (dividendos), SGLN (ouro)
+- Co-proprietário de marca de roupa infantil portuguesa sustentável (Benny Baby)
+- Pratica desporto de endurance: corrida, CrossFit, HYROX
+- Baseado em Porto/Gaia, Portugal
+
+NOTÍCIAS DA SEMANA DE {week_label.upper()}:
+{arts_context}
+
+TAREFA:
+Escreve um resumo semanal em texto corrido em português de Portugal. Estilo editorial, directo, inteligente. Sem bullet points — só prosa fluida. Usa parágrafos de 3-5 linhas. Total: 900-1200 palavras (~8 minutos de leitura).
+
+ESTRUTURA (usa exactamente estes títulos):
+1. "O Mundo Esta Semana" — geopolítica, conflitos, diplomacia, eventos globais relevantes
+2. "Portugal em Foco" — o que se passou em Portugal: economia, política, sociedade
+3. "Economia e Mercados" — macro, Fed, BCE, mercados, inflação, sectores
+4. "Relevante Para Ti" — como os eventos desta semana afectam directamente Ricardo: o seu portfólio (NVDA, ASML, MSFT, cloud), o contexto FinOps/AI na Microsoft, Portugal como mercado, e qualquer implicação para a Benny ou o seu estilo de vida
+
+Responde APENAS com JSON válido:
+{{
+  "week_label": "{week_label}",
+  "generated_at": "{NOW_ISO}",
+  "sections": [
+    {{"title": "O Mundo Esta Semana", "body": "texto corrido..."}},
+    {{"title": "Portugal em Foco", "body": "texto corrido..."}},
+    {{"title": "Economia e Mercados", "body": "texto corrido..."}},
+    {{"title": "Relevante Para Ti", "body": "texto corrido..."}}
+  ],
+  "reading_minutes": 8
+}}"""
+
+    print(f"  prompt semanal: {len(prompt)} chars")
+    t0 = time.time()
+    text = call_mistral(client, prompt, max_tokens=3000, label="[semanal]")
+    print(f"  narrativa gerada em {time.time()-t0:.1f}s")
+    data = parse_json_safe(text)
+    if not isinstance(data, dict) or "sections" not in data:
+        print("  narrativa semanal falhou")
+        return None
+    return data
+
+
+def should_generate_weekly() -> bool:
+    """Corre às sextas (weekday==4) ou se o weekly.json tiver mais de 6 dias."""
+    weekly_path = DATA / "weekly.json"
+    if not weekly_path.exists():
+        return True
+    try:
+        existing = json.loads(weekly_path.read_text())
+        gen_at = existing.get("generated_at","")
+        if gen_at:
+            age_days = (_NOW - datetime.fromisoformat(gen_at.replace("Z","")
+                        .replace("+00:00","")).replace(tzinfo=timezone.utc)).days
+            if age_days < 6:
+                print(f"  weekly.json tem {age_days} dias — a reutilizar")
+                return False
+    except Exception:
+        pass
+    return _NOW.weekday() == 4 or True  # sexta-feira = 4; fallback: sempre gera se expirado
+
+
 # ─── MAIN ─────────────────────────────────────────────────────────────
 def main():
     t0 = time.time()
     print(f"\n{'='*54}")
     print(f"  Prisma v6 — {RUN_ID}")
-    print(f"  Fontes: {len(RSS)} | Max artigos: {MAX_ARTICLES} | Mistral calls: 2")
+    print(f"  Fontes: {len(RSS)} | Max artigos: {MAX_ARTICLES} | Mistral calls: 2+ligações")
     print(f"  Runs/dia: 4 (07h 12h 18h 22h UTC)")
     print(f"{'='*54}\n")
 
     client = get_client()
 
     # 1. RSS
-    print(f"[RSS] A recolher {len(RSS)} feeds...")
-    articles = collect_and_filter()
+    print(f"[RSS] A recolher {len(RSS)} feeds + fontes do utilizador...")
+    articles, user_source_errors = collect_and_filter()
+    if user_source_errors:
+        print(f"  ⚠️  {len(user_source_errors)} fontes do utilizador falharam: {[e['name'] for e in user_source_errors]}")
     print(f"  pronto em {time.time()-t0:.1f}s\n")
 
     # 2. Stocks
@@ -438,10 +637,10 @@ def main():
     print(f"[Mistral 1/2] A enriquecer e categorizar {len(articles)} artigos...")
     articles_enriched, enrich_status = enrich_and_categorize(client, articles)
 
-    # 4. Mistral — resumo
-    print("\n[Mistral 2/2] A gerar resumo do dia...")
-    summary, summary_status = gen_summary(client, articles_enriched, stocks_list)
-    print(f"  {len(summary.get('items',[]))} pontos\n")
+    # 4. Mistral — resumo + ligações
+    print("\n[Mistral 2/2] A gerar resumo + ligações entre notícias...")
+    summary, connections, summary_status = gen_summary(client, articles_enriched, stocks_list)
+    print()
 
     # 5. Portfolio
     pa = gen_portfolio(stocks_list)
@@ -475,18 +674,41 @@ def main():
         "version":            6,
         "sources":            SOURCE_NAMES,
         "gemini_status":      gemini_status,
+        "user_source_errors": user_source_errors,
         "gemini_alert":       gemini_alert,
         "articles":           articles_enriched,
         "categories":         categories,
         "summary":            summary,
+        "connections":        connections,
         "stocks":             stocks_list,
         "portfolio_analysis": pa,
+        "weekly_narrative":  weekly_narrative,
     }
 
     payload = json.dumps(output, ensure_ascii=False, indent=2)
     atomic_write(DATA / f"{RUN_ID}.json", payload)
     atomic_write(DATA / "latest.json",    payload)
     print(f"  Guardado: data/{RUN_ID}.json")
+
+    # 8b. Narrativa semanal (sextas ou se expirada)
+    weekly_narrative = None
+    weekly_path = DATA / "weekly.json"
+    if should_generate_weekly():
+        print("[Mistral 3/3 — SEMANAL] A agregar artigos da semana...")
+        week_arts = load_week_articles()
+        # Inclui também os artigos deste run
+        all_week = articles_enriched + [a for a in week_arts
+                   if a.get("url") not in {x.get("url") for x in articles_enriched}]
+        weekly_narrative = gen_weekly_narrative(client, all_week)
+        if weekly_narrative:
+            atomic_write(weekly_path, json.dumps(weekly_narrative, ensure_ascii=False, indent=2))
+            print(f"  Guardado: data/weekly.json ({len(weekly_narrative.get('sections',[]))} secções)")
+    else:
+        # Lê weekly existente para incluir no output
+        try:
+            weekly_narrative = json.loads(weekly_path.read_text(encoding="utf-8"))
+        except Exception:
+            weekly_narrative = None
 
     # 9. Index
     idx_path = DATA / "index.json"
