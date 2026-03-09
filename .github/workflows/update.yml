@@ -2,16 +2,15 @@ name: Prisma — Actualizar Briefing Diário
 
 on:
   schedule:
-    # 06:00 09:00 12:00 15:00 18:00 21:00 UTC (= mesmas horas Lisboa no inverno)
-    - cron: "0 6,9,12,15,18,21 * * *"
-  # Permite correr manualmente no GitHub (botão "Run workflow")
+    # 07:00 12:00 18:00 22:00 UTC (= 07/08h, 12/13h, 18/19h, 22/23h Lisboa)
+    - cron: "0 7,12,18,22 * * *"
   workflow_dispatch:
 
 jobs:
   update-briefing:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # necessário para fazer commit dos JSON
+      contents: write
 
     steps:
       - name: Checkout repositório
@@ -23,8 +22,7 @@ jobs:
           python-version: "3.11"
 
       - name: Instalar dependências
-        run: |
-          pip install feedparser yfinance google-genai
+        run: pip install feedparser yfinance google-genai requests
 
       - name: Criar pasta data (se não existir)
         run: mkdir -p data
