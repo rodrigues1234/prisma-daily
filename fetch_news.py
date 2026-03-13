@@ -468,6 +468,9 @@ def fetch_stocks() -> list[dict]:
     result = []
     tickers = STOCKS_DEFAULT + FOREX_DEFAULT
     try:
+        # no_cache evita o SQLite lock no GitHub Actions
+        import tempfile, os as _os
+        yf.set_tz_cache_location(tempfile.mkdtemp())
         data  = yf.download(tickers, period="5d", interval="1d",
                             progress=False, auto_adjust=True)
         close = data["Close"]
@@ -675,6 +678,24 @@ def main():
         if cat not in categories: cat = "mundo"
         categories[cat].append(a)
 
+    # 8b. Narrativa semanal (sextas ou se expirada)
+    weekly_narrative = None
+    weekly_path = DATA / "weekly.json"
+    if should_generate_weekly():
+        print("\n[Mistral 3/3 — SEMANAL] A agregar artigos da semana...")
+        week_arts = load_week_articles()
+        all_week = articles_enriched + [a for a in week_arts
+                   if a.get("url") not in {x.get("url") for x in articles_enriched}]
+        weekly_narrative = gen_weekly_narrative(api_key, all_week)
+        if weekly_narrative:
+            atomic_write(weekly_path, json.dumps(weekly_narrative, ensure_ascii=False, indent=2))
+            print(f"  Guardado: data/weekly.json ({len(weekly_narrative.get('sections',[]))} secções)")
+    else:
+        try:
+            weekly_narrative = json.loads(weekly_path.read_text(encoding="utf-8"))
+        except Exception:
+            weekly_narrative = None
+
     # 8. Output
     output = {
         "updated_at":         NOW_ISO,
@@ -697,26 +718,6 @@ def main():
     atomic_write(DATA / f"{RUN_ID}.json", payload)
     atomic_write(DATA / "latest.json",    payload)
     print(f"  Guardado: data/{RUN_ID}.json")
-
-    # 8b. Narrativa semanal (sextas ou se expirada)
-    weekly_narrative = None
-    weekly_path = DATA / "weekly.json"
-    if should_generate_weekly():
-        print("[Mistral 3/3 — SEMANAL] A agregar artigos da semana...")
-        week_arts = load_week_articles()
-        # Inclui também os artigos deste run
-        all_week = articles_enriched + [a for a in week_arts
-                   if a.get("url") not in {x.get("url") for x in articles_enriched}]
-        weekly_narrative = gen_weekly_narrative(api_key, all_week)
-        if weekly_narrative:
-            atomic_write(weekly_path, json.dumps(weekly_narrative, ensure_ascii=False, indent=2))
-            print(f"  Guardado: data/weekly.json ({len(weekly_narrative.get('sections',[]))} secções)")
-    else:
-        # Lê weekly existente para incluir no output
-        try:
-            weekly_narrative = json.loads(weekly_path.read_text(encoding="utf-8"))
-        except Exception:
-            weekly_narrative = None
 
     # 9. Index
     idx_path = DATA / "index.json"
