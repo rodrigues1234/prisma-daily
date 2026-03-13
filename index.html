@@ -1737,7 +1737,7 @@ function buildSectionsFromLive(){
             ${a.impact?`<div class="c-detail-row impact"><span class="c-dr-icon">⚡</span><div><div class="c-dr-label">Impacto potencial</div><div class="c-dr-text">${a.impact}</div></div></div>`:''}
             ${a.related?`<div class="c-detail-row related"><span class="c-dr-icon">🔗</span><div><div class="c-dr-label">Relação com outros factores</div><div class="c-dr-text">${a.related}</div></div></div>`:''}
           </div>`
-          :`<button class="c-expand disabled" disabled><span>Detalhes indisponíveis</span></button>`}
+          :`<div class="c-not-enriched">⟳ Detalhes disponíveis no próximo run</div>`}
         </div>
       </div>`;
     }).join('');
@@ -2268,6 +2268,7 @@ function buildWeeklyNarrative(data){
     'Portugal em Foco':    '🇵🇹',
     'Economia e Mercados': '📈',
     'Relevante Para Ti':   '✨',
+    'O que isto significa':'💡',
   };
 
   sections.innerHTML = (data.sections || []).map(sec => {
