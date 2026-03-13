@@ -323,13 +323,25 @@ Responde APENAS com array JSON válido, sem texto antes ou depois, sem markdown:
 Artigos:
 {arts_txt}"""
 
-    print(f"  prompt: {len(prompt)} chars (~{len(prompt)//4} tokens estimados)")
-    t0 = time.time()
-    text = call_mistral(api_key, prompt, max_tokens=12000, label="[enrich]")
-    print(f"  Mistral respondeu em {time.time()-t0:.1f}s")
-    data = parse_json_safe(text)
+    # Divide em batches de 30 para evitar que Mistral salte artigos
+    BATCH_SIZE = 30
+    all_batches = []
+    for batch_start in range(0, len(articles), BATCH_SIZE):
+        batch = articles[batch_start:batch_start + BATCH_SIZE]
+        batch_txt = "\n".join([
+            f"[{batch_start + i + 1}] {a['title']} | {a['source']}"
+            for i, a in enumerate(batch)
+        ])
+        batch_prompt = prompt.replace(arts_txt, batch_txt)
+        print(f"  batch {batch_start//BATCH_SIZE + 1}: {len(batch)} artigos")
+        t0 = time.time()
+        text = call_mistral(api_key, batch_prompt, max_tokens=8000, label=f"[enrich {batch_start//BATCH_SIZE+1}]")
+        print(f"  Mistral respondeu em {time.time()-t0:.1f}s")
+        data = parse_json_safe(text)
+        if isinstance(data, list):
+            all_batches.extend(data)
 
-    if not isinstance(data, list):
+    if not all_batches:
         print("  enriquecimento falhou — categorização automática por fonte")
         return [{
             "title":        a["title"],
@@ -343,9 +355,11 @@ Artigos:
             "impact_level": "médio",
             "breaking":     False,
             "recomendacao": False,
+            "enriched":     False,
             "date":         NOW_ISO,
         } for a in articles], "failed"
 
+    data = all_batches
     enriched_map = {item.get("id"): item for item in data if isinstance(item,dict)}
     result = []
     for i, a in enumerate(articles):
@@ -353,6 +367,8 @@ Artigos:
         cat = e.get("category","mundo")
         if cat not in CATS:
             cat = SOURCE_TO_CAT.get(a["source"],"mundo")
+        # If Mistral returned no data for this article, mark as not enriched
+        enriched = bool(e.get("summary") or e.get("title") != a["title"])
         result.append({
             "title":        e.get("title") or a["title"],
             "url":          a["url"],
@@ -365,6 +381,7 @@ Artigos:
             "impact_level": (e.get("impact_level") or "médio").replace("medio","médio"),
             "breaking":     bool(e.get("breaking", False)),
             "recomendacao": bool(e.get("recomendacao", False)),
+            "enriched":     enriched,
             "date":         NOW_ISO,
         })
 
@@ -557,26 +574,19 @@ def gen_weekly_narrative(api_key: str, articles: list) -> dict | None:
     friday = monday + timedelta(days=4)
     week_label = f"{monday.strftime('%d')} a {friday.strftime('%d de %B de %Y')}"
 
-    prompt = f"""És editor de um briefing semanal personalizado para Ricardo, executivo português.
-
-PERFIL DO LEITOR:
-- Trabalha na Microsoft (CCX) em FinOps, Azure governance e AI governance
-- Investidor: carteira com NVDA, ASML, MSFT, AVGO, IWDA (ETF MSCI World), VHYL (dividendos), SGLN (ouro)
-- Co-proprietário de marca de roupa infantil portuguesa sustentável (Benny Baby)
-- Pratica desporto de endurance: corrida, CrossFit, HYROX
-- Baseado em Porto/Gaia, Portugal
+    prompt = f"""És editor de um briefing semanal para profissionais portugueses.
 
 NOTÍCIAS DA SEMANA DE {week_label.upper()}:
 {arts_context}
 
 TAREFA:
-Escreve um resumo semanal em texto corrido em português de Portugal. Estilo editorial, directo, inteligente. Sem bullet points — só prosa fluida. Usa parágrafos de 3-5 linhas. Total: 900-1200 palavras (~8 minutos de leitura).
+Escreve um resumo semanal em texto corrido em português de Portugal. Estilo editorial, directo, inteligente. Sem bullet points — só prosa fluida. Parágrafos de 3-5 linhas. Total: 900-1200 palavras (~8 minutos de leitura).
 
 ESTRUTURA (usa exactamente estes títulos):
 1. "O Mundo Esta Semana" — geopolítica, conflitos, diplomacia, eventos globais relevantes
 2. "Portugal em Foco" — o que se passou em Portugal: economia, política, sociedade
 3. "Economia e Mercados" — macro, Fed, BCE, mercados, inflação, sectores
-4. "Relevante Para Ti" — como os eventos desta semana afectam directamente Ricardo: o seu portfólio (NVDA, ASML, MSFT, cloud), o contexto FinOps/AI na Microsoft, Portugal como mercado, e qualquer implicação para a Benny ou o seu estilo de vida
+4. "O que isto significa" — implicações práticas desta semana: para investidores em acções tecnológicas e europeias, para o mercado português, para quem acompanha IA e cloud, para empresas e profissionais
 
 Responde APENAS com JSON válido:
 {{
@@ -586,7 +596,7 @@ Responde APENAS com JSON válido:
     {{"title": "O Mundo Esta Semana", "body": "texto corrido..."}},
     {{"title": "Portugal em Foco", "body": "texto corrido..."}},
     {{"title": "Economia e Mercados", "body": "texto corrido..."}},
-    {{"title": "Relevante Para Ti", "body": "texto corrido..."}}
+    {{"title": "O que isto significa", "body": "texto corrido..."}}
   ],
   "reading_minutes": 8
 }}"""
