@@ -22,7 +22,7 @@ jobs:
           python-version: "3.11"
 
       - name: Instalar dependências
-        run: pip install feedparser yfinance mistralai requests
+        run: pip install feedparser yfinance "mistralai>=1.0.0" requests
 
       - name: Criar pasta data (se não existir)
         run: mkdir -p data
