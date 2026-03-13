@@ -18,7 +18,6 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import feedparser
 import requests
 import yfinance as yf
-from mistralai import Mistral
 
 # ─── TIMEOUT ──────────────────────────────────────────────────────────
 def _timeout_handler(sig, frame):
@@ -238,19 +237,28 @@ def collect_and_filter() -> tuple[list[dict], list[dict]]:
 
 
 # ─── MISTRAL ──────────────────────────────────────────────────────────
-def get_client() -> Mistral:
-    return Mistral(api_key=os.environ["MISTRAL_API_KEY"])
+def get_api_key() -> str:
+    return os.environ["MISTRAL_API_KEY"]
 
 
-def call_mistral(client: Mistral, prompt: str, max_tokens: int, label: str = "") -> str | None:
+def call_mistral(api_key: str, prompt: str, max_tokens: int, label: str = "") -> str | None:
     try:
-        resp = client.chat.complete(
-            model=MODEL,
-            messages=[{"role":"user","content":prompt}],
-            max_tokens=max_tokens,
-            temperature=0.2,
+        resp = requests.post(
+            "https://api.mistral.ai/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "model":       MODEL,
+                "messages":    [{"role": "user", "content": prompt}],
+                "max_tokens":  max_tokens,
+                "temperature": 0.2,
+            },
+            timeout=120,
         )
-        return resp.choices[0].message.content
+        resp.raise_for_status()
+        return resp.json()["choices"][0]["message"]["content"]
     except Exception as ex:
         print(f"  {label} erro Mistral: {ex}")
         return None
@@ -270,7 +278,7 @@ def parse_json_safe(text: str):
 
 
 # ─── ENRIQUECIMENTO + CATEGORIZAÇÃO ──────────────────────────────────
-def enrich_and_categorize(client: Mistral, articles: list) -> tuple[list, str]:
+def enrich_and_categorize(api_key: str, articles: list) -> tuple[list, str]:
     if not articles:
         return [], "ok"
 
@@ -317,7 +325,7 @@ Artigos:
 
     print(f"  prompt: {len(prompt)} chars (~{len(prompt)//4} tokens estimados)")
     t0 = time.time()
-    text = call_mistral(client, prompt, max_tokens=12000, label="[enrich]")
+    text = call_mistral(api_key, prompt, max_tokens=12000, label="[enrich]")
     print(f"  Mistral respondeu em {time.time()-t0:.1f}s")
     data = parse_json_safe(text)
 
@@ -366,7 +374,7 @@ Artigos:
 
 
 # ─── RESUMO DO DIA ────────────────────────────────────────────────────
-def gen_summary(client: Mistral, articles: list, stocks: list) -> tuple[dict, list, str]:
+def gen_summary(api_key: str, articles: list, stocks: list) -> tuple[dict, list, str]:
     """
     Devolve (summary_dict, connections_list, status).
     Tudo numa chamada: 4 pontos de briefing + 3 ligações entre notícias.
@@ -407,7 +415,7 @@ Responde APENAS com JSON válido:
 }}"""
 
     t0 = time.time()
-    text = call_mistral(client, prompt, max_tokens=1000, label="[resumo+ligações]")
+    text = call_mistral(api_key, prompt, max_tokens=1000, label="[resumo+ligações]")
     print(f"  Mistral resumo+ligações em {time.time()-t0:.1f}s")
     data = parse_json_safe(text)
     default_sum = {"headline": f"Briefing de {DIA_PT}", "items": []}
@@ -512,7 +520,7 @@ def load_week_articles() -> list[dict]:
     return articles
 
 
-def gen_weekly_narrative(client: Mistral, articles: list) -> dict | None:
+def gen_weekly_narrative(api_key: str, articles: list) -> dict | None:
     """
     Gera narrativa semanal em texto corrido (~8 minutos de leitura).
     Formato: 4 secções temáticas + relevância pessoal.
@@ -582,7 +590,7 @@ Responde APENAS com JSON válido:
 
     print(f"  prompt semanal: {len(prompt)} chars")
     t0 = time.time()
-    text = call_mistral(client, prompt, max_tokens=3000, label="[semanal]")
+    text = call_mistral(api_key, prompt, max_tokens=3000, label="[semanal]")
     print(f"  narrativa gerada em {time.time()-t0:.1f}s")
     data = parse_json_safe(text)
     if not isinstance(data, dict) or "sections" not in data:
@@ -619,7 +627,7 @@ def main():
     print(f"  Runs/dia: 4 (07h 12h 18h 22h UTC)")
     print(f"{'='*54}\n")
 
-    client = get_client()
+    api_key = get_api_key()
 
     # 1. RSS
     print(f"[RSS] A recolher {len(RSS)} feeds + fontes do utilizador...")
@@ -635,11 +643,11 @@ def main():
 
     # 3. Mistral — enriquecimento + categorização
     print(f"[Mistral 1/2] A enriquecer e categorizar {len(articles)} artigos...")
-    articles_enriched, enrich_status = enrich_and_categorize(client, articles)
+    articles_enriched, enrich_status = enrich_and_categorize(api_key, articles)
 
     # 4. Mistral — resumo + ligações
     print("\n[Mistral 2/2] A gerar resumo + ligações entre notícias...")
-    summary, connections, summary_status = gen_summary(client, articles_enriched, stocks_list)
+    summary, connections, summary_status = gen_summary(api_key, articles_enriched, stocks_list)
     print()
 
     # 5. Portfolio
@@ -699,7 +707,7 @@ def main():
         # Inclui também os artigos deste run
         all_week = articles_enriched + [a for a in week_arts
                    if a.get("url") not in {x.get("url") for x in articles_enriched}]
-        weekly_narrative = gen_weekly_narrative(client, all_week)
+        weekly_narrative = gen_weekly_narrative(api_key, all_week)
         if weekly_narrative:
             atomic_write(weekly_path, json.dumps(weekly_narrative, ensure_ascii=False, indent=2))
             print(f"  Guardado: data/weekly.json ({len(weekly_narrative.get('sections',[]))} secções)")
