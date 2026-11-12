@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-11T14:54:52.091379+00:00",
-  "run_id": "2026-11-11-14h",
+  "updated_at": "2026-11-12T00:03:28.583149+00:00",
+  "run_id": "2026-11-12-00h",
   "version": 6,
   "sources": [
     "Al Jazeera",
@@ -36,98 +36,8 @@
   "gemini_alert": "O serviço de IA não respondeu neste run. Os artigos são mostrados sem tradução ou análise, categorizados automaticamente por fonte.",
   "articles": [
     {
-      "title": "Rubio backs blockade, Vance wants deal: Is Trump’s team split on Iran war?",
-      "url": "https://www.aljazeera.com/news/2026/11/11/is-trump-team-split-on-iran?traffic_source=rss",
-      "source": "Al Jazeera",
-      "translated": false,
-      "category": "mundo",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "South Africans divided over Olympic swimmer’s switch to Netherlands",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/11/11/south-africans-divided-over-olympic-swimmers-switch-to-netherlands-2?traffic_source=rss",
-      "source": "Al Jazeera",
-      "translated": false,
-      "category": "mundo",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "As Gaza floods subside, Palestinians assess human and material damage",
-      "url": "https://www.aljazeera.com/features/2026/11/11/as-gaza-flood-waters-subside-palestinians-assess-human-and-material-damage?traffic_source=rss",
-      "source": "Al Jazeera",
-      "translated": false,
-      "category": "mundo",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Spain sees widespread disruption in first general strike for 14 years",
-      "url": "https://www.bbc.co.uk/news/articles/cwvg25nypmrvo?at_medium=RSS&at_campaign=rss",
-      "source": "BBC News",
-      "translated": false,
-      "category": "breaking",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Scottish man confirmed as victim of Krakow shooting",
-      "url": "https://www.bbc.co.uk/news/articles/cmx28e95g2rzo?at_medium=RSS&at_campaign=rss",
-      "source": "BBC News",
-      "translated": false,
-      "category": "breaking",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Watch: UK falls silent to mark Armistice Day",
-      "url": "https://www.bbc.co.uk/news/videos/c6lymnz44gn4o?at_medium=RSS&at_campaign=rss",
-      "source": "BBC News",
-      "translated": false,
-      "category": "breaking",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Killing of journalist underscores deteriorating conditions in Ecuador",
-      "url": "https://www.theguardian.com/world/2026/nov/11/ecuador-journalist-killing",
+      "title": "Two skulls likely belonging to enslaved people returned to Brazil after Harvard used them in eugenics studies",
+      "url": "https://www.theguardian.com/news/2026/nov/11/harvard-skulls-repatriated-brazil",
       "source": "The Guardian",
       "translated": false,
       "category": "mundo",
@@ -138,11 +48,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Ukraine captures first Indonesian prisoner of war amid surge in Russian recruitment",
-      "url": "https://www.theguardian.com/world/2026/nov/11/ukraine-indonesian-pow-prisoner-of-war-russia",
+      "title": "Ex-member of radical Marxist group scales balcony, escapes house arrest in Argentina",
+      "url": "https://www.theguardian.com/world/2026/nov/11/red-brigades-leonardo-bertulazzi-escapes-house-arrest-argentina",
       "source": "The Guardian",
       "translated": false,
       "category": "mundo",
@@ -153,11 +63,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Falkland Islanders face ‘devastating consequences’ if Argentina blocks oil project, says UK",
-      "url": "https://www.theguardian.com/world/2026/nov/10/uk-and-argentina-clash-over-falklands-oil-project-as-hamburg-tribunal-starts",
+      "title": "Argentinian lawyer mocks UK’s sovereignty claim in Falklands oil case",
+      "url": "https://www.theguardian.com/uk-news/2026/nov/11/argentine-lawyer-mocks-uk-sovereignty-claim-in-falklands-oil-case",
       "source": "The Guardian",
       "translated": false,
       "category": "mundo",
@@ -168,14 +78,14 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Chuva inunda 70 mil tendas em Gaza enquanto Israel retém 150 mil na fronteira",
-      "url": "https://www.publico.pt/2026/11/11/mundo/noticia/chuva-inunda-70-mil-tendas-gaza-israel-retem-150-mil-fronteira-2194574",
-      "source": "Público",
+      "title": "Some under-25s should get less benefits, Milburn review to say",
+      "url": "https://www.bbc.co.uk/news/articles/cwn70l1628l0o?at_medium=RSS&at_campaign=rss",
+      "source": "BBC News",
       "translated": false,
-      "category": "portugal",
+      "category": "breaking",
       "summary": "",
       "why": "",
       "impact": "",
@@ -183,14 +93,14 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "“Não vem a pista de gelo, há essa vitória”: acampada do Porto aceita partilhar praça com decorações de Natal",
-      "url": "https://www.publico.pt/2026/11/11/sociedade/noticia/nao-vem-pista-gelo-ha-vitoria-acampada-porto-aceita-partilhar-praca-decoracoes-natal-2194586",
-      "source": "Público",
+      "title": "British soldier charged with rape of woman serving in Cyprus",
+      "url": "https://www.bbc.co.uk/news/articles/cvglr28re6n9o?at_medium=RSS&at_campaign=rss",
+      "source": "BBC News",
       "translated": false,
-      "category": "portugal",
+      "category": "breaking",
       "summary": "",
       "why": "",
       "impact": "",
@@ -198,14 +108,14 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Mortes em ensaios clínicos não dissuadem doentes com lúpus que esperam por uma cura",
-      "url": "https://www.publico.pt/2026/11/11/ciencia/noticia/mortes-ensaios-clinicos-nao-dissuadem-doentes-lupus-esperam-cura-2194555",
-      "source": "Público",
+      "title": "Lego marketplace BrickLink offline after 'unusual activity' detected",
+      "url": "https://www.bbc.co.uk/news/articles/c6rmgw8zynr4o?at_medium=RSS&at_campaign=rss",
+      "source": "BBC News",
       "translated": false,
-      "category": "portugal",
+      "category": "breaking",
       "summary": "",
       "why": "",
       "impact": "",
@@ -213,142 +123,7 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "France 2026 growth forecast cut to 0.2% by Moody's",
-      "url": "https://www.lemonde.fr/en/france/article/2026/11/11/france-2026-growth-forecast-cut-to-0-2-by-moody-s_6777817_7.html",
-      "source": "Le Monde EN",
-      "translated": false,
-      "category": "mundo",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Armistice Day: Macron presides over commemoration ceremony for the last time",
-      "url": "https://www.lemonde.fr/en/politics/article/2026/11/11/armistice-day-macron-presides-over-commemoration-ceremony-for-the-last-time_6777785_5.html",
-      "source": "Le Monde EN",
-      "translated": false,
-      "category": "mundo",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Russia bans two French lawmakers and two journalists from entry",
-      "url": "https://www.lemonde.fr/en/international/article/2026/11/11/russia-bans-two-french-lawmakers-and-two-journalists-from-entry_6777752_4.html",
-      "source": "Le Monde EN",
-      "translated": false,
-      "category": "mundo",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Lessons from a miserable month for hedge funds",
-      "url": "https://www.economist.com/finance-and-economics/2026/11/10/lessons-from-a-miserable-month-for-hedge-funds",
-      "source": "The Economist",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "For boomers, economic boom times are over",
-      "url": "https://www.economist.com/finance-and-economics/2026/11/10/for-boomers-economic-boom-times-are-over",
-      "source": "The Economist",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "The future of Trumponomics: compromise or failure",
-      "url": "https://www.economist.com/finance-and-economics/2026/11/09/the-future-of-trumponomics-compromise-or-failure",
-      "source": "The Economist",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Aquestive Therapeutics: My Biotech Investment Framework Now Requires Me To Downgrade AQST To Sell",
-      "url": "https://seekingalpha.com/article/4966448-aquestive-therapeutics-my-biotech-investment-framework-now-requires-me-to-downgrade-aqst-to-sell?source=feed_all_articles",
-      "source": "Seeking Alpha",
-      "translated": false,
-      "category": "portfolio",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Ethan Allen Interiors: Leadership Overhaul Is Welcome After Weak Q1",
-      "url": "https://seekingalpha.com/article/4966447-ethan-allen-interiors-leadership-overhaul-is-welcome-after-weak-q1?source=feed_all_articles",
-      "source": "Seeking Alpha",
-      "translated": false,
-      "category": "portfolio",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "TransMedics: 2027 Setting Up To Be A Pivotal Year",
-      "url": "https://seekingalpha.com/article/4966443-transmedics-2027-setting-up-to-be-a-pivotal-year?source=feed_all_articles",
-      "source": "Seeking Alpha",
-      "translated": false,
-      "category": "portfolio",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
       "title": "Grande Entrevista - Sinfonia",
@@ -363,7 +138,7 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
       "title": "Curtas: Arbitragem I",
@@ -378,7 +153,7 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
       "title": "Curtas: Vitor Constâncio II",
@@ -393,11 +168,101 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "União Europeia prepara diálogo de defesa em Doha com países do Golfo",
-      "url": "https://pt.euronews.com/2026/11/11/uniao-europeia-prepara-dialogo-de-defesa-em-doha-com-paises-do-golfo",
+      "title": "Democrat Scott Colom wins closely watched US Senate race in Mississippi",
+      "url": "https://www.aljazeera.com/news/2026/11/11/democrat-scott-colom-wins-closely-watched-us-senate-race-in-mississippi?traffic_source=rss",
+      "source": "Al Jazeera",
+      "translated": false,
+      "category": "mundo",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Israeli strikes hit medical complex as nine killed across Gaza",
+      "url": "https://www.aljazeera.com/news/2026/11/11/israeli-strikes-hit-tent-camp-as-five-killed-in-gaza?traffic_source=rss",
+      "source": "Al Jazeera",
+      "translated": false,
+      "category": "mundo",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Iran designates Argentinian navy, air force as ‘terrorist organisations’",
+      "url": "https://www.aljazeera.com/news/2026/11/11/iran-designates-argentinian-navy-air-force-as-terrorist?traffic_source=rss",
+      "source": "Al Jazeera",
+      "translated": false,
+      "category": "mundo",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Edifício de três andares desabou em Brooklyn, Nova Iorque: uma pessoa morreu",
+      "url": "https://www.publico.pt/2026/11/11/mundo/noticia/edificio-tres-andares-desabou-brooklyn-nova-iorque-pessoa-morreu-2194672",
+      "source": "Público",
+      "translated": false,
+      "category": "portugal",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Demissão de Jensen Huang da Nvidia está iminente, segundo o <em>The Wall Street Journal</em>",
+      "url": "https://www.publico.pt/2026/11/11/enter/noticia/demissao-jensen-huang-nvidia-iminente-segundo-the-wall-street-journal-2194671",
+      "source": "Público",
+      "translated": false,
+      "category": "portugal",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Tempestade Charles foi o trunfo político de que Luís Neves precisava?",
+      "url": "https://www.publico.pt/2026/11/11/politica/noticia/tempestade-charles-trunfo-politico-luis-neves-precisava-2194653",
+      "source": "Público",
+      "translated": false,
+      "category": "portugal",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Espanha: confrontos eclodem em Barcelona após marcha pacífica da greve geral",
+      "url": "https://pt.euronews.com/video/2026/11/11/espanha-confrontos-eclodem-em-barcelona-apos-marcha-pacifica-da-greve-geral",
       "source": "Euronews PT",
       "translated": false,
       "category": "mundo",
@@ -408,11 +273,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Portugal: tempestade Charles traz chuva intensa, ventos fortes e ondas atlânticas",
-      "url": "https://pt.euronews.com/video/2026/11/11/portugal-tempestade-charles-traz-chuva-intensa-ventos-fortes-e-ondas-atlanticas",
+      "title": "Espanha: 120 mil manifestam-se em Madrid por casas acessíveis e melhores salários",
+      "url": "https://pt.euronews.com/video/2026/11/11/espanha-120-mil-manifestam-se-em-madrid-por-casas-acessiveis-e-melhores-salarios",
       "source": "Euronews PT",
       "translated": false,
       "category": "mundo",
@@ -423,11 +288,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Rússia fecha redação de Moscovo do último jornal crítico Novaya Gazeta",
-      "url": "https://pt.euronews.com/2026/11/11/russia-fecha-redacao-de-moscovo-do-ultimo-jornal-critico-novaya-gazeta",
+      "title": "Alemanha: Singulus fecha contrato de 60 milhões com Elon Musk para células solares de satélite",
+      "url": "https://pt.euronews.com/2026/11/11/alemanha-singulus-fecha-contrato-de-60-milhoes-com-elon-musk-para-celulas-solares-de-satel",
       "source": "Euronews PT",
       "translated": false,
       "category": "mundo",
@@ -438,11 +303,146 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "O papel das seguradoras quando acontece o pior",
-      "url": "https://eco.sapo.pt/opiniao/o-papel-das-seguradoras-quando-acontece-o-pior/",
+      "title": "Democrat Scott Colom flips Mississippi Senate seat, becomes state's first Black senator since Reconstruction",
+      "url": "https://www.lemonde.fr/en/international/article/2026/11/12/mississippi-elects-democrat-scott-colom-as-state-s-first-black-us-senator-since-reconstruction_6778148_4.html",
+      "source": "Le Monde EN",
+      "translated": false,
+      "category": "mundo",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Four French journalists and MPs banned from entering Russia, marking new low in Paris-Moscow relations:",
+      "url": "https://www.lemonde.fr/en/international/article/2026/11/11/a-new-low-in-paris-moscow-relations-four-french-journalists-and-mps-banned-from-entering-russia_6778147_4.html",
+      "source": "Le Monde EN",
+      "translated": false,
+      "category": "mundo",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Russia's ambassador to the US Alexander Darchiev dies 'suddenly' in Moscow",
+      "url": "https://www.lemonde.fr/en/international/article/2026/11/11/russia-s-ambassador-to-the-us-alexander-darchiev-dies-suddenly-in-moscow_6778081_4.html",
+      "source": "Le Monde EN",
+      "translated": false,
+      "category": "mundo",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Pixelworks, Inc. (PXLW) Q3 2026 Earnings Call Transcript",
+      "url": "https://seekingalpha.com/article/4966704-pixelworks-inc-pxlw-q3-2026-earnings-call-transcript?source=feed_all_articles",
+      "source": "Seeking Alpha",
+      "translated": false,
+      "category": "portfolio",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Elicio Therapeutics, Inc. (ELTX) Discusses Camupepimut Development in Neoadjuvant and Metastatic Pancreatic Cancer Transcript",
+      "url": "https://seekingalpha.com/article/4966726-elicio-therapeutics-inc-eltx-discusses-camupepimut-development-in-neoadjuvant-and-metastatic?source=feed_all_articles",
+      "source": "Seeking Alpha",
+      "translated": false,
+      "category": "portfolio",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Brown & Brown, Inc. (BRO) Employer Health and Benefits Strategy Survey Results Review Transcript",
+      "url": "https://seekingalpha.com/article/4966671-brown-and-brown-inc-bro-employer-health-and-benefits-strategy-survey-results-review?source=feed_all_articles",
+      "source": "Seeking Alpha",
+      "translated": false,
+      "category": "portfolio",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Lessons from a miserable month for hedge funds",
+      "url": "https://www.economist.com/finance-and-economics/2026/11/10/lessons-from-a-miserable-month-for-hedge-funds",
+      "source": "The Economist",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "For boomers, economic boom times are over",
+      "url": "https://www.economist.com/finance-and-economics/2026/11/10/for-boomers-economic-boom-times-are-over",
+      "source": "The Economist",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "The future of Trumponomics: compromise or failure",
+      "url": "https://www.economist.com/finance-and-economics/2026/11/09/the-future-of-trumponomics-compromise-or-failure",
+      "source": "The Economist",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Acampadas reúnem com Presidente da República na sexta-feira",
+      "url": "https://eco.sapo.pt/2026/11/11/acampadas-reunem-com-presidente-da-republica-na-sexta-feira/",
       "source": "Eco",
       "translated": false,
       "category": "portugal",
@@ -453,11 +453,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Depressão Charles. PSD obriga Aguiar-Branco a clarificar que Parlamento está a “trabalhar”",
-      "url": "https://eco.sapo.pt/2026/11/11/depressao-charles-psd-obriga-aguiar-branco-a-clarificar-que-parlamento-esta-a-trabalhar/",
+      "title": "Negociações demonstram que Washington, Kiev e Europa estão “alinhados e unidos”",
+      "url": "https://eco.sapo.pt/2026/11/11/negociacoes-demonstram-que-washington-kiev-e-europa-estao-alinhados-e-unidos/",
       "source": "Eco",
       "translated": false,
       "category": "portugal",
@@ -468,11 +468,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Sócios aprovam encerramento da Weil Gotshal. Fuga de advogados ditou fim de gigante da advocacia norte-americana",
-      "url": "https://eco.sapo.pt/2026/11/11/socios-aprovam-encerramento-da-weil-gotshal-fuga-de-advogados-ditou-fim-de-gigante-da-advocacia-norte-americana/",
+      "title": "Zelensky insiste em garantias de segurança e não abdica do Donbass",
+      "url": "https://eco.sapo.pt/2026/11/11/zelensky-insiste-em-garantias-de-seguranca-e-nao-abdica-do-donbass/",
       "source": "Eco",
       "translated": false,
       "category": "portugal",
@@ -483,56 +483,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Sony’s latest Pulse wireless headset packs planar magnetic drivers at a good price",
-      "url": "https://www.theverge.com/games/1031291/sony-playstation-pulse-wireless-gaming-headset-hands-on",
-      "source": "The Verge",
-      "translated": false,
-      "category": "tecnologia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Adobe’s AI experiments let you walk around in photos and interview your characters",
-      "url": "https://www.theverge.com/tech/1031505/adobe-max-2026-sneaks-experiments-ai",
-      "source": "The Verge",
-      "translated": false,
-      "category": "tecnologia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Streaming is still trying to be TikTok",
-      "url": "https://www.theverge.com/streaming/1030864/streaming-skydance-paramount-disney-hulu-earnings-tiktok-short-form-video",
-      "source": "The Verge",
-      "translated": false,
-      "category": "tecnologia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Plurai wants to help AI agents work better using the same approach that helped get self-driving cars to roads",
-      "url": "https://techcrunch.com/2026/11/11/plurai-wants-to-help-ai-agents-work-better-using-the-same-approach-that-helped-get-self-driving-cars-to-roads/",
+      "title": "The unfolding Jensen Huang scandal: a timeline",
+      "url": "https://techcrunch.com/2026/11/11/nvidia-ceo-jensen-huangs-affair-with-alleged-chinese-spy-a-timeline/",
       "source": "TechCrunch",
       "translated": false,
       "category": "tecnologia",
@@ -543,11 +498,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Nvidia’s crisis has corporate governance experts reaching for the popcorn",
-      "url": "https://techcrunch.com/2026/11/10/nvidias-crisis-has-corporate-governance-experts-reaching-for-the-popcorn/",
+      "title": "Nvidia’s stock drops as board reportedly preps to oust CEO Jensen Huang",
+      "url": "https://techcrunch.com/2026/11/11/nvidias-stock-drops-as-board-reportedly-preps-to-oust-ceo-jensen-huang/",
       "source": "TechCrunch",
       "translated": false,
       "category": "tecnologia",
@@ -558,11 +513,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "X launches its own clipping feature to spur influencer engagement",
-      "url": "https://techcrunch.com/2026/11/10/x-launches-its-own-clipping-feature-to-spur-influencer-engagement/",
+      "title": "Jensen Huang accused of having another affair — with an Nvidia exec",
+      "url": "https://techcrunch.com/2026/11/11/jensen-huang-accused-of-having-another-affair-with-a-nvidia-exec/",
       "source": "TechCrunch",
       "translated": false,
       "category": "tecnologia",
@@ -573,14 +528,14 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Italy: Hundreds of schools evacuated after bomb threats",
-      "url": "https://www.dw.com/en/italy-hundreds-of-schools-evacuated-after-bomb-threats/a-79918034?maca=en-rss-en-all-1573-rdf",
-      "source": "DW News",
+      "title": "Nvidia is reportedly preparing to fire Jensen Huang",
+      "url": "https://www.theverge.com/tech/1031652/jensen-huang-rumor",
+      "source": "The Verge",
       "translated": false,
-      "category": "mundo",
+      "category": "tecnologia",
       "summary": "",
       "why": "",
       "impact": "",
@@ -588,14 +543,14 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Tundu Lissu: After escaping the death penalty, what does his guilty verdict mean for Tanzania's democracy?",
-      "url": "https://www.dw.com/en/tundu-lissu-after-escaping-the-death-penalty-what-does-his-guilty-verdict-mean-for-tanzania-s-democracy/a-79908512?maca=en-rss-en-all-1573-rdf",
-      "source": "DW News",
+      "title": "Hands on with Home Assistant’s new ‘smart home multi-tool’",
+      "url": "https://www.theverge.com/tech/1031601/home-assistant-connect-aux-2-hands-on",
+      "source": "The Verge",
       "translated": false,
-      "category": "mundo",
+      "category": "tecnologia",
       "summary": "",
       "why": "",
       "impact": "",
@@ -603,14 +558,14 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Germany news: Only 1/3 of Germans satisfied with state of democracy",
-      "url": "https://www.dw.com/en/germany-news-only-1-3-of-germans-satisfied-with-state-of-democracy/live-79915066?maca=en-rss-en-all-1573-rdf",
-      "source": "DW News",
+      "title": "United won’t let your AI agent book your flight",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1031623/united-unauthorized-ai-agents",
+      "source": "The Verge",
       "translated": false,
-      "category": "mundo",
+      "category": "tecnologia",
       "summary": "",
       "why": "",
       "impact": "",
@@ -618,11 +573,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Duolingo, Strava, and Ticketmaster Are All Caught Up in EU’s New Digital Fairness Rules",
-      "url": "https://www.wired.com/story/duolingo-strava-and-ticketmaster-are-all-caught-up-in-eus-new-digital-fairness-rules/",
+      "title": "Pete Hegseth Is About to Get His Ass Kicked",
+      "url": "https://www.wired.com/story/pete-hegseth-is-about-to-get-his-ass-kicked/",
       "source": "Wired",
       "translated": false,
       "category": "tecnologia",
@@ -633,11 +588,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Best Indoor Garden Systems I’ve Been Testing for Years (2026)",
-      "url": "https://www.wired.com/gallery/best-indoor-gardening-systems/",
+      "title": "I Saw the Future of Robotics in a Virtual Duck That Chases My Cat",
+      "url": "https://www.wired.com/story/i-trained-a-microduck-to-be-my-cats-butler/",
       "source": "Wired",
       "translated": false,
       "category": "tecnologia",
@@ -648,11 +603,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Exclusive: Your Smartphone Camera Could Get a Big Upgrade With This Tech",
-      "url": "https://www.wired.com/story/your-smartphone-camera-could-get-a-big-upgrade-with-this-tech/",
+      "title": "The 22 Best Early Black Friday Deals: Our Ultimate Picks (2026)",
+      "url": "https://www.wired.com/story/best-black-friday-deals-11-11-2026/",
       "source": "Wired",
       "translated": false,
       "category": "tecnologia",
@@ -663,191 +618,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Bloomberg Invest Dallas 2026 Highlights",
-      "url": "https://www.bloomberg.com/news/videos/2026-11-11/bloomberg-invest-dallas-2026-highlights-video",
-      "source": "Bloomberg",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Chile Trucker Protest Over Fuel Prices Imperils Farm Exports",
-      "url": "https://www.bloomberg.com/news/articles/2026-11-11/chile-trucker-protest-over-fuel-prices-imperils-farm-exports",
-      "source": "Bloomberg",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Virgin Atlantic Cuts Winter Capacity on Fuel Costs, Soft Demand",
-      "url": "https://www.bloomberg.com/news/articles/2026-11-11/virgin-atlantic-cuts-winter-capacity-on-fuel-costs-soft-demand",
-      "source": "Bloomberg",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "NOS é o primeiro operador a disponibilizar os óculos Ray-Ban Meta em Portugal",
-      "url": "https://tek.sapo.pt/mobile/equipamentos/artigos/nos-e-o-primeiro-operador-a-disponibilizar-os-oculos-ray-ban-meta-em-portugal/",
-      "source": "SAPO Tek",
-      "translated": false,
-      "category": "tecnologia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Mau tempo não “arrefeceu” o entusiasmo, mas mudou os planos de quem veio ao Web Summit à procura de novas ideias e oportunidades",
-      "url": "https://tek.sapo.pt/noticias/negocios/artigos/mau-tempo-nao-arrefeceu-o-entusiasmo-mas-mudou-os-planos-de-quem-veio-ao-web-summit-a-procura-de-novas-ideias-e-oportunidades/",
-      "source": "SAPO Tek",
-      "translated": false,
-      "category": "tecnologia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Web Summit regressa amanhã para o “dia mais movimentado” de sempre. Até lá multiplicam-se iniciativas online",
-      "url": "https://tek.sapo.pt/noticias/negocios/artigos/web-summit-regressa-amanha-para-o-dia-mais-movimentado-de-sempre-ate-la-multiplicam-se-iniciativas-online/",
-      "source": "SAPO Tek",
-      "translated": false,
-      "category": "tecnologia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Produção da OPEP sobe 7,8% para 27,2 milhões de barris diários mas mantém-se abaixo dos níveis pré-guerra",
-      "url": "http://dinheirovivo.dn.pt/economia/produo-da-opep-sobe-78-para-2716-milhes-de-barris-dirios-mas-mantm-se-abaixo-dos-nveis-pr-guerra",
-      "source": "Dinheiro Vivo",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "COP31. \"Poluidores têm de pagar\", exige Guterres no último discurso perante líderes mundiais",
-      "url": "https://www.dn.pt/sociedade/cop31-poluidores-tm-de-pagar-exige-guterres-no-ltimo-discurso-perante-lderes-mundiais",
-      "source": "Dinheiro Vivo",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "E-Redes: Registo de dois mil clientes sem luz considerado normal para um dia de chuva intensa",
-      "url": "http://dinheirovivo.dn.pt/empresas/e-redes-registo-de-dois-mil-clientes-sem-luz-considerado-normal-para-um-dia-de-chuva-intensa",
-      "source": "Dinheiro Vivo",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "US tech stocks gain as AI trade revives",
-      "url": "https://www.ft.com/content/639de881-6017-454f-abfa-cfb191d1e7cd?syn-25a6b1a6=1",
-      "source": "Financial Times",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Hundreds of schools across Italy, Scotland and Ireland receive bomb threats",
-      "url": "https://www.ft.com/content/7bbc0a5e-b7e2-4a3f-874f-a63de94e922d?syn-25a6b1a6=1",
-      "source": "Financial Times",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "RAF Fairford incident partly directed from New York jail, US claims",
-      "url": "https://www.ft.com/content/687acbbb-6296-4030-a1a0-c07936a6c9db?syn-25a6b1a6=1",
-      "source": "Financial Times",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
-    },
-    {
-      "title": "Saab e portuguesa Vangest com parceria para produzir componentes para caças Gripen",
-      "url": "https://www.jornaldenegocios.pt/empresas/detalhe/saab-e-portuguesa-vangest-com-parceria-para-produzir-componentes-para-cacas-gripen",
+      "title": "Imobiliário garante um quarto das receitas das autarquias",
+      "url": "https://www.jornaldenegocios.pt/economia/detalhe/imobiliario-garante-um-quarto-das-receitas-das-autarquias",
       "source": "Jornal de Negócios",
       "translated": false,
       "category": "economia",
@@ -858,11 +633,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Luís Neves: \"Não se prevê a manutenção do estado de alerta. Amanhã voltamos à normalidade\"",
-      "url": "https://www.jornaldenegocios.pt/economia/detalhe/portugal-prepara-se-para-pico-do-mau-tempo-seguradoras-recomendam-fazer-provas-dos-danos",
+      "title": "Tempestade Charles: estas são as imagens de um dia marcado pelo mau tempo em Portugal",
+      "url": "https://www.jornaldenegocios.pt/multimedia/negocios-tv/detalhe/tempestade-charles-estas-sao-as-imagens-de-um-dia-marcado-pelo-mau-tempo-em-portugal",
       "source": "Jornal de Negócios",
       "translated": false,
       "category": "economia",
@@ -873,11 +648,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Indústria de recursos minerais gera 3,7 mil milhões para economia e paga e produz acima da média",
-      "url": "https://www.jornaldenegocios.pt/empresas/industria/detalhe/industria-de-recursos-minerais-gera-3-7-mil-milhoes-para-economia-e-paga-e-produz-acima-da-media",
+      "title": "A fatura da inflação",
+      "url": "https://www.jornaldenegocios.pt/opiniao/editorial/paulo-moutinho/detalhe/a-fatura-da-inflacao",
       "source": "Jornal de Negócios",
       "translated": false,
       "category": "economia",
@@ -888,11 +663,101 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Nvidia stock gets its first boost of the Jensen Huang scandal era. What’s driving shares higher today?",
-      "url": "https://www.fastcompany.com/91640260/nvidia-stock-rises-today-first-boost-ceo-jensen-huang-scandal",
+      "title": "The $150 Billion Catch in US Shipbuilding",
+      "url": "https://www.bloomberg.com/news/videos/2026-11-12/opinion-the-150-billion-us-shipbuilding-catch-video",
+      "source": "Bloomberg",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Pivotal Advisors CEO: Investors Should See AI as Part of Portfolio",
+      "url": "https://www.bloomberg.com/news/videos/2026-11-11/mcghee-investors-should-see-ai-as-part-of-portfolio-video",
+      "source": "Bloomberg",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Dana Telsey on the Future of Department Stores",
+      "url": "https://www.bloomberg.com/news/videos/2026-11-11/dana-telsey-on-the-future-of-department-stores-video",
+      "source": "Bloomberg",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "A morte do prompt perfeito",
+      "url": "https://tek.sapo.pt/noticias/artigos/a-morte-do-prompt-perfeito/",
+      "source": "SAPO Tek",
+      "translated": false,
+      "category": "tecnologia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Drone da Amazon vai voar dentro de casa para fazer tarefas de vigilância doméstica",
+      "url": "https://tek.sapo.pt/noticias/computadores/artigos/drone-da-amazon-vai-voar-dentro-de-casa-para-fazer-tarefas-de-vigilancia-domestica/",
+      "source": "SAPO Tek",
+      "translated": false,
+      "category": "tecnologia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "SpaceX prepara próximo voo da Starship com manobra inédita de recuperação",
+      "url": "https://tek.sapo.pt/noticias/ciencia/artigos/spacex-prepara-proximo-voo-da-starship-com-manobra-inedita-de-recuperacao/",
+      "source": "SAPO Tek",
+      "translated": false,
+      "category": "tecnologia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Can anyone really stop the AI data center boom? What could happen next now that voters have spoken",
+      "url": "https://www.fastcompany.com/91640482/ai-data-center-boom-can-anyone-stop-it-what-happens-next",
       "source": "Fast Company",
       "translated": false,
       "category": "carreira",
@@ -903,11 +768,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Who is Alice Huang? What to know about the businesswoman involved in the Nvidia scandal",
-      "url": "https://www.fastcompany.com/91640240/who-alice-huang-what-know-about-businesswoman-involved-nvidia-scandal",
+      "title": "United Airlines just made a big change to flight bookings. Here’s why Delta and American aren’t following",
+      "url": "https://www.fastcompany.com/91640548/united-airlines-just-made-a-big-change-to-flight-bookings-heres-why-delta-and-american-arent-following",
       "source": "Fast Company",
       "translated": false,
       "category": "carreira",
@@ -918,11 +783,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
     },
     {
-      "title": "Apple is closing the ‘world’s largest community of Apple fans.’ Why shutting it down makes sense",
-      "url": "https://www.fastcompany.com/91640201/apple-support-community-shutdown-why-closing-it-makes-sense",
+      "title": "This company is giving workers time off to play the new ‘Grand Theft Auto’",
+      "url": "https://www.fastcompany.com/91640596/this-company-is-giving-workers-time-off-to-play-the-new-grand-theft-auto",
       "source": "Fast Company",
       "translated": false,
       "category": "carreira",
@@ -933,14 +798,149 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-11T14:54:52.091379+00:00"
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Scott Colom wins historic Senate race in Mississippi",
+      "url": "https://www.ft.com/content/ed93bd25-3ae4-4845-ac2e-ccb6e9c741e6?syn-25a6b1a6=1",
+      "source": "Financial Times",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Nvidia board set to meet after revelations Huang had affair with top company executive",
+      "url": "https://www.ft.com/content/d3838274-a055-4d5d-a1ff-48f2979a08f0?syn-25a6b1a6=1",
+      "source": "Financial Times",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "ExxonMobil launches legal challenge to EU carbon capture rules",
+      "url": "https://www.ft.com/content/377d2ae5-112f-411f-bfc1-5e498948cb7b?syn-25a6b1a6=1",
+      "source": "Financial Times",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Nvidia prepares to push out CEO Jensen Huang, reports",
+      "url": "https://www.dw.com/en/nvidia-prepares-to-push-out-ceo-jensen-huang-reports/a-79925002?maca=en-rss-en-all-1573-rdf",
+      "source": "DW News",
+      "translated": false,
+      "category": "mundo",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Democrat Colom wins Mississippi Senate seat",
+      "url": "https://www.dw.com/en/democrat-colom-wins-mississippi-senate-seat/a-79924938?maca=en-rss-en-all-1573-rdf",
+      "source": "DW News",
+      "translated": false,
+      "category": "mundo",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Russian Foreign Ministry says its ambassador to US has died",
+      "url": "https://www.dw.com/en/russian-foreign-ministry-says-its-ambassador-to-us-has-died/a-79924829?maca=en-rss-en-all-1573-rdf",
+      "source": "DW News",
+      "translated": false,
+      "category": "mundo",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Tempestade Charles perdeu a força, mas Governo não se arrepende do alerta",
+      "url": "https://www.dn.pt/sociedade/tempestade-charles-perdeu-a-fora-mas-governo-no-se-arrepende-do-alerta",
+      "source": "Dinheiro Vivo",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Worten alvo de ciberataque que acedeu a dados de clientes e prestadores de serviços",
+      "url": "http://dinheirovivo.dn.pt/empresas/worten-alvo-de-ciberataque-que-acedeu-a-dados-de-clientes-e-prestadores-de-servios",
+      "source": "Dinheiro Vivo",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
+    },
+    {
+      "title": "Pelo menos um morto e dez feridos após o desabamento de um prédio de três andares em Brooklyn",
+      "url": "https://www.dn.pt/internacional/edifcio-de-trs-andares-desaba-em-brooklyn-h-pessoas-presas-sob-os-escombros",
+      "source": "Dinheiro Vivo",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-12T00:03:28.583149+00:00"
     }
   ],
   "categories": {
     "breaking": [
       {
-        "title": "Spain sees widespread disruption in first general strike for 14 years",
-        "url": "https://www.bbc.co.uk/news/articles/cwvg25nypmrvo?at_medium=RSS&at_campaign=rss",
+        "title": "Some under-25s should get less benefits, Milburn review to say",
+        "url": "https://www.bbc.co.uk/news/articles/cwn70l1628l0o?at_medium=RSS&at_campaign=rss",
         "source": "BBC News",
         "translated": false,
         "category": "breaking",
@@ -951,11 +951,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Scottish man confirmed as victim of Krakow shooting",
-        "url": "https://www.bbc.co.uk/news/articles/cmx28e95g2rzo?at_medium=RSS&at_campaign=rss",
+        "title": "British soldier charged with rape of woman serving in Cyprus",
+        "url": "https://www.bbc.co.uk/news/articles/cvglr28re6n9o?at_medium=RSS&at_campaign=rss",
         "source": "BBC News",
         "translated": false,
         "category": "breaking",
@@ -966,11 +966,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Watch: UK falls silent to mark Armistice Day",
-        "url": "https://www.bbc.co.uk/news/videos/c6lymnz44gn4o?at_medium=RSS&at_campaign=rss",
+        "title": "Lego marketplace BrickLink offline after 'unusual activity' detected",
+        "url": "https://www.bbc.co.uk/news/articles/c6rmgw8zynr4o?at_medium=RSS&at_campaign=rss",
         "source": "BBC News",
         "translated": false,
         "category": "breaking",
@@ -981,55 +981,10 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       }
     ],
     "portugal": [
-      {
-        "title": "Chuva inunda 70 mil tendas em Gaza enquanto Israel retém 150 mil na fronteira",
-        "url": "https://www.publico.pt/2026/11/11/mundo/noticia/chuva-inunda-70-mil-tendas-gaza-israel-retem-150-mil-fronteira-2194574",
-        "source": "Público",
-        "translated": false,
-        "category": "portugal",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
-      },
-      {
-        "title": "“Não vem a pista de gelo, há essa vitória”: acampada do Porto aceita partilhar praça com decorações de Natal",
-        "url": "https://www.publico.pt/2026/11/11/sociedade/noticia/nao-vem-pista-gelo-ha-vitoria-acampada-porto-aceita-partilhar-praca-decoracoes-natal-2194586",
-        "source": "Público",
-        "translated": false,
-        "category": "portugal",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
-      },
-      {
-        "title": "Mortes em ensaios clínicos não dissuadem doentes com lúpus que esperam por uma cura",
-        "url": "https://www.publico.pt/2026/11/11/ciencia/noticia/mortes-ensaios-clinicos-nao-dissuadem-doentes-lupus-esperam-cura-2194555",
-        "source": "Público",
-        "translated": false,
-        "category": "portugal",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
-      },
       {
         "title": "Grande Entrevista - Sinfonia",
         "url": "http://observador21.blogspot.com/2010/03/grande-entrevista-sinfonia.html",
@@ -1043,7 +998,7 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
         "title": "Curtas: Arbitragem I",
@@ -1058,7 +1013,7 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
         "title": "Curtas: Vitor Constâncio II",
@@ -1073,11 +1028,56 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "O papel das seguradoras quando acontece o pior",
-        "url": "https://eco.sapo.pt/opiniao/o-papel-das-seguradoras-quando-acontece-o-pior/",
+        "title": "Edifício de três andares desabou em Brooklyn, Nova Iorque: uma pessoa morreu",
+        "url": "https://www.publico.pt/2026/11/11/mundo/noticia/edificio-tres-andares-desabou-brooklyn-nova-iorque-pessoa-morreu-2194672",
+        "source": "Público",
+        "translated": false,
+        "category": "portugal",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-12T00:03:28.583149+00:00"
+      },
+      {
+        "title": "Demissão de Jensen Huang da Nvidia está iminente, segundo o <em>The Wall Street Journal</em>",
+        "url": "https://www.publico.pt/2026/11/11/enter/noticia/demissao-jensen-huang-nvidia-iminente-segundo-the-wall-street-journal-2194671",
+        "source": "Público",
+        "translated": false,
+        "category": "portugal",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-12T00:03:28.583149+00:00"
+      },
+      {
+        "title": "Tempestade Charles foi o trunfo político de que Luís Neves precisava?",
+        "url": "https://www.publico.pt/2026/11/11/politica/noticia/tempestade-charles-trunfo-politico-luis-neves-precisava-2194653",
+        "source": "Público",
+        "translated": false,
+        "category": "portugal",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-12T00:03:28.583149+00:00"
+      },
+      {
+        "title": "Acampadas reúnem com Presidente da República na sexta-feira",
+        "url": "https://eco.sapo.pt/2026/11/11/acampadas-reunem-com-presidente-da-republica-na-sexta-feira/",
         "source": "Eco",
         "translated": false,
         "category": "portugal",
@@ -1088,11 +1088,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Depressão Charles. PSD obriga Aguiar-Branco a clarificar que Parlamento está a “trabalhar”",
-        "url": "https://eco.sapo.pt/2026/11/11/depressao-charles-psd-obriga-aguiar-branco-a-clarificar-que-parlamento-esta-a-trabalhar/",
+        "title": "Negociações demonstram que Washington, Kiev e Europa estão “alinhados e unidos”",
+        "url": "https://eco.sapo.pt/2026/11/11/negociacoes-demonstram-que-washington-kiev-e-europa-estao-alinhados-e-unidos/",
         "source": "Eco",
         "translated": false,
         "category": "portugal",
@@ -1103,11 +1103,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Sócios aprovam encerramento da Weil Gotshal. Fuga de advogados ditou fim de gigante da advocacia norte-americana",
-        "url": "https://eco.sapo.pt/2026/11/11/socios-aprovam-encerramento-da-weil-gotshal-fuga-de-advogados-ditou-fim-de-gigante-da-advocacia-norte-americana/",
+        "title": "Zelensky insiste em garantias de segurança e não abdica do Donbass",
+        "url": "https://eco.sapo.pt/2026/11/11/zelensky-insiste-em-garantias-de-seguranca-e-nao-abdica-do-donbass/",
         "source": "Eco",
         "translated": false,
         "category": "portugal",
@@ -1118,58 +1118,13 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       }
     ],
     "mundo": [
       {
-        "title": "Rubio backs blockade, Vance wants deal: Is Trump’s team split on Iran war?",
-        "url": "https://www.aljazeera.com/news/2026/11/11/is-trump-team-split-on-iran?traffic_source=rss",
-        "source": "Al Jazeera",
-        "translated": false,
-        "category": "mundo",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
-      },
-      {
-        "title": "South Africans divided over Olympic swimmer’s switch to Netherlands",
-        "url": "https://www.aljazeera.com/video/newsfeed/2026/11/11/south-africans-divided-over-olympic-swimmers-switch-to-netherlands-2?traffic_source=rss",
-        "source": "Al Jazeera",
-        "translated": false,
-        "category": "mundo",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
-      },
-      {
-        "title": "As Gaza floods subside, Palestinians assess human and material damage",
-        "url": "https://www.aljazeera.com/features/2026/11/11/as-gaza-flood-waters-subside-palestinians-assess-human-and-material-damage?traffic_source=rss",
-        "source": "Al Jazeera",
-        "translated": false,
-        "category": "mundo",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
-      },
-      {
-        "title": "Killing of journalist underscores deteriorating conditions in Ecuador",
-        "url": "https://www.theguardian.com/world/2026/nov/11/ecuador-journalist-killing",
+        "title": "Two skulls likely belonging to enslaved people returned to Brazil after Harvard used them in eugenics studies",
+        "url": "https://www.theguardian.com/news/2026/nov/11/harvard-skulls-repatriated-brazil",
         "source": "The Guardian",
         "translated": false,
         "category": "mundo",
@@ -1180,11 +1135,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Ukraine captures first Indonesian prisoner of war amid surge in Russian recruitment",
-        "url": "https://www.theguardian.com/world/2026/nov/11/ukraine-indonesian-pow-prisoner-of-war-russia",
+        "title": "Ex-member of radical Marxist group scales balcony, escapes house arrest in Argentina",
+        "url": "https://www.theguardian.com/world/2026/nov/11/red-brigades-leonardo-bertulazzi-escapes-house-arrest-argentina",
         "source": "The Guardian",
         "translated": false,
         "category": "mundo",
@@ -1195,11 +1150,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Falkland Islanders face ‘devastating consequences’ if Argentina blocks oil project, says UK",
-        "url": "https://www.theguardian.com/world/2026/nov/10/uk-and-argentina-clash-over-falklands-oil-project-as-hamburg-tribunal-starts",
+        "title": "Argentinian lawyer mocks UK’s sovereignty claim in Falklands oil case",
+        "url": "https://www.theguardian.com/uk-news/2026/nov/11/argentine-lawyer-mocks-uk-sovereignty-claim-in-falklands-oil-case",
         "source": "The Guardian",
         "translated": false,
         "category": "mundo",
@@ -1210,12 +1165,12 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "France 2026 growth forecast cut to 0.2% by Moody's",
-        "url": "https://www.lemonde.fr/en/france/article/2026/11/11/france-2026-growth-forecast-cut-to-0-2-by-moody-s_6777817_7.html",
-        "source": "Le Monde EN",
+        "title": "Democrat Scott Colom wins closely watched US Senate race in Mississippi",
+        "url": "https://www.aljazeera.com/news/2026/11/11/democrat-scott-colom-wins-closely-watched-us-senate-race-in-mississippi?traffic_source=rss",
+        "source": "Al Jazeera",
         "translated": false,
         "category": "mundo",
         "summary": "",
@@ -1225,12 +1180,12 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Armistice Day: Macron presides over commemoration ceremony for the last time",
-        "url": "https://www.lemonde.fr/en/politics/article/2026/11/11/armistice-day-macron-presides-over-commemoration-ceremony-for-the-last-time_6777785_5.html",
-        "source": "Le Monde EN",
+        "title": "Israeli strikes hit medical complex as nine killed across Gaza",
+        "url": "https://www.aljazeera.com/news/2026/11/11/israeli-strikes-hit-tent-camp-as-five-killed-in-gaza?traffic_source=rss",
+        "source": "Al Jazeera",
         "translated": false,
         "category": "mundo",
         "summary": "",
@@ -1240,12 +1195,12 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Russia bans two French lawmakers and two journalists from entry",
-        "url": "https://www.lemonde.fr/en/international/article/2026/11/11/russia-bans-two-french-lawmakers-and-two-journalists-from-entry_6777752_4.html",
-        "source": "Le Monde EN",
+        "title": "Iran designates Argentinian navy, air force as ‘terrorist organisations’",
+        "url": "https://www.aljazeera.com/news/2026/11/11/iran-designates-argentinian-navy-air-force-as-terrorist?traffic_source=rss",
+        "source": "Al Jazeera",
         "translated": false,
         "category": "mundo",
         "summary": "",
@@ -1255,11 +1210,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "União Europeia prepara diálogo de defesa em Doha com países do Golfo",
-        "url": "https://pt.euronews.com/2026/11/11/uniao-europeia-prepara-dialogo-de-defesa-em-doha-com-paises-do-golfo",
+        "title": "Espanha: confrontos eclodem em Barcelona após marcha pacífica da greve geral",
+        "url": "https://pt.euronews.com/video/2026/11/11/espanha-confrontos-eclodem-em-barcelona-apos-marcha-pacifica-da-greve-geral",
         "source": "Euronews PT",
         "translated": false,
         "category": "mundo",
@@ -1270,11 +1225,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Portugal: tempestade Charles traz chuva intensa, ventos fortes e ondas atlânticas",
-        "url": "https://pt.euronews.com/video/2026/11/11/portugal-tempestade-charles-traz-chuva-intensa-ventos-fortes-e-ondas-atlanticas",
+        "title": "Espanha: 120 mil manifestam-se em Madrid por casas acessíveis e melhores salários",
+        "url": "https://pt.euronews.com/video/2026/11/11/espanha-120-mil-manifestam-se-em-madrid-por-casas-acessiveis-e-melhores-salarios",
         "source": "Euronews PT",
         "translated": false,
         "category": "mundo",
@@ -1285,11 +1240,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Rússia fecha redação de Moscovo do último jornal crítico Novaya Gazeta",
-        "url": "https://pt.euronews.com/2026/11/11/russia-fecha-redacao-de-moscovo-do-ultimo-jornal-critico-novaya-gazeta",
+        "title": "Alemanha: Singulus fecha contrato de 60 milhões com Elon Musk para células solares de satélite",
+        "url": "https://pt.euronews.com/2026/11/11/alemanha-singulus-fecha-contrato-de-60-milhoes-com-elon-musk-para-celulas-solares-de-satel",
         "source": "Euronews PT",
         "translated": false,
         "category": "mundo",
@@ -1300,11 +1255,56 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Italy: Hundreds of schools evacuated after bomb threats",
-        "url": "https://www.dw.com/en/italy-hundreds-of-schools-evacuated-after-bomb-threats/a-79918034?maca=en-rss-en-all-1573-rdf",
+        "title": "Democrat Scott Colom flips Mississippi Senate seat, becomes state's first Black senator since Reconstruction",
+        "url": "https://www.lemonde.fr/en/international/article/2026/11/12/mississippi-elects-democrat-scott-colom-as-state-s-first-black-us-senator-since-reconstruction_6778148_4.html",
+        "source": "Le Monde EN",
+        "translated": false,
+        "category": "mundo",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-12T00:03:28.583149+00:00"
+      },
+      {
+        "title": "Four French journalists and MPs banned from entering Russia, marking new low in Paris-Moscow relations:",
+        "url": "https://www.lemonde.fr/en/international/article/2026/11/11/a-new-low-in-paris-moscow-relations-four-french-journalists-and-mps-banned-from-entering-russia_6778147_4.html",
+        "source": "Le Monde EN",
+        "translated": false,
+        "category": "mundo",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-12T00:03:28.583149+00:00"
+      },
+      {
+        "title": "Russia's ambassador to the US Alexander Darchiev dies 'suddenly' in Moscow",
+        "url": "https://www.lemonde.fr/en/international/article/2026/11/11/russia-s-ambassador-to-the-us-alexander-darchiev-dies-suddenly-in-moscow_6778081_4.html",
+        "source": "Le Monde EN",
+        "translated": false,
+        "category": "mundo",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-12T00:03:28.583149+00:00"
+      },
+      {
+        "title": "Nvidia prepares to push out CEO Jensen Huang, reports",
+        "url": "https://www.dw.com/en/nvidia-prepares-to-push-out-ceo-jensen-huang-reports/a-79925002?maca=en-rss-en-all-1573-rdf",
         "source": "DW News",
         "translated": false,
         "category": "mundo",
@@ -1315,11 +1315,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Tundu Lissu: After escaping the death penalty, what does his guilty verdict mean for Tanzania's democracy?",
-        "url": "https://www.dw.com/en/tundu-lissu-after-escaping-the-death-penalty-what-does-his-guilty-verdict-mean-for-tanzania-s-democracy/a-79908512?maca=en-rss-en-all-1573-rdf",
+        "title": "Democrat Colom wins Mississippi Senate seat",
+        "url": "https://www.dw.com/en/democrat-colom-wins-mississippi-senate-seat/a-79924938?maca=en-rss-en-all-1573-rdf",
         "source": "DW News",
         "translated": false,
         "category": "mundo",
@@ -1330,11 +1330,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Germany news: Only 1/3 of Germans satisfied with state of democracy",
-        "url": "https://www.dw.com/en/germany-news-only-1-3-of-germans-satisfied-with-state-of-democracy/live-79915066?maca=en-rss-en-all-1573-rdf",
+        "title": "Russian Foreign Ministry says its ambassador to US has died",
+        "url": "https://www.dw.com/en/russian-foreign-ministry-says-its-ambassador-to-us-has-died/a-79924829?maca=en-rss-en-all-1573-rdf",
         "source": "DW News",
         "translated": false,
         "category": "mundo",
@@ -1345,7 +1345,7 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       }
     ],
     "economia": [
@@ -1362,7 +1362,7 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
         "title": "For boomers, economic boom times are over",
@@ -1377,7 +1377,7 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
         "title": "The future of Trumponomics: compromise or failure",
@@ -1392,146 +1392,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Bloomberg Invest Dallas 2026 Highlights",
-        "url": "https://www.bloomberg.com/news/videos/2026-11-11/bloomberg-invest-dallas-2026-highlights-video",
-        "source": "Bloomberg",
-        "translated": false,
-        "category": "economia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
-      },
-      {
-        "title": "Chile Trucker Protest Over Fuel Prices Imperils Farm Exports",
-        "url": "https://www.bloomberg.com/news/articles/2026-11-11/chile-trucker-protest-over-fuel-prices-imperils-farm-exports",
-        "source": "Bloomberg",
-        "translated": false,
-        "category": "economia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
-      },
-      {
-        "title": "Virgin Atlantic Cuts Winter Capacity on Fuel Costs, Soft Demand",
-        "url": "https://www.bloomberg.com/news/articles/2026-11-11/virgin-atlantic-cuts-winter-capacity-on-fuel-costs-soft-demand",
-        "source": "Bloomberg",
-        "translated": false,
-        "category": "economia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
-      },
-      {
-        "title": "Produção da OPEP sobe 7,8% para 27,2 milhões de barris diários mas mantém-se abaixo dos níveis pré-guerra",
-        "url": "http://dinheirovivo.dn.pt/economia/produo-da-opep-sobe-78-para-2716-milhes-de-barris-dirios-mas-mantm-se-abaixo-dos-nveis-pr-guerra",
-        "source": "Dinheiro Vivo",
-        "translated": false,
-        "category": "economia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
-      },
-      {
-        "title": "COP31. \"Poluidores têm de pagar\", exige Guterres no último discurso perante líderes mundiais",
-        "url": "https://www.dn.pt/sociedade/cop31-poluidores-tm-de-pagar-exige-guterres-no-ltimo-discurso-perante-lderes-mundiais",
-        "source": "Dinheiro Vivo",
-        "translated": false,
-        "category": "economia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
-      },
-      {
-        "title": "E-Redes: Registo de dois mil clientes sem luz considerado normal para um dia de chuva intensa",
-        "url": "http://dinheirovivo.dn.pt/empresas/e-redes-registo-de-dois-mil-clientes-sem-luz-considerado-normal-para-um-dia-de-chuva-intensa",
-        "source": "Dinheiro Vivo",
-        "translated": false,
-        "category": "economia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
-      },
-      {
-        "title": "US tech stocks gain as AI trade revives",
-        "url": "https://www.ft.com/content/639de881-6017-454f-abfa-cfb191d1e7cd?syn-25a6b1a6=1",
-        "source": "Financial Times",
-        "translated": false,
-        "category": "economia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
-      },
-      {
-        "title": "Hundreds of schools across Italy, Scotland and Ireland receive bomb threats",
-        "url": "https://www.ft.com/content/7bbc0a5e-b7e2-4a3f-874f-a63de94e922d?syn-25a6b1a6=1",
-        "source": "Financial Times",
-        "translated": false,
-        "category": "economia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
-      },
-      {
-        "title": "RAF Fairford incident partly directed from New York jail, US claims",
-        "url": "https://www.ft.com/content/687acbbb-6296-4030-a1a0-c07936a6c9db?syn-25a6b1a6=1",
-        "source": "Financial Times",
-        "translated": false,
-        "category": "economia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
-      },
-      {
-        "title": "Saab e portuguesa Vangest com parceria para produzir componentes para caças Gripen",
-        "url": "https://www.jornaldenegocios.pt/empresas/detalhe/saab-e-portuguesa-vangest-com-parceria-para-produzir-componentes-para-cacas-gripen",
+        "title": "Imobiliário garante um quarto das receitas das autarquias",
+        "url": "https://www.jornaldenegocios.pt/economia/detalhe/imobiliario-garante-um-quarto-das-receitas-das-autarquias",
         "source": "Jornal de Negócios",
         "translated": false,
         "category": "economia",
@@ -1542,11 +1407,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Luís Neves: \"Não se prevê a manutenção do estado de alerta. Amanhã voltamos à normalidade\"",
-        "url": "https://www.jornaldenegocios.pt/economia/detalhe/portugal-prepara-se-para-pico-do-mau-tempo-seguradoras-recomendam-fazer-provas-dos-danos",
+        "title": "Tempestade Charles: estas são as imagens de um dia marcado pelo mau tempo em Portugal",
+        "url": "https://www.jornaldenegocios.pt/multimedia/negocios-tv/detalhe/tempestade-charles-estas-sao-as-imagens-de-um-dia-marcado-pelo-mau-tempo-em-portugal",
         "source": "Jornal de Negócios",
         "translated": false,
         "category": "economia",
@@ -1557,11 +1422,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Indústria de recursos minerais gera 3,7 mil milhões para economia e paga e produz acima da média",
-        "url": "https://www.jornaldenegocios.pt/empresas/industria/detalhe/industria-de-recursos-minerais-gera-3-7-mil-milhoes-para-economia-e-paga-e-produz-acima-da-media",
+        "title": "A fatura da inflação",
+        "url": "https://www.jornaldenegocios.pt/opiniao/editorial/paulo-moutinho/detalhe/a-fatura-da-inflacao",
         "source": "Jornal de Negócios",
         "translated": false,
         "category": "economia",
@@ -1572,13 +1437,148 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
+      },
+      {
+        "title": "The $150 Billion Catch in US Shipbuilding",
+        "url": "https://www.bloomberg.com/news/videos/2026-11-12/opinion-the-150-billion-us-shipbuilding-catch-video",
+        "source": "Bloomberg",
+        "translated": false,
+        "category": "economia",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-12T00:03:28.583149+00:00"
+      },
+      {
+        "title": "Pivotal Advisors CEO: Investors Should See AI as Part of Portfolio",
+        "url": "https://www.bloomberg.com/news/videos/2026-11-11/mcghee-investors-should-see-ai-as-part-of-portfolio-video",
+        "source": "Bloomberg",
+        "translated": false,
+        "category": "economia",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-12T00:03:28.583149+00:00"
+      },
+      {
+        "title": "Dana Telsey on the Future of Department Stores",
+        "url": "https://www.bloomberg.com/news/videos/2026-11-11/dana-telsey-on-the-future-of-department-stores-video",
+        "source": "Bloomberg",
+        "translated": false,
+        "category": "economia",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-12T00:03:28.583149+00:00"
+      },
+      {
+        "title": "Scott Colom wins historic Senate race in Mississippi",
+        "url": "https://www.ft.com/content/ed93bd25-3ae4-4845-ac2e-ccb6e9c741e6?syn-25a6b1a6=1",
+        "source": "Financial Times",
+        "translated": false,
+        "category": "economia",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-12T00:03:28.583149+00:00"
+      },
+      {
+        "title": "Nvidia board set to meet after revelations Huang had affair with top company executive",
+        "url": "https://www.ft.com/content/d3838274-a055-4d5d-a1ff-48f2979a08f0?syn-25a6b1a6=1",
+        "source": "Financial Times",
+        "translated": false,
+        "category": "economia",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-12T00:03:28.583149+00:00"
+      },
+      {
+        "title": "ExxonMobil launches legal challenge to EU carbon capture rules",
+        "url": "https://www.ft.com/content/377d2ae5-112f-411f-bfc1-5e498948cb7b?syn-25a6b1a6=1",
+        "source": "Financial Times",
+        "translated": false,
+        "category": "economia",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-12T00:03:28.583149+00:00"
+      },
+      {
+        "title": "Tempestade Charles perdeu a força, mas Governo não se arrepende do alerta",
+        "url": "https://www.dn.pt/sociedade/tempestade-charles-perdeu-a-fora-mas-governo-no-se-arrepende-do-alerta",
+        "source": "Dinheiro Vivo",
+        "translated": false,
+        "category": "economia",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-12T00:03:28.583149+00:00"
+      },
+      {
+        "title": "Worten alvo de ciberataque que acedeu a dados de clientes e prestadores de serviços",
+        "url": "http://dinheirovivo.dn.pt/empresas/worten-alvo-de-ciberataque-que-acedeu-a-dados-de-clientes-e-prestadores-de-servios",
+        "source": "Dinheiro Vivo",
+        "translated": false,
+        "category": "economia",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-12T00:03:28.583149+00:00"
+      },
+      {
+        "title": "Pelo menos um morto e dez feridos após o desabamento de um prédio de três andares em Brooklyn",
+        "url": "https://www.dn.pt/internacional/edifcio-de-trs-andares-desaba-em-brooklyn-h-pessoas-presas-sob-os-escombros",
+        "source": "Dinheiro Vivo",
+        "translated": false,
+        "category": "economia",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-12T00:03:28.583149+00:00"
       }
     ],
     "portfolio": [
       {
-        "title": "Aquestive Therapeutics: My Biotech Investment Framework Now Requires Me To Downgrade AQST To Sell",
-        "url": "https://seekingalpha.com/article/4966448-aquestive-therapeutics-my-biotech-investment-framework-now-requires-me-to-downgrade-aqst-to-sell?source=feed_all_articles",
+        "title": "Pixelworks, Inc. (PXLW) Q3 2026 Earnings Call Transcript",
+        "url": "https://seekingalpha.com/article/4966704-pixelworks-inc-pxlw-q3-2026-earnings-call-transcript?source=feed_all_articles",
         "source": "Seeking Alpha",
         "translated": false,
         "category": "portfolio",
@@ -1589,11 +1589,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Ethan Allen Interiors: Leadership Overhaul Is Welcome After Weak Q1",
-        "url": "https://seekingalpha.com/article/4966447-ethan-allen-interiors-leadership-overhaul-is-welcome-after-weak-q1?source=feed_all_articles",
+        "title": "Elicio Therapeutics, Inc. (ELTX) Discusses Camupepimut Development in Neoadjuvant and Metastatic Pancreatic Cancer Transcript",
+        "url": "https://seekingalpha.com/article/4966726-elicio-therapeutics-inc-eltx-discusses-camupepimut-development-in-neoadjuvant-and-metastatic?source=feed_all_articles",
         "source": "Seeking Alpha",
         "translated": false,
         "category": "portfolio",
@@ -1604,11 +1604,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "TransMedics: 2027 Setting Up To Be A Pivotal Year",
-        "url": "https://seekingalpha.com/article/4966443-transmedics-2027-setting-up-to-be-a-pivotal-year?source=feed_all_articles",
+        "title": "Brown & Brown, Inc. (BRO) Employer Health and Benefits Strategy Survey Results Review Transcript",
+        "url": "https://seekingalpha.com/article/4966671-brown-and-brown-inc-bro-employer-health-and-benefits-strategy-survey-results-review?source=feed_all_articles",
         "source": "Seeking Alpha",
         "translated": false,
         "category": "portfolio",
@@ -1619,58 +1619,13 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       }
     ],
     "tecnologia": [
       {
-        "title": "Sony’s latest Pulse wireless headset packs planar magnetic drivers at a good price",
-        "url": "https://www.theverge.com/games/1031291/sony-playstation-pulse-wireless-gaming-headset-hands-on",
-        "source": "The Verge",
-        "translated": false,
-        "category": "tecnologia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
-      },
-      {
-        "title": "Adobe’s AI experiments let you walk around in photos and interview your characters",
-        "url": "https://www.theverge.com/tech/1031505/adobe-max-2026-sneaks-experiments-ai",
-        "source": "The Verge",
-        "translated": false,
-        "category": "tecnologia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
-      },
-      {
-        "title": "Streaming is still trying to be TikTok",
-        "url": "https://www.theverge.com/streaming/1030864/streaming-skydance-paramount-disney-hulu-earnings-tiktok-short-form-video",
-        "source": "The Verge",
-        "translated": false,
-        "category": "tecnologia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
-      },
-      {
-        "title": "Plurai wants to help AI agents work better using the same approach that helped get self-driving cars to roads",
-        "url": "https://techcrunch.com/2026/11/11/plurai-wants-to-help-ai-agents-work-better-using-the-same-approach-that-helped-get-self-driving-cars-to-roads/",
+        "title": "The unfolding Jensen Huang scandal: a timeline",
+        "url": "https://techcrunch.com/2026/11/11/nvidia-ceo-jensen-huangs-affair-with-alleged-chinese-spy-a-timeline/",
         "source": "TechCrunch",
         "translated": false,
         "category": "tecnologia",
@@ -1681,11 +1636,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Nvidia’s crisis has corporate governance experts reaching for the popcorn",
-        "url": "https://techcrunch.com/2026/11/10/nvidias-crisis-has-corporate-governance-experts-reaching-for-the-popcorn/",
+        "title": "Nvidia’s stock drops as board reportedly preps to oust CEO Jensen Huang",
+        "url": "https://techcrunch.com/2026/11/11/nvidias-stock-drops-as-board-reportedly-preps-to-oust-ceo-jensen-huang/",
         "source": "TechCrunch",
         "translated": false,
         "category": "tecnologia",
@@ -1696,11 +1651,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "X launches its own clipping feature to spur influencer engagement",
-        "url": "https://techcrunch.com/2026/11/10/x-launches-its-own-clipping-feature-to-spur-influencer-engagement/",
+        "title": "Jensen Huang accused of having another affair — with an Nvidia exec",
+        "url": "https://techcrunch.com/2026/11/11/jensen-huang-accused-of-having-another-affair-with-a-nvidia-exec/",
         "source": "TechCrunch",
         "translated": false,
         "category": "tecnologia",
@@ -1711,11 +1666,56 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Duolingo, Strava, and Ticketmaster Are All Caught Up in EU’s New Digital Fairness Rules",
-        "url": "https://www.wired.com/story/duolingo-strava-and-ticketmaster-are-all-caught-up-in-eus-new-digital-fairness-rules/",
+        "title": "Nvidia is reportedly preparing to fire Jensen Huang",
+        "url": "https://www.theverge.com/tech/1031652/jensen-huang-rumor",
+        "source": "The Verge",
+        "translated": false,
+        "category": "tecnologia",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-12T00:03:28.583149+00:00"
+      },
+      {
+        "title": "Hands on with Home Assistant’s new ‘smart home multi-tool’",
+        "url": "https://www.theverge.com/tech/1031601/home-assistant-connect-aux-2-hands-on",
+        "source": "The Verge",
+        "translated": false,
+        "category": "tecnologia",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-12T00:03:28.583149+00:00"
+      },
+      {
+        "title": "United won’t let your AI agent book your flight",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/1031623/united-unauthorized-ai-agents",
+        "source": "The Verge",
+        "translated": false,
+        "category": "tecnologia",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-12T00:03:28.583149+00:00"
+      },
+      {
+        "title": "Pete Hegseth Is About to Get His Ass Kicked",
+        "url": "https://www.wired.com/story/pete-hegseth-is-about-to-get-his-ass-kicked/",
         "source": "Wired",
         "translated": false,
         "category": "tecnologia",
@@ -1726,11 +1726,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Best Indoor Garden Systems I’ve Been Testing for Years (2026)",
-        "url": "https://www.wired.com/gallery/best-indoor-gardening-systems/",
+        "title": "I Saw the Future of Robotics in a Virtual Duck That Chases My Cat",
+        "url": "https://www.wired.com/story/i-trained-a-microduck-to-be-my-cats-butler/",
         "source": "Wired",
         "translated": false,
         "category": "tecnologia",
@@ -1741,11 +1741,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Exclusive: Your Smartphone Camera Could Get a Big Upgrade With This Tech",
-        "url": "https://www.wired.com/story/your-smartphone-camera-could-get-a-big-upgrade-with-this-tech/",
+        "title": "The 22 Best Early Black Friday Deals: Our Ultimate Picks (2026)",
+        "url": "https://www.wired.com/story/best-black-friday-deals-11-11-2026/",
         "source": "Wired",
         "translated": false,
         "category": "tecnologia",
@@ -1756,11 +1756,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "NOS é o primeiro operador a disponibilizar os óculos Ray-Ban Meta em Portugal",
-        "url": "https://tek.sapo.pt/mobile/equipamentos/artigos/nos-e-o-primeiro-operador-a-disponibilizar-os-oculos-ray-ban-meta-em-portugal/",
+        "title": "A morte do prompt perfeito",
+        "url": "https://tek.sapo.pt/noticias/artigos/a-morte-do-prompt-perfeito/",
         "source": "SAPO Tek",
         "translated": false,
         "category": "tecnologia",
@@ -1771,11 +1771,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Mau tempo não “arrefeceu” o entusiasmo, mas mudou os planos de quem veio ao Web Summit à procura de novas ideias e oportunidades",
-        "url": "https://tek.sapo.pt/noticias/negocios/artigos/mau-tempo-nao-arrefeceu-o-entusiasmo-mas-mudou-os-planos-de-quem-veio-ao-web-summit-a-procura-de-novas-ideias-e-oportunidades/",
+        "title": "Drone da Amazon vai voar dentro de casa para fazer tarefas de vigilância doméstica",
+        "url": "https://tek.sapo.pt/noticias/computadores/artigos/drone-da-amazon-vai-voar-dentro-de-casa-para-fazer-tarefas-de-vigilancia-domestica/",
         "source": "SAPO Tek",
         "translated": false,
         "category": "tecnologia",
@@ -1786,11 +1786,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Web Summit regressa amanhã para o “dia mais movimentado” de sempre. Até lá multiplicam-se iniciativas online",
-        "url": "https://tek.sapo.pt/noticias/negocios/artigos/web-summit-regressa-amanha-para-o-dia-mais-movimentado-de-sempre-ate-la-multiplicam-se-iniciativas-online/",
+        "title": "SpaceX prepara próximo voo da Starship com manobra inédita de recuperação",
+        "url": "https://tek.sapo.pt/noticias/ciencia/artigos/spacex-prepara-proximo-voo-da-starship-com-manobra-inedita-de-recuperacao/",
         "source": "SAPO Tek",
         "translated": false,
         "category": "tecnologia",
@@ -1801,13 +1801,13 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       }
     ],
     "carreira": [
       {
-        "title": "Nvidia stock gets its first boost of the Jensen Huang scandal era. What’s driving shares higher today?",
-        "url": "https://www.fastcompany.com/91640260/nvidia-stock-rises-today-first-boost-ceo-jensen-huang-scandal",
+        "title": "Can anyone really stop the AI data center boom? What could happen next now that voters have spoken",
+        "url": "https://www.fastcompany.com/91640482/ai-data-center-boom-can-anyone-stop-it-what-happens-next",
         "source": "Fast Company",
         "translated": false,
         "category": "carreira",
@@ -1818,11 +1818,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Who is Alice Huang? What to know about the businesswoman involved in the Nvidia scandal",
-        "url": "https://www.fastcompany.com/91640240/who-alice-huang-what-know-about-businesswoman-involved-nvidia-scandal",
+        "title": "United Airlines just made a big change to flight bookings. Here’s why Delta and American aren’t following",
+        "url": "https://www.fastcompany.com/91640548/united-airlines-just-made-a-big-change-to-flight-bookings-heres-why-delta-and-american-arent-following",
         "source": "Fast Company",
         "translated": false,
         "category": "carreira",
@@ -1833,11 +1833,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       },
       {
-        "title": "Apple is closing the ‘world’s largest community of Apple fans.’ Why shutting it down makes sense",
-        "url": "https://www.fastcompany.com/91640201/apple-support-community-shutdown-why-closing-it-makes-sense",
+        "title": "This company is giving workers time off to play the new ‘Grand Theft Auto’",
+        "url": "https://www.fastcompany.com/91640596/this-company-is-giving-workers-time-off-to-play-the-new-grand-theft-auto",
         "source": "Fast Company",
         "translated": false,
         "category": "carreira",
@@ -1848,13 +1848,13 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-11T14:54:52.091379+00:00"
+        "date": "2026-11-12T00:03:28.583149+00:00"
       }
     ],
     "recomendacao": []
   },
   "summary": {
-    "headline": "Briefing de 11 de Novembro de 2026",
+    "headline": "Briefing de 12 de Novembro de 2026",
     "items": []
   },
   "connections": [],
@@ -1862,55 +1862,62 @@
     {
       "symbol": "AAPL",
       "label": "Apple",
-      "price": 353.68,
-      "change_pct": 1.48,
+      "price": 355.63,
+      "change_pct": 2.04,
       "up": true
     },
     {
       "symbol": "MSFT",
       "label": "Microsoft",
-      "price": 528.65,
-      "change_pct": -0.85,
+      "price": 521.12,
+      "change_pct": -2.26,
       "up": false
     },
     {
       "symbol": "NVDA",
       "label": "NVIDIA",
-      "price": 172.96,
-      "change_pct": 2.41,
+      "price": 173.73,
+      "change_pct": 2.87,
       "up": true
     },
     {
       "symbol": "TSLA",
       "label": "Tesla",
-      "price": 387.08,
-      "change_pct": 1.92,
+      "price": 390.84,
+      "change_pct": 2.91,
       "up": true
     },
     {
       "symbol": "AMZN",
       "label": "Amazon",
-      "price": 268.93,
-      "change_pct": -0.72,
+      "price": 266.17,
+      "change_pct": -1.74,
       "up": false
     },
     {
       "symbol": "EURUSD=X",
       "label": "EUR/USD",
       "price": 1.11,
-      "change_pct": -1.19,
+      "change_pct": -0.65,
       "up": false
+    },
+    {
+      "symbol": "BTC-USD",
+      "label": "Bitcoin",
+      "price": 74022.58,
+      "change_pct": 0.41,
+      "up": true
     },
     {
       "symbol": "GC=F",
       "label": "Ouro",
-      "price": 4023.4,
-      "change_pct": -0.17,
+      "price": 3986.6,
+      "change_pct": -1.08,
       "up": false
     }
   ],
   "portfolio_analysis": {
-    "total_change_pct": 0.41,
+    "total_change_pct": 0.31,
     "sentiment": "positivo",
     "what_happened": "Mercado em alta: Apple, NVIDIA, Tesla sobem; Microsoft, Amazon, EUR/USD descem.",
     "what_to_do": "Manter posições.",
