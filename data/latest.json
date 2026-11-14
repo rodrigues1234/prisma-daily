@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-13T23:15:09.216816+00:00",
-  "run_id": "2026-11-13-23h",
+  "updated_at": "2026-11-14T13:56:44.529380+00:00",
+  "run_id": "2026-11-14-13h",
   "version": 6,
   "sources": [
     "Al Jazeera",
@@ -36,6 +36,66 @@
   "gemini_alert": "O serviço de IA não respondeu neste run. Os artigos são mostrados sem tradução ou análise, categorizados automaticamente por fonte.",
   "articles": [
     {
+      "title": "Young people should have legal guarantee of job or training, Milburn tells BBC",
+      "url": "https://www.bbc.co.uk/news/articles/c69vwp09d7vvo?at_medium=RSS&at_campaign=rss",
+      "source": "BBC News",
+      "translated": false,
+      "category": "breaking",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Body found on French beach after attempted Channel crossing",
+      "url": "https://www.bbc.co.uk/news/articles/cxj05jr299n6o?at_medium=RSS&at_campaign=rss",
+      "source": "BBC News",
+      "translated": false,
+      "category": "breaking",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Neets review won't be for the faint-hearted - and will test Burnham's appetite for a welfare fight",
+      "url": "https://www.bbc.co.uk/news/articles/cmg46qgkl7r4o?at_medium=RSS&at_campaign=rss",
+      "source": "BBC News",
+      "translated": false,
+      "category": "breaking",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Choking fires, deadly heat and devastating floods: 2026 in extreme weather",
+      "url": "https://www.theguardian.com/world/2026/nov/14/fires-heat-floods-extreme-weather-2026",
+      "source": "The Guardian",
+      "translated": false,
+      "category": "mundo",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
       "title": "Nvidia scandal: US treasury chief blames Lutnick’s commerce department over alleged lack of action",
       "url": "https://www.theguardian.com/technology/2026/nov/13/nvidia-scandal-sparks-us-national-security-concerns-china",
       "source": "The Guardian",
@@ -48,7 +108,7 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
       "title": "Storm Charles causes floods and flight cancellations across southern Europe",
@@ -63,71 +123,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
-      "title": "Teen prodigy, Netflix star, prisoner: the story of Hong Kong dissident Joshua Wong – podcast",
-      "url": "https://www.theguardian.com/news/audio/2026/nov/13/teen-prodigy-netflix-star-prisoner-the-story-of-hong-kong-dissident-joshua-wong-podcast",
-      "source": "The Guardian",
-      "translated": false,
-      "category": "mundo",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Grupo Infinito Particular publica em Portugal vencedor do Prémio Booker 2026",
-      "url": "https://www.publico.pt/2026/11/13/culturaipsilon/noticia/grupo-infinito-particular-publica-portugal-vencedor-premio-booker-2026-2194956",
-      "source": "Público",
-      "translated": false,
-      "category": "portugal",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "As negociações sobre a Ucrânia e a verdadeira ameaça russa",
-      "url": "https://www.publico.pt/2026/11/13/mundo/opiniao/negociacoes-ucrania-verdadeira-ameaca-russa-2194951",
-      "source": "Público",
-      "translated": false,
-      "category": "portugal",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Na despedida do ISEG, Louçã propõe manifesto para “nova economia”",
-      "url": "https://www.publico.pt/2026/11/13/politica/noticia/despedida-iseg-louca-propoe-manifesto-nova-economia-2194936",
-      "source": "Público",
-      "translated": false,
-      "category": "portugal",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Rescue efforts under way after tanker strikes river cruise boat in US",
-      "url": "https://www.aljazeera.com/news/2026/11/13/rescue-efforts-under-way-after-tanker-strikes-river-cruise-boat-in-us?traffic_source=rss",
+      "title": "How does Iran view shift in US approach after JD Vance ordered away?",
+      "url": "https://www.aljazeera.com/news/2026/11/14/how-does-iran-view-shift-in-us-approach-after-vance-ordered-away?traffic_source=rss",
       "source": "Al Jazeera",
       "translated": false,
       "category": "mundo",
@@ -138,11 +138,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
-      "title": "LIVE: FAA issues nationwide ground stop after communications outage in US",
-      "url": "https://www.aljazeera.com/news/liveblog/2026/11/13/groundling-live?traffic_source=rss",
+      "title": "Spain vs England: UEFA Nations League – predictions, how to watch, teams",
+      "url": "https://www.aljazeera.com/sports/2026/11/14/spain-england-uefa-nations-league-predictions-how-to-watch-teams?traffic_source=rss",
       "source": "Al Jazeera",
       "translated": false,
       "category": "mundo",
@@ -153,11 +153,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
-      "title": "FAA grounds US flights nationwide after ‘communication issue’",
-      "url": "https://www.aljazeera.com/news/2026/11/13/us-grounds-all-flights-after-communication-issue?traffic_source=rss",
+      "title": "Russian casualties ‘reach 450,000’: What that means for the Ukraine war",
+      "url": "https://www.aljazeera.com/news/2026/11/14/russian-casualties-reach-450000-what-that-means-for-the-ukraine-war?traffic_source=rss",
       "source": "Al Jazeera",
       "translated": false,
       "category": "mundo",
@@ -168,56 +168,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
-      "title": "Grande Entrevista - Sinfonia",
-      "url": "http://observador21.blogspot.com/2010/03/grande-entrevista-sinfonia.html",
-      "source": "Observador",
-      "translated": false,
-      "category": "portugal",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Curtas: Arbitragem I",
-      "url": "http://observador21.blogspot.com/2010/02/curtas-arbitragem-i.html",
-      "source": "Observador",
-      "translated": false,
-      "category": "portugal",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Curtas: Vitor Constâncio II",
-      "url": "http://observador21.blogspot.com/2010/02/curtas-vitor-constancio-ii.html",
-      "source": "Observador",
-      "translated": false,
-      "category": "portugal",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "FAA issues US national ground stop on all flights",
-      "url": "https://www.dw.com/en/faa-issues-us-national-ground-stop-on-all-flights/a-79945062?maca=en-rss-en-all-1573-rdf",
+      "title": "Ukraine: Zelenskyy says security deal could go to referendum",
+      "url": "https://www.dw.com/en/ukraine-zelenskyy-says-security-deal-could-go-to-referendum/a-79947535?maca=en-rss-en-all-1573-rdf",
       "source": "DW News",
       "translated": false,
       "category": "mundo",
@@ -228,11 +183,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
-      "title": "Tanker collides with cruise ship on Mississippi in New Orleans",
-      "url": "https://www.dw.com/en/tanker-collides-with-cruise-ship-on-mississippi-in-new-orleans/a-79945080?maca=en-rss-en-all-1573-rdf",
+      "title": "New facilities in Laos and Cambodia: Is China expanding its military presence in Southeast Asia?",
+      "url": "https://www.dw.com/en/new-facilities-in-laos-and-cambodia-is-china-expanding-its-military-presence-in-southeast-asia/a-79944798?maca=en-rss-en-all-1573-rdf",
       "source": "DW News",
       "translated": false,
       "category": "mundo",
@@ -243,11 +198,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
-      "title": "Ukraine updates: EU to send united front to potential peace talks",
-      "url": "https://www.dw.com/en/ukraine-updates-eu-to-send-united-front-to-potential-peace-talks/live-79937459?maca=en-rss-en-all-1573-rdf",
+      "title": "Germany news: Solar power production approaches record high",
+      "url": "https://www.dw.com/en/germany-news-solar-power-production-approaches-record-high/live-79947500?maca=en-rss-en-all-1573-rdf",
       "source": "DW News",
       "translated": false,
       "category": "mundo",
@@ -258,56 +213,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
-      "title": "Watch: Children in Need 2026... in 90 seconds",
-      "url": "https://www.bbc.co.uk/news/videos/cqdr1jvylv1xo?at_medium=RSS&at_campaign=rss",
-      "source": "BBC News",
-      "translated": false,
-      "category": "breaking",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "US Air Force says it responded to 'suspected drones' over RAF Lakenheath",
-      "url": "https://www.bbc.co.uk/news/articles/c6jd75geegzyo?at_medium=RSS&at_campaign=rss",
-      "source": "BBC News",
-      "translated": false,
-      "category": "breaking",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "New campaign against EU membership launches ahead of UK-EU summit",
-      "url": "https://www.bbc.co.uk/news/articles/c6174l2q99ejo?at_medium=RSS&at_campaign=rss",
-      "source": "BBC News",
-      "translated": false,
-      "category": "breaking",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Libertado na Venezuela preso político espanhol Óscar Caamaño após mais de 9 anos de prisão",
-      "url": "https://pt.euronews.com/2026/11/13/libertado-na-venezuela-preso-politico-espanhol-oscar-caamano-apos-mais-de-9-anos-de-prisao",
+      "title": "China: Trump reúne-se com Xi e Putin em Shenzhen na próxima semana",
+      "url": "https://pt.euronews.com/2026/11/14/china-trump-reune-se-com-xi-e-putin-em-shenzhen-na-proxima-semana",
       "source": "Euronews PT",
       "translated": false,
       "category": "mundo",
@@ -318,11 +228,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
-      "title": "Rússia envia importante delegação empresarial a Cabul para conversações comerciais com talibãs",
-      "url": "https://pt.euronews.com/2026/11/13/russia-envia-importante-delegacao-empresarial-a-cabul-para-conversacoes-comerciais-com-tal",
+      "title": "Estados Unidos propõem Ucrânia ceder território à Rússia em troca de adesão à NATO",
+      "url": "https://pt.euronews.com/2026/11/14/estados-unidos-propoem-ucrania-ceder-territorio-a-russia-em-troca-de-adesao-a-nato",
       "source": "Euronews PT",
       "translated": false,
       "category": "mundo",
@@ -333,11 +243,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
-      "title": "Irão debate possível mudança na doutrina nuclear e saída do tratado de não proliferação de armas nucleares",
-      "url": "https://pt.euronews.com/2026/11/13/irao-debate-possivel-mudanca-na-doutrina-nuclear-e-saida-do-tratado-de-nao-proliferacao-de",
+      "title": "Notícias do dia | 14 de novembro 2026 - Tarde",
+      "url": "https://pt.euronews.com/video/2026/11/14/noticias-do-dia-14-de-novembro-2026-tarde",
       "source": "Euronews PT",
       "translated": false,
       "category": "mundo",
@@ -348,56 +258,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
-      "title": "All flights across US grounded due to air traffic control communications problems",
-      "url": "https://www.lemonde.fr/en/international/article/2026/11/13/all-flights-across-us-grounded-amid-extraordinary-circumstances_6780358_4.html",
-      "source": "Le Monde EN",
-      "translated": false,
-      "category": "mundo",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Irish police disarm 'viable device' in Dublin on day of EU summit",
-      "url": "https://www.lemonde.fr/en/international/article/2026/11/13/irish-police-disarm-viable-device-in-dublin-on-day-of-eu-summit_6780325_4.html",
-      "source": "Le Monde EN",
-      "translated": false,
-      "category": "mundo",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "In the occupied West Bank, violence and dispossession become routine",
-      "url": "https://www.lemonde.fr/en/international/article/2026/11/13/in-the-occupied-west-bank-violence-and-dispossession-become-routine_6780292_4.html",
-      "source": "Le Monde EN",
-      "translated": false,
-      "category": "mundo",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Pirelli & C. S.p.A. 2026 Q3 - Results - Earnings Call Presentation",
-      "url": "https://seekingalpha.com/article/4968032-pirelli-and-c-s-p-a-2026-q3-results-earnings-call-presentation?source=feed_all_articles",
+      "title": "Monster Beverage: Buy The Energy Drink, Sell The Stock",
+      "url": "https://seekingalpha.com/article/4968192-monster-beverage-buy-the-energy-drink-sell-the-stock?source=feed_all_articles",
       "source": "Seeking Alpha",
       "translated": false,
       "category": "portfolio",
@@ -408,11 +273,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
-      "title": "AGNT, Inc 2026 Q3 - Results - Earnings Call Presentation",
-      "url": "https://seekingalpha.com/article/4968031-agnt-inc-2026-q3-results-earnings-call-presentation?source=feed_all_articles",
+      "title": "Replace Market's Roller-Coaster Ride With Low-Stress, 6% Income, And Growth",
+      "url": "https://seekingalpha.com/article/4967255-replace-markets-roller-coaster-ride-with-low-stress-6-percent-income-growth?source=feed_all_articles",
       "source": "Seeking Alpha",
       "translated": false,
       "category": "portfolio",
@@ -423,11 +288,11 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
-      "title": "A No-Spin, No-Snark Take On Nebius",
-      "url": "https://seekingalpha.com/article/4968016-a-no-spin-no-snark-take-on-nebius?source=feed_all_articles",
+      "title": "CPI, The Fed, And An Incredible Opportunity In Bond Investing",
+      "url": "https://seekingalpha.com/article/4967903-cpi-fed-and-incredible-opportunity-in-bond-investing?source=feed_all_articles",
       "source": "Seeking Alpha",
       "translated": false,
       "category": "portfolio",
@@ -438,14 +303,14 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
-      "title": "Amazon’s new Kindle Colorsoft is a premium e-reader with a premium price",
-      "url": "https://techcrunch.com/2026/11/13/amazons-new-kindle-colorsoft-is-a-premium-e-reader-with-a-premium-price/",
-      "source": "TechCrunch",
+      "title": "At Trump's request, Russia relishes the prospect of shaping Europe's security architecture",
+      "url": "https://www.lemonde.fr/en/international/article/2026/11/14/at-trump-s-request-russia-relishes-the-prospect-of-shaping-europe-s-security-architecture_6780754_4.html",
+      "source": "Le Monde EN",
       "translated": false,
-      "category": "tecnologia",
+      "category": "mundo",
       "summary": "",
       "why": "",
       "impact": "",
@@ -453,14 +318,14 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
-      "title": "Jensen Huang’s departure blasts big hole in AI startup funding, VCs and founders say",
-      "url": "https://techcrunch.com/2026/11/13/jensen-huangs-departure-blasts-big-hole-in-ai-startup-funding-vcs-and-founders-say/",
-      "source": "TechCrunch",
+      "title": "French social unrest: Between concessions and tough talk, PM Lecornu struggles to end crisis",
+      "url": "https://www.lemonde.fr/en/politics/article/2026/11/14/french-social-unrest-between-concessions-and-tough-talk-pm-lecornu-struggles-to-end-crisis_6780688_5.html",
+      "source": "Le Monde EN",
       "translated": false,
-      "category": "tecnologia",
+      "category": "mundo",
       "summary": "",
       "why": "",
       "impact": "",
@@ -468,14 +333,14 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
-      "title": "US government grounds all flights across the United States ‘due to extraordinary circumstances’",
-      "url": "https://techcrunch.com/2026/11/13/u-s-government-grounds-all-flights-across-the-united-states-due-to-extraordinary-cirumstances/",
-      "source": "TechCrunch",
+      "title": "Pope Leo receives hero's welcome in Peru from massive crowds as he returns to his former diocese",
+      "url": "https://www.lemonde.fr/en/international/article/2026/11/14/in-peru-pope-leo-receives-a-hero-s-welcome-from-massive-crowds-as-he-returns-to-his-former-diocese_6780589_4.html",
+      "source": "Le Monde EN",
       "translated": false,
-      "category": "tecnologia",
+      "category": "mundo",
       "summary": "",
       "why": "",
       "impact": "",
@@ -483,142 +348,7 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "FAA ground stop shuts down flights nationwide",
-      "url": "https://www.theverge.com/news/1033489/faa-ground-stop",
-      "source": "The Verge",
-      "translated": false,
-      "category": "tecnologia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "ChatGPT Wallet lets OpenAI’s Dots agents make purchases for you",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1033425/openai-chatgpt-wallet",
-      "source": "The Verge",
-      "translated": false,
-      "category": "tecnologia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "CMF’s milk carton-shaped Bluetooth speaker is down to a new low price",
-      "url": "https://www.theverge.com/gadgets/1033185/nothing-cmf-speaker-s-m-black-friday-deal-sale",
-      "source": "The Verge",
-      "translated": false,
-      "category": "tecnologia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Best Early Black Friday AirPods Deals (2026)",
-      "url": "https://www.wired.com/story/best-early-black-friday-airpods-deals-11-13-2026/",
-      "source": "Wired",
-      "translated": false,
-      "category": "tecnologia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "FAA Grounds All US Flights Until Further Notice",
-      "url": "https://www.wired.com/story/faa-grounds-all-us-flights-until-further-notice/",
-      "source": "Wired",
-      "translated": false,
-      "category": "tecnologia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Atlas Coffee Club’s Black Friday Deals (2026)",
-      "url": "https://www.wired.com/story/atlas-coffee-club-black-friday-2026/",
-      "source": "Wired",
-      "translated": false,
-      "category": "tecnologia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Regulador dos EUA suspende todos os voos de partida por falha nas comunicações",
-      "url": "https://eco.sapo.pt/2026/11/13/regulador-dos-eua-suspende-todos-os-voos-de-partida-por-falha-nas-comunicacoes/",
-      "source": "Eco",
-      "translated": false,
-      "category": "portugal",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "DBRS mantém rating e perspetiva da dívida pública portuguesa",
-      "url": "https://eco.sapo.pt/2026/11/13/dbrs-mantem-rating-e-perspetiva-da-divida-publica-portuguesa/",
-      "source": "Eco",
-      "translated": false,
-      "category": "portugal",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Sindicato dos Jornalistas quer renegociar tabela salarial da profissão",
-      "url": "https://eco.sapo.pt/2026/11/13/sindicato-dos-jornalistas-quer-renegociar-tabela-salarial-da-profissao/",
-      "source": "Eco",
-      "translated": false,
-      "category": "portugal",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
       "title": "The return of the snatch-and-grab state",
@@ -633,7 +363,7 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
       "title": "Where to find the anti-AI trade",
@@ -648,7 +378,7 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
       "title": "Italy’s proposed exit tax causes ructions",
@@ -663,7 +393,502 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Jensen Huang: Do estrelato à queda, a história do homem que construiu a Nvidia",
+      "url": "https://eco.sapo.pt/especiais/jensen-huang-do-estrelato-a-queda-a-historia-do-homem-que-construiu-a-nvidia/",
+      "source": "Eco",
+      "translated": false,
+      "category": "portugal",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "EUA propõem à Ucrânia cedência de território no Donbass pela adesão à NATO",
+      "url": "https://eco.sapo.pt/2026/11/14/eua-propoem-a-ucrania-cedencia-de-territorio-no-donbass-pela-adesao-a-nato/",
+      "source": "Eco",
+      "translated": false,
+      "category": "portugal",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "A queda de Jensen Huang dá um filme",
+      "url": "https://eco.sapo.pt/opiniao/a-queda-de-jensen-huang-da-um-filme/",
+      "source": "Eco",
+      "translated": false,
+      "category": "portugal",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Antiga sede do Partido Comunista Italiano é agora um hotel de cinco estrelas",
+      "url": "https://www.publico.pt/2026/11/14/fugas/noticia/antiga-sede-partido-comunista-italiano-hotel-cinco-estrelas-2194982",
+      "source": "Público",
+      "translated": false,
+      "category": "portugal",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "EUA propõem cedência ucraniana do Donbass em troca de adesão à NATO",
+      "url": "https://www.publico.pt/2026/11/14/mundo/noticia/eua-propoem-cedencia-ucraniana-donbass-troca-adesao-nato-2194981",
+      "source": "Público",
+      "translated": false,
+      "category": "portugal",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Câmara de Lisboa em tribunal: acção popular tenta travar hasta pública de terrenos municipais",
+      "url": "https://www.publico.pt/2026/11/14/local/noticia/camara-lisboa-tribunal-accao-popular-tenta-travar-hasta-publica-terrenos-municipais-2194955",
+      "source": "Público",
+      "translated": false,
+      "category": "portugal",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "A gadget to make your dumb house smarter",
+      "url": "https://www.theverge.com/tech/1033761/home-assistant-tk-tripod-tabletop-installer",
+      "source": "The Verge",
+      "translated": false,
+      "category": "tecnologia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Jensen Huang and the decline of the visionary showman founder CEO",
+      "url": "https://www.theverge.com/tech/1033781/nvidia-jensen-huang-last-visionary-showman-founder-ceo",
+      "source": "The Verge",
+      "translated": false,
+      "category": "tecnologia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "FAA lifts nationwide ground stop that blocked takeoffs for hours",
+      "url": "https://www.theverge.com/news/1033489/faa-ground-stop",
+      "source": "The Verge",
+      "translated": false,
+      "category": "tecnologia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "José Luís Carneiro garante que PS \"está bem vivo\" e pede aos portugueses que \"não desistam\"",
+      "url": "https://www.dn.pt/pol%C3%ADtica/jos-lus-carneiro-garante-que-ps-est-bem-vivo-e-pede-aos-portugueses-que-no-desistam",
+      "source": "Dinheiro Vivo",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Mestre maranhense leva ritmos e tradições do Tambor de Crioula a Lisboa neste fim de semana",
+      "url": "https://dnbrasil.dn.pt/mestre-maranhense-leva-ritmos-e-tradies-do-tambor-de-crioula-a-lisboa-neste-fim-de-semana",
+      "source": "Dinheiro Vivo",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "O regresso das crianças ucranianas sequestradas é urgente",
+      "url": "https://dnbrasil.dn.pt/opini%C3%A3o-dn-brasil/o-regresso-das-crianas-ucranianas-sequestradas-urgente",
+      "source": "Dinheiro Vivo",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Amazon’s new Kindle Colorsoft is a premium e-reader with a premium price",
+      "url": "https://techcrunch.com/2026/11/13/amazons-new-kindle-colorsoft-is-a-premium-e-reader-with-a-premium-price/",
+      "source": "TechCrunch",
+      "translated": false,
+      "category": "tecnologia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Jensen Huang’s departure blasts big hole in AI startup funding, VCs and founders say",
+      "url": "https://techcrunch.com/2026/11/13/jensen-huangs-departure-blasts-big-hole-in-ai-startup-funding-vcs-and-founders-say/",
+      "source": "TechCrunch",
+      "translated": false,
+      "category": "tecnologia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "US government grounds all flights across the United States ‘due to extraordinary circumstances’",
+      "url": "https://techcrunch.com/2026/11/13/u-s-government-grounds-all-flights-across-the-united-states-due-to-extraordinary-cirumstances/",
+      "source": "TechCrunch",
+      "translated": false,
+      "category": "tecnologia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "David Cameron Sees Hope in Alzheimer’s Research",
+      "url": "https://www.bloomberg.com/news/videos/2026-11-14/david-cameron-sees-hope-in-alzheimer-s-research-video",
+      "source": "Bloomberg",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Ukraine Peace Push Turns to NATO and Donbas",
+      "url": "https://www.bloomberg.com/news/videos/2026-11-14/ukraine-peace-push-turns-to-nato-and-donbas-video",
+      "source": "Bloomberg",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Miller’s White House Ascent Rattles Mexico Trade Negotiators",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-14/miller-s-white-house-ascent-rattles-mexico-trade-negotiators",
+      "source": "Bloomberg",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Grande Entrevista - Sinfonia",
+      "url": "http://observador21.blogspot.com/2010/03/grande-entrevista-sinfonia.html",
+      "source": "Observador",
+      "translated": false,
+      "category": "portugal",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Curtas: Arbitragem I",
+      "url": "http://observador21.blogspot.com/2010/02/curtas-arbitragem-i.html",
+      "source": "Observador",
+      "translated": false,
+      "category": "portugal",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Curtas: Vitor Constâncio II",
+      "url": "http://observador21.blogspot.com/2010/02/curtas-vitor-constancio-ii.html",
+      "source": "Observador",
+      "translated": false,
+      "category": "portugal",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Beware the New AI-Fueled Ransomware Boom",
+      "url": "https://www.wired.com/story/beware-the-new-ai-fueled-ransomware-boom/",
+      "source": "Wired",
+      "translated": false,
+      "category": "tecnologia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "I Put the Best Digital Notebooks to the Test. Here Are My Favorites (2026)",
+      "url": "https://www.wired.com/gallery/best-smart-notebooks-and-smart-pens/",
+      "source": "Wired",
+      "translated": false,
+      "category": "tecnologia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "How to Run SteamOS on Your Mac",
+      "url": "https://www.wired.com/story/get-steamos-easily-running-on-your-mac/",
+      "source": "Wired",
+      "translated": false,
+      "category": "tecnologia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Carneiro defende que PS \"está bem vivo\" e pede que portugueses \"não desistam\"",
+      "url": "https://www.jornaldenegocios.pt/economia/detalhe/carneiro-defende-que-ps-esta-bem-vivo-e-pede-que-portugueses-nao-desistam",
+      "source": "Jornal de Negócios",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Galáxia: a Madeira na mesa, entre a espada e o tamarilho",
+      "url": "https://www.jornaldenegocios.pt/weekend/gastronomia/detalhe/galaxia-a-madeira-na-mesa-entre-a-espada-e-o-tamarilho",
+      "source": "Jornal de Negócios",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Ucrânia: EUA propõem cedência de território em troca de adesão à NATO",
+      "url": "https://www.jornaldenegocios.pt/economia/detalhe/ucrania-eua-propoem-cedencia-de-territorio-em-troca-de-adesao-a-nato",
+      "source": "Jornal de Negócios",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Trump Media group stares down $1bn debt crunch as bitcoin bet fades",
+      "url": "https://www.ft.com/content/ada459c4-5f43-4a4a-bc6c-90de8897a4f0?syn-25a6b1a6=1",
+      "source": "Financial Times",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Passengers face widespread disruption after US air traffic control outage",
+      "url": "https://www.ft.com/content/f66f9811-59a2-4e52-a944-c7ed81dabc50?syn-25a6b1a6=1",
+      "source": "Financial Times",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "US floats Nato membership for Donbas withdrawal deal, Zelenskyy says",
+      "url": "https://www.ft.com/content/24319e2d-1a34-4a72-8c91-008d974234f9?syn-25a6b1a6=1",
+      "source": "Financial Times",
+      "translated": false,
+      "category": "economia",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "5 ways to turn your cold outreach into a job offer",
+      "url": "https://www.fastcompany.com/91631346/5-ways-to-turn-your-cold-outreach-into-a-job-offer-job-hunting",
+      "source": "Fast Company",
+      "translated": false,
+      "category": "carreira",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Taxing billionaires failed in California, but other states are taking steps to collect from the rich",
+      "url": "https://www.fastcompany.com/91641216/taxing-billionaires-failed-california-other-states-taking-steps-collect-rich",
+      "source": "Fast Company",
+      "translated": false,
+      "category": "carreira",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
+    },
+    {
+      "title": "Here’s how to fix the looming Social Security shortfall",
+      "url": "https://www.fastcompany.com/91642066/heres-how-to-fix-the-looming-social-security-shortfall",
+      "source": "Fast Company",
+      "translated": false,
+      "category": "carreira",
+      "summary": "",
+      "why": "",
+      "impact": "",
+      "impact_level": "médio",
+      "breaking": false,
+      "recomendacao": false,
+      "enriched": false,
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
       "title": "How Nvidia Can Move Forward Without Its Founder",
@@ -678,7 +903,7 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
       "title": "How Boards Detect and Prevent Internal Misconduct",
@@ -693,7 +918,7 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     },
     {
       "title": "Get the Real Story on Your Next Exec Hire",
@@ -708,239 +933,14 @@
       "breaking": false,
       "recomendacao": false,
       "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Europa representada por cinco países e instituições europeias nas negociações sobre a Ucrânia",
-      "url": "https://www.dn.pt/internacional/europa-representada-por-cinco-pases-e-instituies-europeias-nas-negociaes-sobre-a-ucrnia",
-      "source": "Dinheiro Vivo",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "EUA. Petroleiro abalroa navio de cruzeiro com 129 pessoas no rio Mississippi (vídeo)",
-      "url": "https://www.dn.pt/internacional/eua-petroleiroabalroa-navio-de-cruzeiro-com-129-pessoas-no-rio-mississippi-vdeo",
-      "source": "Dinheiro Vivo",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "DBRS confirma ‘rating’ de Portugal em “A” elevado com tendência positiva",
-      "url": "http://dinheirovivo.dn.pt/economia/dbrs-confirma-rating-de-portugal-em-a-elevado-com-tendncia-positiva",
-      "source": "Dinheiro Vivo",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Descolagens nos EUA suspensas. FBI não acredita em ciberataque, problema de software poderá ser a causa",
-      "url": "https://www.jornaldenegocios.pt/empresas/transportes/aviacao/detalhe/descolagens-nos-eua-suspensas-fbi-nao-acredita-em-ciberataque-problema-de-software-podera-ser-a-causa",
-      "source": "Jornal de Negócios",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Secretário de Segurança Nacional dos EUA: \"Não estamos a descartar nenhuma possibilidade\" de ciberataque",
-      "url": "https://www.jornaldenegocios.pt/empresas/detalhe/secretario-de-seguranca-nacional-dos-eua-nao-estamos-a-descartar-nenhuma-possibilidade-de-ciberataque",
-      "source": "Jornal de Negócios",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Mais de 3 mil voos iriam descolar com destino a aeroportos dos EUA",
-      "url": "https://www.jornaldenegocios.pt/empresas/detalhe/mais-de-3-mil-voos-iriam-descolar-com-destino-a-aeroportos-dos-eua",
-      "source": "Jornal de Negócios",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "A IA já chegou. O organograma é de 1998",
-      "url": "https://tek.sapo.pt/opiniao/artigos/a-ia-ja-chegou-o-organograma-e-de-1998/",
-      "source": "SAPO Tek",
-      "translated": false,
-      "category": "tecnologia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Microsoft 365: Serviços em recuperação e uma falha global ainda sem fim à vista. O que causou um dos maiores apagões da história da empresa?",
-      "url": "https://tek.sapo.pt/noticias/internet/artigos/microsoft-365-servicos-em-recuperacao-e-uma-falha-global-ainda-sem-fim-a-vista-o-que-causou-um-dos-maiores-apagoes-da-historia-da-empresa/",
-      "source": "SAPO Tek",
-      "translated": false,
-      "category": "tecnologia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Investigadores portugueses desenvolvem protótipo que pode ajudar a tornar redes 6G mais eficientes",
-      "url": "https://tek.sapo.pt/noticias/telecomunicacoes/artigos/investigadores-portugueses-desenvolvem-prototipo-que-pode-ajudar-a-tornar-redes-6g-mais-eficientes/",
-      "source": "SAPO Tek",
-      "translated": false,
-      "category": "tecnologia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Exemplar Luxury Group CEO on the Company’s Second Life",
-      "url": "https://www.bloomberg.com/news/videos/2026-11-13/exemplar-luxury-group-ceo-on-the-company-s-second-life-video",
-      "source": "Bloomberg",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Big Take: The Climate Is Changing in Ways Models Couldn’t Predict",
-      "url": "https://www.bloomberg.com/news/videos/2026-11-13/the-climate-is-changing-in-ways-models-couldn-t-predict-video",
-      "source": "Bloomberg",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Jeff Currie Says He’s Bearish on Copper Due to China",
-      "url": "https://www.bloomberg.com/news/videos/2026-11-13/jeff-currie-says-he-s-bearish-on-copper-due-to-china-video",
-      "source": "Bloomberg",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "US aviation regulator grounds all departing flights",
-      "url": "https://www.ft.com/content/c9b119ff-d1da-46a7-b2b3-4ad0544fff6b?syn-25a6b1a6=1",
-      "source": "Financial Times",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Amazon revives deal with troubled data centre venture backed by Rick Perry",
-      "url": "https://www.ft.com/content/692fbfe8-da52-42c0-b436-9c4aff21fbdb?syn-25a6b1a6=1",
-      "source": "Financial Times",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
-    },
-    {
-      "title": "Anthropic’s Amodei ‘not super fussed’ about market turmoil ahead of IPO",
-      "url": "https://www.ft.com/content/4b7b83d7-7fea-4ce2-bfe3-4f2cf75b1d82?syn-25a6b1a6=1",
-      "source": "Financial Times",
-      "translated": false,
-      "category": "economia",
-      "summary": "",
-      "why": "",
-      "impact": "",
-      "impact_level": "médio",
-      "breaking": false,
-      "recomendacao": false,
-      "enriched": false,
-      "date": "2026-11-13T23:15:09.216816+00:00"
+      "date": "2026-11-14T13:56:44.529380+00:00"
     }
   ],
   "categories": {
     "breaking": [
       {
-        "title": "Watch: Children in Need 2026... in 90 seconds",
-        "url": "https://www.bbc.co.uk/news/videos/cqdr1jvylv1xo?at_medium=RSS&at_campaign=rss",
+        "title": "Young people should have legal guarantee of job or training, Milburn tells BBC",
+        "url": "https://www.bbc.co.uk/news/articles/c69vwp09d7vvo?at_medium=RSS&at_campaign=rss",
         "source": "BBC News",
         "translated": false,
         "category": "breaking",
@@ -951,11 +951,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "US Air Force says it responded to 'suspected drones' over RAF Lakenheath",
-        "url": "https://www.bbc.co.uk/news/articles/c6jd75geegzyo?at_medium=RSS&at_campaign=rss",
+        "title": "Body found on French beach after attempted Channel crossing",
+        "url": "https://www.bbc.co.uk/news/articles/cxj05jr299n6o?at_medium=RSS&at_campaign=rss",
         "source": "BBC News",
         "translated": false,
         "category": "breaking",
@@ -966,11 +966,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "New campaign against EU membership launches ahead of UK-EU summit",
-        "url": "https://www.bbc.co.uk/news/articles/c6174l2q99ejo?at_medium=RSS&at_campaign=rss",
+        "title": "Neets review won't be for the faint-hearted - and will test Burnham's appetite for a welfare fight",
+        "url": "https://www.bbc.co.uk/news/articles/cmg46qgkl7r4o?at_medium=RSS&at_campaign=rss",
         "source": "BBC News",
         "translated": false,
         "category": "breaking",
@@ -981,14 +981,14 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       }
     ],
     "portugal": [
       {
-        "title": "Grupo Infinito Particular publica em Portugal vencedor do Prémio Booker 2026",
-        "url": "https://www.publico.pt/2026/11/13/culturaipsilon/noticia/grupo-infinito-particular-publica-portugal-vencedor-premio-booker-2026-2194956",
-        "source": "Público",
+        "title": "Jensen Huang: Do estrelato à queda, a história do homem que construiu a Nvidia",
+        "url": "https://eco.sapo.pt/especiais/jensen-huang-do-estrelato-a-queda-a-historia-do-homem-que-construiu-a-nvidia/",
+        "source": "Eco",
         "translated": false,
         "category": "portugal",
         "summary": "",
@@ -998,12 +998,12 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "As negociações sobre a Ucrânia e a verdadeira ameaça russa",
-        "url": "https://www.publico.pt/2026/11/13/mundo/opiniao/negociacoes-ucrania-verdadeira-ameaca-russa-2194951",
-        "source": "Público",
+        "title": "EUA propõem à Ucrânia cedência de território no Donbass pela adesão à NATO",
+        "url": "https://eco.sapo.pt/2026/11/14/eua-propoem-a-ucrania-cedencia-de-territorio-no-donbass-pela-adesao-a-nato/",
+        "source": "Eco",
         "translated": false,
         "category": "portugal",
         "summary": "",
@@ -1013,11 +1013,26 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "Na despedida do ISEG, Louçã propõe manifesto para “nova economia”",
-        "url": "https://www.publico.pt/2026/11/13/politica/noticia/despedida-iseg-louca-propoe-manifesto-nova-economia-2194936",
+        "title": "A queda de Jensen Huang dá um filme",
+        "url": "https://eco.sapo.pt/opiniao/a-queda-de-jensen-huang-da-um-filme/",
+        "source": "Eco",
+        "translated": false,
+        "category": "portugal",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-14T13:56:44.529380+00:00"
+      },
+      {
+        "title": "Antiga sede do Partido Comunista Italiano é agora um hotel de cinco estrelas",
+        "url": "https://www.publico.pt/2026/11/14/fugas/noticia/antiga-sede-partido-comunista-italiano-hotel-cinco-estrelas-2194982",
         "source": "Público",
         "translated": false,
         "category": "portugal",
@@ -1028,7 +1043,37 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
+      },
+      {
+        "title": "EUA propõem cedência ucraniana do Donbass em troca de adesão à NATO",
+        "url": "https://www.publico.pt/2026/11/14/mundo/noticia/eua-propoem-cedencia-ucraniana-donbass-troca-adesao-nato-2194981",
+        "source": "Público",
+        "translated": false,
+        "category": "portugal",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-14T13:56:44.529380+00:00"
+      },
+      {
+        "title": "Câmara de Lisboa em tribunal: acção popular tenta travar hasta pública de terrenos municipais",
+        "url": "https://www.publico.pt/2026/11/14/local/noticia/camara-lisboa-tribunal-accao-popular-tenta-travar-hasta-publica-terrenos-municipais-2194955",
+        "source": "Público",
+        "translated": false,
+        "category": "portugal",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
         "title": "Grande Entrevista - Sinfonia",
@@ -1043,7 +1088,7 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
         "title": "Curtas: Arbitragem I",
@@ -1058,7 +1103,7 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
         "title": "Curtas: Vitor Constâncio II",
@@ -1073,55 +1118,25 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
-      },
-      {
-        "title": "Regulador dos EUA suspende todos os voos de partida por falha nas comunicações",
-        "url": "https://eco.sapo.pt/2026/11/13/regulador-dos-eua-suspende-todos-os-voos-de-partida-por-falha-nas-comunicacoes/",
-        "source": "Eco",
-        "translated": false,
-        "category": "portugal",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
-      },
-      {
-        "title": "DBRS mantém rating e perspetiva da dívida pública portuguesa",
-        "url": "https://eco.sapo.pt/2026/11/13/dbrs-mantem-rating-e-perspetiva-da-divida-publica-portuguesa/",
-        "source": "Eco",
-        "translated": false,
-        "category": "portugal",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
-      },
-      {
-        "title": "Sindicato dos Jornalistas quer renegociar tabela salarial da profissão",
-        "url": "https://eco.sapo.pt/2026/11/13/sindicato-dos-jornalistas-quer-renegociar-tabela-salarial-da-profissao/",
-        "source": "Eco",
-        "translated": false,
-        "category": "portugal",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       }
     ],
     "mundo": [
+      {
+        "title": "Choking fires, deadly heat and devastating floods: 2026 in extreme weather",
+        "url": "https://www.theguardian.com/world/2026/nov/14/fires-heat-floods-extreme-weather-2026",
+        "source": "The Guardian",
+        "translated": false,
+        "category": "mundo",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-14T13:56:44.529380+00:00"
+      },
       {
         "title": "Nvidia scandal: US treasury chief blames Lutnick’s commerce department over alleged lack of action",
         "url": "https://www.theguardian.com/technology/2026/nov/13/nvidia-scandal-sparks-us-national-security-concerns-china",
@@ -1135,7 +1150,7 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
         "title": "Storm Charles causes floods and flight cancellations across southern Europe",
@@ -1150,26 +1165,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "Teen prodigy, Netflix star, prisoner: the story of Hong Kong dissident Joshua Wong – podcast",
-        "url": "https://www.theguardian.com/news/audio/2026/nov/13/teen-prodigy-netflix-star-prisoner-the-story-of-hong-kong-dissident-joshua-wong-podcast",
-        "source": "The Guardian",
-        "translated": false,
-        "category": "mundo",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
-      },
-      {
-        "title": "Rescue efforts under way after tanker strikes river cruise boat in US",
-        "url": "https://www.aljazeera.com/news/2026/11/13/rescue-efforts-under-way-after-tanker-strikes-river-cruise-boat-in-us?traffic_source=rss",
+        "title": "How does Iran view shift in US approach after JD Vance ordered away?",
+        "url": "https://www.aljazeera.com/news/2026/11/14/how-does-iran-view-shift-in-us-approach-after-vance-ordered-away?traffic_source=rss",
         "source": "Al Jazeera",
         "translated": false,
         "category": "mundo",
@@ -1180,11 +1180,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "LIVE: FAA issues nationwide ground stop after communications outage in US",
-        "url": "https://www.aljazeera.com/news/liveblog/2026/11/13/groundling-live?traffic_source=rss",
+        "title": "Spain vs England: UEFA Nations League – predictions, how to watch, teams",
+        "url": "https://www.aljazeera.com/sports/2026/11/14/spain-england-uefa-nations-league-predictions-how-to-watch-teams?traffic_source=rss",
         "source": "Al Jazeera",
         "translated": false,
         "category": "mundo",
@@ -1195,11 +1195,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "FAA grounds US flights nationwide after ‘communication issue’",
-        "url": "https://www.aljazeera.com/news/2026/11/13/us-grounds-all-flights-after-communication-issue?traffic_source=rss",
+        "title": "Russian casualties ‘reach 450,000’: What that means for the Ukraine war",
+        "url": "https://www.aljazeera.com/news/2026/11/14/russian-casualties-reach-450000-what-that-means-for-the-ukraine-war?traffic_source=rss",
         "source": "Al Jazeera",
         "translated": false,
         "category": "mundo",
@@ -1210,11 +1210,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "FAA issues US national ground stop on all flights",
-        "url": "https://www.dw.com/en/faa-issues-us-national-ground-stop-on-all-flights/a-79945062?maca=en-rss-en-all-1573-rdf",
+        "title": "Ukraine: Zelenskyy says security deal could go to referendum",
+        "url": "https://www.dw.com/en/ukraine-zelenskyy-says-security-deal-could-go-to-referendum/a-79947535?maca=en-rss-en-all-1573-rdf",
         "source": "DW News",
         "translated": false,
         "category": "mundo",
@@ -1225,11 +1225,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "Tanker collides with cruise ship on Mississippi in New Orleans",
-        "url": "https://www.dw.com/en/tanker-collides-with-cruise-ship-on-mississippi-in-new-orleans/a-79945080?maca=en-rss-en-all-1573-rdf",
+        "title": "New facilities in Laos and Cambodia: Is China expanding its military presence in Southeast Asia?",
+        "url": "https://www.dw.com/en/new-facilities-in-laos-and-cambodia-is-china-expanding-its-military-presence-in-southeast-asia/a-79944798?maca=en-rss-en-all-1573-rdf",
         "source": "DW News",
         "translated": false,
         "category": "mundo",
@@ -1240,11 +1240,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "Ukraine updates: EU to send united front to potential peace talks",
-        "url": "https://www.dw.com/en/ukraine-updates-eu-to-send-united-front-to-potential-peace-talks/live-79937459?maca=en-rss-en-all-1573-rdf",
+        "title": "Germany news: Solar power production approaches record high",
+        "url": "https://www.dw.com/en/germany-news-solar-power-production-approaches-record-high/live-79947500?maca=en-rss-en-all-1573-rdf",
         "source": "DW News",
         "translated": false,
         "category": "mundo",
@@ -1255,11 +1255,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "Libertado na Venezuela preso político espanhol Óscar Caamaño após mais de 9 anos de prisão",
-        "url": "https://pt.euronews.com/2026/11/13/libertado-na-venezuela-preso-politico-espanhol-oscar-caamano-apos-mais-de-9-anos-de-prisao",
+        "title": "China: Trump reúne-se com Xi e Putin em Shenzhen na próxima semana",
+        "url": "https://pt.euronews.com/2026/11/14/china-trump-reune-se-com-xi-e-putin-em-shenzhen-na-proxima-semana",
         "source": "Euronews PT",
         "translated": false,
         "category": "mundo",
@@ -1270,11 +1270,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "Rússia envia importante delegação empresarial a Cabul para conversações comerciais com talibãs",
-        "url": "https://pt.euronews.com/2026/11/13/russia-envia-importante-delegacao-empresarial-a-cabul-para-conversacoes-comerciais-com-tal",
+        "title": "Estados Unidos propõem Ucrânia ceder território à Rússia em troca de adesão à NATO",
+        "url": "https://pt.euronews.com/2026/11/14/estados-unidos-propoem-ucrania-ceder-territorio-a-russia-em-troca-de-adesao-a-nato",
         "source": "Euronews PT",
         "translated": false,
         "category": "mundo",
@@ -1285,11 +1285,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "Irão debate possível mudança na doutrina nuclear e saída do tratado de não proliferação de armas nucleares",
-        "url": "https://pt.euronews.com/2026/11/13/irao-debate-possivel-mudanca-na-doutrina-nuclear-e-saida-do-tratado-de-nao-proliferacao-de",
+        "title": "Notícias do dia | 14 de novembro 2026 - Tarde",
+        "url": "https://pt.euronews.com/video/2026/11/14/noticias-do-dia-14-de-novembro-2026-tarde",
         "source": "Euronews PT",
         "translated": false,
         "category": "mundo",
@@ -1300,11 +1300,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "All flights across US grounded due to air traffic control communications problems",
-        "url": "https://www.lemonde.fr/en/international/article/2026/11/13/all-flights-across-us-grounded-amid-extraordinary-circumstances_6780358_4.html",
+        "title": "At Trump's request, Russia relishes the prospect of shaping Europe's security architecture",
+        "url": "https://www.lemonde.fr/en/international/article/2026/11/14/at-trump-s-request-russia-relishes-the-prospect-of-shaping-europe-s-security-architecture_6780754_4.html",
         "source": "Le Monde EN",
         "translated": false,
         "category": "mundo",
@@ -1315,11 +1315,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "Irish police disarm 'viable device' in Dublin on day of EU summit",
-        "url": "https://www.lemonde.fr/en/international/article/2026/11/13/irish-police-disarm-viable-device-in-dublin-on-day-of-eu-summit_6780325_4.html",
+        "title": "French social unrest: Between concessions and tough talk, PM Lecornu struggles to end crisis",
+        "url": "https://www.lemonde.fr/en/politics/article/2026/11/14/french-social-unrest-between-concessions-and-tough-talk-pm-lecornu-struggles-to-end-crisis_6780688_5.html",
         "source": "Le Monde EN",
         "translated": false,
         "category": "mundo",
@@ -1330,11 +1330,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "In the occupied West Bank, violence and dispossession become routine",
-        "url": "https://www.lemonde.fr/en/international/article/2026/11/13/in-the-occupied-west-bank-violence-and-dispossession-become-routine_6780292_4.html",
+        "title": "Pope Leo receives hero's welcome in Peru from massive crowds as he returns to his former diocese",
+        "url": "https://www.lemonde.fr/en/international/article/2026/11/14/in-peru-pope-leo-receives-a-hero-s-welcome-from-massive-crowds-as-he-returns-to-his-former-diocese_6780589_4.html",
         "source": "Le Monde EN",
         "translated": false,
         "category": "mundo",
@@ -1345,7 +1345,7 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       }
     ],
     "economia": [
@@ -1362,7 +1362,7 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
         "title": "Where to find the anti-AI trade",
@@ -1377,7 +1377,7 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
         "title": "Italy’s proposed exit tax causes ructions",
@@ -1392,11 +1392,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "Europa representada por cinco países e instituições europeias nas negociações sobre a Ucrânia",
-        "url": "https://www.dn.pt/internacional/europa-representada-por-cinco-pases-e-instituies-europeias-nas-negociaes-sobre-a-ucrnia",
+        "title": "José Luís Carneiro garante que PS \"está bem vivo\" e pede aos portugueses que \"não desistam\"",
+        "url": "https://www.dn.pt/pol%C3%ADtica/jos-lus-carneiro-garante-que-ps-est-bem-vivo-e-pede-aos-portugueses-que-no-desistam",
         "source": "Dinheiro Vivo",
         "translated": false,
         "category": "economia",
@@ -1407,11 +1407,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "EUA. Petroleiro abalroa navio de cruzeiro com 129 pessoas no rio Mississippi (vídeo)",
-        "url": "https://www.dn.pt/internacional/eua-petroleiroabalroa-navio-de-cruzeiro-com-129-pessoas-no-rio-mississippi-vdeo",
+        "title": "Mestre maranhense leva ritmos e tradições do Tambor de Crioula a Lisboa neste fim de semana",
+        "url": "https://dnbrasil.dn.pt/mestre-maranhense-leva-ritmos-e-tradies-do-tambor-de-crioula-a-lisboa-neste-fim-de-semana",
         "source": "Dinheiro Vivo",
         "translated": false,
         "category": "economia",
@@ -1422,11 +1422,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "DBRS confirma ‘rating’ de Portugal em “A” elevado com tendência positiva",
-        "url": "http://dinheirovivo.dn.pt/economia/dbrs-confirma-rating-de-portugal-em-a-elevado-com-tendncia-positiva",
+        "title": "O regresso das crianças ucranianas sequestradas é urgente",
+        "url": "https://dnbrasil.dn.pt/opini%C3%A3o-dn-brasil/o-regresso-das-crianas-ucranianas-sequestradas-urgente",
         "source": "Dinheiro Vivo",
         "translated": false,
         "category": "economia",
@@ -1437,56 +1437,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "Descolagens nos EUA suspensas. FBI não acredita em ciberataque, problema de software poderá ser a causa",
-        "url": "https://www.jornaldenegocios.pt/empresas/transportes/aviacao/detalhe/descolagens-nos-eua-suspensas-fbi-nao-acredita-em-ciberataque-problema-de-software-podera-ser-a-causa",
-        "source": "Jornal de Negócios",
-        "translated": false,
-        "category": "economia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
-      },
-      {
-        "title": "Secretário de Segurança Nacional dos EUA: \"Não estamos a descartar nenhuma possibilidade\" de ciberataque",
-        "url": "https://www.jornaldenegocios.pt/empresas/detalhe/secretario-de-seguranca-nacional-dos-eua-nao-estamos-a-descartar-nenhuma-possibilidade-de-ciberataque",
-        "source": "Jornal de Negócios",
-        "translated": false,
-        "category": "economia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
-      },
-      {
-        "title": "Mais de 3 mil voos iriam descolar com destino a aeroportos dos EUA",
-        "url": "https://www.jornaldenegocios.pt/empresas/detalhe/mais-de-3-mil-voos-iriam-descolar-com-destino-a-aeroportos-dos-eua",
-        "source": "Jornal de Negócios",
-        "translated": false,
-        "category": "economia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
-      },
-      {
-        "title": "Exemplar Luxury Group CEO on the Company’s Second Life",
-        "url": "https://www.bloomberg.com/news/videos/2026-11-13/exemplar-luxury-group-ceo-on-the-company-s-second-life-video",
+        "title": "David Cameron Sees Hope in Alzheimer’s Research",
+        "url": "https://www.bloomberg.com/news/videos/2026-11-14/david-cameron-sees-hope-in-alzheimer-s-research-video",
         "source": "Bloomberg",
         "translated": false,
         "category": "economia",
@@ -1497,11 +1452,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "Big Take: The Climate Is Changing in Ways Models Couldn’t Predict",
-        "url": "https://www.bloomberg.com/news/videos/2026-11-13/the-climate-is-changing-in-ways-models-couldn-t-predict-video",
+        "title": "Ukraine Peace Push Turns to NATO and Donbas",
+        "url": "https://www.bloomberg.com/news/videos/2026-11-14/ukraine-peace-push-turns-to-nato-and-donbas-video",
         "source": "Bloomberg",
         "translated": false,
         "category": "economia",
@@ -1512,11 +1467,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "Jeff Currie Says He’s Bearish on Copper Due to China",
-        "url": "https://www.bloomberg.com/news/videos/2026-11-13/jeff-currie-says-he-s-bearish-on-copper-due-to-china-video",
+        "title": "Miller’s White House Ascent Rattles Mexico Trade Negotiators",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-14/miller-s-white-house-ascent-rattles-mexico-trade-negotiators",
         "source": "Bloomberg",
         "translated": false,
         "category": "economia",
@@ -1527,11 +1482,56 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "US aviation regulator grounds all departing flights",
-        "url": "https://www.ft.com/content/c9b119ff-d1da-46a7-b2b3-4ad0544fff6b?syn-25a6b1a6=1",
+        "title": "Carneiro defende que PS \"está bem vivo\" e pede que portugueses \"não desistam\"",
+        "url": "https://www.jornaldenegocios.pt/economia/detalhe/carneiro-defende-que-ps-esta-bem-vivo-e-pede-que-portugueses-nao-desistam",
+        "source": "Jornal de Negócios",
+        "translated": false,
+        "category": "economia",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-14T13:56:44.529380+00:00"
+      },
+      {
+        "title": "Galáxia: a Madeira na mesa, entre a espada e o tamarilho",
+        "url": "https://www.jornaldenegocios.pt/weekend/gastronomia/detalhe/galaxia-a-madeira-na-mesa-entre-a-espada-e-o-tamarilho",
+        "source": "Jornal de Negócios",
+        "translated": false,
+        "category": "economia",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-14T13:56:44.529380+00:00"
+      },
+      {
+        "title": "Ucrânia: EUA propõem cedência de território em troca de adesão à NATO",
+        "url": "https://www.jornaldenegocios.pt/economia/detalhe/ucrania-eua-propoem-cedencia-de-territorio-em-troca-de-adesao-a-nato",
+        "source": "Jornal de Negócios",
+        "translated": false,
+        "category": "economia",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-14T13:56:44.529380+00:00"
+      },
+      {
+        "title": "Trump Media group stares down $1bn debt crunch as bitcoin bet fades",
+        "url": "https://www.ft.com/content/ada459c4-5f43-4a4a-bc6c-90de8897a4f0?syn-25a6b1a6=1",
         "source": "Financial Times",
         "translated": false,
         "category": "economia",
@@ -1542,11 +1542,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "Amazon revives deal with troubled data centre venture backed by Rick Perry",
-        "url": "https://www.ft.com/content/692fbfe8-da52-42c0-b436-9c4aff21fbdb?syn-25a6b1a6=1",
+        "title": "Passengers face widespread disruption after US air traffic control outage",
+        "url": "https://www.ft.com/content/f66f9811-59a2-4e52-a944-c7ed81dabc50?syn-25a6b1a6=1",
         "source": "Financial Times",
         "translated": false,
         "category": "economia",
@@ -1557,11 +1557,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "Anthropic’s Amodei ‘not super fussed’ about market turmoil ahead of IPO",
-        "url": "https://www.ft.com/content/4b7b83d7-7fea-4ce2-bfe3-4f2cf75b1d82?syn-25a6b1a6=1",
+        "title": "US floats Nato membership for Donbas withdrawal deal, Zelenskyy says",
+        "url": "https://www.ft.com/content/24319e2d-1a34-4a72-8c91-008d974234f9?syn-25a6b1a6=1",
         "source": "Financial Times",
         "translated": false,
         "category": "economia",
@@ -1572,13 +1572,13 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       }
     ],
     "portfolio": [
       {
-        "title": "Pirelli & C. S.p.A. 2026 Q3 - Results - Earnings Call Presentation",
-        "url": "https://seekingalpha.com/article/4968032-pirelli-and-c-s-p-a-2026-q3-results-earnings-call-presentation?source=feed_all_articles",
+        "title": "Monster Beverage: Buy The Energy Drink, Sell The Stock",
+        "url": "https://seekingalpha.com/article/4968192-monster-beverage-buy-the-energy-drink-sell-the-stock?source=feed_all_articles",
         "source": "Seeking Alpha",
         "translated": false,
         "category": "portfolio",
@@ -1589,11 +1589,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "AGNT, Inc 2026 Q3 - Results - Earnings Call Presentation",
-        "url": "https://seekingalpha.com/article/4968031-agnt-inc-2026-q3-results-earnings-call-presentation?source=feed_all_articles",
+        "title": "Replace Market's Roller-Coaster Ride With Low-Stress, 6% Income, And Growth",
+        "url": "https://seekingalpha.com/article/4967255-replace-markets-roller-coaster-ride-with-low-stress-6-percent-income-growth?source=feed_all_articles",
         "source": "Seeking Alpha",
         "translated": false,
         "category": "portfolio",
@@ -1604,11 +1604,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "A No-Spin, No-Snark Take On Nebius",
-        "url": "https://seekingalpha.com/article/4968016-a-no-spin-no-snark-take-on-nebius?source=feed_all_articles",
+        "title": "CPI, The Fed, And An Incredible Opportunity In Bond Investing",
+        "url": "https://seekingalpha.com/article/4967903-cpi-fed-and-incredible-opportunity-in-bond-investing?source=feed_all_articles",
         "source": "Seeking Alpha",
         "translated": false,
         "category": "portfolio",
@@ -1619,10 +1619,55 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       }
     ],
     "tecnologia": [
+      {
+        "title": "A gadget to make your dumb house smarter",
+        "url": "https://www.theverge.com/tech/1033761/home-assistant-tk-tripod-tabletop-installer",
+        "source": "The Verge",
+        "translated": false,
+        "category": "tecnologia",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-14T13:56:44.529380+00:00"
+      },
+      {
+        "title": "Jensen Huang and the decline of the visionary showman founder CEO",
+        "url": "https://www.theverge.com/tech/1033781/nvidia-jensen-huang-last-visionary-showman-founder-ceo",
+        "source": "The Verge",
+        "translated": false,
+        "category": "tecnologia",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-14T13:56:44.529380+00:00"
+      },
+      {
+        "title": "FAA lifts nationwide ground stop that blocked takeoffs for hours",
+        "url": "https://www.theverge.com/news/1033489/faa-ground-stop",
+        "source": "The Verge",
+        "translated": false,
+        "category": "tecnologia",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-14T13:56:44.529380+00:00"
+      },
       {
         "title": "Amazon’s new Kindle Colorsoft is a premium e-reader with a premium price",
         "url": "https://techcrunch.com/2026/11/13/amazons-new-kindle-colorsoft-is-a-premium-e-reader-with-a-premium-price/",
@@ -1636,7 +1681,7 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
         "title": "Jensen Huang’s departure blasts big hole in AI startup funding, VCs and founders say",
@@ -1651,7 +1696,7 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
         "title": "US government grounds all flights across the United States ‘due to extraordinary circumstances’",
@@ -1666,56 +1711,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "FAA ground stop shuts down flights nationwide",
-        "url": "https://www.theverge.com/news/1033489/faa-ground-stop",
-        "source": "The Verge",
-        "translated": false,
-        "category": "tecnologia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
-      },
-      {
-        "title": "ChatGPT Wallet lets OpenAI’s Dots agents make purchases for you",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/1033425/openai-chatgpt-wallet",
-        "source": "The Verge",
-        "translated": false,
-        "category": "tecnologia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
-      },
-      {
-        "title": "CMF’s milk carton-shaped Bluetooth speaker is down to a new low price",
-        "url": "https://www.theverge.com/gadgets/1033185/nothing-cmf-speaker-s-m-black-friday-deal-sale",
-        "source": "The Verge",
-        "translated": false,
-        "category": "tecnologia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
-      },
-      {
-        "title": "Best Early Black Friday AirPods Deals (2026)",
-        "url": "https://www.wired.com/story/best-early-black-friday-airpods-deals-11-13-2026/",
+        "title": "Beware the New AI-Fueled Ransomware Boom",
+        "url": "https://www.wired.com/story/beware-the-new-ai-fueled-ransomware-boom/",
         "source": "Wired",
         "translated": false,
         "category": "tecnologia",
@@ -1726,11 +1726,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "FAA Grounds All US Flights Until Further Notice",
-        "url": "https://www.wired.com/story/faa-grounds-all-us-flights-until-further-notice/",
+        "title": "I Put the Best Digital Notebooks to the Test. Here Are My Favorites (2026)",
+        "url": "https://www.wired.com/gallery/best-smart-notebooks-and-smart-pens/",
         "source": "Wired",
         "translated": false,
         "category": "tecnologia",
@@ -1741,11 +1741,11 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
-        "title": "Atlas Coffee Club’s Black Friday Deals (2026)",
-        "url": "https://www.wired.com/story/atlas-coffee-club-black-friday-2026/",
+        "title": "How to Run SteamOS on Your Mac",
+        "url": "https://www.wired.com/story/get-steamos-easily-running-on-your-mac/",
         "source": "Wired",
         "translated": false,
         "category": "tecnologia",
@@ -1756,55 +1756,55 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
-      },
-      {
-        "title": "A IA já chegou. O organograma é de 1998",
-        "url": "https://tek.sapo.pt/opiniao/artigos/a-ia-ja-chegou-o-organograma-e-de-1998/",
-        "source": "SAPO Tek",
-        "translated": false,
-        "category": "tecnologia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
-      },
-      {
-        "title": "Microsoft 365: Serviços em recuperação e uma falha global ainda sem fim à vista. O que causou um dos maiores apagões da história da empresa?",
-        "url": "https://tek.sapo.pt/noticias/internet/artigos/microsoft-365-servicos-em-recuperacao-e-uma-falha-global-ainda-sem-fim-a-vista-o-que-causou-um-dos-maiores-apagoes-da-historia-da-empresa/",
-        "source": "SAPO Tek",
-        "translated": false,
-        "category": "tecnologia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
-      },
-      {
-        "title": "Investigadores portugueses desenvolvem protótipo que pode ajudar a tornar redes 6G mais eficientes",
-        "url": "https://tek.sapo.pt/noticias/telecomunicacoes/artigos/investigadores-portugueses-desenvolvem-prototipo-que-pode-ajudar-a-tornar-redes-6g-mais-eficientes/",
-        "source": "SAPO Tek",
-        "translated": false,
-        "category": "tecnologia",
-        "summary": "",
-        "why": "",
-        "impact": "",
-        "impact_level": "médio",
-        "breaking": false,
-        "recomendacao": false,
-        "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       }
     ],
     "carreira": [
+      {
+        "title": "5 ways to turn your cold outreach into a job offer",
+        "url": "https://www.fastcompany.com/91631346/5-ways-to-turn-your-cold-outreach-into-a-job-offer-job-hunting",
+        "source": "Fast Company",
+        "translated": false,
+        "category": "carreira",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-14T13:56:44.529380+00:00"
+      },
+      {
+        "title": "Taxing billionaires failed in California, but other states are taking steps to collect from the rich",
+        "url": "https://www.fastcompany.com/91641216/taxing-billionaires-failed-california-other-states-taking-steps-collect-rich",
+        "source": "Fast Company",
+        "translated": false,
+        "category": "carreira",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-14T13:56:44.529380+00:00"
+      },
+      {
+        "title": "Here’s how to fix the looming Social Security shortfall",
+        "url": "https://www.fastcompany.com/91642066/heres-how-to-fix-the-looming-social-security-shortfall",
+        "source": "Fast Company",
+        "translated": false,
+        "category": "carreira",
+        "summary": "",
+        "why": "",
+        "impact": "",
+        "impact_level": "médio",
+        "breaking": false,
+        "recomendacao": false,
+        "enriched": false,
+        "date": "2026-11-14T13:56:44.529380+00:00"
+      },
       {
         "title": "How Nvidia Can Move Forward Without Its Founder",
         "url": "/2026/11/how-nvidia-can-move-forward-without-its-founder",
@@ -1818,7 +1818,7 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
         "title": "How Boards Detect and Prevent Internal Misconduct",
@@ -1833,7 +1833,7 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       },
       {
         "title": "Get the Real Story on Your Next Exec Hire",
@@ -1848,13 +1848,13 @@
         "breaking": false,
         "recomendacao": false,
         "enriched": false,
-        "date": "2026-11-13T23:15:09.216816+00:00"
+        "date": "2026-11-14T13:56:44.529380+00:00"
       }
     ],
     "recomendacao": []
   },
   "summary": {
-    "headline": "Briefing de 13 de Novembro de 2026",
+    "headline": "Briefing de 14 de Novembro de 2026",
     "items": []
   },
   "connections": [],
@@ -1895,32 +1895,25 @@
       "up": false
     },
     {
-      "symbol": "EURUSD=X",
-      "label": "EUR/USD",
-      "price": 1.1,
-      "change_pct": -0.61,
-      "up": false
-    },
-    {
       "symbol": "BTC-USD",
       "label": "Bitcoin",
-      "price": 68002.05,
-      "change_pct": -4.68,
+      "price": 66771.75,
+      "change_pct": -2.16,
       "up": false
     },
     {
       "symbol": "GC=F",
       "label": "Ouro",
-      "price": 3887.6,
-      "change_pct": 0.06,
+      "price": 3886.3,
+      "change_pct": 0.03,
       "up": true
     }
   ],
   "portfolio_analysis": {
-    "total_change_pct": -1.1,
+    "total_change_pct": -0.81,
     "sentiment": "negativo",
     "what_happened": "Mercado em baixa: Apple, Microsoft, Ouro sobem; NVIDIA, Tesla, Amazon descem.",
-    "what_to_do": "Rever exposição a activos voláteis.",
+    "what_to_do": "Manter posições.",
     "risks": "Volatilidade normal.",
     "tips": [
       {
